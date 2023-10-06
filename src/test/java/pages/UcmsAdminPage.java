@@ -32,6 +32,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//a[text()=' mehmet.demir']")
     public WebElement homePageUser;
 
+
     //Kod Grubu Ekeleme Senaryosu Location
     @FindBy(xpath = "//span[text()='Sonuç Kodları']")
     public WebElement sonuçKodlarıButton;
@@ -44,7 +45,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//span[text()='Kaydet']")
     public WebElement kaydetButton;
     @FindBy(xpath = "//button[text()='Evet']")
-    public WebElement kaydetEvetButton;
+    public WebElement kaydetOnayButton;
 
 
 
@@ -54,7 +55,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//mat-icon[text()='add']")
     public WebElement sonuçKoduEkleIkon;
     @FindBy(id = "mat-input-1")
-    public WebElement başlık;
+    public WebElement SonuçKoduBaşlık;
 
 
 
@@ -71,6 +72,7 @@ public class UcmsAdminPage {
     //Genel Özellikler Tab
     @FindBy(id = "mat-tab-label-0-1")
     public WebElement genelÖzelliklerTab;
+
 
     //Başarı Durumu Combo Box
     @FindBy(id = "mat-select-value-3")
@@ -101,6 +103,10 @@ public class UcmsAdminPage {
     public WebElement müşteriyeTemasEdilemedi;
     @FindBy(xpath = "//span[text()='Müşteriye Temas Edildi']")
     public WebElement müşteriyeTemasEdildi;
+
+    //Alt Grup Ekle
+    @FindBy(id = "mat-input-1")
+    public WebElement altGrupBaşlık;
 
 
 }

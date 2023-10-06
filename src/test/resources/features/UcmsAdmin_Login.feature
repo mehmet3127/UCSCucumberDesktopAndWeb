@@ -16,7 +16,7 @@ Feature: Ucms Admin Login Test
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için username "<username>" girer
     And Kullanıcı ucmsadmin için passeord "<password>" girer
-    And Kullanıcı giriş butonuna tıklar
+    And Kullanıcı giriş butona tıklar
     Then Kullanıcı Anasayfaya gidilemediğini doğrular
     And Sayfayı kapatır
     Examples:

@@ -21,7 +21,9 @@ public class UcmsAdminStepDefinition {
     Actions actions = new Actions(Driver.getDriver());
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
     static String eklenenKodGrubuName;
+    static WebElement eklenenkodGrubu;
 
+    //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
     public void kullanıcıUcmsadminSayfasınaGider() throws InterruptedException {
         Driver.getDriver().get(ConfigReader.getProperty("ucmsAdminURL"));
@@ -40,13 +42,20 @@ public class UcmsAdminStepDefinition {
     @And("Kullanıcı giriş butonuna tıklar")
     public void kullanıcıGirişButonunaTıklar() {
         ucmsAdminPage.girişButton.click();
+        ucmsAdminPage.uygulamalar.click();
+        ucmsAdminPage.ucmsConfig.click();
+        ucmsAdminPage.girişButton.click();
+    }
+
+    @And("Kullanıcı giriş butona tıklar")
+    public void kullanıcıGirişButonaTıklar() {
+        ucmsAdminPage.girişButton.click();
     }
 
     @Then("Anasayfaya gidildiğini doğrular")
     public void anasayfayaGidildiğiniDoğrular() {
-        ucmsAdminPage.uygulamalar.click();
-        ucmsAdminPage.ucmsConfig.click();
         ucmsAdminPage.girişButton.click();
+
         Assert.assertTrue("Ucms Admin Anasayfasına Gidilemedi", ucmsAdminPage.homePageUser.isDisplayed());
     }
 
@@ -65,6 +74,7 @@ public class UcmsAdminStepDefinition {
         Assert.assertTrue(ucmsAdminPage.hatalıKullanıcıBilgileriPopup.isDisplayed());
     }
 
+    //Kod Grubu Ekle Steps
     @And("Sonuç kodları butonuna tıklar")
     public void sonuçKodlarıButonunaTıklar() {
         ucmsAdminPage.sonuçKodlarıButton.click();
@@ -77,17 +87,13 @@ public class UcmsAdminStepDefinition {
 
     @And("Kod grubu ekle ıkon a tıklar")
     public void KodGrubuEkleIkonATıklar() {
-
         ucmsAdminPage.kodGrubuEkleIkon.click();
     }
 
     @And("Grup adı {string} ekler")
     public void GrupAdıEkler(String grupAdı) {
-
         eklenenKodGrubuName = grupAdı;
-        ucmsAdminPage.grupAdıEkle.sendKeys(eklenenKodGrubuName);
-
-
+        ucmsAdminPage.grupAdıEkle.sendKeys("KG" + grupAdı);
     }
 
     @And("Grup adı  ekler")
@@ -96,15 +102,13 @@ public class UcmsAdminStepDefinition {
 
     @And("Kaydet butonuna tıklar")
     public void KaydetButonunaTıklar() {
-
         ucmsAdminPage.kaydetButton.click();
     }
 
     @Then("Onay butonuna tıklar")
     public void OnayButonunaTıklar() throws InterruptedException {
-
-        ucmsAdminPage.kaydetEvetButton.click();
-        Thread.sleep(3000);
+        ucmsAdminPage.kaydetOnayButton.click();
+        Thread.sleep(2000);
     }
 
     @Then("Sayfayı kapatır")
@@ -114,37 +118,70 @@ public class UcmsAdminStepDefinition {
     }
 
 
+    //Alt Grup Ekleme
+    @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
+    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar() throws InterruptedException {
+        Thread.sleep(1000);
+        Driver.getDriver().navigate().refresh();                                //button[@aria-label='toggle " + eklenenKodGrubuName +']
+        Thread.sleep(1000);
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        Thread.sleep(1000);
+        actions.moveToElement(eklenenkodGrubu).perform();
+        Thread.sleep(1000);
+        WebElement eklenenkodGrubuAltGrupEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Alt Grup Ekle']"));
+        Thread.sleep(1000);
+        eklenenkodGrubuAltGrupEkle.click();
+    }
+
+    @And("Alt grup ekle modalı açılır.")
+    public void altGrupEkleModalıAçılır() {
+
+    }
+
+    @And("Geçerli bir başlık girilir.")
+    public void geçerliBirBaşlıkGirilir() {
+        ucmsAdminPage.altGrupBaşlık.sendKeys("AG" + eklenenKodGrubuName);
+    }
+
+    @And("Kaydet butonuna tıklanır.")
+    public void kaydetButonunaTıklanır() {
+        ucmsAdminPage.kaydetButton.click();
+        ucmsAdminPage.kaydetOnayButton.click();
+    }
+
+    @Then("Başarılı bir şekilde kaydedildiği doğrulanır.")
+    public void başarılıBirŞekildeKaydedildiğiDoğrulanır() {
+
+    }
+
+
+    //Sonuç Kodları Steps
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
-        WebElement eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
         actions.moveToElement(eklenenkodGrubu).perform();
         WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
         eklenenkodGrubuSonuçKoduEkle.click();
-
     }
 
     @And("Aksiyon tipi combo suna tıklanır")
     public void aksiyonTipiComboSunaTıklanır() {
-
         ucmsAdminPage.actionTipiCombo.click();
     }
 
     @And("Açılan pencereden kaydı kapat sekmesine tıklar")
     public void AçılanPenceredenKaydıKapatSekmesineTıklar() {
-
         ucmsAdminPage.kaydıKapat.click();
     }
 
     @And("Başlık kısmına isim girer")
     public void başlıkKısmınaIsimGirer() {
-
-        ucmsAdminPage.başlık.sendKeys(eklenenKodGrubuName);
+        ucmsAdminPage.SonuçKoduBaşlık.sendKeys("SK" + eklenenKodGrubuName);
     }
 
     @And("Genel özellikler tabına geçer")
     public void genelÖzelliklerTabınaGeçer() {
-
         ucmsAdminPage.genelÖzelliklerTab.click();
     }
 
@@ -164,37 +201,12 @@ public class UcmsAdminStepDefinition {
     public void müşteriTemasDurumundanTemasEdilemediSeçer() {
         ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
         ucmsAdminPage.müşteriyeTemasEdilemedi.click();
-
     }
 
     @And("Kaydete tıklar")
     public void kaydeteTıklar() throws InterruptedException {
-
         ucmsAdminPage.kaydetButton.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
-
-    //Alt Grup Ekleme
-    @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
-    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar() {
-
-
-    }
-
-    @And("Alt grup ekle modalı açılır.")
-    public void altGrupEkleModalıAçılır() {
-    }
-
-    @And("Geçerli bir başlık girilir.")
-    public void geçerliBirBaşlıkGirilir() {
-    }
-
-    @And("Kaydet butonuna tıklanır.")
-    public void kaydetButonunaTıklanır() {
-    }
-
-    @Then("Başarılı bir şekilde kaydedildiği doğrulanır.")
-    public void başarılıBirŞekildeKaydedildiğiDoğrulanır() {
-    }
 }
