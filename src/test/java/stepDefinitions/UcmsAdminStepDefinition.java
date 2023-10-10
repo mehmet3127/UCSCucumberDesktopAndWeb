@@ -22,6 +22,7 @@ public class UcmsAdminStepDefinition {
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
     static String eklenenKodGrubuName;
     static WebElement eklenenkodGrubu;
+    static String eklenenSonuçKoduName;
 
     //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
@@ -122,7 +123,7 @@ public class UcmsAdminStepDefinition {
     @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
     public void eklenenKodGrubununAltGrupEkleIkonunaTıklar() throws InterruptedException {
         Thread.sleep(1000);
-        Driver.getDriver().navigate().refresh();                                //button[@aria-label='toggle " + eklenenKodGrubuName +']
+        Driver.getDriver().navigate().refresh();
         Thread.sleep(1000);
         eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
         Thread.sleep(1000);
@@ -135,7 +136,6 @@ public class UcmsAdminStepDefinition {
 
     @And("Alt grup ekle modalı açılır.")
     public void altGrupEkleModalıAçılır() {
-
     }
 
     @And("Geçerli bir başlık girilir.")
@@ -151,11 +151,10 @@ public class UcmsAdminStepDefinition {
 
     @Then("Başarılı bir şekilde kaydedildiği doğrulanır.")
     public void başarılıBirŞekildeKaydedildiğiDoğrulanır() {
-
     }
 
 
-    //Sonuç Kodları Steps
+    //Sonuç Kodları Ekleme Steps
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
@@ -178,6 +177,7 @@ public class UcmsAdminStepDefinition {
     @And("Başlık kısmına isim girer")
     public void başlıkKısmınaIsimGirer() {
         ucmsAdminPage.SonuçKoduBaşlık.sendKeys("SK" + eklenenKodGrubuName);
+        eklenenSonuçKoduName = "SK"+eklenenKodGrubuName;
     }
 
     @And("Genel özellikler tabına geçer")
@@ -209,4 +209,27 @@ public class UcmsAdminStepDefinition {
         Thread.sleep(2000);
     }
 
+
+    //Sonuç Kodu Arama Steps
+    @And("İçerik ara searchbox ına tıklar")
+    public void içerikAraSearchboxInaTıklar() {
+        ucmsAdminPage.içerikAramaSearchBox.click();
+
+    }
+
+    @And("Var olan sonuç kodunun ismini girer")
+    public void varOlanSonuçKodununIsminiGirer() throws InterruptedException {
+        Thread.sleep(1000);
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(eklenenSonuçKoduName);
+        Thread.sleep(1000);
+
+    }
+
+    @And("Var olan sonuç kodunun olduğunu doğrular")
+    public void varOlanSonuçKodununOlduğunuDoğrular() {
+        WebElement eklenenSonuçKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenSonuçKoduName + "')]"));
+        System.out.println("eklenenSonuçKodu.getText() = " + eklenenSonuçKodu.getText());
+        Assert.assertTrue(eklenenSonuçKodu.isDisplayed());
+
+    }
 }

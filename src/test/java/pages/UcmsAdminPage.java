@@ -104,9 +104,16 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//span[text()='Müşteriye Temas Edildi']")
     public WebElement müşteriyeTemasEdildi;
 
+
     //Alt Grup Ekle
     @FindBy(id = "mat-input-1")
     public WebElement altGrupBaşlık;
+
+    //Sonuç Kodu İçerik Arama
+    @FindBy(id = "mat-input-0")
+    public WebElement içerikAramaSearchBox;
+
+
 
 
 }

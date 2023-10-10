@@ -2,7 +2,7 @@
 Feature: Sonuç Kodu Ekleme
 
 
-  Scenario Outline: TC001 Kodu Grubu Ekleme
+  Scenario Outline: TC_001 Kodu Grubu Ekleme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -17,12 +17,12 @@ Feature: Sonuç Kodu Ekleme
     Then Sayfayı kapatır
     Examples:
       | grupAdı     |
-      | otomasyon07 |
+      | otomasyon09 |
 
 
 
   @KapatıcısonuçKoduEkleme
-  Scenario: TC002 Kapatıcı Sonuç Kodu Ekleme
+  Scenario: TC_002 Kapatıcı Sonuç Kodu Ekleme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -39,6 +39,22 @@ Feature: Sonuç Kodu Ekleme
     And Müşteriye ulaşılma durumundan müşteriye ulaşılamadı seçer
     And Müşteri temas durumundan temas edilemedi seçer
     And Kaydete tıklar
+
+    @İçeriktenSonuçKoduArama
+  Scenario: TC_002 İçerik den Sonuç Kodu Arama
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç kodları sekmesine tıklar
+    And İçerik ara searchbox ına tıklar
+    And Var olan sonuç kodunun ismini girer
+    And Var olan sonuç kodunun olduğunu doğrular
+
+
+
 
 
 
