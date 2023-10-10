@@ -31,7 +31,6 @@ public class GenesysAdminStepDefinitions {
     public void kullanıcıGenesysAdminIçinGeçerliUsernameGirer() {
         genesys.userName.sendKeys("can");
     }
-
     @And("Kullanıcı Genesys admin için geçerli password girer")
     public void kullanıcıGenesysAdminIçinGeçerliPasswordGirer() {
         genesys.password.sendKeys("x");

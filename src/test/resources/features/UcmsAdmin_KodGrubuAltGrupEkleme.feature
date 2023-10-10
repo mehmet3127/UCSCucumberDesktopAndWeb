@@ -19,7 +19,7 @@ Feature: Kod Grubu Ekleme
       | grupAdı     |
       | otomasyon07 |
 
-    @AltGrupEkleme
+  @AltGrupEkleme
   Scenario: Alt Grup Ekleme
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
