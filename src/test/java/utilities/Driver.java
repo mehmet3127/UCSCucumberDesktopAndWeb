@@ -86,8 +86,8 @@ public class Driver {
                     Desktop desktop = Desktop.getDesktop();
                     try {
                         desktop.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-                        Thread.sleep(1000);
-                    } catch (IOException | InterruptedException e) {
+                        ReusableMethods.waitFor(1);
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
 
@@ -110,8 +110,8 @@ public class Driver {
                     Desktop desktop2 = Desktop.getDesktop();
                     try {
                         desktop2.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-                        Thread.sleep(1000);
-                    } catch (IOException | InterruptedException e) {
+                        ReusableMethods.waitFor(1);
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
 

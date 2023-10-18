@@ -9,6 +9,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Actions;
 import pages.GensysAdminPage;
 import utilities.Driver;
+import utilities.ReusableMethods;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,9 +74,8 @@ public class GenesysAdminStepDefinitions {
     }
 
     @And("Kullanıcı users sekmesine tıklar")
-    public void kullanıcıUsersSekmesineTıklar() throws InterruptedException {
-
-        Thread.sleep(2000);
+    public void kullanıcıUsersSekmesineTıklar(){
+        ReusableMethods.waitFor(1);
         jse.executeScript("arguments[0].click();",genesys.users);
 
     }
@@ -91,12 +92,12 @@ public class GenesysAdminStepDefinitions {
     }
 
     @And("Kullanıcı istediği link e tıklar")
-    public void kullanıcıIstediğiLinkETıklar() throws InterruptedException{
+    public void kullanıcıIstediğiLinkETıklar(){
         genesys.OCS_Group_1.click();
-        Thread.sleep(2000);
+        ReusableMethods.waitFor(1);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         System.out.println("windowHandlesHashCode = " + windowList.get(1));
         Driver.getDriver().switchTo().window(windowList.get(1));
-        Thread.sleep(2000);
+        ReusableMethods.waitFor(1);
     }
 }

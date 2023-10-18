@@ -17,7 +17,7 @@ Feature: Kod Grubu Ekleme
     Then Sayfayı kapatır
     Examples:
       | grupAdı     |
-      | otomasyon07 |
+      | otomasyon12 |
 
   @AltGrupEkleme
   Scenario: Alt Grup Ekleme

@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
 
 public class UcmsAdminStepDefinition {
@@ -107,30 +108,30 @@ public class UcmsAdminStepDefinition {
     }
 
     @Then("Onay butonuna tıklar")
-    public void OnayButonunaTıklar() throws InterruptedException {
+    public void OnayButonunaTıklar(){
         ucmsAdminPage.kaydetOnayButton.click();
-        Thread.sleep(2000);
+        ReusableMethods.waitFor(1);
     }
 
     @Then("Sayfayı kapatır")
-    public void SayfayıKapatır() throws InterruptedException {
-        Thread.sleep(1000);
+    public void SayfayıKapatır(){
+        ReusableMethods.waitFor(1);
         //Driver.closeDriver();
     }
 
 
     //Alt Grup Ekleme
     @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
-    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar() throws InterruptedException {
-        Thread.sleep(1000);
+    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar(){
+        ReusableMethods.waitFor(1);
         Driver.getDriver().navigate().refresh();
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
         eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
         actions.moveToElement(eklenenkodGrubu).perform();
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
         WebElement eklenenkodGrubuAltGrupEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Alt Grup Ekle']"));
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
         eklenenkodGrubuAltGrupEkle.click();
     }
 
@@ -204,9 +205,9 @@ public class UcmsAdminStepDefinition {
     }
 
     @And("Kaydete tıklar")
-    public void kaydeteTıklar() throws InterruptedException {
+    public void kaydeteTıklar(){
         ucmsAdminPage.kaydetButton.click();
-        Thread.sleep(2000);
+        ReusableMethods.waitFor(1);
     }
 
 
@@ -218,10 +219,10 @@ public class UcmsAdminStepDefinition {
     }
 
     @And("Var olan sonuç kodunun ismini girer")
-    public void varOlanSonuçKodununIsminiGirer() throws InterruptedException {
-        Thread.sleep(1000);
+    public void varOlanSonuçKodununIsminiGirer(){
+        ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(eklenenSonuçKoduName);
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
 
     }
 
