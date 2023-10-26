@@ -21,6 +21,6 @@ Feature: Ucms Admin Login Test
     And Sayfayı kapatır
     Examples:
       | username     | password |
-      | mehmet.demir | y        |
+      | mehmet.demir | x        |
       | mehmetdemir  | x        |
       | mehmetdemir  | y        |
