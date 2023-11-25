@@ -15,6 +15,8 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.util.List;
+
 
 public class UcmsAdminStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
@@ -27,7 +29,7 @@ public class UcmsAdminStepDefinition {
 
     //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
-    public void kullanıcıUcmsadminSayfasınaGider() throws InterruptedException {
+    public void kullanıcıUcmsadminSayfasınaGider() {
         Driver.getDriver().get(ConfigReader.getProperty("ucmsAdminURL"));
     }
 
@@ -57,8 +59,7 @@ public class UcmsAdminStepDefinition {
     @Then("Anasayfaya gidildiğini doğrular")
     public void anasayfayaGidildiğiniDoğrular() {
         ucmsAdminPage.girişButton.click();
-
-        Assert.assertTrue("Ucms Admin Anasayfasına Gidilemedi", ucmsAdminPage.homePageUser.isDisplayed());
+        Assert.assertTrue(ucmsAdminPage.homePageUser.isDisplayed());
     }
 
     @When("Kullanıcı ucmsadmin için username {string} girer")
@@ -76,7 +77,7 @@ public class UcmsAdminStepDefinition {
         Assert.assertTrue(ucmsAdminPage.hatalıKullanıcıBilgileriPopup.isDisplayed());
     }
 
-    //Kod Grubu Ekle Steps
+    //Kod Grubu Ekleme Ve Silme Steps
     @And("Sonuç kodları butonuna tıklar")
     public void sonuçKodlarıButonunaTıklar() {
         ucmsAdminPage.sonuçKodlarıButton.click();
@@ -85,11 +86,16 @@ public class UcmsAdminStepDefinition {
     @And("Sonuç kodları sekmesine tıklar")
     public void sonuçKodlarıSekmesineTıklar() {
         ucmsAdminPage.sonuçKodlarSekmesi.click();
+
     }
 
     @And("Kod grubu ekle ıkon a tıklar")
     public void KodGrubuEkleIkonATıklar() {
         ucmsAdminPage.kodGrubuEkleIkon.click();
+    }
+
+    @And("Crm ıd alanını null geçer")
+    public void crmIdAlanınıNullGeçer() {
     }
 
     @And("Grup adı {string} ekler")
@@ -108,21 +114,42 @@ public class UcmsAdminStepDefinition {
     }
 
     @Then("Onay butonuna tıklar")
-    public void OnayButonunaTıklar(){
-        ucmsAdminPage.kaydetOnayButton.click();
+    public void OnayButonunaTıklar() {
+        ucmsAdminPage.onayButton.click();
         ReusableMethods.waitFor(1);
     }
 
     @Then("Sayfayı kapatır")
-    public void SayfayıKapatır(){
+    public void SayfayıKapatır() {
         ReusableMethods.waitFor(1);
         //Driver.closeDriver();
+    }
+    @And("Silmek istediği kod grubunun sil ıkonuna tıklar")
+    public void silmekIstediğiKodGrubununSilIkonunaTıklar() {
+        ReusableMethods.waitFor(1);
+        Driver.getDriver().navigate().refresh();
+        ReusableMethods.waitFor(1);
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        ReusableMethods.waitFor(1);
+        actions.moveToElement(eklenenkodGrubu).perform();
+        ReusableMethods.waitFor(1);
+        WebElement eklenenkodGrubuSilIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sil']"));
+        ReusableMethods.waitFor(1);
+        eklenenkodGrubuSilIkonu.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.onayButton.click();
+
+    }
+
+    @Then("Kod grubunun silindiğini doğrular")
+    public void KodGrubununSilindiğiniDoğrular() {
+        Assert.assertFalse(eklenenkodGrubu.isDisplayed());
     }
 
 
     //Alt Grup Ekleme
     @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
-    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar(){
+    public void eklenenKodGrubununAltGrupEkleIkonunaTıklar() {
         ReusableMethods.waitFor(1);
         Driver.getDriver().navigate().refresh();
         ReusableMethods.waitFor(1);
@@ -147,11 +174,16 @@ public class UcmsAdminStepDefinition {
     @And("Kaydet butonuna tıklanır.")
     public void kaydetButonunaTıklanır() {
         ucmsAdminPage.kaydetButton.click();
-        ucmsAdminPage.kaydetOnayButton.click();
+        ucmsAdminPage.onayButton.click();
     }
 
     @Then("Başarılı bir şekilde kaydedildiği doğrulanır.")
     public void başarılıBirŞekildeKaydedildiğiDoğrulanır() {
+    }
+
+    @And("Kaydet butonunun aktif olmadığı görülür")
+    public void kaydetButonununAktifOlmadığıGörülür() {
+        ucmsAdminPage.kaydetButton.isEnabled();
     }
 
 
@@ -159,9 +191,9 @@ public class UcmsAdminStepDefinition {
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
-        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Otomasyon_17')]"));
         actions.moveToElement(eklenenkodGrubu).perform();
-        WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
+        WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'Otomasyon_17')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
         eklenenkodGrubuSonuçKoduEkle.click();
     }
 
@@ -172,13 +204,13 @@ public class UcmsAdminStepDefinition {
 
     @And("Açılan pencereden kaydı kapat sekmesine tıklar")
     public void AçılanPenceredenKaydıKapatSekmesineTıklar() {
-        ucmsAdminPage.kaydıKapat.click();
+        ucmsAdminPage.yalnızcaÇağrıyıKapat.click();
     }
 
     @And("Başlık kısmına isim girer")
     public void başlıkKısmınaIsimGirer() {
         ucmsAdminPage.SonuçKoduBaşlık.sendKeys("SK" + eklenenKodGrubuName);
-        eklenenSonuçKoduName = "SK"+eklenenKodGrubuName;
+        eklenenSonuçKoduName = "SK" + eklenenKodGrubuName;
     }
 
     @And("Genel özellikler tabına geçer")
@@ -205,21 +237,22 @@ public class UcmsAdminStepDefinition {
     }
 
     @And("Kaydete tıklar")
-    public void kaydeteTıklar(){
+    public void kaydeteTıklar() {
         ucmsAdminPage.kaydetButton.click();
-        ReusableMethods.waitFor(1);
+        ReusableMethods.waitFor(5);
     }
 
 
     //Sonuç Kodu Arama Steps
     @And("İçerik ara searchbox ına tıklar")
     public void içerikAraSearchboxInaTıklar() {
+        ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.click();
 
     }
 
     @And("Var olan sonuç kodunun ismini girer")
-    public void varOlanSonuçKodununIsminiGirer(){
+    public void varOlanSonuçKodununIsminiGirer() {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(eklenenSonuçKoduName);
         ReusableMethods.waitFor(1);
@@ -232,5 +265,39 @@ public class UcmsAdminStepDefinition {
         System.out.println("eklenenSonuçKodu.getText() = " + eklenenSonuçKodu.getText());
         Assert.assertTrue(eklenenSonuçKodu.isDisplayed());
 
+    }
+
+    //Devre Dışı Bırakılan Sonuç Kodlarını Listeleme
+    @And("Açılan sayfada devre dışı bırakılanlar iconuna tıklanır.")
+    public void açılanSayfadaDevreDışıBırakılanlarIconunaTıklanır() {
+        ucmsAdminPage.devreDışıBırakılanlarIkon.click();
+    }
+
+    @Then("Kod grupları hiyerarşisi altında devre dışı bırakılan sonuç kodlarının da üstü çizili olarak listelendiği görülür")
+    public void kodGruplarıHiyerarşisiAltındaDevreDışıBırakılanSonuçKodlarınınDaÜstüÇiziliOlarakListelendiğiGörülür() {
+
+        List<WebElement> devreDışıBırakılanSonuçKodlarıList = ucmsAdminPage.devreDışıBırakılanSonuçKodları;
+
+        System.out.println("devreDışıBırakılanSonuçKodlarıList.size() = " + devreDışıBırakılanSonuçKodlarıList.size());
+
+        for (WebElement w : devreDışıBırakılanSonuçKodlarıList) {
+            System.out.println(w.getText());
+        }
+    }
+
+    @Then("Tekrar devre dışı bırakılanlar iconuna tıklandığında, devre dışı bırakılmış sonuç kodlarının listelenmediği  görülür")
+    public void tekrarDevreDışıBırakılanlarIconunaTıklandığındaDevreDışıBırakılmışSonuçKodlarınınListelenmediğiGörülür() {
+        ucmsAdminPage.devreDışıBırakılanlarIkon.click();
+
+        List<WebElement> devreDışıBırakılanSonuçKodlarıList = ucmsAdminPage.devreDışıBırakılanSonuçKodları;
+        System.out.println("devreDışıBırakılanSonuçKodlarıList.size() = " + devreDışıBırakılanSonuçKodlarıList.size());
+        for (WebElement w : devreDışıBırakılanSonuçKodlarıList) {
+            System.out.println(w.getText());
+        }
+
+    }
+
+    @Then("kod grubu silindiğini dogrular")
+    public void kodGrubuSilindiğiniDogrular() {
     }
 }

@@ -17,7 +17,7 @@ Feature: Sonuç Kodu Ekleme
     Then Sayfayı kapatır
     Examples:
       | grupAdı     |
-      | otomasyon13 |
+      | Otomasyon_17 |
 
 
   @KapatıcısonuçKoduEkleme
@@ -39,7 +39,7 @@ Feature: Sonuç Kodu Ekleme
     And Müşteri temas durumundan temas edilemedi seçer
     And Kaydete tıklar
 
-    @İçeriktenSonuçKoduArama
+  @İçeriktenSonuçKoduArama
   Scenario: TC_002 İçerik den Sonuç Kodu Arama
 
     Given Kullanıcı ucmsadmin sayfasına gider
