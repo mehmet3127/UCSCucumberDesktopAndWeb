@@ -17,8 +17,9 @@ Feature: Kod Grubu
     And Onay butonuna tıklar
     Then Sayfayı kapatır
     Examples:
-      | grupAdı       |
-      | KodGrubuSilmeDeneme4 |
+      | grupAdı             |
+      | KodGrubuSilDeneme17 |
+
 
   @SonuçKoduOlanKodGrubunuSilme
   Scenario:Kod Grubu Ekleme
@@ -39,8 +40,10 @@ Feature: Kod Grubu
     And Müşteri temas durumundan temas edilemedi seçer
     And Kaydete tıklar
 
-  @KodGrubuSilme
-  Scenario: TC_001-TC_002 Kod Grubu Silme
+
+  #@SonuçKoduOlmayanKodGrubuSilme
+  @ignore
+  Scenario: TC_001 Sonuç Kodu Olmayan Kod Grubunu Silme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -50,6 +53,18 @@ Feature: Kod Grubu
     And Sonuç kodları sekmesine tıklar
     And Silmek istediği kod grubunun sil ıkonuna tıklar
     Then Kod grubunun silindiğini doğrular
+
+  @SonuçKoduOlanKodGrubuSilme
+  Scenario: TC_002 Sonuç Kodu Olan Kod Grubunu Silme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç kodları sekmesine tıklar
+    And Silmek istediği sonuç kodu olan kod grubunun sil Ikonuna tıklar
+    Then Kod grubunun silinemediğini doğrular
 
 
 

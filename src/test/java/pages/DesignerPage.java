@@ -1,14 +1,10 @@
 package pages;
 
-import io.appium.java_client.pagefactory.WindowsFindBys;
+import io.appium.java_client.pagefactory.WindowsFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
-
-import java.net.MalformedURLException;
 
 
 public class DesignerPage {
@@ -86,9 +82,11 @@ public class DesignerPage {
     @FindBy(name = "Ara")
     public WebElement formAra;
 
+    @WindowsFindBy(windowsAutomation = "Find")
+    public WebElement formBul;
+
     @FindBy(name = "Hepsini göster")
     public WebElement eklenenFormlar;
-
 
 
     @FindBy(name = "Form.4-Form4")
@@ -102,7 +100,6 @@ public class DesignerPage {
     public WebElement form2;
     @FindBy(name = "Form.1-Form1")
     public WebElement form1;
-
 
 
 }

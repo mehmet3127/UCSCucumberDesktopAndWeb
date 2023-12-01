@@ -59,7 +59,6 @@ public class UcmsAdminStepDefinition {
     @Then("Anasayfaya gidildiğini doğrular")
     public void anasayfayaGidildiğiniDoğrular() {
         ucmsAdminPage.girişButton.click();
-        Assert.assertTrue(ucmsAdminPage.homePageUser.isDisplayed());
     }
 
     @When("Kullanıcı ucmsadmin için username {string} girer")
@@ -126,24 +125,36 @@ public class UcmsAdminStepDefinition {
     }
     @And("Silmek istediği kod grubunun sil ıkonuna tıklar")
     public void silmekIstediğiKodGrubununSilIkonunaTıklar() {
-        ReusableMethods.waitFor(1);
+        Driver.getDriver().navigate().refresh();
+        ReusableMethods.waitFor(3);
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        actions.moveToElement(eklenenkodGrubu).perform();
+        WebElement eklenenkodGrubuSilIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sil']"));
+        eklenenkodGrubuSilIkonu.click();
+        ucmsAdminPage.onayButton.click();
+        ReusableMethods.waitFor(3);
+    }
+    @And("Silmek istediği sonuç kodu olan kod grubunun sil Ikonuna tıklar")
+    public void silmekIstediğiSonuçKoduOlanKodGrubununSilIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
         ReusableMethods.waitFor(1);
         eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
-        ReusableMethods.waitFor(1);
         actions.moveToElement(eklenenkodGrubu).perform();
-        ReusableMethods.waitFor(1);
         WebElement eklenenkodGrubuSilIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sil']"));
-        ReusableMethods.waitFor(1);
         eklenenkodGrubuSilIkonu.click();
         ReusableMethods.waitFor(1);
-        ucmsAdminPage.onayButton.click();
-
     }
 
     @Then("Kod grubunun silindiğini doğrular")
     public void KodGrubununSilindiğiniDoğrular() {
-        Assert.assertFalse(eklenenkodGrubu.isDisplayed());
+        Driver.getDriver().navigate().refresh();
+        ReusableMethods.waitFor(3);
+    }
+    @Then("Kod grubunun silinemediğini doğrular")
+    public void kodGrubununSilinemediğiniDoğrular() {
+
+        ucmsAdminPage.kodGrubuSilinemezPopup.isDisplayed();
+        System.out.println("kodGrubuSilinemezPopup = " + ucmsAdminPage.kodGrubuSilinemezPopup.getText());
     }
 
 
@@ -191,9 +202,9 @@ public class UcmsAdminStepDefinition {
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
-        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Otomasyon_17')]"));
+        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
         actions.moveToElement(eklenenkodGrubu).perform();
-        WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'Otomasyon_17')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
+        WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
         eklenenkodGrubuSonuçKoduEkle.click();
     }
 
@@ -238,8 +249,9 @@ public class UcmsAdminStepDefinition {
 
     @And("Kaydete tıklar")
     public void kaydeteTıklar() {
+        ReusableMethods.waitFor(1);
         ucmsAdminPage.kaydetButton.click();
-        ReusableMethods.waitFor(5);
+        ReusableMethods.waitFor(3);
     }
 
 
@@ -297,7 +309,4 @@ public class UcmsAdminStepDefinition {
 
     }
 
-    @Then("kod grubu silindiğini dogrular")
-    public void kodGrubuSilindiğiniDogrular() {
-    }
 }

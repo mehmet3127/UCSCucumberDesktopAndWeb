@@ -50,8 +50,8 @@ public class UcmsAdminPage {
     public WebElement kaydetButton;
     @FindBy(xpath = "//button[text()='Evet']")
     public WebElement onayButton;
-
-
+    @FindBy(id = "swal2-html-container")
+    public WebElement kodGrubuSilinemezPopup;
 
     //Sonuç Kodu Ekleme Senaryosu Location
     @FindBy(xpath = "//span[text()='237 - otomasyon_03']")
@@ -70,10 +70,17 @@ public class UcmsAdminPage {
     public WebElement kaydıKapat;
     @FindBy(xpath = "//span[text()='Randevuyu Sistem Belirlesin']")
     public WebElement randevuyuSistemBelirlesin;
+    @FindBy(id = "imat-select-value-31")
+    public WebElement randevuTipiComboBox;
+    @FindBy(xpath = "//span[text()='Otomatik Kişisel Randevu']")
+    public WebElement randevuTipiKişiselRandevu;
+    @FindBy(xpath = "//span[text()='Otomatik Grup Randevu']")
+    public WebElement randevuTipiGrupRandevu;
     @FindBy(xpath = "//span[text()='Randevuyu Agent Belirlesin']")
     public WebElement randevuyuAgentBelirlesin;
     @FindBy(xpath = "//span[text()='Yalnızca Çağrıyı Kapat']")
     public WebElement yalnızcaÇağrıyıKapat;
+
 
     //Genel Özellikler Tab
     @FindBy(id = "mat-tab-label-0-1")

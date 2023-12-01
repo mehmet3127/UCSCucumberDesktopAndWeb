@@ -1,23 +1,31 @@
 package stepDefinitions;
 
 
+import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DesignerStepDefinition {
 
-
+    public static WebDriver driver;
     DesignerPage designerPage = new DesignerPage();
     Actions actions = new Actions(Driver.getDriver());
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 100);
@@ -26,7 +34,24 @@ public class DesignerStepDefinition {
     @Given("Kullanici designer sayfasina gider")
     public void kullaniciDesignerSayfasinaGider(){
 
-        Driver.getDriver();
+        //Driver.getDriver();
+        Desktop desktop2 = Desktop.getDesktop();
+        try {
+            desktop2.open(new File(ConfigReader.getProperty("winAppDriverPath")));
+            ReusableMethods.waitFor(1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
+        try {
+            driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
+            };
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
