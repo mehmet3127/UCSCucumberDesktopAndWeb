@@ -42,7 +42,6 @@ Feature: Kod Grubu
 
 
   #@SonuçKoduOlmayanKodGrubuSilme
-  @ignore
   Scenario: TC_001 Sonuç Kodu Olmayan Kod Grubunu Silme
 
     Given Kullanıcı ucmsadmin sayfasına gider

@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,7 +31,6 @@ public class UcmsAdminPage {
     public WebElement uygulamalar;
     @FindBy(id = "mat-option-0")
     public WebElement ucmsConfig;
-
     @FindBy(xpath = "//a[text()=' mehmet.demir']")
     public WebElement homePageUser;
 
@@ -53,6 +53,7 @@ public class UcmsAdminPage {
     @FindBy(id = "swal2-html-container")
     public WebElement kodGrubuSilinemezPopup;
 
+
     //Sonuç Kodu Ekleme Senaryosu Location
     @FindBy(xpath = "//span[text()='237 - otomasyon_03']")
     public WebElement eklenenKodGrubu;
@@ -70,19 +71,44 @@ public class UcmsAdminPage {
     public WebElement kaydıKapat;
     @FindBy(xpath = "//span[text()='Randevuyu Sistem Belirlesin']")
     public WebElement randevuyuSistemBelirlesin;
-    @FindBy(id = "imat-select-value-31")
-    public WebElement randevuTipiComboBox;
-    @FindBy(xpath = "//span[text()='Otomatik Kişisel Randevu']")
-    public WebElement randevuTipiKişiselRandevu;
-    @FindBy(xpath = "//span[text()='Otomatik Grup Randevu']")
-    public WebElement randevuTipiGrupRandevu;
     @FindBy(xpath = "//span[text()='Randevuyu Agent Belirlesin']")
     public WebElement randevuyuAgentBelirlesin;
     @FindBy(xpath = "//span[text()='Yalnızca Çağrıyı Kapat']")
     public WebElement yalnızcaÇağrıyıKapat;
 
 
-    //Genel Özellikler Tab
+
+
+    //Kara Liste (DNC)
+    @FindBy(xpath = "//span[text()=' Bu müşteri aranmasın ']")
+    public WebElement karaListeBuMüşteriAranmasın;
+    @FindBy(xpath = "//span[text()=' Bu telefon aranmasın ']")
+    public WebElement karaListeBuTelefonAranmasın;
+    @FindBy(xpath = "//span[text()=' Bu kampanya için aranmasın ']")
+    public WebElement karaListeBuKampanyaİçinAranmasın;
+
+
+    //Aksiyon Tipi: Randevuyu Sistem Belirlesin Randevu Özellikleri
+    @FindBy(id = "mat-select-value-11")
+    public WebElement randevuTipi;
+    @FindBy(xpath = "//span[text()='Otomatik Kişisel Randevu']")
+    public WebElement otomatikKişiselRandevu;
+    @FindBy(xpath = "//span[text()='Otomatik Grup Randevu']")
+    public WebElement otomatikGrupRandevu;
+    @FindBy(id = "mat-input-5")
+    public WebElement randevuÖzellikleriDakika;
+
+
+
+    //Aksiyon Tipi: Randevuyu Sistem Sonraki Arama Davranışı
+    @FindBy(xpath = "//span[text()=' Bir Sonraki Kontağa Geç ']")
+    public WebElement birSonrakiKontağaGeç;
+    @FindBy(xpath = "//span[text()=' Bu Kontağı Arama Sıralamasından Çıkart ']")
+    public WebElement buKontağıAramaSıralamasındanÇıkart;
+
+
+
+    //Genel Özellikler TabI
     @FindBy(id = "mat-tab-label-0-1")
     public WebElement genelÖzelliklerTab;
 
@@ -98,7 +124,6 @@ public class UcmsAdminPage {
     public WebElement başarılı;
 
 
-
     //Müşteriye Ulaşılma Durumu Combo Box
     @FindBy(id = "mat-select-value-5")
     public WebElement müşteriyeUlaşılmaDurumuComboBox;
@@ -106,7 +131,6 @@ public class UcmsAdminPage {
     public WebElement müşteriyeUlaşılamadı;
     @FindBy(xpath = "//span[text()='Müşteriye Ulaşıldı']")
     public WebElement müşteriyeUlaşıldı;
-
 
 
     //Müşteriye Temas Durumu Combo Box
@@ -122,19 +146,18 @@ public class UcmsAdminPage {
     @FindBy(id = "mat-input-1")
     public WebElement altGrupBaşlık;
 
+
     //Sonuç Kodu İçerik Arama
     @FindBy(id = "mat-input-0")
     public WebElement içerikAramaSearchBox;
 
 
+
     //Devre Dışı Bırakma
     @FindBy(xpath = "//button[@mattooltip='Devre Dışı Bırakılanlar']")
     public WebElement devreDışıBırakılanlarIkon;
-
     @FindBy(xpath = "//div/del")
     public List<WebElement> devreDışıBırakılanSonuçKodları;
-
-
 
 
 }

@@ -113,7 +113,6 @@ public class Driver {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
                     try {

@@ -31,36 +31,16 @@ public class DesignerStepDefinition {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 100);
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
 
+
+    //Login Steps
     @Given("Kullanici designer sayfasina gider")
     public void kullaniciDesignerSayfasinaGider(){
-
-        //Driver.getDriver();
-        Desktop desktop2 = Desktop.getDesktop();
-        try {
-            desktop2.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-            ReusableMethods.waitFor(1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
-        try {
-            driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
-            };
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-
-
+        Driver.getDriver();
     }
-
-
     @Then("Kullanici gecerli username girer")
     public void kullanicigecerliUsernameGirer() {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty("userName"));
-
     }
 
     @And("Kullanici gecerli password girer")
@@ -68,11 +48,9 @@ public class DesignerStepDefinition {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty("password"));
     }
-
     @And("Kullanici login buttonuna tıklar")
     public void kullaniciLoginButtonunaTıklar() throws InterruptedException{
         designerPage.sistemeGiris.click();
-
         Thread.sleep(5000);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(windowList.get(0));
@@ -82,43 +60,41 @@ public class DesignerStepDefinition {
         System.out.println(Driver.getDriver().getTitle());
         //String windows = Driver.getDriver().getWindowHandles().iterator().next();
         //Driver.getDriver().switchTo().window(windows).getTitle();
-
-
-
     }
-
-
     @Then("Kullanici gecerli userName {string} girer")
     public void kullaniciGecerliUserNameGirer(String girilecekUserName) {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
-
     }
-
     @And("Kullanici gecerli olmayan password {string} girer")
     public void kullaniciGecerliOlmayanPasswordGirer(String girilecekPassword) {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
-
     }
-
     @Then("Kullanici gecerli olmayan userName {string} girer")
     public void kullaniciGecerliOlmayanUserNameGirer(String girilecekUserName) {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
-
     }
-
     @And("kullanıcı gecerli password {string} girer")
     public void kullanıcıGecerliPasswordGirer(String girilecekPassword) {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
     }
-
     @Then("Kullanıcı tamam button'una tıklar")
     public void kullanıcıTamamButtonUnaTıklar() {
-
         designerPage.tamam.click();
+    }
+
+    @Then("Kullanıcı designer ana sayfasina gidildiğini doğrular")
+    public void kullanıcıDesignerAnaSayfasinaGidildiğiniDoğrular() {
+
+    }
+
+    @Then("Kullanıcı sayfayı kapatır")
+    public void kullanıcıSayfayıKapatır() {
+        designerPage.pencereKapat.click();
+        designerPage.pencereKapatEvet.click();
     }
 
 
@@ -223,5 +199,4 @@ public class DesignerStepDefinition {
         designerPage.form4.click();
 
     }
-
 }

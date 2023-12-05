@@ -17,7 +17,7 @@ Feature: Sonuç Kodu Ekleme
     Then Sayfayı kapatır
     Examples:
       | grupAdı     |
-      | Otomasyon_17 |
+      | Otomasyon001|
 
 
   @KapatıcısonuçKoduEkleme
