@@ -16,5 +16,5 @@ Feature: Sonuç Kodu Ekleme Tüm Senaryolar
 
     Examples:
       | isim |
-      |otmsyn15|
+      |otmsyn40|
 

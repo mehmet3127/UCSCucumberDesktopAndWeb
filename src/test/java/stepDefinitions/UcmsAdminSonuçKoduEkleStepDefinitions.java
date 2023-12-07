@@ -1035,17 +1035,489 @@ public class UcmsAdminSonuçKoduEkleStepDefinitions {
             ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
             ucmsAdminPage.actionTipiCombo.click();
             ucmsAdminPage.randevuyuSistemBelirlesin.click();
-            ReusableMethods.waitFor(1);
             ucmsAdminPage.randevuTipi.click();
             ucmsAdminPage.otomatikKişiselRandevu.click();
-            ReusableMethods.waitFor(1);
             ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Kişisel Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn16")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikKişiselRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Kişisel Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın", "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn17")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikKişiselRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Kişisel Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn18")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikKişiselRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Kişisel Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn19")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikKişiselRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn20")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn21")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", "Bu Kontağı Arama Sıralamasından Çıkart" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn22")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu müşteri aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn23")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn24")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu müşteri aranmasın" ve "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn25")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu müşteri aranmasın", "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn26")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu müşteri aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn27")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Kara Liste (DNC) "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn28")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("10");
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu müşteri aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn29")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn30")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn31")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu müşteri aranmasın", "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn32")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn33")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç", Kara Liste(DNC) "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn34")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn35")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn36")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu telefon aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn37")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın", "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn38")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu müşteri aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn39")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
+            ucmsAdminPage.birSonrakiKontağaGeç.click();
+            ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
+            ucmsAdminPage.karaListeBuMüşteriAranmasın.click();
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
+            ucmsAdminPage.genelÖzelliklerTab.click();
+            ucmsAdminPage.başarıDurumuComboBox.click();
+            ucmsAdminPage.kriterDışı.click();
+            ucmsAdminPage.müşteriyeUlaşılmaDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeUlaşılamadı.click();
+            ucmsAdminPage.müşteriyeTemasDurumuComboBox.click();
+            ucmsAdminPage.müşteriyeTemasEdildi.click();
+        }
+        //Aksiyon tipi "Randevuyu Sistem Belirlesin", Randevu Özellikleri "Otomatik Grup Randevu" Sonraki arama davranışı "Bir Sonraki Kontağa Geç" ve "Bu Kontağı Arama Sıralamasından Çıkart", Kara Liste(DNC) "Bu telefon aranmasın" ve "Bu kampanya için aranmasın" ile sonuç kodu ekleme
+        if (sonuçKoduBaşlık.equals("otmsyn40")) {
+            ucmsAdminPage.SonuçKoduBaşlık.sendKeys(sonuçKoduBaşlık);
+            ucmsAdminPage.actionTipiCombo.click();
+            ucmsAdminPage.randevuyuSistemBelirlesin.click();
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.randevuTipi.click();
+            ucmsAdminPage.otomatikGrupRandevu.click();
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("35");
             ReusableMethods.waitFor(1);
             ucmsAdminPage.birSonrakiKontağaGeç.click();
             ReusableMethods.waitFor(1);
             ucmsAdminPage.buKontağıAramaSıralamasındanÇıkart.click();
             ReusableMethods.waitFor(1);
             ucmsAdminPage.karaListeBuTelefonAranmasın.click();
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.karaListeBuKampanyaİçinAranmasın.click();
             ReusableMethods.waitFor(1);
             ucmsAdminPage.genelÖzelliklerTab.click();
             ucmsAdminPage.başarıDurumuComboBox.click();
