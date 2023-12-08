@@ -176,6 +176,10 @@ public class UcmsAdminStepDefinition {
     @And("Alt grup ekle modalı açılır.")
     public void altGrupEkleModalıAçılır() {
     }
+    @And("Kapat butonuna tıklanarak menü kapatılır.")
+    public void kapatButonunaTıklanarakMenüKapatılır() {
+        ucmsAdminPage.altGrupKapat.click();
+    }
 
     @And("Geçerli bir başlık girilir.")
     public void geçerliBirBaşlıkGirilir() {
@@ -254,29 +258,23 @@ public class UcmsAdminStepDefinition {
         ReusableMethods.waitFor(3);
     }
 
-
     //Sonuç Kodu Arama Steps
     @And("İçerik ara searchbox ına tıklar")
     public void içerikAraSearchboxInaTıklar() {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.click();
-
     }
-
     @And("Var olan sonuç kodunun ismini girer")
     public void varOlanSonuçKodununIsminiGirer() {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(eklenenSonuçKoduName);
         ReusableMethods.waitFor(1);
-
     }
-
     @And("Var olan sonuç kodunun olduğunu doğrular")
     public void varOlanSonuçKodununOlduğunuDoğrular() {
         WebElement eklenenSonuçKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenSonuçKoduName + "')]"));
         System.out.println("eklenenSonuçKodu.getText() = " + eklenenSonuçKodu.getText());
         Assert.assertTrue(eklenenSonuçKodu.isDisplayed());
-
     }
 
     //Devre Dışı Bırakılan Sonuç Kodlarını Listeleme

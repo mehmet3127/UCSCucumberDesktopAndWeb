@@ -63,7 +63,6 @@ public class UcmsAdminPage {
     public WebElement SonuçKoduBaşlık;
 
 
-
     //Aksiyon Tipi Combo Secenekleri
     @FindBy(id = "mat-select-0")
     public WebElement actionTipiCombo;
@@ -75,8 +74,6 @@ public class UcmsAdminPage {
     public WebElement randevuyuAgentBelirlesin;
     @FindBy(xpath = "//span[text()='Yalnızca Çağrıyı Kapat']")
     public WebElement yalnızcaÇağrıyıKapat;
-
-
 
 
     //Kara Liste (DNC)
@@ -99,13 +96,18 @@ public class UcmsAdminPage {
     public WebElement randevuÖzellikleriDakika;
 
 
-
     //Aksiyon Tipi: Randevuyu Sistem Sonraki Arama Davranışı
     @FindBy(xpath = "//span[text()=' Bir Sonraki Kontağa Geç ']")
     public WebElement birSonrakiKontağaGeç;
     @FindBy(xpath = "//span[text()=' Bu Kontağı Arama Sıralamasından Çıkart ']")
     public WebElement buKontağıAramaSıralamasındanÇıkart;
 
+
+    //Aksiyon Tipi: Randevuyu Agent Belirlesin Randevu Özellkikleri
+    @FindBy(xpath = "//span[text()=' Kişisel Randevu Verebilir ']")
+    public WebElement kişiselRandevuVerebilir;
+    @FindBy(xpath = "//span[text()=' Grup Randevusu Verebilir ']")
+    public WebElement grupRandevusuVerebilir;
 
 
     //Genel Özellikler TabI
@@ -145,12 +147,13 @@ public class UcmsAdminPage {
     //Alt Grup Ekle
     @FindBy(id = "mat-input-1")
     public WebElement altGrupBaşlık;
+    @FindBy(xpath = "//span[text()='Kapat']")
+    public WebElement altGrupKapat;
 
 
     //Sonuç Kodu İçerik Arama
     @FindBy(id = "mat-input-0")
     public WebElement içerikAramaSearchBox;
-
 
 
     //Devre Dışı Bırakma
