@@ -18,7 +18,7 @@ Feature: Kod Grubu Ekleme ve Alt Grup Ekleme
     Then Sayfayı kapatır
     Examples:
       | grupAdı     |
-      |AltGrupdeneme|
+      |AltGrupdeneme03|
 
 
 

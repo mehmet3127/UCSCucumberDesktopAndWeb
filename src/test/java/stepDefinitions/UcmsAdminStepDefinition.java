@@ -110,6 +110,7 @@ public class UcmsAdminStepDefinition {
     @And("Kaydet butonuna tıklar")
     public void KaydetButonunaTıklar() {
         ucmsAdminPage.kaydetButton.click();
+        ReusableMethods.waitFor(2);
     }
 
     @Then("Onay butonuna tıklar")
@@ -123,6 +124,7 @@ public class UcmsAdminStepDefinition {
         ReusableMethods.waitFor(1);
         //Driver.closeDriver();
     }
+
     @And("Silmek istediği kod grubunun sil ıkonuna tıklar")
     public void silmekIstediğiKodGrubununSilIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
@@ -134,6 +136,7 @@ public class UcmsAdminStepDefinition {
         ucmsAdminPage.onayButton.click();
         ReusableMethods.waitFor(3);
     }
+
     @And("Silmek istediği sonuç kodu olan kod grubunun sil Ikonuna tıklar")
     public void silmekIstediğiSonuçKoduOlanKodGrubununSilIkonunaTıklar() {
         Driver.getDriver().navigate().refresh();
@@ -150,11 +153,47 @@ public class UcmsAdminStepDefinition {
         Driver.getDriver().navigate().refresh();
         ReusableMethods.waitFor(3);
     }
+
     @Then("Kod grubunun silinemediğini doğrular")
     public void kodGrubununSilinemediğiniDoğrular() {
 
         ucmsAdminPage.kodGrubuSilinemezPopup.isDisplayed();
         System.out.println("kodGrubuSilinemezPopup = " + ucmsAdminPage.kodGrubuSilinemezPopup.getText());
+    }
+
+    //Kod Grubu Güncelleme Steps
+    @And("Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar")
+    public void güncellemekIstediğiKodGrubununGrupGüncelleIkonunaTıklar() {
+        ReusableMethods.waitFor(1);
+        WebElement güncellenenKodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'GrupGüncelleme')]"));
+        actions.moveToElement(güncellenenKodGrubu).perform();
+        WebElement eklenenkodGrubuSilIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'GrupGüncelleme')]/following::button[@mattooltip='Grup Güncelle']"));
+        eklenenkodGrubuSilIkonu.click();
+        ReusableMethods.waitFor(1);
+
+    }
+
+    @And("Açılan pencereden istediği alanı günceller")
+    public void açılanPenceredenIstediğiAlanıGünceller() {
+        ucmsAdminPage.crmId.clear();
+        ucmsAdminPage.crmId.sendKeys("KodGrupGüncelleme");
+        ucmsAdminPage.grupAdıEkle.clear();
+        ucmsAdminPage.grupAdıEkle.sendKeys("KodGrupGüncelleme");
+    }
+
+    @Then("Kod grubunun güncellendiğini doğrular")
+    public void kodGrubununGüncellendiğiniDoğrular() {
+
+    }
+    @And("Açılan pencereden bilgileri siler")
+    public void açılanPenceredenBilgileriSiler() {
+        ucmsAdminPage.crmId.clear();
+        ucmsAdminPage.grupAdıEkle.clear();
+    }
+
+    @Then("Zorunlu alanları doldurunuz uyarısını doğrular")
+    public void zorunluAlanlarıDoldurunuzUyarısınıDoğrular() {
+        Assert.assertTrue(ucmsAdminPage.zorunluAlanlarıDoldurunuzPopup.isDisplayed());
     }
 
 
@@ -176,9 +215,12 @@ public class UcmsAdminStepDefinition {
     @And("Alt grup ekle modalı açılır.")
     public void altGrupEkleModalıAçılır() {
     }
+
     @And("Kapat butonuna tıklanarak menü kapatılır.")
     public void kapatButonunaTıklanarakMenüKapatılır() {
+        ReusableMethods.waitFor(2);
         ucmsAdminPage.altGrupKapat.click();
+
     }
 
     @And("Geçerli bir başlık girilir.")
@@ -264,12 +306,14 @@ public class UcmsAdminStepDefinition {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.click();
     }
+
     @And("Var olan sonuç kodunun ismini girer")
     public void varOlanSonuçKodununIsminiGirer() {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(eklenenSonuçKoduName);
         ReusableMethods.waitFor(1);
     }
+
     @And("Var olan sonuç kodunun olduğunu doğrular")
     public void varOlanSonuçKodununOlduğunuDoğrular() {
         WebElement eklenenSonuçKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenSonuçKoduName + "')]"));
@@ -277,10 +321,12 @@ public class UcmsAdminStepDefinition {
         Assert.assertTrue(eklenenSonuçKodu.isDisplayed());
     }
 
-    //Devre Dışı Bırakılan Sonuç Kodlarını Listeleme
+    //Devre Dışı Bırakılan Sonuç Kodlarını Listeleme Steps
     @And("Açılan sayfada devre dışı bırakılanlar iconuna tıklanır.")
     public void açılanSayfadaDevreDışıBırakılanlarIconunaTıklanır() {
         ucmsAdminPage.devreDışıBırakılanlarIkon.click();
+        ReusableMethods.waitFor(3);
+
     }
 
     @Then("Kod grupları hiyerarşisi altında devre dışı bırakılan sonuç kodlarının da üstü çizili olarak listelendiği görülür")
@@ -306,5 +352,74 @@ public class UcmsAdminStepDefinition {
         }
 
     }
+
+    //Sonuç Kodu Taşıma Steps
+    @And("Değiştirmek istediği sonuç kodunun kod grubuna tıklar")
+    public void değiştirmekIstediğiSonuçKodununKodGrubunaTıklar() {
+        WebElement değiştirmekİstediğiSonuçKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//button[@aria-label='toggle KGOtomasyon001']"));
+        değiştirmekİstediğiSonuçKoduKodGrubu.click();
+    }
+
+    @And("Değiştirmek istediği sonuç kodunun dizin değiştir iconuna tıklar")
+    public void değiştirmekIstediğiSonuçKodununDizinDeğiştirIconunaTıklar() {
+
+        WebElement sonuçKodu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'SonuçKoduTaşıma')]"));
+        ReusableMethods.waitFor(1);
+        actions.moveToElement(sonuçKodu).perform();
+        ReusableMethods.waitFor(1);
+        WebElement sonuçKoduDizinDeğiştirİkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'SonuçKoduTaşıma')]/following::button[@mattooltip='Dizin Değiştir']"));
+        ReusableMethods.waitFor(1);
+        sonuçKoduDizinDeğiştirİkonu.click();
+        ReusableMethods.waitFor(1);
+
+    }
+
+    @And("Değiştirmek istediği pasif sonuç kodunun dizin değiştir iconuna tıklar")
+    public void değiştirmekIstediğiPasifSonuçKodununDizinDeğiştirIconunaTıklar() {
+        WebElement taşınanSonuçKodu = Driver.getDriver().findElement(By.xpath("//del[contains(text(),'SonuçKoduTaşıma')]"));
+        actions.moveToElement(taşınanSonuçKodu).perform();
+        WebElement sonuçKoduDizinDeğiştirİkonu = Driver.getDriver().findElement(By.xpath("//del[contains(text(),'SonuçKoduTaşıma')]/following::button[@mattooltip='Dizin Değiştir']"));
+        sonuçKoduDizinDeğiştirİkonu.click();
+
+    }
+
+    @And("Taşımak istediği kod grubunun buraya taşı iconuna tıklar")
+    public void taşımakIstediğiKodGrubununBurayaTaşıIconunaTıklar() {
+
+        WebElement taşımakİstediğiSonuçKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'SonuçKoduTaşımaKodGrubu')]"));
+        ReusableMethods.waitFor(1);
+        actions.moveToElement(taşımakİstediğiSonuçKoduKodGrubu).perform();
+        ReusableMethods.waitFor(1);
+        WebElement sonuçKoduBurayaTaşıİkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'SonuçKoduTaşımaKodGrubu')]/following::button[@mattooltip='Buraya Taşı']"));
+        ReusableMethods.waitFor(1);
+        sonuçKoduBurayaTaşıİkonu.click();
+        ReusableMethods.waitFor(1);
+    }
+    @And("Açılan uyarı penceresinde evet e tıklanır")
+    public void açılanUyarıPenceresindeEvetETıklanır() {
+        ucmsAdminPage.onayButton.click();
+    }
+
+    @Then("Sonuç kodunun dizinin değiştiği görülür.")
+    public void sonuçKodununDizininDeğiştiğiGörülür() {
+        List<WebElement> sonuçKoduTaşındıUyarı = ucmsAdminPage.sonuçKoduTaşındıUyarısı;
+        Assert.assertEquals(sonuçKoduTaşındıUyarı.size(), 1);
+    }
+    @And("Açılan uyarı penceresinde vazgeç e tıklanır")
+    public void açılanUyarıPenceresindeVazgeçETıklanır() {
+        ucmsAdminPage.vazgeçButton.click();
+    }
+
+    @Then("Sonuç kodunun dizinin değişmediğini görülür.")
+    public void sonuçKodununDizininDeğişmediğiniGörülür() {
+        List<WebElement> sonuçKoduTaşındıUyarı = ucmsAdminPage.sonuçKoduTaşındıUyarısı;
+        Assert.assertEquals(sonuçKoduTaşındıUyarı.size(), 0);
+    }
+
+    @And("İptal icon'una tıklar")
+    public void iptalIconUnaTıklar() {
+        ucmsAdminPage.taşımaİptalButton.click();
+    }
+
 
 }

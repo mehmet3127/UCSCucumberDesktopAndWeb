@@ -17,8 +17,8 @@ Feature: Kod Grubu
     And Onay butonuna tıklar
     Then Sayfayı kapatır
     Examples:
-      | grupAdı             |
-      | KodGrubuSilDeneme17 |
+      | grupAdı               |
+      | AltGrupPencereKapat01 |
 
 
   @SonuçKoduOlanKodGrubunuSilme
@@ -41,7 +41,7 @@ Feature: Kod Grubu
     And Kaydete tıklar
 
 
-  #@SonuçKoduOlmayanKodGrubuSilme
+  @SonuçKoduOlmayanKodGrubuSilme
   Scenario: TC_001 Sonuç Kodu Olmayan Kod Grubunu Silme
 
     Given Kullanıcı ucmsadmin sayfasına gider
@@ -64,6 +64,38 @@ Feature: Kod Grubu
     And Sonuç kodları sekmesine tıklar
     And Silmek istediği sonuç kodu olan kod grubunun sil Ikonuna tıklar
     Then Kod grubunun silinemediğini doğrular
+
+  @KodGrubuGüncelleme
+  Scenario: TC_001 Bilgileri değiştirerek kod grubu güncelleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç kodları sekmesine tıklar
+    And Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar
+    And Açılan pencereden istediği alanı günceller
+    And Kaydet butonuna tıklar
+    And Onay butonuna tıklar
+    Then Kod grubunun güncellendiğini doğrular
+
+  @BoşBırakarakKodGrubuGüncelleme
+  Scenario: TC_001 Bilgileri değiştirerek kod grubu güncelleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç kodları sekmesine tıklar
+    And Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar
+    And Açılan pencereden bilgileri siler
+    And Kaydet butonuna tıklar
+    And Onay butonuna tıklar
+    Then Zorunlu alanları doldurunuz uyarısını doğrular
+    #otomasyon da crm ıd ve grup adı silinince Kaydet buttın pasif oluyor
+
 
 
 

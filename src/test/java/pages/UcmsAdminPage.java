@@ -42,7 +42,7 @@ public class UcmsAdminPage {
     public WebElement sonuçKodlarSekmesi;
     @FindBy(xpath = "//button[@mattooltip='Kod Grubu Ekle']")
     public WebElement kodGrubuEkleIkon;
-    @FindBy(id = "mat-input-1")
+    @FindBy(name = "data.group.CrmId")
     public WebElement crmId;
     @FindBy(id = "mat-input-2")
     public WebElement grupAdıEkle;
@@ -50,6 +50,8 @@ public class UcmsAdminPage {
     public WebElement kaydetButton;
     @FindBy(xpath = "//button[text()='Evet']")
     public WebElement onayButton;
+    @FindBy(xpath = "//*[contains(text(), 'Zorunlu alanları doldurunuz.')]")
+    public WebElement zorunluAlanlarıDoldurunuzPopup;
     @FindBy(id = "swal2-html-container")
     public WebElement kodGrubuSilinemezPopup;
 
@@ -163,4 +165,28 @@ public class UcmsAdminPage {
     public List<WebElement> devreDışıBırakılanSonuçKodları;
 
 
+    //Sonuç Kodu Taşıma
+    @FindBy(xpath = "//button[text()='Vazgeç']")
+    public WebElement vazgeçButton;
+
+    @FindBy(xpath = "//*[contains(text(),'başlıklı dizin altına taşındı')]")
+    public List<WebElement> sonuçKoduTaşındıUyarısı;
+    @FindBy(xpath = "//button[@mattooltip='İptal']//span[@class='mat-button-wrapper']")
+    public WebElement taşımaİptalButton;
+
+
+    //Sonuç Şablonları
+    @FindBy(xpath = "//a[text()=' Sonuç Şablonları ']")
+    public WebElement sonuçŞablonlarıMenü;
+    @FindBy(xpath = "//button[@mattooltip='Ekle']")
+    public WebElement sonuçŞablonuEkleIkon;
+    @FindBy(xpath = "//input[@data-placeholder='Şablon Adı']")
+    public WebElement şablonAdı;
+    @FindBy(xpath = "//textarea[@data-placeholder='Açıklama']")
+    public WebElement şablonEkleAçıklama;
+    @FindBy(xpath = "//*[contains(text(), 'Lütfen bir veya birden fazla sonuç kodu seçiniz')]")
+    public WebElement sonuçKoduseçinizPopup;
+
+    @FindBy(xpath = "//*[contains(text(),'sonuç şablonu eklendi')]")
+    public List<WebElement> sonuçŞablonuEklendiPopup;
 }

@@ -1,24 +1,15 @@
 package stepDefinitions;
 
 
-import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
-import utilities.ReusableMethods;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
