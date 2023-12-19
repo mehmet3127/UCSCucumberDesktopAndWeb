@@ -74,14 +74,29 @@ Feature: Kod Grubu
     And Kullanıcı giriş butonuna tıklar
     And Sonuç kodları butonuna tıklar
     And Sonuç kodları sekmesine tıklar
-    And Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar
-    And Açılan pencereden istediği alanı günceller
+    And Güncellemek istediği kod grubunun "grupAdı" grup güncelle ıkonuna tıklar
+    And Açılan pencereden grup adı "KG_Versiyon" ve crmId "crmId" alanını günceller
     And Kaydet butonuna tıklar
     And Onay butonuna tıklar
     Then Kod grubunun güncellendiğini doğrular
 
   @BoşBırakarakKodGrubuGüncelleme
   Scenario: TC_001 Bilgileri değiştirerek kod grubu güncelleme
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç kodları sekmesine tıklar
+    And Güncellemek istediği kod grubunun "GrupGüncelleme" grup güncelle ıkonuna tıklar
+    And Açılan pencereden bilgileri siler
+    And Kaydet butonuna tıklar
+    And Onay butonuna tıklar
+    Then Zorunlu alanları doldurunuz uyarısını doğrular
+    #otomasyon da crm ıd ve grup adı silinince Kaydet buttın pasif oluyor
+
+  @KodGrubuVersiyonDeğiştirme
+  Scenario: TC_001 Kod grubu versiyon değiştirme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -89,12 +104,17 @@ Feature: Kod Grubu
     And Kullanıcı giriş butonuna tıklar
     And Sonuç kodları butonuna tıklar
     And Sonuç kodları sekmesine tıklar
-    And Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar
-    And Açılan pencereden bilgileri siler
+    And Güncellemek istediği kod grubunun "SonuçKoduOtomasyonu" grup güncelle ıkonuna tıklar
+    And Açılan pencereden grup adı "KG_Versiyon02" ve crmId "crmId" alanını günceller
     And Kaydet butonuna tıklar
     And Onay butonuna tıklar
-    Then Zorunlu alanları doldurunuz uyarısını doğrular
-    #otomasyon da crm ıd ve grup adı silinince Kaydet buttın pasif oluyor
+    Then Kod grubunun güncellendiğini doğrular
+    And Güncellenen sonuç kodu grubunun versiyon ikonuna tıklar
+    And Açılan pencerede tipi Oluşturma olan satırın Bu versiyonlar devam et ikonuna tıklar
+    And Açılan pencerede tüm alanların pasif geldiğini görür
+    And Kaydet butonuna tıklar
+    And Onay butonuna tıklar
+    And Sonuç kodu grubunun güncellendiğini doğrular
 
 
 

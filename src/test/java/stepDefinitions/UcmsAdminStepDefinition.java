@@ -26,6 +26,10 @@ public class UcmsAdminStepDefinition {
     static String eklenenKodGrubuName;
     static WebElement eklenenkodGrubu;
     static String eklenenSonuçKoduName;
+    static String versiyonDeğişecekSonuçKodu;
+    static String güncellenecekSonuçKoduKodGrubu;
+    static String güncellenecekKodGrubu;
+    static String versiyonDeğişecekKodGrubuName;
 
     //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
@@ -162,29 +166,31 @@ public class UcmsAdminStepDefinition {
     }
 
     //Kod Grubu Güncelleme Steps
-    @And("Güncellemek istediği kod grubunun grup güncelle ıkonuna tıklar")
-    public void güncellemekIstediğiKodGrubununGrupGüncelleIkonunaTıklar() {
+    @And("Güncellemek istediği kod grubunun {string} grup güncelle ıkonuna tıklar")
+    public void güncellemekIstediğiKodGrubununGrupGüncelleIkonunaTıklar(String kodGrubuName) {
+        güncellenecekKodGrubu = kodGrubuName;
         ReusableMethods.waitFor(1);
-        WebElement güncellenenKodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'GrupGüncelleme')]"));
+        WebElement güncellenenKodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + güncellenecekKodGrubu + "')]"));
         actions.moveToElement(güncellenenKodGrubu).perform();
-        WebElement eklenenkodGrubuSilIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'GrupGüncelleme')]/following::button[@mattooltip='Grup Güncelle']"));
-        eklenenkodGrubuSilIkonu.click();
+        WebElement eklenenkodGrubuGüncelleIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + güncellenecekKodGrubu + "')]/following::button[@mattooltip='Grup Güncelle']"));
+        eklenenkodGrubuGüncelleIkonu.click();
         ReusableMethods.waitFor(1);
-
     }
 
-    @And("Açılan pencereden istediği alanı günceller")
-    public void açılanPenceredenIstediğiAlanıGünceller() {
+    @And("Açılan pencereden grup adı {string} ve crmId {string} alanını günceller")
+    public void açılanPenceredenGrupAdıVeCrmIdAlanınıGünceller(String grupAdı, String crmId) {
+        versiyonDeğişecekKodGrubuName = grupAdı;
         ucmsAdminPage.crmId.clear();
-        ucmsAdminPage.crmId.sendKeys("KodGrupGüncelleme");
+        ucmsAdminPage.crmId.sendKeys(crmId);
         ucmsAdminPage.grupAdıEkle.clear();
-        ucmsAdminPage.grupAdıEkle.sendKeys("KodGrupGüncelleme");
+        ucmsAdminPage.grupAdıEkle.sendKeys(grupAdı);
     }
 
     @Then("Kod grubunun güncellendiğini doğrular")
     public void kodGrubununGüncellendiğiniDoğrular() {
 
     }
+
     @And("Açılan pencereden bilgileri siler")
     public void açılanPenceredenBilgileriSiler() {
         ucmsAdminPage.crmId.clear();
@@ -196,6 +202,22 @@ public class UcmsAdminStepDefinition {
         Assert.assertTrue(ucmsAdminPage.zorunluAlanlarıDoldurunuzPopup.isDisplayed());
     }
 
+    //Kod Grubu Versiyon Değişikliği
+    @And("Güncellenen sonuç kodu grubunun versiyon ikonuna tıklar")
+    public void güncellenenSonuçKoduGrubununVersiyonIkonunaTıklar() {
+        ReusableMethods.waitFor(1);
+        WebElement versiyonDeğişecekKodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + versiyonDeğişecekKodGrubuName + "')]"));
+        actions.moveToElement(versiyonDeğişecekKodGrubu).perform();
+        WebElement kodGrubuVersiyonIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekKodGrubuName + "')]//following::button[@mattooltip='Versiyon']"));
+        kodGrubuVersiyonIkonu.click();
+        ReusableMethods.waitFor(1);
+
+    }
+
+    @And("Sonuç kodu grubunun güncellendiğini doğrular")
+    public void sonuçKoduGrubununGüncellendiğiniDoğrular() {
+
+    }
 
     //Alt Grup Ekleme
     @And("Eklenen kod grubunun alt grup ekle ikonuna tıklar")
@@ -247,7 +269,6 @@ public class UcmsAdminStepDefinition {
     //Sonuç Kodları Ekleme Steps
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
-        Driver.getDriver().navigate().refresh();
         eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
         actions.moveToElement(eklenenkodGrubu).perform();
         WebElement eklenenkodGrubuSonuçKoduEkle = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
@@ -266,7 +287,7 @@ public class UcmsAdminStepDefinition {
 
     @And("Başlık kısmına isim girer")
     public void başlıkKısmınaIsimGirer() {
-        ucmsAdminPage.SonuçKoduBaşlık.sendKeys("SK" + eklenenKodGrubuName);
+        ucmsAdminPage.sonuçKoduBaşlık.sendKeys("SK" + eklenenKodGrubuName);
         eklenenSonuçKoduName = "SK" + eklenenKodGrubuName;
     }
 
@@ -395,6 +416,7 @@ public class UcmsAdminStepDefinition {
         sonuçKoduBurayaTaşıİkonu.click();
         ReusableMethods.waitFor(1);
     }
+
     @And("Açılan uyarı penceresinde evet e tıklanır")
     public void açılanUyarıPenceresindeEvetETıklanır() {
         ucmsAdminPage.onayButton.click();
@@ -405,6 +427,7 @@ public class UcmsAdminStepDefinition {
         List<WebElement> sonuçKoduTaşındıUyarı = ucmsAdminPage.sonuçKoduTaşındıUyarısı;
         Assert.assertEquals(sonuçKoduTaşındıUyarı.size(), 1);
     }
+
     @And("Açılan uyarı penceresinde vazgeç e tıklanır")
     public void açılanUyarıPenceresindeVazgeçETıklanır() {
         ucmsAdminPage.vazgeçButton.click();
@@ -421,5 +444,82 @@ public class UcmsAdminStepDefinition {
         ucmsAdminPage.taşımaİptalButton.click();
     }
 
+
+    //Sonuç Kodu Güncelleme ve Veriyon değişikliği
+    @And("Güncellemek istediği sonuç kodunun {string} tıklar")
+    public void güncellemekIstediğiSonuçKodununTıklar(String kodGrubuName) {
+        güncellenecekSonuçKoduKodGrubu = kodGrubuName;
+        WebElement güncellemekİstediğiSonuçKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//button[@aria-label='toggle " + güncellenecekSonuçKoduKodGrubu + "']"));
+        güncellemekİstediğiSonuçKoduKodGrubu.click();
+    }
+
+    @And("Güncellemek istediği {string} güncelle ıkonuna tıklar")
+    public void güncellemekIstediğiSonuçKodununGüncelleIkonunaTıklar(String sonuçKodu) {
+
+
+        versiyonDeğişecekSonuçKodu = sonuçKodu;
+        WebElement güncellenecekSonuçKodu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekSonuçKodu + "')]"));
+        actions.moveToElement(güncellenecekSonuçKodu).perform();
+
+        WebElement sonuçKoduGüncelleİkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekSonuçKodu + "')]/following::button[@mattooltip='Güncelle']"));
+        sonuçKoduGüncelleİkonu.click();
+        ReusableMethods.waitFor(3);
+
+    }
+
+    @And("Açılan pencereden Başlık alanını günceller")
+    public void açılanPenceredenBaşlıkAlanınıGünceller() {
+        ucmsAdminPage.sonuçKoduBaşlık.clear();
+        ucmsAdminPage.sonuçKoduBaşlık.sendKeys(versiyonDeğişecekSonuçKodu);
+    }
+
+    @And("Güncelle butonuna tıklar")
+    public void güncelleButonunaTıklar() {
+        ucmsAdminPage.güncelleButton.click();
+        ReusableMethods.waitFor(3);
+    }
+
+    @Then("Sonuç kodunun güncellendiğini doğrular")
+    public void sonuçKodununGüncellendiğiniDoğrular() {
+
+        List<WebElement> sonuçKoduGüncellendi = ucmsAdminPage.sonuçKoduGüncellendiPopup;
+        Assert.assertEquals(sonuçKoduGüncellendi.size(), 1);
+    }
+
+    @And("Güncellenen sonuç kodunun versiyon ikonuna tıklar")
+    public void güncellenenSonuçKodununVersiyonIkonunaTıklar() {
+        WebElement versiyonDeğişecekSonuçKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//button[@aria-label='toggle " + güncellenecekSonuçKoduKodGrubu + "']"));
+        versiyonDeğişecekSonuçKoduKodGrubu.click();
+
+        WebElement sonuçKodu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekSonuçKodu + "')]"));
+        actions.moveToElement(sonuçKodu).perform();
+        WebElement sonuçKoduVersiyonİkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekSonuçKodu + "')]//following::button[@mattooltip='Versiyon']"));
+        ReusableMethods.waitFor(2);
+        sonuçKoduVersiyonİkonu.click();
+
+
+    }
+
+    @And("Açılan pencerede tipi Oluşturma olan satırın Bu versiyonlar devam et ikonuna tıklar")
+    public void açılanPenceredeTipiOluşturmaOlanSatırınBuVersiyonlarDevamEtIkonunaTıklar() {
+        ucmsAdminPage.oluşturmaTipiBuVersiyonİleDevamEt.click();
+
+    }
+
+    @And("Açılan pencerede tüm alanların pasif geldiğini görür")
+    public void açılanPenceredeTümAlanlarınPasifGeldiğiniGörür() {
+    }
+
+    @And("Versiyonu değiştir butonuna tıklar")
+    public void versiyonuDeğiştirButonunaTıklar() {
+        jse.executeScript("arguments[0].click();", ucmsAdminPage.versiyonDeğiştirButton);
+        ReusableMethods.waitFor(3);
+    }
+
+    @And("Sonuç kodu veriyonunun güncellendiğini doğrular")
+    public void sonuçKoduVeriyonununGüncellendiğiniDoğrular() {
+        List<WebElement> sonuçKoduGüncellendi = ucmsAdminPage.sonuçKoduGüncellendiPopup;
+        Assert.assertEquals(sonuçKoduGüncellendi.size(), 1);
+    }
 
 }

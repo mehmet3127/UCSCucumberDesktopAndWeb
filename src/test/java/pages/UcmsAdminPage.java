@@ -62,7 +62,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//mat-icon[text()='add']")
     public WebElement sonuçKoduEkleIkon;
     @FindBy(id = "mat-input-1")
-    public WebElement SonuçKoduBaşlık;
+    public WebElement sonuçKoduBaşlık;
 
 
     //Aksiyon Tipi Combo Secenekleri
@@ -173,6 +173,17 @@ public class UcmsAdminPage {
     public List<WebElement> sonuçKoduTaşındıUyarısı;
     @FindBy(xpath = "//button[@mattooltip='İptal']//span[@class='mat-button-wrapper']")
     public WebElement taşımaİptalButton;
+
+
+    //Sonuç Kodu Güncelleme Versiyon Değişikliği
+    @FindBy(xpath = "//span[text()='Güncelle']")
+    public WebElement güncelleButton;
+    @FindBy(xpath = "//*[contains(text(),'sonuç kodu güncellendi')]")
+    public List<WebElement> sonuçKoduGüncellendiPopup;
+    @FindBy(xpath = "//td[text()='Oluşturma']//following::button[@mattooltip='Bu versiyonla devam et']")
+    public WebElement oluşturmaTipiBuVersiyonİleDevamEt;
+    @FindBy(xpath = "//span[text()='Versiyon Değiştir']")
+    public WebElement versiyonDeğiştirButton;
 
 
     //Sonuç Şablonları
