@@ -57,6 +57,47 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Var olan sonuç şablonunun ıd sini girer
     Then Id ile aranan sonuç şablonunun olduğunu doğrular
 
+  @SonuçŞablonuDüzenleme1
+  Scenario: TC_001 Seçili sonuç kodlarını kaldırarak sonuç şablonunu düzenleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Düzenlemek istediği sonuç şablonunun "şablonGüncellendi" düzenle ikonuna tıklar
+    And Seçili olan sonuç kodu seçeneğini kaldırır
+    And Kaydet butonuna tıklar
+    And Sonuç kodu seçiniz uyarısını doğrular
+
+  @SonuçŞablonuDüzenleme2
+  Scenario: TC_002 Şablon adını değiştirerek sonuç şablonunu düzenleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncellendi" düzenle ikonuna tıklar
+    And Şablon adını "SonuçŞablonuGüncellendi2" değiştirir
+    And Kaydet butonuna tıklar
+    And Sonuç şablonu güncellendi yazısnı doğrular
+
+
+  @SonuçŞablonlarılisteleme1
+  Scenario:TC_001 Tüm(aktif/pasif) sonuç şablonlarını listeleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And İnaktif sonuç şablonları listelenir
+
 
 
 

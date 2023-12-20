@@ -456,7 +456,6 @@ public class UcmsAdminStepDefinition {
     @And("Güncellemek istediği {string} güncelle ıkonuna tıklar")
     public void güncellemekIstediğiSonuçKodununGüncelleIkonunaTıklar(String sonuçKodu) {
 
-
         versiyonDeğişecekSonuçKodu = sonuçKodu;
         WebElement güncellenecekSonuçKodu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + versiyonDeğişecekSonuçKodu + "')]"));
         actions.moveToElement(güncellenecekSonuçKodu).perform();
@@ -520,6 +519,50 @@ public class UcmsAdminStepDefinition {
     public void sonuçKoduVeriyonununGüncellendiğiniDoğrular() {
         List<WebElement> sonuçKoduGüncellendi = ucmsAdminPage.sonuçKoduGüncellendiPopup;
         Assert.assertEquals(sonuçKoduGüncellendi.size(), 1);
+    }
+
+    //Sonuç Kodu Sayfa Kuralları Steps
+    @And("Açılan pencereden Randevuyu Sistem Belirlesin sekmesine tıklar")
+    public void açılanPenceredenRandevuyuSistemBelirlesinSekmesineTıklar() {
+        ucmsAdminPage.actionTipiCombo.click();
+        ucmsAdminPage.randevuyuSistemBelirlesin.click();
+
+    }
+
+    @And("Açılan Randevu Özellikleri alanındaki Randevu Tipi combosunda Otomatik Grup Randevu işaretlenir")
+    public void açılanRandevuÖzellikleriAlanındakiRandevuTipiCombosundaOtomatikGrupRandevuIşaretlenir() {
+        ucmsAdminPage.randevuTipi.click();
+        ucmsAdminPage.otomatikGrupRandevu.click();
+    }
+
+    @And("Dakika alanına süre girilir.")
+    public void dakikaAlanınaSüreGirilir() {
+        ucmsAdminPage.randevuÖzellikleriDakika.sendKeys("20");
+    }
+
+    @And("Sonraki arama davranışı alanında Bu Kontağı Arama Sıralamasından Çıkart check box seçilemez olduğu görülür.")
+    public void sonrakiAramaDavranışıAlanındaBuKontağıAramaSıralamasındanÇıkartCheckBoxSeçilemezOlduğuGörülür() {
+
+    }
+
+    @And("Sonraki arama davranışı alanında Bir Sonraki Kontağa Geç check box işaretlenir.")
+    public void sonrakiAramaDavranışıAlanındaBirSonrakiKontağaGeçCheckBoxIşaretlenir() {
+    }
+
+    @And("Sonraki arama davranışı alanında Bu Kontağı Arama Sıralamasından Çıkart check box seçilebilir olduğu görülür.")
+    public void sonrakiAramaDavranışıAlanındaBuKontağıAramaSıralamasındanÇıkartCheckBoxSeçilebilirOlduğuGörülür() {
+    }
+
+    @And("Sonraki arama davranışı alanında Bu Kontağı Arama Sıralamasından Çıkart check box işaretlenir.")
+    public void sonrakiAramaDavranışıAlanındaBuKontağıAramaSıralamasındanÇıkartCheckBoxIşaretlenir() {
+    }
+
+    @And("Sonraki arama davranışı alanında Bir Sonraki Kontağa Geç  check box işareti kaldırılır.")
+    public void sonrakiAramaDavranışıAlanındaBirSonrakiKontağaGeçCheckBoxIşaretiKaldırılır() {
+    }
+
+    @And("Sonraki arama davranışı alanında Bu Kontağı Arama Sıralamasından Çıkart check box seçilemez olduğu ve işaretinin kaldırıldığı görülür.")
+    public void sonrakiAramaDavranışıAlanındaBuKontağıAramaSıralamasındanÇıkartCheckBoxSeçilemezOlduğuVeIşaretininKaldırıldığıGörülür() {
     }
 
 }

@@ -197,7 +197,22 @@ public class UcmsAdminPage {
     public WebElement şablonEkleAçıklama;
     @FindBy(xpath = "//*[contains(text(), 'Lütfen bir veya birden fazla sonuç kodu seçiniz')]")
     public WebElement sonuçKoduseçinizPopup;
-
     @FindBy(xpath = "//*[contains(text(),'sonuç şablonu eklendi')]")
     public List<WebElement> sonuçŞablonuEklendiPopup;
+    @FindBy(xpath = "//*[contains(text(),'sonuç şablonu güncellendi')]")
+    public List<WebElement> sonuçŞablonuGüncellendiPopup;
+    @FindBy(xpath = "//label[@for='mat-slide-toggle-5-input']")
+    public WebElement sonuçŞablonuDevreDışıBırakılanlar;
+    @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
+    public List<WebElement> aktifSonuçŞablonuList;
+    @FindBy(xpath = "//mat-icon[contains(@class,'red')]")
+    public List<WebElement> pasifSonuçŞablonuList;
+    @FindBy(xpath = "//button[@aria-label='Next page']")
+    public WebElement nextPageButton;
+
+
+
+
+
+
 }
