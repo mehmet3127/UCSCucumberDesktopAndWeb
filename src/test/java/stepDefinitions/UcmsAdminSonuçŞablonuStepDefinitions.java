@@ -141,16 +141,16 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
 
     }
 
-    @And("İnaktif sonuç şablonları listelenir")
-    public void inaktifSonuçŞablonlarıListelenir() {
+    @And("İnaktif sonuç şablonları listelendiği görülür")
+    public void inaktifSonuçŞablonlarıListelendiğiGörülür() {
         List<WebElement> inaktifSonuçŞablonları = ucmsAdminPage.pasifSonuçŞablonuList;
 
         boolean nextPageExists = true;
-        int pasifSonuçŞablonuSize=0;
+        int toplamPasifSonuçŞablonuSize = 0;
 
         while (nextPageExists) {
             System.out.println("inaktifSonuçŞablonları.size = " + inaktifSonuçŞablonları.size());
-            pasifSonuçŞablonuSize+=inaktifSonuçŞablonları.size();
+            toplamPasifSonuçŞablonuSize += inaktifSonuçŞablonları.size();
             try {
                 if (!ucmsAdminPage.nextPageButton.isEnabled()) {
                     nextPageExists = false;
@@ -162,7 +162,97 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
                 nextPageExists = false;
             }
         }
-        System.out.println("pasifSonuçŞablonuSize = " + pasifSonuçŞablonuSize);
+        System.out.println("pasifSonuçŞablonuSize = " + toplamPasifSonuçŞablonuSize);
+
+    }
+
+    @And("Açılan Devre dışı bırakılanlar toggle'ı kapatılır")
+    public void devreDışıBırakılanlarToggleIKapatılır() {
+        ucmsAdminPage.sonuçŞablonuDevreDışıBırakılanlar.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.sonuçŞablonuDevreDışıBırakılanlar.click();
+
+    }
+
+    @And("Yalnızca aktif sonuç şablonları listelendiği görülür")
+    public void yalnızcaAktifSonuçŞablonlarıListelendiğiGörülür() {
+        List<WebElement> aktifSonuçŞablonları = ucmsAdminPage.aktifSonuçŞablonuList;
+
+        boolean nextPageExists = true;
+        int toplamAktifSonuçŞablonuSize = 0;
+
+        while (nextPageExists) {
+            System.out.println("aktifSonuçŞablonları.size = " + aktifSonuçŞablonları.size());
+            toplamAktifSonuçŞablonuSize += aktifSonuçŞablonları.size();
+            try {
+                if (!ucmsAdminPage.nextPageButton.isEnabled()) {
+                    nextPageExists = false;
+                } else {
+                    ucmsAdminPage.nextPageButton.click();
+                    //ReusableMethods.waitFor(1);
+                }
+            } catch (NoSuchElementException e) {
+                nextPageExists = false;
+            }
+        }
+        System.out.println("aktifSonuçŞablonuSize = " + toplamAktifSonuçŞablonuSize);
+    }
+
+    //Sonuç Şablonları Aktifleştirme-Pasifleştirme
+    @And("İnaktif olan sonuç şablonunun {string} Aktif et iconuna tıklanır")
+    public void inaktifOlanSonuçŞablonununAktifEtIconunaTıklanır(String şablonAdı) {
+        WebElement aktifEdilecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + şablonAdı + "')]//following-sibling::td[contains(@class,'IsActive')]"));
+        ReusableMethods.waitFor(1);
+        aktifEdilecekSonuçŞablonu.click();
+        ReusableMethods.waitFor(1);
+
+    }
+
+    @And("Sonuç şablonunun aktif edildiği görülür")
+    public void sonuçŞablonununAktifEdildiğiGörülür() {
+        List<WebElement> sonuçŞablonuAktifPasifEtmePopUp = ucmsAdminPage.sonuçŞablonuAktifPasifEtmePopup;
+        Assert.assertEquals(sonuçŞablonuAktifPasifEtmePopUp.size(), 1);
+
+    }
+
+    @And("İnaktif olan sonuç şablonunun {string} Pasif et iconuna tıklanır")
+    public void inaktifOlanSonuçŞablonununPasifEtIconunaTıklanır(String şablonAdı) {
+        WebElement aktifEdilecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + şablonAdı + "')]//following-sibling::td[contains(@class,'IsActive')]"));
+        ReusableMethods.waitFor(1);
+        aktifEdilecekSonuçŞablonu.click();
+        ReusableMethods.waitFor(1);
+    }
+
+    @And("Sonuç şablonunun Pasif edildiği görülür")
+    public void sonuçŞablonununPasifEdildiğiGörülür() {
+        List<WebElement> sonuçŞablonuAktifPasifEtmePopUp = ucmsAdminPage.sonuçŞablonuAktifPasifEtmePopup;
+        Assert.assertEquals(sonuçŞablonuAktifPasifEtmePopUp.size(), 1);
+    }
+
+    @And("Listelenen sonuç şablonlarının solundaki checkbox kullanılarak bir tanesi {string} seçilir")
+    public void listelenenSonuçŞablonlarınınSolundakiCheckboxKullanılarakBirTanesiSeçilir(String şablonAdı) {
+        WebElement sonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + şablonAdı + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        sonuçŞablonu.click();
+    }
+
+    @And("Sağ üst köşede beliren aktif_pasif iconuna tıklanır")
+    public void sağÜstKöşedeBelirenAktif_pasifIconunaTıklanır() {
+        ucmsAdminPage.aktifPasifİcon.click();
+    }
+
+    @Then("Seçilen şablonun güncellendiği görülür")
+    public void seçilenŞablonunGüncellendiğiGörülür() {
+        List<WebElement> checkBoxŞablonGüncellendiPopUp = ucmsAdminPage.checkBoxAktifPasifEtmePopup;
+        Assert.assertEquals(checkBoxŞablonGüncellendiPopUp.size(), 1);
+
+    }
+
+    @And("Listelenen sonuç şablonlarının solundaki checkbox kullanılarak birden fazla {string} {string} seçilir")
+    public void listelenenSonuçŞablonlarınınSolundakiCheckboxKullanılarakBirdenFazlaSeçilir(String şablonAdı1, String şablonAdı2) {
+        WebElement sonuçŞablonu1 = Driver.getDriver().findElement(By.xpath("//td[text()='" + şablonAdı1 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        sonuçŞablonu1.click();
+        WebElement sonuçŞablonu2 = Driver.getDriver().findElement(By.xpath("//td[text()='" + şablonAdı2 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        sonuçŞablonu2.click();
 
     }
 }

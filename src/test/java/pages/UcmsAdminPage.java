@@ -161,7 +161,7 @@ public class UcmsAdminPage {
     //Devre Dışı Bırakma
     @FindBy(xpath = "//button[@mattooltip='Devre Dışı Bırakılanlar']")
     public WebElement devreDışıBırakılanlarIkon;
-    @FindBy(xpath = "//div/del")
+    @FindBy(xpath = "//div//del")
     public List<WebElement> devreDışıBırakılanSonuçKodları;
 
 
@@ -186,7 +186,7 @@ public class UcmsAdminPage {
     public WebElement versiyonDeğiştirButton;
 
 
-    //Sonuç Şablonları
+    //Sonuç Şablonu Ekleme
     @FindBy(xpath = "//a[text()=' Sonuç Şablonları ']")
     public WebElement sonuçŞablonlarıMenü;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
@@ -199,8 +199,12 @@ public class UcmsAdminPage {
     public WebElement sonuçKoduseçinizPopup;
     @FindBy(xpath = "//*[contains(text(),'sonuç şablonu eklendi')]")
     public List<WebElement> sonuçŞablonuEklendiPopup;
+
+    //Sonuç Şablonu Güncelleme
     @FindBy(xpath = "//*[contains(text(),'sonuç şablonu güncellendi')]")
     public List<WebElement> sonuçŞablonuGüncellendiPopup;
+
+    //Sonuç Şablonu Listeleme
     @FindBy(xpath = "//label[@for='mat-slide-toggle-5-input']")
     public WebElement sonuçŞablonuDevreDışıBırakılanlar;
     @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
@@ -209,8 +213,16 @@ public class UcmsAdminPage {
     public List<WebElement> pasifSonuçŞablonuList;
     @FindBy(xpath = "//button[@aria-label='Next page']")
     public WebElement nextPageButton;
+    @FindBy(xpath = "//label[@for='mat-slide-toggle-6-input']")
+    public WebElement sonuçŞablonuEkleDevreDışıBırakılanlarIcon;
 
-
+    //Sonuç Şablonu Aktif-Pasif Etme
+    @FindBy(xpath = "//*[contains(text(),'kaydı güncellendi')]")
+    public List<WebElement> sonuçŞablonuAktifPasifEtmePopup;
+    @FindBy(xpath = "//button[@mattooltip='Aktif/Pasif']")
+    public WebElement aktifPasifİcon;
+    @FindBy(xpath = "//*[contains(text(),'kayıt güncellendi')]")
+    public List<WebElement> checkBoxAktifPasifEtmePopup;
 
 
 

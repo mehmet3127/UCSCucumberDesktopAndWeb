@@ -96,8 +96,114 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Sonuç kodları butonuna tıklar
     And Sonuç şablonları sekmesine tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
-    And İnaktif sonuç şablonları listelenir
+    And İnaktif sonuç şablonları listelendiği görülür
 
+
+  @SonuçŞablonlarılisteleme2
+  Scenario:TC_002 Yalnızca Aktif sonuç şablonlarını listeleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Açılan Devre dışı bırakılanlar toggle'ı kapatılır
+    And Yalnızca aktif sonuç şablonları listelendiği görülür
+
+  @SonuçŞablonlarıAktifEtme
+  Scenario:TC_001 Aktif et iconu kullanarak pasif şablonu aktif etme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And İnaktif olan sonuç şablonunun "SonuçŞablonuEklemeOtomasyon05" Aktif et iconuna tıklanır
+    And Sonuç şablonunun aktif edildiği görülür
+
+  @SonuçŞablonlarıPasifEtme
+  Scenario:TC_002 Devre dışı bırak iconu kullanarak aktif şablonu pasif etme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And İnaktif olan sonuç şablonunun "SonuçŞablonuEklemeOtomasyon05" Pasif et iconuna tıklanır
+    And Sonuç şablonunun Pasif edildiği görülür
+
+  @CheckBoxİleSonuçŞablonlarıPasifEtme
+  Scenario:TC_003 Checkbox ile aktif olan şablonu seçip pasif hale getirme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Listelenen sonuç şablonlarının solundaki checkbox kullanılarak bir tanesi "SonuçŞablonuAktifPasifHaleGetirme" seçilir
+    And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
+    Then Seçilen şablonun güncellendiği görülür
+
+
+  @CheckBoxİleSonuçŞablonlarıAktifEtme
+  Scenario:TC_005 Checkbox ile pasif olan şablonu seçip aktif hale getirme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And Listelenen sonuç şablonlarının solundaki checkbox kullanılarak bir tanesi "SonuçŞablonuAktifPasifHaleGetirme" seçilir
+    And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
+    Then Seçilen şablonun güncellendiği görülür
+
+
+  @CheckBoxİleBirdenFazlaSonuçŞablonlarıPasifEtme
+  Scenario:TC_004 Checkbox ile birden fazla aktif olan şablonları seçip pasif hale getirme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Listelenen sonuç şablonlarının solundaki checkbox kullanılarak birden fazla "CheckBoxAktifPasifEtmeŞablonu1" "CheckBoxAktifPasifEtmeŞablonu2" seçilir
+    And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
+    Then Seçilen şablonun güncellendiği görülür
+
+  @CheckBoxİleBirdenFazlaSonuçŞablonlarıAktifEtme
+  Scenario:TC_006 Checkbox ile birden fazla pasif olan şablonları seçip aktif hale getirme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And Listelenen sonuç şablonlarının solundaki checkbox kullanılarak birden fazla "CheckBoxAktifPasifEtmeŞablonu1" "CheckBoxAktifPasifEtmeŞablonu2" seçilir
+    And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
+    Then Seçilen şablonun güncellendiği görülür
+
+
+  @
+  Scenario:
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Sonuç şablonu ekleme ıkonun tıklar
+    And Açılan modaldaki devre dışı bırakılanlar toggle'ı aktif edilir
 
 
 
