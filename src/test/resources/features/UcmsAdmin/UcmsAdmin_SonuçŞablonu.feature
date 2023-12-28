@@ -66,7 +66,7 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Kullanıcı giriş butonuna tıklar
     And Sonuç kodları butonuna tıklar
     And Sonuç şablonları sekmesine tıklar
-    And Düzenlemek istediği sonuç şablonunun "şablonGüncellendi" düzenle ikonuna tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncelleme" düzenle ikonuna tıklar
     And Seçili olan sonuç kodu seçeneğini kaldırır
     And Kaydet butonuna tıklar
     And Sonuç kodu seçiniz uyarısını doğrular
@@ -80,7 +80,7 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Kullanıcı giriş butonuna tıklar
     And Sonuç kodları butonuna tıklar
     And Sonuç şablonları sekmesine tıklar
-    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncellendi" düzenle ikonuna tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncelleme" düzenle ikonuna tıklar
     And Şablon adını "SonuçŞablonuGüncellendi2" değiştirir
     And Kaydet butonuna tıklar
     And Sonuç şablonu güncellendi yazısnı doğrular
@@ -192,9 +192,9 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
     Then Seçilen şablonun güncellendiği görülür
 
-
-  @
-  Scenario:
+   #Sonuş Şablonu Ekle modalında Devre dışı bırakılanlar ikonu ile sonuç kodlarını listeleme
+  @EkleModalıDevreDışıBırakılanSonuçKodlarıListeleme
+  Scenario:TC_001 Ekle modalı devre dışı bırakılan kodlarını da listeleme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -204,6 +204,83 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Sonuç şablonları sekmesine tıklar
     And Sonuç şablonu ekleme ıkonun tıklar
     And Açılan modaldaki devre dışı bırakılanlar toggle'ı aktif edilir
+    Then Devre dışı bırakılan sonuç kodlarının listelendiği görülür
+    #!!Sonuç kodları listelenmediği için görünmüyor task açıldı bekleneiyor
+
+
+  @EkleModalıSonuçKodlarıListeleme
+  Scenario:TC_002 Ekle modalı şablonları listeleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Sonuç şablonu ekleme ıkonun tıklar
+    And Açılan modaldaki devre dışı bırakılanlar toggle'ı kapatılır
+    Then Sonuç kodlarının listelendiği görülür
+    #!!Sonuç kodları listelenmediği için görünmüyor task açıldı bekleneiyor
+
+
+  #Sonuş Şablonu Güncelle modalında Devre dışı bırakılanlar ikonu ile sonuç Kodlarını listeleme
+  @GüncelleModalıDevreDışıBırakılanSonuçKodlarıListelem
+  Scenario:TC_001 Güncelle modalı devre dışı bırakılan sonuç kodlarını da listeleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncellme" düzenle ikonuna tıklar
+    And Açılan modaldaki devre dışı bırakılanlar toggle'ı aktif edilir
+    Then Devre dışı bırakılan sonuç kodlarının listelendiği görülür
+    #!!Sonuç kodları listelenmediği için görünmüyor task açıldı bekleneiyor
+
+
+  @GüncelleModalıSonuçKodlarıListeleme
+  Scenario:TC_001 Güncelle modalı devre dışı bırakılan şablonları da listeleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncellme" düzenle ikonuna tıklar
+    And Açılan modaldaki devre dışı bırakılanlar toggle'ı kapatılır
+    Then Sonuç kodlarının listelendiği görülür
+    #!!Sonuç kodları listelenmediği için görünmüyor task açıldı bekleneiyor
+
+
+  @sonuçKoduŞablonuVersiyonDeğiştirme
+  Scenario: TC_001	Güncellenen sonuç kodu şablonunun ilk versiyonuna dönme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sonuç kodları butonuna tıklar
+    And Sonuç şablonları sekmesine tıklar
+    And Düzenlemek istediği sonuç şablonunun "SonuçŞablonuGüncelleme" düzenle ikonuna tıklar
+    And Şablon adını "SonuçŞablonuGüncelleme" değiştirir
+    And Kaydet butonuna tıklar
+    And Güncellenen sonuç kodu şablonunun versiyon ikonuna tıklar
+    #Bu versiyonla devam et dedikten sonra Tip olarak oluşturma görünmediği için beklemede ömer'e sor
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

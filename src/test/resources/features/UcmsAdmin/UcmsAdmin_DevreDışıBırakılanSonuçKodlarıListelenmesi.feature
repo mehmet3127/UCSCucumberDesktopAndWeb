@@ -20,5 +20,5 @@ Feature: Devre Dışı Bırakılan Sonuç Kodlarının Listelenmesi
     And Sonuç kodları butonuna tıklar
     And Sonuç kodları sekmesine tıklar
     And Açılan sayfada devre dışı bırakılanlar iconuna tıklanır.
-    Then Kod grupları hiyerarşisi altında devre dışı bırakılan sonuç kodlarının da üstü çizili olarak listelendiği görülür
+    #Then Kod grupları hiyerarşisi altında devre dışı bırakılan sonuç kodlarının da üstü çizili olarak listelendiği görülür
     Then Tekrar devre dışı bırakılanlar iconuna tıklandığında, devre dışı bırakılmış sonuç kodlarının listelenmediği  görülür

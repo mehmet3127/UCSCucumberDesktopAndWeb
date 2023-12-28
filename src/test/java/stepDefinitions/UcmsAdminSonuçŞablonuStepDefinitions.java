@@ -21,6 +21,7 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
     Actions actions = new Actions(Driver.getDriver());
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
     static String sonuçŞablonuName;
+    static String güncellenecekŞablonAdı;
 
     //Sonuç Şablonu Ekleme Steps
     @And("Sonuç şablonları sekmesine tıklar")
@@ -97,8 +98,9 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
     //Sonuç Şablonu Düzenleme Steps
     @And("Düzenlemek istediği sonuç şablonunun {string} düzenle ikonuna tıklar")
     public void düzenlemekIstediğiSonuçŞablonununDüzenleIkonunaTıklar(String şablonAdı) {
+        güncellenecekŞablonAdı =şablonAdı;
 
-        WebElement düzenlenecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + şablonAdı + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        WebElement düzenlenecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + güncellenecekŞablonAdı + "')]//following-sibling::td[contains(@class,'Edit')]"));
         düzenlenecekSonuçŞablonu.click();
 
     }
@@ -120,7 +122,7 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
     public void şablonAdınıDeğiştirir(String ŞablonAdı) {
         ucmsAdminPage.şablonAdı.clear();
         ucmsAdminPage.şablonAdı.sendKeys(ŞablonAdı);
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(1);
     }
 
     @And("Sonuç şablonu güncellendi yazısnı doğrular")
@@ -229,6 +231,7 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
         Assert.assertEquals(sonuçŞablonuAktifPasifEtmePopUp.size(), 1);
     }
 
+    //CheckBox ile Sonuç şablonlarının aktif-pasif edilmesi
     @And("Listelenen sonuç şablonlarının solundaki checkbox kullanılarak bir tanesi {string} seçilir")
     public void listelenenSonuçŞablonlarınınSolundakiCheckboxKullanılarakBirTanesiSeçilir(String şablonAdı) {
         WebElement sonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + şablonAdı + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
@@ -253,6 +256,39 @@ public class UcmsAdminSonuçŞablonuStepDefinitions {
         sonuçŞablonu1.click();
         WebElement sonuçŞablonu2 = Driver.getDriver().findElement(By.xpath("//td[text()='" + şablonAdı2 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
         sonuçŞablonu2.click();
+
+    }
+    //Sonuş Şablonu Ekle modalında Devre dışı bırakılanlar ikonu ile sonuç şablonlarını listeleme
+    @And("Açılan modaldaki devre dışı bırakılanlar toggle'ı aktif edilir")
+    public void açılanModaldakiDevreDışıBırakılanlarToggleIAktifEdilir() {
+        ucmsAdminPage.sonuçŞablonuEkleGüncelleDevreDışıBırakılanlarIcon.click();
+        ReusableMethods.waitFor(1);
+
+    }
+
+    @Then("Devre dışı bırakılan sonuç kodlarının listelendiği görülür")
+    public void devreDışıBırakılanSonuçKodlarınınListelendiğiGörülür() {
+        List<WebElement> devreDışıBırakılanSonuçKodlarıList =ucmsAdminPage.sonuçŞablonuEkleDevreDışıBırakılanSonuçKodları;
+        System.out.println("devreDışıBırakılanSonuçKodlarıList.size = " + devreDışıBırakılanSonuçKodlarıList.size());
+    }
+
+    @And("Açılan modaldaki devre dışı bırakılanlar toggle'ı kapatılır")
+    public void açılanModaldakiDevreDışıBırakılanlarToggleIKapatılır() {
+        ucmsAdminPage.sonuçŞablonuEkleGüncelleDevreDışıBırakılanlarIcon.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.sonuçŞablonuEkleGüncelleDevreDışıBırakılanlarIcon.click();
+    }
+
+    @Then("Sonuç kodlarının listelendiği görülür")
+    public void sonuçKodlarınınListelendiğiGörülür() {
+
+    }
+
+    @And("Güncellenen sonuç kodu şablonunun versiyon ikonuna tıklar")
+    public void güncellenenSonuçKoduŞablonununVersiyonIkonunaTıklar() {
+        WebElement versionDeğişecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'"+güncellenecekŞablonAdı+"')]//following-sibling::td[contains(@class,'History')]"));
+
+        versionDeğişecekSonuçŞablonu.click();
 
     }
 }

@@ -161,7 +161,7 @@ public class UcmsAdminPage {
     //Devre Dışı Bırakma
     @FindBy(xpath = "//button[@mattooltip='Devre Dışı Bırakılanlar']")
     public WebElement devreDışıBırakılanlarIkon;
-    @FindBy(xpath = "//div//del")
+    @FindBy(xpath = "//del")
     public List<WebElement> devreDışıBırakılanSonuçKodları;
 
 
@@ -214,7 +214,11 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//button[@aria-label='Next page']")
     public WebElement nextPageButton;
     @FindBy(xpath = "//label[@for='mat-slide-toggle-6-input']")
-    public WebElement sonuçŞablonuEkleDevreDışıBırakılanlarIcon;
+    public WebElement sonuçŞablonuEkleGüncelleDevreDışıBırakılanlarIcon;
+
+    @FindBy(xpath = "//del")
+    public List<WebElement> sonuçŞablonuEkleDevreDışıBırakılanSonuçKodları;
+
 
     //Sonuç Şablonu Aktif-Pasif Etme
     @FindBy(xpath = "//*[contains(text(),'kaydı güncellendi')]")

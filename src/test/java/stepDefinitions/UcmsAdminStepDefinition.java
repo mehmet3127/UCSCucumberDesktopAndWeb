@@ -346,7 +346,11 @@ public class UcmsAdminStepDefinition {
     @And("Açılan sayfada devre dışı bırakılanlar iconuna tıklanır.")
     public void açılanSayfadaDevreDışıBırakılanlarIconunaTıklanır() {
         ucmsAdminPage.devreDışıBırakılanlarIkon.click();
-        ReusableMethods.waitFor(3);
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.devreDışıBırakılanlarIkon.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.devreDışıBırakılanlarIkon.click();
+
 
     }
 
@@ -355,7 +359,7 @@ public class UcmsAdminStepDefinition {
 
         List<WebElement> devreDışıBırakılanSonuçKodlarıList = ucmsAdminPage.devreDışıBırakılanSonuçKodları;
 
-        System.out.println("devreDışıBırakılanSonuçKodlarıList.size() = " + devreDışıBırakılanSonuçKodlarıList.size());
+        System.out.println("devreDışıBırakılanSonuçKodlarıList.size = " + devreDışıBırakılanSonuçKodlarıList.size());
 
         for (WebElement w : devreDışıBırakılanSonuçKodlarıList) {
             System.out.println(w.getText());
@@ -367,7 +371,7 @@ public class UcmsAdminStepDefinition {
         ucmsAdminPage.devreDışıBırakılanlarIkon.click();
 
         List<WebElement> devreDışıBırakılanSonuçKodlarıList = ucmsAdminPage.devreDışıBırakılanSonuçKodları;
-        System.out.println("devreDışıBırakılanSonuçKodlarıList.size() = " + devreDışıBırakılanSonuçKodlarıList.size());
+
         for (WebElement w : devreDışıBırakılanSonuçKodlarıList) {
             System.out.println(w.getText());
         }
