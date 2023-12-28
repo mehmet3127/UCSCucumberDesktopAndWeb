@@ -9,7 +9,7 @@ import pages.UcmsAdminPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-public class UcmsAdminSonuçKoduEkleStepDefinitions {
+public class UcmsAdminSonuçKoduEkleStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
     static String eklenenSonuçKoduName;
     static WebElement eklenenkodGrubu;

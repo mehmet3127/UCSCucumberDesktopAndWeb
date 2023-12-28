@@ -229,6 +229,13 @@ public class UcmsAdminPage {
     public List<WebElement> checkBoxAktifPasifEtmePopup;
 
 
-
-
+    //Veri Setleri-İlişkili Veriler Menüsü
+    @FindBy(xpath = "//span[text()='Veri Setleri']")
+    public WebElement verilerSetleriSekmesi;
+    @FindBy(xpath = "//a[text()=' İlişkili Veriler ']")
+    public WebElement ilişkiliVerilerMenü;
+    @FindBy(xpath = "//button[@mattooltip='Ekle']")
+    public WebElement veriEkleİkon;
+    @FindBy(xpath = "//*[contains(text(),'Excel row number cannot be single digit.')]")
+    public List<WebElement> uygunFormattaVeriEkleyinPoUp;
 }

@@ -1,11 +1,7 @@
 package stepDefinitions;
 
-import io.appium.java_client.windows.WindowsElement;
 import io.cucumber.java.en.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
@@ -20,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WdeStepDefinitions {
+public class WdeStepDefinition {
 
     WdePage wdePage = new WdePage();
     Actions actions = new Actions(Driver.getDriver());

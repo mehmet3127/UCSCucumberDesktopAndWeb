@@ -15,7 +15,7 @@ import utilities.ReusableMethods;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class UcmsAdminSonuçŞablonuStepDefinitions {
+public class UcmsAdminSonuçŞablonuStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
     Faker faker = new Faker();
     Actions actions = new Actions(Driver.getDriver());

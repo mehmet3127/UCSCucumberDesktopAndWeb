@@ -14,7 +14,7 @@ import utilities.ReusableMethods;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenesysAdminStepDefinitions {
+public class GenesysAdminStepDefinition {
 
     GensysAdminPage genesys = new GensysAdminPage();
     Actions actions = new Actions(Driver.getDriver());
