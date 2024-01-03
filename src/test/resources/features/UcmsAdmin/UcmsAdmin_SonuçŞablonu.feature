@@ -267,7 +267,7 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
     And Şablon adını "SonuçŞablonuGüncelleme" değiştirir
     And Kaydet butonuna tıklar
     And Güncellenen sonuç kodu şablonunun versiyon ikonuna tıklar
-    #Bu versiyonla devam et dedikten sonra Tip olarak oluşturma görünmediği için beklemede ömer'e sor
+    #Bu versiyonla devam et dedikten sonra Tip olarak oluşturma görünmediği için beklemede task açılacak
 
 
 

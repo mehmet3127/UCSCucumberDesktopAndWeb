@@ -237,5 +237,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
     public WebElement veriEkleİkon;
     @FindBy(xpath = "//*[contains(text(),'Excel row number cannot be single digit.')]")
-    public List<WebElement> uygunFormattaVeriEkleyinPoUp;
+    public WebElement uygunFormattaVeriEkleyinPoUp;
+    @FindBy(xpath = "//*[contains(text(),'Bu dosya adında bir kayıt zaten var.')]")
+    public WebElement aynıİsimdeVeriEklenemezPopup;
 }

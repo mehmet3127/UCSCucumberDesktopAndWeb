@@ -17,7 +17,7 @@ public class ReusableMethods {
 
 
     //========ScreenShot(Syafanın resmini alma)=====//
-    public static String getScreenshot(String name) throws IOException {
+    public static String getScreenshot(String name){
 
         // naming the screenshot with the current date to avoid duplication
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
@@ -30,13 +30,17 @@ public class ReusableMethods {
         String target = System.getProperty("user.dir") + "/target/Screenshots/" + name + date + ".png";
         File finalDestination = new File(target);
         // save the screenshot to the path given
-        FileUtils.copyFile(source, finalDestination);
+        try {
+            FileUtils.copyFile(source, finalDestination);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return target;
     }
 
 
     //========ScreenShot Web Element(Bir webelementin resmini alma)=====//
-    public static String getScreenshotWebElement(String name,WebElement element) throws IOException {
+    public static String getScreenshotWebElement(String name,WebElement element){
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         // TakesScreenshot is an interface of selenium that takes the screenshot
         File source = element.getScreenshotAs(OutputType.FILE);
@@ -44,7 +48,11 @@ public class ReusableMethods {
         String wElementSS = System.getProperty("user.dir") + "/target/WElementScreenshots/" + name + date + ".png";
         File finalDestination = new File(wElementSS);
         // save the screenshot to the path given
-        FileUtils.copyFile(source, finalDestination);
+        try {
+            FileUtils.copyFile(source, finalDestination);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return  wElementSS;
     }
 
