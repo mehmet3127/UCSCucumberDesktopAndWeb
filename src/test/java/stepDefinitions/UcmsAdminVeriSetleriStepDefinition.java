@@ -15,9 +15,8 @@ import utilities.ReusableMethods;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class UcmsAdminVeriSetleriStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
@@ -26,6 +25,8 @@ public class UcmsAdminVeriSetleriStepDefinition {
     JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
     static String dosyaYolu;
     static String silenecekVeriAdi;
+    static String indirilecekDosyaAdı;
+    static String arananVeriAdi;
 
     //Veri Setler-İlişkili Veriler Veri Ekleme Steps
     @And("Veri setleri butonuna tıklar")
@@ -124,12 +125,11 @@ public class UcmsAdminVeriSetleriStepDefinition {
     public void dosyanınSilindiğiniDoğrular() {
         ReusableMethods.waitFor(1);
         List<WebElement> silinecekVeri = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + silenecekVeriAdi + "')]"));
+
         ReusableMethods.getScreenshot("veriSilindi");
-        //Assert.assertFalse(actualDosyaAdi.isDisplayed());
-        //Assert.assertNotEquals(silenecekVeriAdi, actualDosyaAdi.getText());
 
         System.out.println("silinecekVeri.size = " + silinecekVeri.size());
-        Assert.assertEquals(silinecekVeri.size(),0);
+        Assert.assertEquals(silinecekVeri.size(), 0);
         if (silinecekVeri.size() == 0) {
             System.out.println("dosya silindi");
         } else System.out.println("dosya silinmedi");
@@ -142,5 +142,75 @@ public class UcmsAdminVeriSetleriStepDefinition {
             System.out.println("Element bulundu.");
         }
        */
+    }
+
+    //Veri Setler-İlişkili Veriler Dosya indirme Steps
+    @And("İndirmek istediği dosyanın {string} dosya indir ıkonuna tıklar")
+    public void indirmekIstediğiDosyanınDosyaIndirIkonunaTıklar(String dosyaAdı) {
+        indirilecekDosyaAdı = dosyaAdı;
+        WebElement indirilecekDosya = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + indirilecekDosyaAdı + "')]//following-sibling::td[contains(@class,'Download')]"));
+        indirilecekDosya.click();
+
+    }
+
+    @Then("Dosyanın indirildiğini doğrular")
+    public void dosyanınIndirildiğiniDoğrular() {
+        ReusableMethods.waitFor(5);
+        // Örnek olarak, dosyanın indirildiği klasörü belirtmek için
+        String downloadFolderPath = "C:\\Users\\demir\\Downloads";
+        // Dosya adını belirleyin
+
+
+        // Dosya yolu oluşturun
+        String filePath = downloadFolderPath + "\\" + indirilecekDosyaAdı;
+
+        // Dosya var mı yok mu kontrol edin
+
+        File file = new File(filePath);
+        if (file.exists()) {
+            System.out.println("Dosya indirildi.");
+        } else {
+            System.out.println("Dosya indirilmedi.");
+        }
+    }
+
+    //Veri Setler-İlişkili Veriler Veri Arama Steps
+    @And("Var olan veri ismini {string} girer")
+    public void varOlanVeriIsminiGirer(String veriAdi) {
+        arananVeriAdi = veriAdi;
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(arananVeriAdi);
+
+    }
+
+    @Then("Var olan verinin olduğunu doğrular")
+    public void varOlanVerininOlduğunuDoğrular() {
+        WebElement arananVeri = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + arananVeriAdi + "')]"));
+        Assert.assertTrue(arananVeri.isDisplayed());
+        ReusableMethods.waitFor(1);
+
+    }
+
+    //Veri Setler-Veri Seti Şablonu Veri Seti Şablonu Ekleme
+    @And("Veri seti şablonları sekmesine tıklar")
+    public void veriSetiŞablonlarıSekmesineTıklar() {
+        ucmsAdminPage.veriSetiŞablonlarıMenü.click();
+    }
+
+    @And("Veri seti şablonu ekleme ikonuna tıklar")
+    public void veriSetiŞablonuEklemeIkonunaTıklar() {
+        ucmsAdminPage.veriSetiŞablonuEkleİkon.click();
+    }
+
+    @And("Şablon adı {string} girer")
+    public void şablonAdıGirer(String şablonAdı) {
+        ucmsAdminPage.şablonAdı.sendKeys(şablonAdı);
+    }
+
+    @And("En az bir adet from alanı {string} seçer")
+    public void enAzBirAdetFromAlanıSeçer(String arg0) {
+    }
+
+    @Then("Veri seti şablonunun eklendi ğini doğrular")
+    public void veriSetiŞablonununEklendiĞiniDoğrular() {
     }
 }

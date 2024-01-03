@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "junit:target/xml-report/cucumber.xml"},//Bu plagin ile xml formatinda rapor aliriz target'in altinda xml-report klasorunun altinda verir Ctrl-Alt-L yapmak gerek
         features = "src/test/resources/features",
         glue = "stepDefinitions",
-        tags = "@Dosyaİndirme", // iki tag'ı aynı anda çalıştırmak isterseniz "@gp1 or @gp2"
+        tags = "@VeriSetiŞablonları", // iki tag'ı aynı anda çalıştırmak isterseniz "@gp1 or @gp2"
         dryRun = false  // true olursa sayfayi acip calistirmadan eksiklik varsa onlari bize gosterir.
 )
 public class Runner {

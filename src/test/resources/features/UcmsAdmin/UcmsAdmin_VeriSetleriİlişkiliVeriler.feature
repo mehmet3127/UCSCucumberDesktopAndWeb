@@ -81,6 +81,32 @@ Feature: Vrei setleri İlişkili Veriler
     Then Bu dosya adında bir kayıt zaten var uyarısını doğrular
 
 
+  @İsimİleVeriArama
+  Scenario:TC_001 İsmi ile Veri arama
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And İlişkili veriler sekmesine tıklar
+    And İçerik ara searchbox ına tıklar
+    And Var olan veri ismini "dataDosyası" girer
+    Then Var olan verinin olduğunu doğrular
+
+  @Dosyaİndirme
+  Scenario:TC_001 Dosya indirme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And İlişkili veriler sekmesine tıklar
+    And İndirmek istediği dosyanın "dataDosyası.xlsx" dosya indir ıkonuna tıklar
+    Then Dosyanın indirildiğini doğrular
+
+
   @VeriSilme
   Scenario:TC_001 Veri silme
 
@@ -94,15 +120,7 @@ Feature: Vrei setleri İlişkili Veriler
     And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar
     And Dosyanın silindiğini doğrular
 
-  @Dosyaİndirme
-  Scenario:TC_001 Dosya indirme
 
-    Given Kullanıcı ucmsadmin sayfasına gider
-    When Kullanıcı ucmsadmin için geçerli username girer
-    And Kullanıcı ucmsadmin için geçerli password girer
-    And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And İlişkili veriler sekmesine tıklar
 
 
 

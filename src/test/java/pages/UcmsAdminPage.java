@@ -240,4 +240,11 @@ public class UcmsAdminPage {
     public WebElement uygunFormattaVeriEkleyinPoUp;
     @FindBy(xpath = "//*[contains(text(),'Bu dosya adında bir kayıt zaten var.')]")
     public WebElement aynıİsimdeVeriEklenemezPopup;
+
+
+    //Veri Setleri-İlişkili Veriler Menüsü
+    @FindBy(xpath = "//a[text()=' Veri Seti Şablonları ']")
+    public WebElement veriSetiŞablonlarıMenü;
+    @FindBy(xpath = "//button[@mattooltip='Ekle']")
+    public WebElement veriSetiŞablonuEkleİkon;
 }
