@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import com.github.javafaker.Faker;
+import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -27,6 +28,8 @@ public class UcmsAdminVeriSetleriStepDefinition {
     static String silenecekVeriAdi;
     static String indirilecekDosyaAdı;
     static String arananVeriAdi;
+    static String veriSetiŞablonAdı;
+
 
     //Veri Setler-İlişkili Veriler Veri Ekleme Steps
     @And("Veri setleri butonuna tıklar")
@@ -203,14 +206,63 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
     @And("Şablon adı {string} girer")
     public void şablonAdıGirer(String şablonAdı) {
+        veriSetiŞablonAdı = şablonAdı;
         ucmsAdminPage.şablonAdı.sendKeys(şablonAdı);
     }
 
-    @And("En az bir adet from alanı {string} seçer")
-    public void enAzBirAdetFromAlanıSeçer(String arg0) {
+    @And("En az bir adet veri seti {string} seçer")
+    public void enAzBirAdetFromAlanıSeçer(String formAdı) {
+
+        WebElement formAlanı = Driver.getDriver().findElement(By.xpath("//div[contains(text(),'" + formAdı + "')]"));
+
+        actions.clickAndHold(formAlanı).moveToElement(ucmsAdminPage.veriSetTaşımaAlanı).release(ucmsAdminPage.veriSetTaşımaAlanı).build().perform();
+        ReusableMethods.waitFor(1);
     }
 
-    @Then("Veri seti şablonunun eklendi ğini doğrular")
+    @Then("Veri seti şablonunun eklendiğini doğrular")
     public void veriSetiŞablonununEklendiĞiniDoğrular() {
+        List<WebElement> veriSetiŞablonuEklendiUyarısı = ucmsAdminPage.veriSetiŞablonuEklendiPopup;
+        Assert.assertEquals(veriSetiŞablonuEklendiUyarısı.size(), 1);
+    }
+
+    @Then("Şablon adı boş bırakılamaz uyarısını doğrular")
+    public void şablonAdıBoşBırakılamazUyarısınıDoğrular() {
+        List<WebElement> şablonAdıBoşBırakılmazPopUp = ucmsAdminPage.şablonAdıBoşBırakılamazPopUp;
+        Assert.assertEquals(şablonAdıBoşBırakılmazPopUp.size(), 1);
+    }
+
+    @Then("Bir veya birden fazla form alanı seçiniz uyarısnı doğrular")
+    public void birVeyaBirdenFazlaFormAlanıSeçinizUyarısnıDoğrular() {
+        List<WebElement> birdenFazlaFormAlanıSeçinizPopUp = ucmsAdminPage.formAlanıSeçinizPopUp;
+        Assert.assertEquals(birdenFazlaFormAlanıSeçinizPopUp.size(), 1);
+    }
+
+    //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Düzenleme
+    @And("Düzenlemek istediği veri seti şablonunun {string} düzenle ikonuna tıklar")
+    public void düzenlemekIstediğiVeriSetiŞablonununDüzenleIkonunaTıklar(String veriSetiŞablonu) {
+        WebElement düzenlenecekVeriSetiŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + veriSetiŞablonu + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        düzenlenecekVeriSetiŞablonu.click();
+    }
+
+    @And("Açılan pencerede Şablon adını {string} değiştirir")
+    public void açılanPenceredeŞablonAdınıDeğiştirir(String güncelŞablonAdı) {
+        ucmsAdminPage.şablonAdı.clear();
+        ucmsAdminPage.şablonAdı.sendKeys(güncelŞablonAdı);
+    }
+
+    @Then("Veri seti şablonunun güncellendiğini doğrular")
+    public void veriSetiŞablonununGüncellendiğiniDoğrular() {
+
+        List<WebElement> veriSetiŞablonuGüncellendiUyarısı = ucmsAdminPage.veriSetiŞablonuGüncellendiPopUp;
+        Assert.assertEquals(veriSetiŞablonuGüncellendiUyarısı.size(), 1);
+    }
+
+    @And("Seçilen veri setlerini {string} iptal eder")
+    public void seçilenVeriSetleriniIptalEder(String versiSeti) {
+        WebElement formAlanı = Driver.getDriver().findElement(By.xpath("//div[contains(text(),'" + versiSeti + "')]"));
+
+        actions.clickAndHold(formAlanı).moveToElement(ucmsAdminPage.veriSetiAlanı).release(ucmsAdminPage.veriSetiAlanı).build().perform();
+        ReusableMethods.waitFor(1);
+
     }
 }

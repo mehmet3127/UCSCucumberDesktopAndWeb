@@ -96,8 +96,6 @@ public class Driver {
                     try {
                         driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
                         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                        System.out.println("driver.getTitle() = " + driver.getTitle());
-                        System.out.println("driver.getWindowHandle() = " + driver.getWindowHandle()); //0x00060752
                         String widowHandle = driver.getWindowHandle();
                         driver.switchTo().window(widowHandle);
                     } catch (MalformedURLException e) {

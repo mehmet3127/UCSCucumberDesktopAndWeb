@@ -242,9 +242,23 @@ public class UcmsAdminPage {
     public WebElement aynıİsimdeVeriEklenemezPopup;
 
 
-    //Veri Setleri-İlişkili Veriler Menüsü
+    //Veri Setleri-Veri Seti Şablonu Ekleme
     @FindBy(xpath = "//a[text()=' Veri Seti Şablonları ']")
     public WebElement veriSetiŞablonlarıMenü;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
     public WebElement veriSetiŞablonuEkleİkon;
+    @FindBy(xpath = "//div[contains(@style,'padding-top')]")
+    public WebElement veriSetTaşımaAlanı;
+    @FindBy(xpath = "//*[contains(text(),'veri seti şablonu eklendi.')]")
+    public List<WebElement> veriSetiŞablonuEklendiPopup;
+    @FindBy(xpath = "//*[contains(text(),'Yaptığınız işlem gerçekleştirilemedi.')]")
+    public List<WebElement> şablonAdıBoşBırakılamazPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Bir veya birden fazla Form Alanı seçiniz')]")
+    public List<WebElement> formAlanıSeçinizPopUp;
+
+    //Veri Setleri-Veri Seti Şablonu Düzenleme
+    @FindBy(xpath = "//*[contains(text(),'veri seti şablonu güncellendi')]")
+    public List<WebElement> veriSetiŞablonuGüncellendiPopUp;
+    @FindBy(xpath = "//div[contains(@style,'margin-right')]")
+    public WebElement veriSetiAlanı;
 }

@@ -31,4 +31,3 @@ public class Runner {
     dryRun = false; testlerimizi driver ile çalıştırır.
    */
 }
-
