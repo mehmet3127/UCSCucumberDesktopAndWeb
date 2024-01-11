@@ -256,9 +256,21 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'Bir veya birden fazla Form Alanı seçiniz')]")
     public List<WebElement> formAlanıSeçinizPopUp;
 
+
     //Veri Setleri-Veri Seti Şablonu Düzenleme
     @FindBy(xpath = "//*[contains(text(),'veri seti şablonu güncellendi')]")
     public List<WebElement> veriSetiŞablonuGüncellendiPopUp;
     @FindBy(xpath = "//div[contains(@style,'margin-right')]")
     public WebElement veriSetiAlanı;
+
+
+    //Veri Setleri-Veri Seti Şablonu Listeleme
+    @FindBy(xpath = "//mat-icon[contains(@class,'red')]")
+    public List<WebElement> pasifVeriSetiŞablonuList;
+    @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
+    public List<WebElement> aktifVeriSetiŞablonuList;
+
+    //Veri Setleri-Veri Seti Şablonu Aktif Pasif Etme
+    @FindBy(xpath = "//*[contains(text(),'kayıt güncellendi')]")
+    public List<WebElement> verSetiŞablonuAktifPasifEtmePopup;
 }

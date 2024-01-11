@@ -210,26 +210,21 @@ public class UcmsAdminSonuçŞablonuStepDefinition {
 
     }
 
-    @And("Sonuç şablonunun aktif edildiği görülür")
-    public void sonuçŞablonununAktifEdildiğiGörülür() {
+    @And("Kayıt güncellendi yazısnı görür")
+    public void kayıtGüncellendiYazısınıGörür() {
         List<WebElement> sonuçŞablonuAktifPasifEtmePopUp = ucmsAdminPage.sonuçŞablonuAktifPasifEtmePopup;
         Assert.assertEquals(sonuçŞablonuAktifPasifEtmePopUp.size(), 1);
 
     }
 
-    @And("İnaktif olan sonuç şablonunun {string} Pasif et iconuna tıklanır")
-    public void inaktifOlanSonuçŞablonununPasifEtIconunaTıklanır(String şablonAdı) {
+    @And("Aktif olan sonuç şablonunun {string} Pasif et iconuna tıklanır")
+    public void aktifOlanSonuçŞablonununPasifEtIconunaTıklanır(String şablonAdı) {
         WebElement aktifEdilecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + şablonAdı + "')]//following-sibling::td[contains(@class,'IsActive')]"));
         ReusableMethods.waitFor(1);
         aktifEdilecekSonuçŞablonu.click();
         ReusableMethods.waitFor(1);
     }
 
-    @And("Sonuç şablonunun Pasif edildiği görülür")
-    public void sonuçŞablonununPasifEdildiğiGörülür() {
-        List<WebElement> sonuçŞablonuAktifPasifEtmePopUp = ucmsAdminPage.sonuçŞablonuAktifPasifEtmePopup;
-        Assert.assertEquals(sonuçŞablonuAktifPasifEtmePopUp.size(), 1);
-    }
 
     //CheckBox ile Sonuç şablonlarının aktif-pasif edilmesi
     @And("Listelenen sonuç şablonlarının solundaki checkbox kullanılarak bir tanesi {string} seçilir")

@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import com.github.javafaker.Faker;
-import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -18,6 +17,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class UcmsAdminVeriSetleriStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
@@ -29,6 +29,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     static String indirilecekDosyaAdı;
     static String arananVeriAdi;
     static String veriSetiŞablonAdı;
+    static String güncelVeriSetiŞablonAdi;
 
 
     //Veri Setler-İlişkili Veriler Veri Ekleme Steps
@@ -240,14 +241,15 @@ public class UcmsAdminVeriSetleriStepDefinition {
     //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Düzenleme
     @And("Düzenlemek istediği veri seti şablonunun {string} düzenle ikonuna tıklar")
     public void düzenlemekIstediğiVeriSetiŞablonununDüzenleIkonunaTıklar(String veriSetiŞablonu) {
-        WebElement düzenlenecekVeriSetiŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + veriSetiŞablonu + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        WebElement düzenlenecekVeriSetiŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + veriSetiŞablonAdı + "')]//following-sibling::td[contains(@class,'Edit')]"));
         düzenlenecekVeriSetiŞablonu.click();
     }
 
     @And("Açılan pencerede Şablon adını {string} değiştirir")
-    public void açılanPenceredeŞablonAdınıDeğiştirir(String güncelŞablonAdı) {
+    public void açılanPenceredeŞablonAdınıDeğiştirir(String güncellenenŞablonAdı) {
+        güncelVeriSetiŞablonAdi = güncellenenŞablonAdı;
         ucmsAdminPage.şablonAdı.clear();
-        ucmsAdminPage.şablonAdı.sendKeys(güncelŞablonAdı);
+        ucmsAdminPage.şablonAdı.sendKeys(güncelVeriSetiŞablonAdi);
     }
 
     @Then("Veri seti şablonunun güncellendiğini doğrular")
@@ -264,5 +266,102 @@ public class UcmsAdminVeriSetleriStepDefinition {
         actions.clickAndHold(formAlanı).moveToElement(ucmsAdminPage.veriSetiAlanı).release(ucmsAdminPage.veriSetiAlanı).build().perform();
         ReusableMethods.waitFor(1);
 
+    }
+
+    //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Düzenleme
+    @And("Aramak istediği veri seti şablonunun {string} ismini girer")
+    public void aramakIstediğiVeriSetiŞablonununIsminiGirer(String aranacakŞablonAdı) {
+
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiŞablonAdı);
+        ReusableMethods.waitFor(1);
+    }
+
+    @Then("Veri seti şablonunun olduğunu doğrular")
+    public void veriSetiŞablonununOlduğunuDoğrular() {
+        WebElement sonuçŞablonu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + veriSetiŞablonAdı + "')]"));
+        Assert.assertTrue(sonuçŞablonu.isDisplayed());
+        ReusableMethods.waitFor(1);
+    }
+
+    //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Listeleme
+    @Then("İnaktif veri seti şablonlarının listelendiği görülür")
+    public void inaktifVeriSetiŞablonlarınınListelendiğiGörülür() {
+
+        List<WebElement> inaktifVeriSetiŞablonları = ucmsAdminPage.pasifVeriSetiŞablonuList;
+
+        boolean nextPageExists = true;
+        int toplamPasifVeriSetiŞablonuSize = 0;
+
+        while (nextPageExists) {
+            //System.out.println("inaktifVeriSetiŞablonları.size = " + inaktifVeriSetiŞablonları.size());
+            toplamPasifVeriSetiŞablonuSize += inaktifVeriSetiŞablonları.size();
+            try {
+                if (!ucmsAdminPage.nextPageButton.isEnabled()) {
+                    nextPageExists = false;
+                } else {
+                    ucmsAdminPage.nextPageButton.click();
+                    //ReusableMethods.waitFor(1);
+                }
+            } catch (NoSuchElementException e) {
+                nextPageExists = false;
+            }
+        }
+        System.out.println("toplamPasifVeriSetiŞablonuSize = " + toplamPasifVeriSetiŞablonuSize);
+
+    }
+
+    @Then("Yalnızca aktif veri seti şablonlarının listelendiği görülür")
+    public void yalnızcaAktifVeriSetiŞablonlarınınListelendiğiGörülür() {
+        List<WebElement> aktifVeriSetiŞablonları = ucmsAdminPage.aktifVeriSetiŞablonuList;
+
+        boolean nextPageExists = true;
+        int toplamAktifVeriSetiŞablonuSize = 0;
+
+        while (nextPageExists) {
+            //System.out.println("aktifVeriSetiŞablonları.size = " + aktifVeriSetiŞablonları.size());
+            toplamAktifVeriSetiŞablonuSize += aktifVeriSetiŞablonları.size();
+            try {
+                if (!ucmsAdminPage.nextPageButton.isEnabled()) {
+                    nextPageExists = false;
+                } else {
+                    ucmsAdminPage.nextPageButton.click();
+                    //ReusableMethods.waitFor(1);
+                }
+            } catch (NoSuchElementException e) {
+                nextPageExists = false;
+            }
+        }
+        System.out.println("toplamAktifVeriSetiŞablonuSize = " + toplamAktifVeriSetiŞablonuSize);
+
+    }
+
+    //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Aktif-Pasif Etme
+    @And("Aktif olan veri seti şablonunun {string} Aktif-Pasif et iconuna tıklanır")
+    public void aktifOlanVeriSetiŞablonununPasifEtIconunaTıklanır(String pasifEdilecekVeriSetiŞablonu) {
+        WebElement aktifEdilecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + güncelVeriSetiŞablonAdi + "')]//following-sibling::td[contains(@class,'IsActive')]"));
+        ReusableMethods.waitFor(1);
+        aktifEdilecekSonuçŞablonu.click();
+        ReusableMethods.waitFor(1);
+    }
+    @Then("Kayıt güncellendi yazısnı doğrular")
+    public void kayıtGüncellendiYazısnıDoğrular() {
+        List<WebElement> veriSetiŞablonuGüncellendiPopUp = ucmsAdminPage.verSetiŞablonuAktifPasifEtmePopup;
+        Assert.assertEquals(veriSetiŞablonuGüncellendiPopUp.size(), 1);
+
+    }
+    @And("Pasif etmek istediği şablonun {string} checkboxına tıklar")
+    public void pasifEtmekIstediğiŞablonunCheckboxınaTıklar(String veriSetiŞablonu) {
+        WebElement pasifEdilecekVeriSetiŞablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + güncelVeriSetiŞablonAdi + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        pasifEdilecekVeriSetiŞablonu.click();
+    }
+
+    //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Versiyon Değiştirme
+    @And("Güncellenen veri seti şablonunun {string} versiyon ikonuna tıklar")
+    public void güncellenenVeriSetiŞablonununVersiyonIkonunaTıklar(String versiyonDeğişecekVeriSetiŞablonu) {
+
+        WebElement versionDeğişecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'"+versiyonDeğişecekVeriSetiŞablonu+"')]//following-sibling::td[contains(@class,'History')]"));
+
+        versionDeğişecekSonuçŞablonu.click();
     }
 }
