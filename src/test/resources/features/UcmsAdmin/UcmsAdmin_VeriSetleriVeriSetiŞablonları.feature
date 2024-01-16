@@ -125,7 +125,7 @@ Feature: Veri Setleri Veri Seti Şablonları
     #And Kaydet butonuna tıklar
     #Then Veri seti şablonunun güncellendiğini doğrular
     And Güncellenen veri seti şablonunun "VeriSetiŞablonuVersiyonDeğişikliğiGüncellendi" versiyon ikonuna tıklar
-    #Güncelleme yapıldıktan sonra versiyon tıklayınca oluşturma vs hiç bir kauıt gelmediği için Task açıldı beklemede
+    #Güncellenen veri seti şablonunun versiyon değiştir ikonuna tıklayınca oluşturma tipi vs hiç bir kayıt çıkmadığı için Task açıldı beklemede
 
 
   @PasifVeriSetiŞablonlarınıListeleme

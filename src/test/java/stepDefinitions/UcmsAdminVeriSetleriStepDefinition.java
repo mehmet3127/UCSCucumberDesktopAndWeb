@@ -5,7 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
@@ -18,18 +17,21 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+
 
 public class UcmsAdminVeriSetleriStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
-    Faker faker = new Faker();
+
     Actions actions = new Actions(Driver.getDriver());
-    JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
     static String dosyaYolu;
     static String silenecekVeriAdi;
     static String indirilecekDosyaAdı;
     static String arananVeriAdi;
     static String veriSetiŞablonAdı;
     static String güncelVeriSetiŞablonAdi;
+    static String veriTipiSeçeneği;
+    static String formAlanTipiSeçeneği;
 
 
     //Veri Setler-İlişkili Veriler Veri Ekleme Steps
@@ -344,12 +346,14 @@ public class UcmsAdminVeriSetleriStepDefinition {
         aktifEdilecekSonuçŞablonu.click();
         ReusableMethods.waitFor(1);
     }
+
     @Then("Kayıt güncellendi yazısnı doğrular")
     public void kayıtGüncellendiYazısnıDoğrular() {
         List<WebElement> veriSetiŞablonuGüncellendiPopUp = ucmsAdminPage.verSetiŞablonuAktifPasifEtmePopup;
         Assert.assertEquals(veriSetiŞablonuGüncellendiPopUp.size(), 1);
 
     }
+
     @And("Pasif etmek istediği şablonun {string} checkboxına tıklar")
     public void pasifEtmekIstediğiŞablonunCheckboxınaTıklar(String veriSetiŞablonu) {
         WebElement pasifEdilecekVeriSetiŞablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + güncelVeriSetiŞablonAdi + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
@@ -360,8 +364,161 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Güncellenen veri seti şablonunun {string} versiyon ikonuna tıklar")
     public void güncellenenVeriSetiŞablonununVersiyonIkonunaTıklar(String versiyonDeğişecekVeriSetiŞablonu) {
 
-        WebElement versionDeğişecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'"+versiyonDeğişecekVeriSetiŞablonu+"')]//following-sibling::td[contains(@class,'History')]"));
+        WebElement versionDeğişecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + versiyonDeğişecekVeriSetiŞablonu + "')]//following-sibling::td[contains(@class,'History')]"));
 
         versionDeğişecekSonuçŞablonu.click();
     }
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Seti Ekleme
+    @And("Veri setleri Menüsüne tıklar")
+    public void veriSetleriMenüsüneTıklar() {
+        ucmsAdminPage.veriSetleriMenü.click();
+    }
+
+    @And("Veri seti ekle ikonuna tıklar")
+    public void veriSetiEkleIkonunaTıklar() {
+        ucmsAdminPage.veriSetiEkleİkon.click();
+    }
+
+    @And("Form alan tipini {string} seçer")
+    public void formAlanTipiniSeçer(String formAlanTipi) {
+        formAlanTipiSeçeneği = formAlanTipi;
+        ucmsAdminPage.formAlanTipi.click();
+        WebElement formAlanTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + formAlanTipi + "']"));
+
+        ReusableMethods.waitForVisibility(formAlanTipiSeç, 10);
+
+        ReusableMethods.clickWithJs(formAlanTipiSeç);
+    }
+
+    @And("Veri tipini {string} seçer")
+    public void veriTipiniSeçer(String veriTipi) {
+        veriTipiSeçeneği = veriTipi;
+        ucmsAdminPage.veriTipi.click();
+
+        WebElement veriTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + veriTipi + "']"));
+
+        ReusableMethods.waitForVisibility(veriTipiSeç, 10);
+
+        ReusableMethods.clickWithJs(veriTipiSeç);
+    }
+
+    @Then("Özellikler tabının etkin olduğu görülür")
+    public void özelliklerTabınınEtkinOlduğuGörülür() {
+        Assert.assertTrue(ucmsAdminPage.veriSetiÖzelliklerTab.isDisplayed());
+    }
+
+    @Then("Veriler tabının etkin olduğu görülür")
+    public void verilerTabınınEtkinOlduğuGörülür() {
+        Assert.assertTrue(ucmsAdminPage.veriSetiVerilerTab.isDisplayed());
+    }
+
+    @And("Alan adını girer")
+    public void alanAdınıGirer() {
+        String alanAdı = Faker.instance().idNumber().invalid();
+
+        ucmsAdminPage.alanAdı.sendKeys("AlanAdi_" + alanAdı);
+    }
+
+    @And("Etiket adını girer")
+    public void etiketAdınıGirer() {
+        String etiketAdı = Faker.instance().idNumber().valid();
+
+        ucmsAdminPage.etiketAdı.sendKeys("EtiketAdi_" + etiketAdı);
+    }
+
+    @And("Db adını girer")
+    public void dbAdınıGirer() {
+        String dbAdı = Faker.instance().idNumber().valid();
+        ucmsAdminPage.dbAdı.sendKeys("Db_" + dbAdı);
+    }
+
+    @And("Özellikler tabına geçip Maksimum veri uzunluğu girilir")
+    public void özelliklerTabınaGeçipMaksimumVeriUzunluğuGirilir() {
+        ucmsAdminPage.veriSetiÖzelliklerTab.click();
+
+        switch (formAlanTipiSeçeneği) {
+            case "TextBox":
+
+                break;
+            case "MultilineTextBox":
+
+                break;
+            case "CheckBox":
+
+                break;
+            case "ComboBox":
+
+                switch (veriTipiSeçeneği){
+                    case "Karakter":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Nümerik":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Nümerik Kod":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Tarih":
+                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
+                        break;
+                }
+
+                break;
+            case "ListBox":
+                switch (veriTipiSeçeneği){
+                    case "Karakter":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Nümerik":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Nümerik Kod":
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
+                        break;
+                    case "Tarih":
+                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
+                        break;
+                }
+                break;
+
+
+            default:
+        }
+
+
+    }
+
+    @And("Veriler tab'ına geçer")
+    public void verilerTabInaGeçer() {
+        ucmsAdminPage.veriSetiVerilerTab.click();
+    }
+
+    @And("Anahtar değer ve görünen değer ekler")
+    public void anahtarDeğerVeGörünenDeğerEkler() {
+        ucmsAdminPage.anahtarDeğer.sendKeys("Ad_" + ReusableMethods.randomİnt(100));
+        ucmsAdminPage.görünenDeğer.sendKeys("Gd_" + ReusableMethods.randomİnt(100));
+        ucmsAdminPage.veriKaydet.click();
+        ucmsAdminPage.anahtarDeğer.sendKeys("Ad_" + ReusableMethods.randomİnt(100));
+        ucmsAdminPage.görünenDeğer.sendKeys("Gd_" + ReusableMethods.randomİnt(100));
+        ucmsAdminPage.veriKaydet.click();
+
+    }
+
+    @And("Kaydet butonuna tıklar.")
+    public void kaydetButonunaTıklar() {
+        ucmsAdminPage.veriSetiKaydetButton.click();
+    }
+
+    @Then("Veri setinin eklendiğini doğrular")
+    public void veriSetininEklendiğiniDoğrular() {
+        Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
+    }
+
 }

@@ -4,6 +4,9 @@ import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +15,14 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ReusableMethods {
 
 
     //========ScreenShot(Syafanın resmini alma)=====//
-    public static String getScreenshot(String name){
+    public static String getScreenshot(String name) {
 
         // naming the screenshot with the current date to avoid duplication
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
@@ -40,7 +45,7 @@ public class ReusableMethods {
 
 
     //========ScreenShot Web Element(Bir webelementin resmini alma)=====//
-    public static String getScreenshotWebElement(String name,WebElement element){
+    public static String getScreenshotWebElement(String name, WebElement element) {
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         // TakesScreenshot is an interface of selenium that takes the screenshot
         File source = element.getScreenshotAs(OutputType.FILE);
@@ -53,7 +58,7 @@ public class ReusableMethods {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return  wElementSS;
+        return wElementSS;
     }
 
     //========Switching Window(Pencereler arası geçiş)=====//
@@ -74,6 +79,30 @@ public class ReusableMethods {
         actions.moveToElement(element).perform();
     }
 
+    //========Click Element With Java Script(JavaScript İle Elemente Tıklama)=====//
+    public static void clickWithJs(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        jse.executeScript("arguments[0].click();", element);
+    }
+
+    //========Scroll Into View Java Script(JavaScript İle Elemente Tıklama)=====//
+    public static void scroolWithJs(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        jse.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static int randomİnt(int randomRnd){
+        Random random = new Random();
+        int anahtarDeğer = random.nextInt(randomRnd);
+        return anahtarDeğer;
+    }
+
+
+
+
+
+
+
     //==========Return a list of string given a list of Web Element====////
     public static List<String> getElementsText(List<WebElement> list) {
         List<String> elemTexts = new ArrayList<>();
@@ -84,6 +113,7 @@ public class ReusableMethods {
         }
         return elemTexts;
     }
+
     //========Returns the Text of the element given an element locator==//
     public static List<String> getElementsText(By locator) {
         List<WebElement> elems = Driver.getDriver().findElements(locator);
@@ -108,23 +138,27 @@ public class ReusableMethods {
     }
 
     //===============Explicit Wait==============//
-    /*
+
     public static WebElement waitForVisibility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
+
     public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public static WebElement waitForClickablility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
     public static WebElement waitForClickablility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
     public static void clickWithTimeOut(WebElement element, int timeout) {
         for (int i = 0; i < timeout; i++) {
             try {
@@ -135,6 +169,7 @@ public class ReusableMethods {
             }
         }
     }
+
     public static void waitForPageToLoad(long timeout) {
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -143,7 +178,7 @@ public class ReusableMethods {
         };
         try {
             System.out.println("Waiting for page to load...");
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds());
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
             wait.until(expectation);
         } catch (Throwable error) {
             System.out.println(
@@ -151,6 +186,6 @@ public class ReusableMethods {
         }
     }
 
-     */
+
 
 }

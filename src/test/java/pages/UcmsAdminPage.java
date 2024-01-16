@@ -242,7 +242,7 @@ public class UcmsAdminPage {
     public WebElement aynıİsimdeVeriEklenemezPopup;
 
 
-    //Veri Setleri-Veri Seti Şablonu Ekleme
+    //Veri Setleri-Veri Seti Şablonu Menüsü-Veri Seti Şablonu Ekleme
     @FindBy(xpath = "//a[text()=' Veri Seti Şablonları ']")
     public WebElement veriSetiŞablonlarıMenü;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
@@ -257,20 +257,101 @@ public class UcmsAdminPage {
     public List<WebElement> formAlanıSeçinizPopUp;
 
 
-    //Veri Setleri-Veri Seti Şablonu Düzenleme
+    //Veri Setleri-Veri Seti Şablonu Menüsü-Veri Seti Şablonu Düzenleme
     @FindBy(xpath = "//*[contains(text(),'veri seti şablonu güncellendi')]")
     public List<WebElement> veriSetiŞablonuGüncellendiPopUp;
     @FindBy(xpath = "//div[contains(@style,'margin-right')]")
     public WebElement veriSetiAlanı;
 
 
-    //Veri Setleri-Veri Seti Şablonu Listeleme
+    //Veri Setleri-Veri Seti Şablonu Menüsü-Veri Seti Şablonu Listeleme
     @FindBy(xpath = "//mat-icon[contains(@class,'red')]")
     public List<WebElement> pasifVeriSetiŞablonuList;
     @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
     public List<WebElement> aktifVeriSetiŞablonuList;
 
-    //Veri Setleri-Veri Seti Şablonu Aktif Pasif Etme
+    //Veri Setleri-Veri Seti Şablonu Menüsü-Veri Seti Şablonu Aktif Pasif Etme
     @FindBy(xpath = "//*[contains(text(),'kayıt güncellendi')]")
     public List<WebElement> verSetiŞablonuAktifPasifEtmePopup;
+
+
+    //Veri Setleri-Veri Setleri Menüsü Veri Seti Ekleme
+    @FindBy(xpath = "//a[text()=' Veri Setleri ']")
+    public WebElement veriSetleriMenü;
+    @FindBy(xpath = "//button[@mattooltip='Ekle']")
+    public WebElement veriSetiEkleİkon;
+
+    //Form Alan Tipi
+    @FindBy(xpath = "(//mat-select[@role='combobox'])[2]")
+    public WebElement formAlanTipi;
+    @FindBy(xpath = "//span[text()='TextBox']")
+    public WebElement formAlanTipiTextBox;
+    @FindBy(xpath = "//span[text()='MultilineTextBox']")
+    public WebElement formAlanTipiMultilineTextBox;
+    @FindBy(xpath = "//span[text()='CheckBox']")
+    public WebElement formAlanTipiCheckBox;
+    @FindBy(xpath = "//span[text()='ComboBox']")
+    public WebElement formAlanTipiComboBox;
+    @FindBy(xpath = "//span[text()='ListBox']")
+    public WebElement formAlanTipiListBox;
+
+    //Veri Tipi
+    @FindBy(xpath = "(//mat-select[@role='combobox'])[3]")
+    public WebElement veriTipi;
+    @FindBy(xpath = "//span[text()='Karakter']")
+    public WebElement verTipiKarakter;
+    @FindBy(xpath = "//span[text()='Nümerik']")
+    public WebElement verTipiNümerik;
+    @FindBy(xpath = "//span[text()='Nümerik Kod']")
+    public WebElement verTipiNümerikKod;
+    @FindBy(xpath = "//span[text()='Tarih']")
+    public WebElement verTipiTarih;
+
+
+    @FindBy(xpath = "//input[@aria-label='Alan Adı']")
+    public WebElement alanAdı;
+    @FindBy(xpath = "//input[@aria-label='Etiket Adı']")
+    public WebElement etiketAdı;
+    @FindBy(xpath = "//input[@aria-label='Db Adı']")
+    public WebElement dbAdı;
+    @FindBy(xpath = "//span[text()='Veri Kaynağı Alan Adı']")
+    public WebElement veriKaynağıAlanAdı;
+    @FindBy(xpath = "//span[text()='Açıklama']")
+    public WebElement açıklama;
+    @FindBy(xpath = "//span[text()=' Veriyi Şifrele ']")
+    public WebElement veriyiŞifrele;
+    @FindBy(xpath = "//span[text()=' Kaydet ']")
+    public WebElement veriSetiKaydetButton;
+    @FindBy(xpath = "//span[text()=' Vazgeç']")
+    public WebElement veriSetiVazgeçButton;
+
+
+    //Veri Seti Özellikler Tab'ı
+    @FindBy(xpath = "//div[text()='Özellikler']")
+    public WebElement veriSetiÖzelliklerTab;
+    @FindBy(name = "attribute.LenMax")
+    public WebElement maxVeriUzunluğu;
+
+
+    //Veri Seti Veriler Tab'ı
+    @FindBy(xpath = "//div[text()='Veriler']")
+    public WebElement veriSetiVerilerTab;
+    @FindBy(name = "optionItem.Key")
+    public WebElement anahtarDeğer;
+    @FindBy(name = "optionItem.Value")
+    public WebElement görünenDeğer;
+    @FindBy(xpath = "//button[@mattooltip='Kaydet']")
+    public WebElement veriKaydet;
+    @FindBy(xpath = "//*[contains(text(),'veri seti eklendi.')]")
+    public List<WebElement> verSetiEklendiPopup;
+
+
+
+
+
+
+
+
+
+
 }
