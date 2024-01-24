@@ -17,7 +17,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 
 public class UcmsAdminVeriSetleriStepDefinition {
@@ -32,6 +31,13 @@ public class UcmsAdminVeriSetleriStepDefinition {
     static String güncelVeriSetiŞablonAdi;
     static String veriTipiSeçeneği;
     static String formAlanTipiSeçeneği;
+    static int eklenecekVeriSayısı;
+    static int maxVeriUzunlugu;
+    static String anahtarDeger;
+    static String görünenDeger;
+    static String alanAdi;
+    static String etiketAdi;
+    static String dbAdi;
 
 
     //Veri Setler-İlişkili Veriler Veri Ekleme Steps
@@ -383,142 +389,318 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Form alan tipini {string} seçer")
     public void formAlanTipiniSeçer(String formAlanTipi) {
         formAlanTipiSeçeneği = formAlanTipi;
-        ucmsAdminPage.formAlanTipi.click();
-        WebElement formAlanTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + formAlanTipi + "']"));
 
-        ReusableMethods.waitForVisibility(formAlanTipiSeç, 10);
+        if (!formAlanTipi.isEmpty()) {
+            ucmsAdminPage.formAlanTipi.click();
+            WebElement formAlanTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + formAlanTipi + "']"));
 
-        ReusableMethods.clickWithJs(formAlanTipiSeç);
+            ReusableMethods.waitForVisibility(formAlanTipiSeç, 10);
+
+            ReusableMethods.clickWithJs(formAlanTipiSeç);
+        }
+
     }
 
     @And("Veri tipini {string} seçer")
     public void veriTipiniSeçer(String veriTipi) {
         veriTipiSeçeneği = veriTipi;
-        ucmsAdminPage.veriTipi.click();
 
-        WebElement veriTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + veriTipi + "']"));
+        if (!veriTipi.isEmpty()) {
+            if (formAlanTipiSeçeneği.equals("MultilineTextBox") || formAlanTipiSeçeneği.equals("CheckBox")) {
 
-        ReusableMethods.waitForVisibility(veriTipiSeç, 10);
-
-        ReusableMethods.clickWithJs(veriTipiSeç);
+            } else {
+                ucmsAdminPage.veriTipi.click();
+                WebElement veriTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + veriTipi + "']"));
+                ReusableMethods.waitForVisibility(veriTipiSeç, 10);
+                ReusableMethods.clickWithJs(veriTipiSeç);
+            }
+        }
     }
 
     @Then("Özellikler tabının etkin olduğu görülür")
     public void özelliklerTabınınEtkinOlduğuGörülür() {
-        Assert.assertTrue(ucmsAdminPage.veriSetiÖzelliklerTab.isDisplayed());
+
+        if (!veriTipiSeçeneği.isEmpty()) {
+            Assert.assertTrue(ucmsAdminPage.veriSetiÖzelliklerTab.isEnabled());
+        }
     }
 
     @Then("Veriler tabının etkin olduğu görülür")
     public void verilerTabınınEtkinOlduğuGörülür() {
-        Assert.assertTrue(ucmsAdminPage.veriSetiVerilerTab.isDisplayed());
-    }
 
-    @And("Alan adını girer")
-    public void alanAdınıGirer() {
-        String alanAdı = Faker.instance().idNumber().invalid();
-
-        ucmsAdminPage.alanAdı.sendKeys("AlanAdi_" + alanAdı);
-    }
-
-    @And("Etiket adını girer")
-    public void etiketAdınıGirer() {
-        String etiketAdı = Faker.instance().idNumber().valid();
-
-        ucmsAdminPage.etiketAdı.sendKeys("EtiketAdi_" + etiketAdı);
-    }
-
-    @And("Db adını girer")
-    public void dbAdınıGirer() {
-        String dbAdı = Faker.instance().idNumber().valid();
-        ucmsAdminPage.dbAdı.sendKeys("Db_" + dbAdı);
-    }
-
-    @And("Özellikler tabına geçip Maksimum veri uzunluğu girilir")
-    public void özelliklerTabınaGeçipMaksimumVeriUzunluğuGirilir() {
-        ucmsAdminPage.veriSetiÖzelliklerTab.click();
-
-        switch (formAlanTipiSeçeneği) {
-            case "TextBox":
-
-                break;
-            case "MultilineTextBox":
-
-                break;
-            case "CheckBox":
-
-                break;
-            case "ComboBox":
-
-                switch (veriTipiSeçeneği){
-                    case "Karakter":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Nümerik":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Nümerik Kod":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Tarih":
-                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
-                        break;
-                }
-
-                break;
-            case "ListBox":
-                switch (veriTipiSeçeneği){
-                    case "Karakter":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Nümerik":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Nümerik Kod":
-                        ucmsAdminPage.maxVeriUzunluğu.clear();
-                        ucmsAdminPage.maxVeriUzunluğu.sendKeys("30");
-                        break;
-                    case "Tarih":
-                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
-                        break;
-                }
-                break;
-
-
-            default:
+        if (!veriTipiSeçeneği.isEmpty()) {
+            if (formAlanTipiSeçeneği.equals("ComboBox") || formAlanTipiSeçeneği.equals("ListBox")) {
+                Assert.assertTrue(ucmsAdminPage.veriSetiVerilerTab.isEnabled());
+            }
         }
 
 
     }
 
-    @And("Veriler tab'ına geçer")
-    public void verilerTabInaGeçer() {
-        ucmsAdminPage.veriSetiVerilerTab.click();
+    @And("Alan adını {string} girer")
+    public void alanAdınıGirer(String alanAdiGir) {
+
+        if (alanAdiGir.isEmpty()) {
+            alanAdi = alanAdiGir;
+            ucmsAdminPage.alanAdı.sendKeys(alanAdiGir);
+
+        } else {
+            alanAdi = (alanAdiGir + Faker.instance().idNumber().valid());
+            ucmsAdminPage.alanAdı.sendKeys(alanAdi);
+        }
+
     }
 
-    @And("Anahtar değer ve görünen değer ekler")
-    public void anahtarDeğerVeGörünenDeğerEkler() {
-        ucmsAdminPage.anahtarDeğer.sendKeys("Ad_" + ReusableMethods.randomİnt(100));
-        ucmsAdminPage.görünenDeğer.sendKeys("Gd_" + ReusableMethods.randomİnt(100));
-        ucmsAdminPage.veriKaydet.click();
-        ucmsAdminPage.anahtarDeğer.sendKeys("Ad_" + ReusableMethods.randomİnt(100));
-        ucmsAdminPage.görünenDeğer.sendKeys("Gd_" + ReusableMethods.randomİnt(100));
-        ucmsAdminPage.veriKaydet.click();
+    @And("Etiket adını {string} girer")
+    public void etiketAdınıGirer(String etiketAdiGir) {
+
+        if (etiketAdiGir.isEmpty()) {
+            etiketAdi = etiketAdiGir;
+            ucmsAdminPage.etiketAdı.sendKeys(etiketAdiGir);
+
+        } else {
+            etiketAdi = (etiketAdiGir + Faker.instance().idNumber().valid());
+            ucmsAdminPage.etiketAdı.sendKeys(etiketAdi);
+        }
+
+    }
+
+    @And("Db adını {string} girer")
+    public void dbAdınıGirer(String dbAdiGir) {
+
+        if (dbAdiGir.isEmpty()) {
+            dbAdi = dbAdiGir;
+            ucmsAdminPage.dbAdı.sendKeys(dbAdiGir);
+
+        } else {
+            dbAdi = (dbAdiGir + Faker.instance().idNumber().valid());
+            ucmsAdminPage.dbAdı.sendKeys(dbAdi);
+        }
+
+    }
+
+    @And("Özellikler tabına geçip Maksimum veri uzunluğunu {int} girilir")
+    public void özelliklerTabınaGecipMaksimumVeriUzunluguGirilir(int veriUzunlugu) {
+        maxVeriUzunlugu = veriUzunlugu;
+
+        String stringMaxVeriUzunlugu = String.valueOf(maxVeriUzunlugu);
+
+        if (!veriTipiSeçeneği.isEmpty() || !formAlanTipiSeçeneği.isEmpty()) {
+
+            ucmsAdminPage.veriSetiÖzelliklerTab.click();
+
+            switch (formAlanTipiSeçeneği) {
+                case "TextBox":
+
+                    if (veriTipiSeçeneği.equals("Tarih")) {
+                        System.out.println("Max veri uzunluğu defoult olarak 10 karakter gelir...");
+                    } else {
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys(stringMaxVeriUzunlugu);
+                    }
+                    break;
+                case "MultilineTextBox":
+                    ucmsAdminPage.maxVeriUzunluğu.clear();
+                    ucmsAdminPage.maxVeriUzunluğu.sendKeys(stringMaxVeriUzunlugu);
+                    break;
+                case "CheckBox":
+
+                    if (veriTipiSeçeneği.equals("Nümerik Kod")) {
+
+                        System.out.println("Max veri uzunluğu defoult olarak 1 karakter gelir...");
+                    }
+
+                    //ucmsAdminPage.varsayılanDeğer.click(); //Varsayılan değeri true olan veri seti ekleme
+
+                    break;
+                case "ComboBox":
+
+                    if (veriTipiSeçeneği.equals("Tarih")) {
+                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
+                    } else {
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys(stringMaxVeriUzunlugu);
+                    }
+
+                    break;
+                case "ListBox":
+                    if (veriTipiSeçeneği.equals("Tarih")) {
+                        System.out.println("Tarih seçeneği defoult olrak 10 karakter gelir...");
+                    } else {
+                        ucmsAdminPage.maxVeriUzunluğu.clear();
+                        ucmsAdminPage.maxVeriUzunluğu.sendKeys(stringMaxVeriUzunlugu);
+                    }
+                    break;
+
+                default:
+            }
+
+        }
+
+    }
+
+    @And("Veriler tab'ına geçer")
+    public void verilerTabInaGeçer() {
+
+        if (!veriTipiSeçeneği.isEmpty()) {
+            if (formAlanTipiSeçeneği.equals("ComboBox") || formAlanTipiSeçeneği.equals("ListBox")) {
+                ucmsAdminPage.veriSetiVerilerTab.click();
+            }
+        }
+    }
+
+    @And("{int} adet anahtar değer ve görünen değer ekler")
+    public void adetAnahtarDeğerVeGörünenDeğerEkler(int veriSayısı) {
+
+
+        eklenecekVeriSayısı = veriSayısı;
+
+        if (!veriTipiSeçeneği.isEmpty()) {
+            if (formAlanTipiSeçeneği.equals("ComboBox") || formAlanTipiSeçeneği.equals("ListBox")) {
+
+                if (veriTipiSeçeneği.equals("Tarih")) {
+
+                    for (int i = 1; i <= veriSayısı; i++) {
+                        anahtarDeger = "" + Faker.instance().date().birthday();
+                        görünenDeger = "" + Faker.instance().date().birthday();
+                        ucmsAdminPage.anahtarDeğer.sendKeys(anahtarDeger);
+                        ucmsAdminPage.görünenDeğer.sendKeys(görünenDeger);
+                        ucmsAdminPage.veriKaydet.click();
+                        if (eklenecekVeriSayısı < 2 || maxVeriUzunlugu < anahtarDeger.length()) {
+                            break;
+                        }
+                    }
+
+                } else if (veriTipiSeçeneği.equals("Nümerik") || veriTipiSeçeneği.equals("Nümerik Kod")) {
+
+                    for (int i = 1; i <= veriSayısı; i++) {
+
+                        anahtarDeger = "" + Faker.instance().number().numberBetween(1, 100);
+                        görünenDeger = "Gd_" + Faker.instance().number().numberBetween(1, 100);
+
+                        ucmsAdminPage.anahtarDeğer.sendKeys(anahtarDeger);
+                        ucmsAdminPage.görünenDeğer.sendKeys(görünenDeger);
+                        ucmsAdminPage.veriKaydet.click();
+
+                        if (eklenecekVeriSayısı < 2 || maxVeriUzunlugu < anahtarDeger.length()) {
+                            break;
+                        }
+                    }
+
+                } else {
+
+                    for (int i = 1; i <= veriSayısı; i++) {
+
+                        anahtarDeger = "Ad_" + Faker.instance().internet().password();
+                        görünenDeger = "Gd_" + Faker.instance().internet().password();
+
+                        ucmsAdminPage.anahtarDeğer.sendKeys(anahtarDeger);
+                        ucmsAdminPage.görünenDeğer.sendKeys(görünenDeger);
+                        ucmsAdminPage.veriKaydet.click();
+
+                        if (eklenecekVeriSayısı < 2 || maxVeriUzunlugu < anahtarDeger.length()) {
+                            break;
+
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
     @And("Kaydet butonuna tıklar.")
     public void kaydetButonunaTıklar() {
-        ucmsAdminPage.veriSetiKaydetButton.click();
+
+        if (formAlanTipiSeçeneği.isEmpty() || veriTipiSeçeneği.isEmpty()) {
+
+            ucmsAdminPage.veriSetiKaydetButton.click();
+
+        } else {
+            if (formAlanTipiSeçeneği.equals("ComboBox") || formAlanTipiSeçeneği.equals("ListBox")) {
+
+                if (maxVeriUzunlugu < anahtarDeger.length()) {
+
+                } else ucmsAdminPage.veriSetiKaydetButton.click();
+
+            } else ucmsAdminPage.veriSetiKaydetButton.click();
+        }
     }
 
     @Then("Veri setinin eklendiğini doğrular")
     public void veriSetininEklendiğiniDoğrular() {
-        Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
+
+        if (formAlanTipiSeçeneği.isEmpty() || veriTipiSeçeneği.isEmpty()) {
+
+            Assert.assertEquals(ucmsAdminPage.formAlanVeyaVeriTipiSeçinizPopup.size(), 1);
+
+        } else {
+            if (formAlanTipiSeçeneği.equals("ComboBox") || formAlanTipiSeçeneği.equals("ListBox")) {
+
+                if (maxVeriUzunlugu > anahtarDeger.length()) {
+
+                    if (eklenecekVeriSayısı >= 1) {
+
+                        if (alanAdi.isEmpty()) {
+
+                            Assert.assertEquals(ucmsAdminPage.alanAdıBoşBırakılamazPopup.size(), 1);
+
+                        } else if (etiketAdi.isEmpty()) {
+                            Assert.assertEquals(ucmsAdminPage.etiketAdıBoşBırakılamazPopup.size(), 1);
+
+                        } else if (dbAdi.isEmpty()) {
+                            Assert.assertEquals(ucmsAdminPage.dbAdıBoşBırakılamazPopup.size(), 1);
+
+                        } else {
+
+                            if (eklenecekVeriSayısı == 1) {
+                                Assert.assertEquals(ucmsAdminPage.enAzİkiVeriGirmelisinizPopup.size(), 1);
+
+                            } else
+                                Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
+                        }
+                    } else
+                        Assert.assertEquals(ucmsAdminPage.anahtarVeGörünenDeğerAtanmadıPopup.size(), 1);
+                } else
+                    Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);/*
+            if (eklenecekVeriSayısı > 1) {
+
+                if ((maxVeriUzunlugu < anahtarDeger.length())) {
+                    Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);
+
+                } else
+                    Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
+
+            } else if (eklenecekVeriSayısı == 1) {
+
+                if ((maxVeriUzunlugu < anahtarDeger.length())) {
+
+                    Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);
+
+                } else {
+                    Assert.assertEquals(ucmsAdminPage.enAzİkiVeriGirmelisinizPopup.size(), 1);
+                }
+            } else
+                Assert.assertEquals(ucmsAdminPage.anahtarVeGörünenDeğerAtanmadıPopup.size(), 1);
+
+
+             */
+
+            } else {
+
+                if (alanAdi.isEmpty()) {
+                    Assert.assertEquals(ucmsAdminPage.alanAdıBoşBırakılamazPopup.size(), 1);
+
+                } else if (etiketAdi.isEmpty()) {
+                    Assert.assertEquals(ucmsAdminPage.etiketAdıBoşBırakılamazPopup.size(), 1);
+
+                } else if (dbAdi.isEmpty()) {
+                    Assert.assertEquals(ucmsAdminPage.dbAdıBoşBırakılamazPopup.size(), 1);
+                } else
+                    Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
+            }
+        }
+
     }
 
 }

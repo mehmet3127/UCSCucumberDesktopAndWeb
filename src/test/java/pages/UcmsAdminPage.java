@@ -327,14 +327,16 @@ public class UcmsAdminPage {
 
 
     //Veri Seti Özellikler Tab'ı
-    @FindBy(xpath = "//div[text()='Özellikler']")
+    @FindBy(xpath = "//div[text()='Özellikler']//ancestor::div[@aria-disabled='false']")
     public WebElement veriSetiÖzelliklerTab;
+
     @FindBy(name = "attribute.LenMax")
     public WebElement maxVeriUzunluğu;
-
+    @FindBy(xpath = "//span[text()=' Varsayılan Değer ']")
+    public WebElement varsayılanDeğer;
 
     //Veri Seti Veriler Tab'ı
-    @FindBy(xpath = "//div[text()='Veriler']")
+    @FindBy(xpath = "//div[text()='Veriler']//ancestor::div[@aria-disabled=\"false\"]")
     public WebElement veriSetiVerilerTab;
     @FindBy(name = "optionItem.Key")
     public WebElement anahtarDeğer;
@@ -344,14 +346,24 @@ public class UcmsAdminPage {
     public WebElement veriKaydet;
     @FindBy(xpath = "//*[contains(text(),'veri seti eklendi.')]")
     public List<WebElement> verSetiEklendiPopup;
+    @FindBy(xpath = "//*[contains(text(),'En az 2 tane veri girmelisiniz.')]")
+    public List<WebElement> enAzİkiVeriGirmelisinizPopup;
+    @FindBy(xpath = "//*[contains(text(),'değerinden büyük olamaz')]")
+    public List<WebElement> maxVeriUzunluguPopup;
+    @FindBy(xpath = "//button[text()='Kapat']")
+    public WebElement maxVeriUzunluguPopupKapat;
 
+    //Veri seti ekleme zorunlu alanlar boş bırakılamaz popUp
+    @FindBy(xpath = "//*[contains(text(),'tipi seçiniz')]")
+    public List<WebElement> formAlanVeyaVeriTipiSeçinizPopup;
+    @FindBy(xpath = "//*[contains(text(),'Alan Adı boş geçilemez.')]")
+    public List<WebElement> alanAdıBoşBırakılamazPopup;
+    @FindBy(xpath = "//*[contains(text(),'Etiket Adı boş geçilemez.')]")
+    public List<WebElement> etiketAdıBoşBırakılamazPopup;
+    @FindBy(xpath = "//*[contains(text(),'Db Adı boş geçilemez.')]")
+    public List<WebElement> dbAdıBoşBırakılamazPopup;
 
-
-
-
-
-
-
-
+    @FindBy(xpath = "//*[contains(text(),'alanlarına herhangi bir değer atanmamıştır.')]")
+    public List<WebElement> anahtarVeGörünenDeğerAtanmadıPopup;
 
 }

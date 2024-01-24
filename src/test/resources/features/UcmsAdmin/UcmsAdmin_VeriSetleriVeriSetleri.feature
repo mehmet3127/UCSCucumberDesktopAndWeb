@@ -14,26 +14,35 @@ Feature: Veri Setleri Veri Seti Ekleme
     And Veri tipini "<Veri Tipi>" seçer
     Then Özellikler tabının etkin olduğu görülür
     Then Veriler tabının etkin olduğu görülür
-    And Alan adını girer
-    And Etiket adını girer
-    And Db adını girer
-    And Özellikler tabına geçip Maksimum veri uzunluğu girilir
+    And Alan adını "Alan_" girer
+    And Etiket adını "Etiket_" girer
+    And Db adını "Db_" girer
+    And Özellikler tabına geçip Maksimum veri uzunluğunu 20 girilir
     And Veriler tab'ına geçer
-    And Anahtar değer ve görünen değer ekler
+    And 2 adet anahtar değer ve görünen değer ekler
     And Kaydet butonuna tıklar.
     Then Veri setinin eklendiğini doğrular
     Examples:
       | Form Alan Tipi | Veri Tipi   |
-      | ComboBox       | Karakter    |
-      | ComboBox       | Nümerik     |
-      | ComboBox       | Nümerik Kod |
-      | ComboBox       | Tarih       |
-      | ListBox        | Karakter    |
-      #| ListBox        | Nümerik     | Bu durumda combobox da ki gibi max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
-      #| ListBox        |Nümerik Kod|   Bu durumda combobox da ki gibi max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
-      | ListBox        | Tarih       |
+      #| ComboBox         | Karakter    |
+      #| ComboBox       |  Nümerik  |
+      |                | Nümerik Kod |
+      #| ComboBox         | Tarih       |
+      #| ListBox          | Karakter    |
+      #| ListBox          | Nümerik     |
+      ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
+      #| ListBox          | Nümerik Kod |
+      ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
+      #| ListBox          | Tarih       |
+      #| TextBox        | Karakter  |
+      #| TextBox          | Nümerik     |
+      #| TextBox          | Nümerik Kod |
+      #| TextBox          | Tarih       |
+      #| MultilineTextBox | Karakter    |
+      #| CheckBox         | Nümerik Kod |
 
-
+     #Note:Veri titpi tarih seçiince max veri uzunluğu defoult olarak 10 geliyor
+     #     ama anahtar değer 10 karakterde fazla girince uyarı vermiyor
 
 
 

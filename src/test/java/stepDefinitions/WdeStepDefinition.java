@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import pages.WdePage;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,10 +47,10 @@ public class WdeStepDefinition {
     }
 
     @And("Kullanıc wde için Login button tıklar")
-    public void kullanıcWdeIçinLoginButtonTıklar() throws InterruptedException {
+    public void kullanıcWdeIçinLoginButtonTıklar() {
         wdePage.login.click();
 
-        Thread.sleep(10000);
+        ReusableMethods.waitFor(15);
         /*
         int windowCount = Driver.getDriver().getWindowHandles().size();
         System.out.println(windowCount);
@@ -58,12 +59,15 @@ public class WdeStepDefinition {
         System.out.println(Driver.getDriver().switchTo().window(windows).getTitle());
         */
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
-        if (windowList.size() == 1) {
-            Driver.getDriver().switchTo().window(windowList.get(0));
-        } else {
+        System.out.println("windowList.size = " + windowList.size());
+        System.out.println("Driver.getDriver().getTitle = " + Driver.getDriver().getTitle());
+        if (windowList.size() == 2) {
+
             Driver.getDriver().switchTo().window(windowList.get(1));
+        } else {
+            Driver.getDriver().switchTo().window(windowList.get(0));
         }
-        Thread.sleep(1000);
+        ReusableMethods.waitFor(1);
         System.out.println(Driver.getDriver().getTitle());
     }
 
@@ -81,10 +85,10 @@ public class WdeStepDefinition {
     }
 
     @And("My campains sayfasında get rocords butonu na tıklar")
-    public void myCampainsSayfasındaGetRocordsButonuNaTıklar() throws InterruptedException, MalformedURLException {
+    public void myCampainsSayfasındaGetRocordsButonuNaTıklar() throws MalformedURLException {
         wdePage.getRecord.click();
 
-        Thread.sleep(25000);
+        ReusableMethods.waitFor(1);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         System.out.println("windowList = " + windowList.size());
 
@@ -121,7 +125,7 @@ public class WdeStepDefinition {
         SessionId session_id = driver1.getSessionId();
         System.out.println("driver1.getTitle() = " + driver1.getTitle());
         System.out.println("driver1.getWindowHandles() = " + driver1.getWindowHandles().size());
-        Thread.sleep(3000);
+        ReusableMethods.waitFor(3);
         /*
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         if (windowList.size() == 1) {
