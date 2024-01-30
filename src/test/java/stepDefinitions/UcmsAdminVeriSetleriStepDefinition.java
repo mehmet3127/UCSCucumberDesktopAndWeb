@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
@@ -272,7 +273,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
         WebElement formAlanı = Driver.getDriver().findElement(By.xpath("//div[contains(text(),'" + versiSeti + "')]"));
 
         actions.clickAndHold(formAlanı).moveToElement(ucmsAdminPage.veriSetiAlanı).release(ucmsAdminPage.veriSetiAlanı).build().perform();
-        ReusableMethods.waitFor(1);
+
 
     }
 
@@ -280,16 +281,14 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Aramak istediği veri seti şablonunun {string} ismini girer")
     public void aramakIstediğiVeriSetiŞablonununIsminiGirer(String aranacakŞablonAdı) {
 
-        ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiŞablonAdı);
-        ReusableMethods.waitFor(1);
     }
 
     @Then("Veri seti şablonunun olduğunu doğrular")
     public void veriSetiŞablonununOlduğunuDoğrular() {
         WebElement sonuçŞablonu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + veriSetiŞablonAdı + "')]"));
         Assert.assertTrue(sonuçŞablonu.isDisplayed());
-        ReusableMethods.waitFor(1);
+
     }
 
     //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Listeleme
@@ -347,6 +346,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     //Veri Setler-Veri Seti Şablonu-Veri Seti Şablonu Aktif-Pasif Etme
     @And("Aktif olan veri seti şablonunun {string} Aktif-Pasif et iconuna tıklanır")
     public void aktifOlanVeriSetiŞablonununPasifEtIconunaTıklanır(String pasifEdilecekVeriSetiŞablonu) {
+
         WebElement aktifEdilecekSonuçŞablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + güncelVeriSetiŞablonAdi + "')]//following-sibling::td[contains(@class,'IsActive')]"));
         ReusableMethods.waitFor(1);
         aktifEdilecekSonuçŞablonu.click();
@@ -446,6 +446,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
         } else {
             alanAdi = (alanAdiGir + Faker.instance().idNumber().valid());
+            alanAdi = alanAdi.replace("-", "");
             ucmsAdminPage.alanAdı.sendKeys(alanAdi);
         }
 
@@ -460,6 +461,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
         } else {
             etiketAdi = (etiketAdiGir + Faker.instance().idNumber().valid());
+            etiketAdi = etiketAdi.replace("-", "");
             ucmsAdminPage.etiketAdı.sendKeys(etiketAdi);
         }
 
@@ -474,6 +476,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
         } else {
             dbAdi = (dbAdiGir + Faker.instance().idNumber().valid());
+            dbAdi = dbAdi.replace("-", "");
             ucmsAdminPage.dbAdı.sendKeys(dbAdi);
         }
 
@@ -481,11 +484,12 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
     @And("Özellikler tabına geçip Maksimum veri uzunluğunu {int} girilir")
     public void özelliklerTabınaGecipMaksimumVeriUzunluguGirilir(int veriUzunlugu) {
+
         maxVeriUzunlugu = veriUzunlugu;
 
         String stringMaxVeriUzunlugu = String.valueOf(maxVeriUzunlugu);
 
-        if (!veriTipiSeçeneği.isEmpty() || !formAlanTipiSeçeneği.isEmpty()) {
+        if (!(veriTipiSeçeneği.isEmpty() || formAlanTipiSeçeneği.isEmpty())) {
 
             ucmsAdminPage.veriSetiÖzelliklerTab.click();
 
@@ -606,7 +610,6 @@ public class UcmsAdminVeriSetleriStepDefinition {
                 }
             }
         }
-
     }
 
     @And("Kaydet butonuna tıklar.")
@@ -662,29 +665,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
                     } else
                         Assert.assertEquals(ucmsAdminPage.anahtarVeGörünenDeğerAtanmadıPopup.size(), 1);
                 } else
-                    Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);/*
-            if (eklenecekVeriSayısı > 1) {
-
-                if ((maxVeriUzunlugu < anahtarDeger.length())) {
                     Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);
-
-                } else
-                    Assert.assertEquals(ucmsAdminPage.verSetiEklendiPopup.size(), 1);
-
-            } else if (eklenecekVeriSayısı == 1) {
-
-                if ((maxVeriUzunlugu < anahtarDeger.length())) {
-
-                    Assert.assertEquals(ucmsAdminPage.maxVeriUzunluguPopup.size(), 1);
-
-                } else {
-                    Assert.assertEquals(ucmsAdminPage.enAzİkiVeriGirmelisinizPopup.size(), 1);
-                }
-            } else
-                Assert.assertEquals(ucmsAdminPage.anahtarVeGörünenDeğerAtanmadıPopup.size(), 1);
-
-
-             */
 
             } else {
 
@@ -701,6 +682,132 @@ public class UcmsAdminVeriSetleriStepDefinition {
             }
         }
 
+    }
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Seti Arama
+    @And("Aramak istediği veri setinin {string} ismini girer")
+    public void aramakIstediğiVeriSetininIsminiGirer(String veriSetiAdi) {
+
+        //Veri setinin Id ile aranması
+        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Etiket_086524108')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
+        //ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiId.getText());
+
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(etiketAdi);
+    }
+
+    @Then("Veri setinin olduğunu doğrular")
+    public void veriSetininOlduğunuDoğrular() {
+        WebElement veriSeti = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + etiketAdi + "')]"));
+        Assert.assertTrue(veriSeti.isDisplayed());
+        //Veri setinin Id ile aranıp doğrulanması
+        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Etiket_086524108')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
+        //Assert.assertTrue(veriSetiId.isDisplayed());
+    }
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Listeleme
+    @Then("İnaktif veri setilerinin listelendiği görülür")
+    public void inaktifVeriSetilerininListelendiğiGörülür() {
+
+        List<WebElement> inaktifVeriSetiList = ucmsAdminPage.pasifVeriSetiList;
+
+        boolean nextPageExists = true;
+        int toplamPasifVeriSetiSize = 0;
+
+        while (nextPageExists) {
+            //System.out.println("inaktifVeriSetiList.size = " + inaktifVeriSetiList.size());
+            toplamPasifVeriSetiSize += inaktifVeriSetiList.size();
+            try {
+                if (!ucmsAdminPage.nextPageButton.isEnabled()) {
+                    nextPageExists = false;
+                } else {
+                    ucmsAdminPage.nextPageButton.click();
+                    //ReusableMethods.waitFor(1);
+                }
+            } catch (NoSuchElementException e) {
+                nextPageExists = false;
+            }
+        }
+        System.out.println("toplamPasifVeriSetiSize = " + toplamPasifVeriSetiSize);
+
+
+    }
+
+    @Then("Yalnızca aktif veri setlerinin listelendiği görülür")
+    public void yalnızcaAktifVeriSetlerininListelendiğiGörülür() {
+
+        List<WebElement> aktifVeriSetiList = ucmsAdminPage.aktifVeriSetiList;
+
+        boolean nextPageExists = true;
+        int toplamAktifVeriSetiSize = 0;
+
+        while (nextPageExists) {
+            //System.out.println("AktifVeriSetiList.size = " + AktifVeriSetiList.size());
+            toplamAktifVeriSetiSize += aktifVeriSetiList.size();
+            try {
+                if (!ucmsAdminPage.nextPageButton.isEnabled()) {
+                    nextPageExists = false;
+                } else {
+                    ucmsAdminPage.nextPageButton.click();
+                    //ReusableMethods.waitFor(1);
+                }
+            } catch (NoSuchElementException e) {
+                nextPageExists = false;
+            }
+        }
+        System.out.println("toplamAktifVeriSetiSize = " + toplamAktifVeriSetiSize);
+    }
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Aktif-Pasif Etme
+    @And("Aktif olan veri setinin {string} Aktif-Pasif et iconuna tıklanır")
+    public void aktifOlanVeriSetininAktifPasifEtIconunaTıklanır(String veriSeti) {
+
+        WebElement aktifEdilenVeriSeti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + etiketAdi + "')]//following-sibling::td[contains(@class,'IsActive')]"));
+        ReusableMethods.waitForVisibility(aktifEdilenVeriSeti, 5);
+        aktifEdilenVeriSeti.click();
+    }
+
+    @Then("Veri setinin aktif-Pasif edildiğini doğrular")
+    public void veriSetininAktifPasifEdildiğiniDoğrular() {
+
+        Assert.assertEquals(ucmsAdminPage.veriSetiAktifPasifEtmePopup.size(), 1);
+    }
+
+    @And("Aktif yada Pasif etmek istediği veri setinin {string} checkboxına tıklar")
+    public void pasifEtmekIstediğiVeriSetininCheckboxınaTıklar(String veriSeti) {
+
+        WebElement pasifEdilecekVeriSeti = Driver.getDriver().findElement(By.xpath("//td[text()='" + etiketAdi + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        pasifEdilecekVeriSeti.click();
+    }
+
+    @And("Açılan pencereyi tutup sürükler")
+    public void açılanPencereyiTutupSürükler() {
+        WebElement veriSetiEkleModal = Driver.getDriver().findElement(By.xpath("//h1[text()='Veri Seti Ekle ']"));
+
+
+        //JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        //actions.dragAndDropBy(veriSetiEkleModal,1200,330).build().perform();
+
+
+    }
+
+    @And("Kopyalamak istediği veri setinin {string} kopyala ikonuna tıklar")
+    public void kopyalamakIstediğiVeriSetininKopyalaIkonunaTıklar(String kopyalanacakVeriSeti) {
+
+        WebElement veriSetiKopyala = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + etiketAdi + "')]//following-sibling::td[contains(@class,'Copy')]"));
+        veriSetiKopyala.click();
+        ReusableMethods.waitForVisibility(ucmsAdminPage.bosAlanAdi, 10);
+    }
+    @And("Kopyala butonuna tıklar")
+    public void kopyalaButonunaTıklar() {
+
+        ucmsAdminPage.kopyalaButton.click();
+
+    }
+
+    @Then("Veri setinin kopyalandığını görür")
+    public void veriSetininKopyalandığınıGörür() {
+
+        Assert.assertEquals(ucmsAdminPage.veriSetiKopyalandıPopup.size(), 1);
     }
 
 }

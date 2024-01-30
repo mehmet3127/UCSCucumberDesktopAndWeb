@@ -99,10 +99,6 @@ public class ReusableMethods {
 
 
 
-
-
-
-
     //==========Return a list of string given a list of Web Element====////
     public static List<String> getElementsText(List<WebElement> list) {
         List<String> elemTexts = new ArrayList<>();

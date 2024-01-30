@@ -310,6 +310,8 @@ public class UcmsAdminPage {
 
     @FindBy(xpath = "//input[@aria-label='Alan Adı']")
     public WebElement alanAdı;
+    @FindBy(xpath = "//input[@aria-label='Alan Adı']//descendant-or-self::input[contains(@class,'invalid')]")
+    public WebElement bosAlanAdi;
     @FindBy(xpath = "//input[@aria-label='Etiket Adı']")
     public WebElement etiketAdı;
     @FindBy(xpath = "//input[@aria-label='Db Adı']")
@@ -362,8 +364,25 @@ public class UcmsAdminPage {
     public List<WebElement> etiketAdıBoşBırakılamazPopup;
     @FindBy(xpath = "//*[contains(text(),'Db Adı boş geçilemez.')]")
     public List<WebElement> dbAdıBoşBırakılamazPopup;
-
     @FindBy(xpath = "//*[contains(text(),'alanlarına herhangi bir değer atanmamıştır.')]")
     public List<WebElement> anahtarVeGörünenDeğerAtanmadıPopup;
 
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Listeleme
+    @FindBy(xpath = "//mat-icon[contains(@class,'red')]")
+    public List<WebElement> pasifVeriSetiList;
+    @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
+    public List<WebElement> aktifVeriSetiList;
+
+    @FindBy(xpath = "//*[contains(text(),'kaydı güncellendi')]")
+    public List<WebElement> veriSetiAktifPasifEtmePopup;
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Listeleme
+    @FindBy(className = "cdk-overlay-pane")
+    public WebElement ekleModalıDraggable;
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Kopyalama
+    @FindBy(xpath = "//span[text()=' Kopyala']")
+    public WebElement kopyalaButton;
+    @FindBy(xpath = "//*[contains(text(),'veri seti kopyalandı.')]")
+    public List<WebElement> veriSetiKopyalandıPopup;
 }
