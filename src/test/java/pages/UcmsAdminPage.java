@@ -353,7 +353,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'değerinden büyük olamaz')]")
     public List<WebElement> maxVeriUzunluguPopup;
     @FindBy(xpath = "//button[text()='Kapat']")
-    public WebElement maxVeriUzunluguPopupKapat;
+    public WebElement popupKapat;
 
     //Veri seti ekleme zorunlu alanlar boş bırakılamaz popUp
     @FindBy(xpath = "//*[contains(text(),'tipi seçiniz')]")
@@ -364,6 +364,11 @@ public class UcmsAdminPage {
     public List<WebElement> etiketAdıBoşBırakılamazPopup;
     @FindBy(xpath = "//*[contains(text(),'Db Adı boş geçilemez.')]")
     public List<WebElement> dbAdıBoşBırakılamazPopup;
+    @FindBy(xpath = "//*[contains(text(),'İlk karakter nümerik olamaz.')]")
+    public List<WebElement> dbAdıIlkKarakternümerikOlamazPopup;
+    @FindBy(xpath = "//*[contains(text(),'özel karakter kullanılamaz')]")
+    public List<WebElement> dbAdiOzelKarakterKullanilamazPopup;
+
     @FindBy(xpath = "//*[contains(text(),'alanlarına herhangi bir değer atanmamıştır.')]")
     public List<WebElement> anahtarVeGörünenDeğerAtanmadıPopup;
 
@@ -385,4 +390,31 @@ public class UcmsAdminPage {
     public WebElement kopyalaButton;
     @FindBy(xpath = "//*[contains(text(),'veri seti kopyalandı.')]")
     public List<WebElement> veriSetiKopyalandıPopup;
+    @FindBy(xpath = "(//mat-select[@role='combobox'])[2]//following::mat-select[contains(@class,'disable')]")
+    public WebElement veriTipiDisabled;
+    @FindBy(xpath = "(//mat-select[@role='combobox']//ancestor-or-self::mat-select[contains(@class,'disable')])[2]")
+    public WebElement formAlanTipiDisabled;
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Güncelleme
+    @FindBy(xpath = "//*[contains(text(),'veri seti güncellendi.')]")
+    public List<WebElement> veriSetiGüncellendiPopUp;
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Kontrol Ekleme-Silme
+
+    @FindBy(name = "validator.ValidatorType")
+    public WebElement veriSetiKontrolTipi;
+    @FindBy(xpath = "//mat-option[@value='required']//following::span[text()='Gerekli Alan']")
+    public WebElement kontrolTipiGerekliAlan;
+    @FindBy(xpath = "//span[text()='Kontrol Deseni']")
+    public WebElement kontrolTipiKontrolDeseni;
+    @FindBy(name = "validator.Message")
+    public WebElement kontrolMesajı;
+    @FindBy(xpath = "//button[@mattooltip='Kaydet']")
+    public WebElement kontrolMesajıKaydet;
+    @FindBy(xpath = "//span[text()='Kapat']")
+    public WebElement kontrolKapatButton;
+    @FindBy(xpath = "//button[@mattooltip='Sil']")
+    public List<WebElement> kontrolSil;
+
+
 }

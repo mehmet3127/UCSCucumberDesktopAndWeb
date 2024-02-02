@@ -17,30 +17,30 @@ Feature: Veri Setleri
     Then Veriler tabının etkin olduğu görülür
     And Alan adını "Alan_" girer
     And Etiket adını "Etiket_" girer
-    And Db adını "Db_" girer
+    And Db adını "<dB Adi>" girer
     And Özellikler tabına geçip Maksimum veri uzunluğunu 38 girilir
     And Veriler tab'ına geçer
     And 2 adet anahtar değer ve görünen değer ekler
     And Kaydet butonuna tıklar.
     Then Veri setinin eklendiğini doğrular
     Examples:
-      | Form Alan Tipi | Veri Tipi |
-      #| ComboBox       | Karakter  |
-      #| ComboBox       |  Nümerik  |
-      #| ComboBox       | Nümerik Kod |
-      | ComboBox       | Tarih     |
-      #| ListBox          | Karakter    |
-      #| ListBox          | Nümerik     |
+      | Form Alan Tipi | Veri Tipi | dB Adi |
+      #| ComboBox       | Karakter  | Db     |
+      #| ComboBox       | Nümerik     | Db*_   |
+      #| ComboBox       | Nümerik Kod | 7Dbş_  |
+      #| ComboBox       | Tarih       | Db    |
+      #| ListBox        | Karakter    | DB_    |
+      #| ListBox          | Nümerik     |        |
       ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
-      #| ListBox          | Nümerik Kod |
+      #| ListBox          | Nümerik Kod |        |
       ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
-      #| ListBox          | Tarih       |
-      #| TextBox        | Karakter  |
-      #| TextBox        | Nümerik   |
-      #| TextBox          | Nümerik Kod |
-      #| TextBox          | Tarih       |
-      #| MultilineTextBox | Karakter  |
-      #| CheckBox       | Nümerik Kod |
+      #| ListBox          | Tarih       |        |
+      | TextBox        | Karakter  | Db     |
+      #| TextBox        | Nümerik   | Db     |
+      #| TextBox        | Nümerik Kod | Db     |
+      #| TextBox        | Tarih     | Db     |
+      #| MultilineTextBox | Karakter  | Db*    |
+      #| CheckBox         | Nümerik Kod |   Db     |
 
      #Note:Veri titpi tarih seçiince max veri uzunluğu defoult olarak 10 geliyor
      #     ama anahtar değer 10 karakterde fazla girince uyarı vermiyor
@@ -111,9 +111,73 @@ Feature: Veri Setleri
     And Veri setleri butonuna tıklar
     And Veri setleri Menüsüne tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
-    And Aktif yada Pasif etmek istediği veri setinin "" checkboxına tıklar
+    And Aktif yada Pasif etmek istediği veri setinin "Etiket_317435321" checkboxına tıklar
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
     Then Kayıt güncellendi yazısnı doğrular
+
+
+  @VeriSetiKontrolEkleme
+  Scenario:TC_001 Veri seti kontrol ekleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Kontrol eklemek istediği veri setinin "Etiket_871202480" kontrol ıkonuna tıklar
+    And Kontrol tipini "" seçer
+    And Mesaj alanına içerik "Lütfen zorunlu alanı doldurunuz" girilir
+    And Kaydet ikonuna tıklar
+    And Kapat butonuna tıklar
+    #Kontrol eklendi popUp olursa doğrulama için
+
+  @VeriSetiKontrolSilme
+  Scenario:TC_002 Veri seti kontrol silme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Kontrol eklemek istediği veri setinin "Etiket_197837176" kontrol ıkonuna tıklar
+    And Sil ıkonuna tıklar
+    And Kapat butonuna tıklar
+    #Kontrol eklendi popUp olursa doğrulama için
+
+
+  @VeriSetiGüncelleme
+  Scenario:Veri seti güncelleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Güncellemek istediği veri setinin "EtiketCopy_162340272" düzenle ikonuna tıklar
+    And Alan adını "GüncelAlan_" girer
+    And Etiket adını "GüncelEtiket_" girer
+    And Kaydet butona tıklar
+    Then Veri setinin güncellendiğini doğrular
+
+
+  @VeriSetiKopyalama
+  Scenario:Veri seti kopyalama
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Kopyalamak istediği veri setinin "Etiket_218598467" kopyala ikonuna tıklar
+    And Alan adını "AlanCopy_" girer
+    And Etiket adını "EtiketCopy_" girer
+    And Db adını "DbCopy_" girer
+    And Kopyala butonuna tıklar
+    Then Veri setinin kopyalandığını görür
 
 
   @ignore
@@ -141,23 +205,6 @@ Feature: Veri Setleri
     And Veri setleri Menüsüne tıklar
     And Açılan Devre dışı bırakılanlar toggle'ı kapatılır
     Then Yalnızca aktif veri setlerinin listelendiği görülür
-
-
-  @VeriSetiKopyalama
-  Scenario: TC_001 Form Alanı tipi TextBox ve Veri tipi Numerik olan Veri seti kopyalama
-
-    Given Kullanıcı ucmsadmin sayfasına gider
-    When Kullanıcı ucmsadmin için geçerli username girer
-    And Kullanıcı ucmsadmin için geçerli password girer
-    And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
-    And Kopyalamak istediği veri setinin "Etiket_768572171" kopyala ikonuna tıklar
-    And Alan adını "AlanCopy_" girer
-    And Etiket adını "EtiketCopy_" girer
-    And Db adını "DbCopy_" girer
-    And Kopyala butonuna tıklar
-    Then Veri setinin kopyalandığını görür
 
 
   @EkleGüncellePenceresiDrAggableOlması
