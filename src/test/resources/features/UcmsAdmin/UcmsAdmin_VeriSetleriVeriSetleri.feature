@@ -46,6 +46,28 @@ Feature: Veri Setleri
      #     ama anahtar değer 10 karakterde fazla girince uyarı vermiyor
 
 
+  @AlanEtiketDbAdıAynıVeriSetiEkleme
+  Scenario Outline: Alan Adı Etiket Adı ve  Db Adı Aynı olan Veri Seti Ekleme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Veri seti ekle ikonuna tıklar
+    And Form alan tipini "<Form Alan Tipi>" seçer
+    And Veri tipini "<Veri Tipi>" seçer
+    And Alan adını "AynıAlanAdi" girer
+    And Etiket adını "AynıEtiketAdi1" girer
+    And Db adını "AyniDbAdi1" girer
+    And Kaydet butonuna tıklar.
+    Then Aynı isimde Etiket Adı Obje Adı veya Db Adı bulunmakta uyarısını görür
+    Examples:
+      | Form Alan Tipi | Veri Tipi   |
+      | CheckBox       | Nümerik Kod |
+
+
   @VeriSetiArama
   Scenario: TC_002	Var olan veri setini ismi ile içerikten arama
 
@@ -116,6 +138,21 @@ Feature: Veri Setleri
     Then Kayıt güncellendi yazısnı doğrular
 
 
+  @CheckBoxİleBirdenFazlaVeriSetiniAktifPasifEtme
+  Scenario:TC_001-TC_002 Check Box İle Birden Fazla Veri Setini Aktif-Pasif Etme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And Aktif yada Pasif etmek istediği veri setlerinin "Etiket_197837176" "Etiket_082855152" checkboxına tıklar
+    And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
+    Then Kayıt güncellendi yazısnı doğrular
+
+
   @VeriSetiKontrolEkleme
   Scenario:TC_001 Veri seti kontrol ekleme
 
@@ -163,6 +200,22 @@ Feature: Veri Setleri
     Then Veri setinin güncellendiğini doğrular
 
 
+  @VeriSetiVersiyonDeğiştir
+  Scenario:TC_001 Güncellenen veri setinin ilk versiyonuna dönme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Veri setleri butonuna tıklar
+    And Veri setleri Menüsüne tıklar
+    And Güncellenen veri setinin "Db082036206" versiyon ikonuna tıklar
+    And Açılan pencerede tipi Oluşturma olan satırın Bu versiyonlar devam et ikonuna tıklar
+    And Versiyon geri al butonuna tıklar
+    And Onay butonuna tıklar
+    #Versiyon geri al Evet deyince "Alan Adı boş" geçilemez. Uyarısı veriyor
+
+
   @VeriSetiKopyalama
   Scenario:Veri seti kopyalama
 
@@ -181,7 +234,7 @@ Feature: Veri Setleri
 
 
   @ignore
-  #@PasifVeriSetleriniListeleme
+  @PasifVeriSetleriniListeleme
   Scenario: TC_001 Tüm(aktif/pasif) veri setlerini listeleme
 
     Given Kullanıcı ucmsadmin sayfasına gider

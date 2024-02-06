@@ -368,6 +368,8 @@ public class UcmsAdminPage {
     public List<WebElement> dbAdıIlkKarakternümerikOlamazPopup;
     @FindBy(xpath = "//*[contains(text(),'özel karakter kullanılamaz')]")
     public List<WebElement> dbAdiOzelKarakterKullanilamazPopup;
+    @FindBy(xpath = "//*[contains(text(),'Lütfen kontrol edip tekrar deneyin.')]")
+    public List<WebElement> alanEtiketVeDbAdiAynıOlamazPopup;
 
     @FindBy(xpath = "//*[contains(text(),'alanlarına herhangi bir değer atanmamıştır.')]")
     public List<WebElement> anahtarVeGörünenDeğerAtanmadıPopup;
@@ -400,7 +402,6 @@ public class UcmsAdminPage {
     public List<WebElement> veriSetiGüncellendiPopUp;
 
     //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Kontrol Ekleme-Silme
-
     @FindBy(name = "validator.ValidatorType")
     public WebElement veriSetiKontrolTipi;
     @FindBy(xpath = "//mat-option[@value='required']//following::span[text()='Gerekli Alan']")
@@ -416,5 +417,23 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//button[@mattooltip='Sil']")
     public List<WebElement> kontrolSil;
 
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Versiyon Değiştirme
+    @FindBy(xpath = "//span[text()=' Versiyonu Geri Al ']")
+    public WebElement versiyonGeriAl;
+
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Ekleme
+    @FindBy(xpath = "//span[text()='SMS']")
+    public WebElement smsSekmesi;
+    @FindBy(xpath = "//a[contains(@href,'/sms/templates')]")
+    public WebElement smsSablonlar;
+    @FindBy(xpath = "//button[@mattooltip='Ekle']")
+    public WebElement sablonEkleIkon;
+    @FindBy(xpath = "//input[@data-placeholder='Veri Seti']")
+    public WebElement smsSablonuEklemeVeriSeti;
+    @FindBy(xpath = "//div[@aria-label='Rich Text Editor, main']")
+    public WebElement smsSablonuEklemeSablonMetni;
+    @FindBy(xpath = "//*[contains(text(),'sms şablonu eklendi.')]")
+    public List<WebElement> smsSablonuEklendiPopUp;
 
 }

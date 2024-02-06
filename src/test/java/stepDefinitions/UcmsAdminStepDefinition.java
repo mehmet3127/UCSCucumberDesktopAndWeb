@@ -505,6 +505,7 @@ public class UcmsAdminStepDefinition {
 
     @And("Açılan pencerede tipi Oluşturma olan satırın Bu versiyonlar devam et ikonuna tıklar")
     public void açılanPenceredeTipiOluşturmaOlanSatırınBuVersiyonlarDevamEtIkonunaTıklar() {
+
         ucmsAdminPage.oluşturmaTipiBuVersiyonİleDevamEt.click();
 
     }

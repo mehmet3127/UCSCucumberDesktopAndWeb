@@ -224,7 +224,7 @@ Feature: Sonuç Şablonu Ekleme-Düzenleme-Arama
 
 
   #Sonuş Şablonu Güncelle modalında Devre dışı bırakılanlar ikonu ile sonuç Kodlarını listeleme
-  @GüncelleModalıDevreDışıBırakılanSonuçKodlarıListelem
+  @GüncelleModalıDevreDışıBırakılanSonuçKodlarıListeleme
   Scenario:TC_001 Güncelle modalı devre dışı bırakılan sonuç kodlarını da listeleme
 
     Given Kullanıcı ucmsadmin sayfasına gider

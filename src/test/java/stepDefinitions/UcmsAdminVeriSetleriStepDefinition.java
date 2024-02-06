@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
@@ -440,7 +441,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Alan adını {string} girer")
     public void alanAdınıGirer(String alanAdiGir) {
 
-        if (alanAdiGir.isEmpty()) {
+        if (alanAdiGir.isEmpty() || alanAdiGir.contains("AynıAlanAdi")) {
             alanAdi = alanAdiGir;
             ucmsAdminPage.alanAdı.sendKeys(alanAdiGir);
 
@@ -456,7 +457,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Etiket adını {string} girer")
     public void etiketAdınıGirer(String etiketAdiGir) {
 
-        if (etiketAdiGir.isEmpty()) {
+        if (etiketAdiGir.isEmpty() || etiketAdiGir.contains("AynıEtiketAdi")) {
             etiketAdi = etiketAdiGir;
             ucmsAdminPage.etiketAdı.sendKeys(etiketAdiGir);
 
@@ -472,7 +473,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Db adını {string} girer")
     public void dbAdınıGirer(String dbAdiGir) {
 
-        if (dbAdiGir.isEmpty()) {
+        if (dbAdiGir.isEmpty() || dbAdiGir.contains("AyniDbAdi")) {
             dbAdi = dbAdiGir;
             ucmsAdminPage.dbAdı.sendKeys(dbAdiGir);
         } else {
@@ -721,6 +722,13 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
     }
 
+    @Then("Aynı isimde Etiket Adı Obje Adı veya Db Adı bulunmakta uyarısını görür")
+    public void aynıIsimdeEtiketAdıObjeAdıVeyaDbAdıBulunmaktaUyarısınıGörür() {
+
+        Assert.assertEquals(ucmsAdminPage.alanEtiketVeDbAdiAynıOlamazPopup.size(), 1);
+
+    }
+
     //Veri Setleri-Veri Setleri Menüsü-Veri Seti Arama
     @And("Aramak istediği veri setinin {string} ismini girer")
     public void aramakIstediğiVeriSetininIsminiGirer(String veriSetiAdi) {
@@ -816,13 +824,26 @@ public class UcmsAdminVeriSetleriStepDefinition {
         pasifEdilecekVeriSeti.click();
     }
 
+    @And("Aktif yada Pasif etmek istediği veri setlerinin {string} {string} checkboxına tıklar")
+    public void aktifYadaPasifEtmekIstediğiVeriSetlerininCheckboxınaTıklar(String veriSeti1, String VeriSeti2) {
+        WebElement pasifEdilecekVeriSeti1 = Driver.getDriver().findElement(By.xpath("//td[text()='" + veriSeti1 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        pasifEdilecekVeriSeti1.click();
+        WebElement pasifEdilecekVeriSeti2 = Driver.getDriver().findElement(By.xpath("//td[text()='" + VeriSeti2 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        pasifEdilecekVeriSeti2.click();
+    }
+
     @And("Açılan pencereyi tutup sürükler")
     public void açılanPencereyiTutupSürükler() {
 
         WebElement veriSetiEkleModal = Driver.getDriver().findElement(By.xpath("//h1[text()='Veri Seti Ekle ']"));
 
+        ReusableMethods.waitFor(2);
         //JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
-        //actions.dragAndDropBy(veriSetiEkleModal,1200,330).build().perform();
+        actions.clickAndHold(veriSetiEkleModal).build().perform();
+        ReusableMethods.waitFor(2);
+
+        //jse.executeScript("window.scrollBy(" + xOffset + ", 0);");
+        //actions.moveByOffset(500, 0).build().perform();
 
     }
 
@@ -852,7 +873,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Güncellemek istediği veri setinin {string} düzenle ikonuna tıklar")
     public void güncellemekIstediğiVeriSetininDüzenleIkonunaTıklar(String GüncellenecekVeriSeti) {
 
-        WebElement veriSetiDüzenle = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + GüncellenecekVeriSeti + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        WebElement veriSetiDüzenle = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + dbAdi + "')]//following-sibling::td[contains(@class,'Edit')]"));
         veriSetiDüzenle.click();
     }
 
@@ -872,7 +893,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Kontrol eklemek istediği veri setinin {string} kontrol ıkonuna tıklar")
     public void kontrolEklemekIstediğiVeriSetininKontrolIkonunaTıklar(String kontrolVeriSeti) {
 
-        WebElement veriSetiKontrol = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + kontrolVeriSeti + "')]//following-sibling::td[contains(@class,'Validator ')]"));
+        WebElement veriSetiKontrol = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + dbAdi + "')]//following-sibling::td[contains(@class,'Validator ')]"));
         veriSetiKontrol.click();
     }
 
@@ -914,5 +935,18 @@ public class UcmsAdminVeriSetleriStepDefinition {
             ucmsAdminPage.kontrolSil.get(i).click();
 
         }
+    }
+
+    //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Versiyon Değiştirme
+    @And("Güncellenen veri setinin {string} versiyon ikonuna tıklar")
+    public void güncellenenVeriSetininVersiyonIkonunaTıklar(String veriSeti) {
+        WebElement versionDeğişecekVeriSeti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + veriSeti + "')]//following-sibling::td[contains(@class,'History')]"));
+
+        versionDeğişecekVeriSeti.click();
+    }
+
+    @And("Versiyon geri al butonuna tıklar")
+    public void versiyonGeriAlButonunaTıklar() {
+        ucmsAdminPage.versiyonGeriAl.click();
     }
 }
