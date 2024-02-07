@@ -22,11 +22,8 @@ public class UcmsAdminPage {
     public WebElement password;
     @FindBy(xpath = "//*[@type='submit']")
     public WebElement girişButton;
-
     @FindBy(xpath = "//span[contains(text(),'Kullanıcı bilgileri hatalı')]")
     public WebElement hatalıKullanıcıBilgileriPopup;
-
-
     @FindBy(id = "mat-select-value-1")
     public WebElement uygulamalar;
     @FindBy(id = "mat-option-0")
@@ -338,7 +335,7 @@ public class UcmsAdminPage {
     public WebElement varsayılanDeğer;
 
     //Veri Seti Veriler Tab'ı
-    @FindBy(xpath = "//div[text()='Veriler']//ancestor::div[@aria-disabled=\"false\"]")
+    @FindBy(xpath = "//div[text()='Veriler']//ancestor::div[@aria-disabled='false']")
     public WebElement veriSetiVerilerTab;
     @FindBy(name = "optionItem.Key")
     public WebElement anahtarDeğer;
@@ -435,5 +432,34 @@ public class UcmsAdminPage {
     public WebElement smsSablonuEklemeSablonMetni;
     @FindBy(xpath = "//*[contains(text(),'sms şablonu eklendi.')]")
     public List<WebElement> smsSablonuEklendiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Şablon metni alanına en az 10 karakter girilmeli.')]")
+    public List<WebElement> sablonMetniOnKarakterOlmalıPopUp;
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Ekleme
+    @FindBy(xpath = "//*[contains(text(),'sms şablonu güncellendi.')]")
+    public List<WebElement> smsSablonuGuncellendiPopUp;
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Listeleme
+    @FindBy(xpath = "//mat-icon[contains(@class,'red')]")
+    public List<WebElement> pasifSmsSablonuList;
+    @FindBy(xpath = "//mat-icon[contains(@class,'green')]")
+    public List<WebElement> aktifSmsSablonuList;
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Aktif-Pasif Etme
+    @FindBy(xpath = "//*[contains(text(),'kayıt güncellendi')]")
+    public List<WebElement> smsSablonuAktifPasifEdildPopUp;
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Silme
+    @FindBy(xpath = "//button[@mattooltip='Sil']")
+    public WebElement silIkon;
+    @FindBy(xpath = "//*[contains(text(),'kayıt silindi')]") //sms şablonu güncellendi.
+    public List<WebElement> smsSablonuSilindiPopUp;
+
+    //SMS Sayfası-Şablonlar Menüsü-Sms şablonu Silme
+    @FindBy(xpath = "//span[text()='Versiyonu Geri Al']")
+    public WebElement versiyonuGeriAl;
+    @FindBy(xpath = "//*[contains(text(),'sms şablonu güncellendi.')]")
+    public List<WebElement> versiyonGüncellendi;
+
 
 }

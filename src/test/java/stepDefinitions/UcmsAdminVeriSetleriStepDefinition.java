@@ -734,7 +734,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     public void aramakIstediğiVeriSetininIsminiGirer(String veriSetiAdi) {
 
         //Veri setinin Id ile aranması
-        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Etiket_086524108')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
+        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'+ etiketAdi + ')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
         //ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiId.getText());
 
         ucmsAdminPage.içerikAramaSearchBox.sendKeys(etiketAdi);
@@ -745,7 +745,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
         WebElement veriSeti = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + etiketAdi + "')]"));
         Assert.assertTrue(veriSeti.isDisplayed());
         //Veri setinin Id ile aranıp doğrulanması
-        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'Etiket_086524108')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
+        //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'+ etiketAdi + ')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
         //Assert.assertTrue(veriSetiId.isDisplayed());
     }
 
@@ -803,8 +803,8 @@ public class UcmsAdminVeriSetleriStepDefinition {
     }
 
     //Veri Setleri-Veri Setleri Menüsü-Veri Setleri Aktif-Pasif Etme
-    @And("Aktif olan veri setinin {string} Aktif-Pasif et iconuna tıklanır")
-    public void aktifOlanVeriSetininAktifPasifEtIconunaTıklanır(String veriSeti) {
+    @And("Veri setinin {string} Aktif-Pasif et iconuna tıklanır")
+    public void veriSetininAktifPasifEtIconunaTıklanır(String veriSeti) {
 
         WebElement aktifEdilenVeriSeti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + etiketAdi + "')]//following-sibling::td[contains(@class,'IsActive')]"));
         ReusableMethods.waitForVisibility(aktifEdilenVeriSeti, 5);

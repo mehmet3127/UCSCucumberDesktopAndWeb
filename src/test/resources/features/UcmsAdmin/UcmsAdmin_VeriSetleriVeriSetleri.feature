@@ -91,7 +91,7 @@ Feature: Veri Setleri
     And Kullanıcı giriş butonuna tıklar
     And Veri setleri butonuna tıklar
     And Veri setleri Menüsüne tıklar
-    And Aktif olan veri setinin "" Aktif-Pasif et iconuna tıklanır
+    And Veri setinin "" Aktif-Pasif et iconuna tıklanır
     Then Veri setinin aktif-Pasif edildiğini doğrular
 
 
@@ -105,7 +105,7 @@ Feature: Veri Setleri
     And Veri setleri butonuna tıklar
     And Veri setleri Menüsüne tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
-    And Aktif olan veri setinin "" Aktif-Pasif et iconuna tıklanır
+    And Veri setinin "" Aktif-Pasif et iconuna tıklanır
     Then Veri setinin aktif-Pasif edildiğini doğrular
 
 
@@ -234,7 +234,7 @@ Feature: Veri Setleri
 
 
   @ignore
-  @PasifVeriSetleriniListeleme
+  @TümAktifPasifVeriSetleriniListeleme
   Scenario: TC_001 Tüm(aktif/pasif) veri setlerini listeleme
 
     Given Kullanıcı ucmsadmin sayfasına gider

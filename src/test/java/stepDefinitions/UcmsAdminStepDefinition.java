@@ -119,6 +119,7 @@ public class UcmsAdminStepDefinition {
 
     @Then("Onay butonuna tıklar")
     public void OnayButonunaTıklar() {
+        
         ucmsAdminPage.onayButton.click();
         ReusableMethods.waitFor(1);
     }
@@ -262,6 +263,7 @@ public class UcmsAdminStepDefinition {
 
     @And("Kaydet butonunun aktif olmadığı görülür")
     public void kaydetButonununAktifOlmadığıGörülür() {
+
         ucmsAdminPage.kaydetButton.isEnabled();
     }
 
@@ -324,7 +326,6 @@ public class UcmsAdminStepDefinition {
     //Sonuç Kodu Arama Steps
     @And("İçerik ara searchbox ına tıklar")
     public void içerikAraSearchboxInaTıklar() {
-        ReusableMethods.waitFor(1);
         ucmsAdminPage.içerikAramaSearchBox.click();
     }
 
