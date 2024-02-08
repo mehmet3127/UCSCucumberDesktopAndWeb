@@ -114,12 +114,11 @@ public class UcmsAdminStepDefinition {
     @And("Kaydet butonuna tıklar")
     public void KaydetButonunaTıklar() {
         ucmsAdminPage.kaydetButton.click();
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(1);
     }
 
     @Then("Onay butonuna tıklar")
     public void OnayButonunaTıklar() {
-        
         ucmsAdminPage.onayButton.click();
         ReusableMethods.waitFor(1);
     }
@@ -320,7 +319,7 @@ public class UcmsAdminStepDefinition {
     public void kaydeteTıklar() {
         ReusableMethods.waitFor(1);
         ucmsAdminPage.kaydetButton.click();
-        ReusableMethods.waitFor(3);
+        ReusableMethods.waitFor(1);
     }
 
     //Sonuç Kodu Arama Steps
@@ -480,7 +479,7 @@ public class UcmsAdminStepDefinition {
     @And("Güncelle butonuna tıklar")
     public void güncelleButonunaTıklar() {
         ucmsAdminPage.güncelleButton.click();
-        ReusableMethods.waitFor(3);
+        ReusableMethods.waitFor(1);
     }
 
     @Then("Sonuç kodunun güncellendiğini doğrular")

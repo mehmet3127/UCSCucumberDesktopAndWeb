@@ -21,6 +21,9 @@ public class UcmsAdminSmsStepDefinition {
     Actions actions = new Actions(Driver.getDriver());
 
     static String smsSablonAdi;
+    static String guncelSmsSablonAdi;
+    static String smsYaraticiId;
+    static String smsYaraticiAdi;
 
     //Sms Sayfası-Şablonlar Menüsü-Sms Şablonu Ekleme Steps
     @And("Sms butonuna tıklar")
@@ -35,9 +38,10 @@ public class UcmsAdminSmsStepDefinition {
 
     }
 
-    @And("Sms şablonu ekle ikonuna tıklar")
-    public void smsŞablonuEkleIkonunaTıklar() {
-        ucmsAdminPage.sablonEkleIkon.click();
+    @And("Ekle ikonuna tıklar")
+    public void ekleIkonunaTıklar() {
+
+        ucmsAdminPage.ekleIkon.click();
     }
 
     @And("Sms Şablon adı {string} girer")
@@ -47,14 +51,17 @@ public class UcmsAdminSmsStepDefinition {
             smsSablonAdi = smsSablonAdiGir;
             ucmsAdminPage.şablonAdı.sendKeys(smsSablonAdiGir);
 
+        } else if (smsSablonAdiGir.contains("Güncel")) {
+            guncelSmsSablonAdi = (smsSablonAdiGir + Faker.instance().idNumber().valid());
+            guncelSmsSablonAdi = guncelSmsSablonAdi.replace("-", "");
+            ucmsAdminPage.şablonAdı.clear();
+            ucmsAdminPage.şablonAdı.sendKeys(guncelSmsSablonAdi);
         } else {
             smsSablonAdi = (smsSablonAdiGir + Faker.instance().idNumber().valid());
             smsSablonAdi = smsSablonAdi.replace("-", "");
             ucmsAdminPage.şablonAdı.clear();
             ucmsAdminPage.şablonAdı.sendKeys(smsSablonAdi);
         }
-
-
     }
 
     @And("Veri seti alanında eklemek istediği veri setini {string} seçer")
@@ -109,7 +116,6 @@ public class UcmsAdminSmsStepDefinition {
         WebElement smsSablonu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + smsSablonAdi + "')]"));
         ReusableMethods.waitForVisibility(smsSablonu, 10);
         Assert.assertTrue(smsSablonu.isDisplayed());
-        ReusableMethods.waitFor(2);
     }
 
     //Sms Sayfası-Şablonlar Menüsü-Sms Şablonu Düzenleme Steps
@@ -192,16 +198,12 @@ public class UcmsAdminSmsStepDefinition {
         WebElement aktifEdilenVeriSeti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + smsSablonAdi + "')]//following-sibling::td[contains(@class,'IsActive')]"));
         ReusableMethods.waitForVisibility(aktifEdilenVeriSeti, 10);
         aktifEdilenVeriSeti.click();
-
-
     }
 
     @Then("Sms sablonunun aktif-pasif edildiği doğrulanır")
     public void smsSablonununAktifPasifEdildiğiDoğrulanır() {
 
         Assert.assertEquals(ucmsAdminPage.smsSablonuAktifPasifEdildPopUp.size(), 1);
-
-
     }
 
     @And("Aktif yada pasif etmek istediği sms sablonunun {string} checkboxına tıklar")
@@ -209,7 +211,6 @@ public class UcmsAdminSmsStepDefinition {
 
         WebElement aktifPasifEdilecekSmsSablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + smsSablonAdi + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
         aktifPasifEdilecekSmsSablonu.click();
-
     }
 
     @And("Aktif yada pasif etmek istediği sms sablonlarının {string} {string} checkboxına tıklar")
@@ -222,11 +223,22 @@ public class UcmsAdminSmsStepDefinition {
 
     }
 
+    //Sms Sayfası-Şablonlar Menüsü-Sms Şablonu Silme Steps
     @And("Silmek istediği sms sablonunun {string} checkboxına tıklar")
     public void silmekIstediğiSmsSablonununCheckBoxınaTıklar(String smsSablonu) {
 
         WebElement silinecekSmsSablonu = Driver.getDriver().findElement(By.xpath("//td[text()='" + smsSablonAdi + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
         silinecekSmsSablonu.click();
+    }
+
+    @And("Silmek istediği sms sablonunun {string} {string} checkboxına tıklar")
+    public void silmekIstediğiSmsSablonununCheckboxınaTıklar(String smsSablonu1, String smsSablonu2) {
+
+        WebElement silinecekSmsSablonu1 = Driver.getDriver().findElement(By.xpath("//td[text()='" + smsSablonu1 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        silinecekSmsSablonu1.click();
+        WebElement silinecekSmsSablonu2 = Driver.getDriver().findElement(By.xpath("//td[text()='" + smsSablonu2 + "']//preceding-sibling::td[contains(@class, 'mat-column-Select')]"));
+        silinecekSmsSablonu2.click();
+
     }
 
     @And("Sağ üst köşede beliren sil ikonuna tıklanır")
@@ -246,9 +258,10 @@ public class UcmsAdminSmsStepDefinition {
         Assert.assertEquals(ucmsAdminPage.smsSablonuSilindiPopUp.size(), 0);
     }
 
+    //Sms Sayfası-Şablonlar Menüsü-Sms Şablonu Güncelleme(Düzenleme) Steps
     @And("Güncellenen sms sablonunun {string} versiyon ikonuna tıklar")
     public void güncellenenSmsSablonununVersiyonIkonunaTıklar(String smsSablonu) {
-        WebElement versionDegisecekSmsSablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + smsSablonAdi + "')]//following-sibling::td[contains(@class,'History')]"));
+        WebElement versionDegisecekSmsSablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + guncelSmsSablonAdi + "')]//following-sibling::td[contains(@class,'History')]"));
 
         versionDegisecekSmsSablonu.click();
     }
@@ -264,11 +277,102 @@ public class UcmsAdminSmsStepDefinition {
     @Then("Versiyon değiştiğini görür")
     public void versiyonDeğiştiğiniGörür() {
 
-        Assert.assertEquals(ucmsAdminPage.versiyonGüncellendi.size(), 1);
+        Assert.assertEquals(ucmsAdminPage.versiyonGuncellendi.size(), 1);
     }
 
-    @And("{int} dakika bekler")
-    public void dakikaBekler(int beklemeSuresi) {
+    @And("{int} saniye bekler")
+    public void saniyeBekler(int beklemeSuresi) {
+
         ReusableMethods.waitFor(beklemeSuresi);
+    }
+
+    //Sms Sayfası-Yaratıcı Menüsü-Sms Yaratıcı Oluşturma Steps
+    @And("SMS Yaratıcı sekmesine tıklar")
+    public void smsYaratıcıSekmesineTıklar() {
+        ucmsAdminPage.smsSablonYaratici.click();
+    }
+
+    @And("Açılan ekranda Yaratıcı Id {string} ve Yaratıcı Adı {string} girer")
+    public void açılanEkrandaYaratıcıIdVeYaratıcıAdıGirer(String yaraticiId, String yaraticiAdi) {
+
+        if (yaraticiId.isEmpty()) {
+            ucmsAdminPage.smsYaraticiId.clear();
+            ucmsAdminPage.smsYaraticiId.sendKeys(yaraticiId);
+            smsYaraticiId = yaraticiId;
+        } else {
+            ucmsAdminPage.smsYaraticiId.clear();
+            smsYaraticiId = (yaraticiId + Faker.instance().idNumber().valid()).replace("-", "");
+            ucmsAdminPage.smsYaraticiId.sendKeys(smsYaraticiId);
+        }
+
+
+        if (yaraticiAdi.isEmpty()) {
+            ucmsAdminPage.smsYaraticiAdi.clear();
+            ucmsAdminPage.smsYaraticiAdi.sendKeys(yaraticiAdi);
+            smsYaraticiAdi = yaraticiAdi;
+        } else {
+            ucmsAdminPage.smsYaraticiAdi.clear();
+            smsYaraticiAdi = yaraticiAdi + ReusableMethods.randomİnt(100);
+            ucmsAdminPage.smsYaraticiAdi.sendKeys(smsYaraticiAdi);
+        }
+    }
+
+    @Then("SMS Yaratıcı eklendiğini doğrular")
+    public void smsYaratıcıEklendiğiniDoğrular() {
+
+        if (smsYaraticiId.isEmpty() || smsYaraticiAdi.isEmpty()) {
+
+            Assert.assertEquals(ucmsAdminPage.smsYaraticiOlusturulduPopUp.size(), 0);
+
+        } else {
+
+            Assert.assertEquals(ucmsAdminPage.smsYaraticiOlusturulduPopUp.size(), 1);
+        }
+
+    }
+
+    //Sms Sayfası-Yaratıcı Menüsü-Sms Yaratıcı Güncelleme(Düzenleme) Steps
+    @And("Güncelle butonuna tıklar.")
+    public void güncelleButonunaTıklar() {
+
+        ucmsAdminPage.smsGuncelleButton.click();
+    }
+
+    @And("Düzenlemek istediği Sms yaratıcı {string} düzenle ikonuna tıklar")
+    public void düzenlemekIstediğiSmsYaratıcıDüzenleIkonunaTıklar(String smsYaratici) {
+
+        WebElement smsYaraticDuzenle = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + smsYaraticiId + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        smsYaraticDuzenle.click();
+    }
+
+    @Then("SMS güncellendiğini eklendiğini doğrular")
+    public void smsGüncellendiğiniEklendiğiniDoğrular() {
+
+
+        if (smsYaraticiId.isEmpty() || smsYaraticiAdi.isEmpty()) {
+
+            Assert.assertEquals(ucmsAdminPage.smsYaraticiGuncellendiPopUp.size(), 0);
+
+        } else {
+
+            Assert.assertEquals(ucmsAdminPage.smsYaraticiGuncellendiPopUp.size(), 1);
+        }
+    }
+
+    //Sms Sayfası-Yaratıcı Menüsü-Sms Yaratıcı Silme Step
+    @And("Silmek istediği Sms yaratıcının {string} sil ikonuna tıklar")
+    public void silmekIstediğiSmsYaratıcınınSilIkonunaTıklar(String smsYaratici) {
+
+        WebElement silinecekSmsYaratici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + smsYaraticiId + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+        silinecekSmsYaratici.click();
+    }
+
+    @Then("Sms yaratıcı nın silindiğini doğrular")
+    public void smsYaratıcıNınSilindiğiniDoğrular() {
+
+        List<WebElement> smsSablonu = Driver.getDriver().findElements(By.xpath("//*[contains(text(),'" + smsYaraticiId + "')]"));
+
+        Assert.assertEquals(smsSablonu.size(), 0);
+
     }
 }

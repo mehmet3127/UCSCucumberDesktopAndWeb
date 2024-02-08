@@ -425,7 +425,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//a[contains(@href,'/sms/templates')]")
     public WebElement smsSablonlar;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
-    public WebElement sablonEkleIkon;
+    public WebElement ekleIkon;
     @FindBy(xpath = "//input[@data-placeholder='Veri Seti']")
     public WebElement smsSablonuEklemeVeriSeti;
     @FindBy(xpath = "//div[@aria-label='Rich Text Editor, main']")
@@ -459,7 +459,43 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//span[text()='Versiyonu Geri Al']")
     public WebElement versiyonuGeriAl;
     @FindBy(xpath = "//*[contains(text(),'sms şablonu güncellendi.')]")
-    public List<WebElement> versiyonGüncellendi;
+    public List<WebElement> versiyonGuncellendi;
+
+
+    //SMS Sayfası-Sms Yaratıcı Menüsü-Sms Yaratıcı oluşturma
+    @FindBy(xpath = "//a[text()=' Sms Yaratıcı ']")
+    public WebElement smsSablonYaratici;
+    @FindBy(xpath = "//input[contains(@data-placeholder,'Yaratıcı Id')]")
+    public WebElement smsYaraticiId;
+    @FindBy(xpath = "//input[contains(@data-placeholder, 'Yaratıcı Adı')]")
+    public WebElement smsYaraticiAdi;
+    @FindBy(xpath = "//*[contains(text(),'Sms Tanımı Oluşturuldu.')]")
+    public List<WebElement> smsYaraticiOlusturulduPopUp;
+
+    //SMS Sayfası-Sms Yaratıcı Menüsü-Sms Yaratıcı Güncelle
+    @FindBy(xpath = "//span[text()=' Güncelle ']")
+    public WebElement smsGuncelleButton;
+    @FindBy(xpath = "//*[contains(text(),'Sms Tanımı Güncellendi.')]")
+    public List<WebElement> smsYaraticiGuncellendiPopUp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

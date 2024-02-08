@@ -10,7 +10,7 @@ Feature: SMS_Şablonlar Menüsü
     And Kullanıcı giriş butonuna tıklar
     And Sms butonuna tıklar
     And Şablonlar sekmesine tıklar
-    And Sms şablonu ekle ikonuna tıklar
+    And Ekle ikonuna tıklar
     And Sms Şablon adı "SmsŞablonAdı_" girer
     And Şablon metni alanına bir metin "ileti" girer
     And Kaydet butonuna tıklar
@@ -26,7 +26,7 @@ Feature: SMS_Şablonlar Menüsü
     And Kullanıcı giriş butonuna tıklar
     And Sms butonuna tıklar
     And Şablonlar sekmesine tıklar
-    And Sms şablonu ekle ikonuna tıklar
+    And Ekle ikonuna tıklar
     And Sms Şablon adı "" girer
     Then Kaydet butonunun aktif olmadığı görülür
 
@@ -40,7 +40,7 @@ Feature: SMS_Şablonlar Menüsü
     And Kullanıcı giriş butonuna tıklar
     And Sms butonuna tıklar
     And Şablonlar sekmesine tıklar
-    And Sms şablonu ekle ikonuna tıklar
+    And Ekle ikonuna tıklar
     And Sms Şablon adı "SmsŞablonAdı_" girer
     And Veri seti alanında eklemek istediği veri setini "EtiketAdi_470-03-7170" seçer
     And Şablon metni alanına bir metin "Lütfen mesajınızı girin..." girer
@@ -190,6 +190,22 @@ Feature: SMS_Şablonlar Menüsü
     And Şablonlar sekmesine tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
     And Silmek istediği sms sablonunun "SmsŞablonAdı_176866214" checkboxına tıklar
+    And Sağ üst köşede beliren sil ikonuna tıklanır
+    And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar
+    Then Sms sablonunun silindiğini doğrular
+
+  @ignore
+  @CheckBoxİleBirdenFazlaSmsSablonuSilme
+  Scenario:TC_002 Checkbox ile birden fazla sms şablonları seçip silme
+
+    Given Kullanıcı ucmsadmin sayfasına gider
+    When Kullanıcı ucmsadmin için geçerli username girer
+    And Kullanıcı ucmsadmin için geçerli password girer
+    And Kullanıcı giriş butonuna tıklar
+    And Sms butonuna tıklar
+    And Şablonlar sekmesine tıklar
+    And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
+    And Silmek istediği sms sablonunun "SmsŞablonAdı_517039402" "SmsŞablonAdı_493965585" checkboxına tıklar
     And Sağ üst köşede beliren sil ikonuna tıklanır
     And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar
     Then Sms sablonunun silindiğini doğrular
