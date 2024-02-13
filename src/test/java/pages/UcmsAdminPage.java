@@ -478,18 +478,58 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'Sms Tanımı Güncellendi.')]")
     public List<WebElement> smsYaraticiGuncellendiPopUp;
 
+    //Listeler Sayfası-DNC Menüsü-Manuel DNC ekleme
+    @FindBy(xpath = "//span[text()='Listeler']")
+    public WebElement listelerSekmesi;
+    @FindBy(xpath = "//a[text()=' DNC  ']")
+    public WebElement dncMenu;
+    @FindBy(xpath = "//div[text()='MANUEL DNC KAYDI EKLE']")
+    public WebElement manuelDncKaydiEkleTab;
+    @FindBy(name = "dncModel.CampId")
+    public WebElement kampanyaId;
+    @FindBy(name = "dncModel.TelNo")
+    public WebElement telefonNumarasi;
+    @FindBy(name = "dncModel.ClientNo")
+    public WebElement clientId;
+    @FindBy(xpath = "//*[contains(text(),'Kayıt Eklendi')]")
+    public List<WebElement> manuelDncKaydiEklendiPopUp;
+    @FindBy(xpath = "//mat-select[@placeholder='Arama Katagorisi']")
+    public WebElement aramaKatagorisi;
+    @FindBy(xpath = "//span[text()='ClientNo']")
+    public WebElement aramaKatagorisiClientNo;
+    @FindBy(xpath = "//span[text()='TelNo']")
+    public WebElement aramaKatagorisiTelNo;
+    @FindBy(xpath = "//span[text()='CampId']")
+    public WebElement aramaKatagorisiCampId;
+    @FindBy(xpath = "//mat-icon[text()='search']")
+    public WebElement araButton;
+
+    //Listeler Sayfası-DNC Menüsü-DNC List ekleme-silme
+    @FindBy(xpath = "//input[@type='file']")
+    public WebElement dosyaSecButton;
+    @FindBy(xpath = "//span[text()='DNC Liste Ekle']")
+    public WebElement dncListEkle;
+    @FindBy(xpath = "//span[text()='DNC Liste Sil']")
+    public WebElement dncListSil;
+    @FindBy(xpath = "//div[text()='DNC LİSTE EKLE-SİL']")
+    public WebElement dncListeEkleSilTab;
+    @FindBy(xpath = "//*[contains(text(),'Kayıtlar Ekleniyor...')]")
+    public WebElement dncListEkleniyorPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Kayıtlar Silinyor...')]")
+    public WebElement dncListSiliniyorPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Excel formatı uygun değildir')]")
+    public WebElement uygunOlmayanFormattaDncPopUp;
 
 
-
-
-
-
-
-
-
-
-
-
+    //Sİstem Sayfası-Rol/Yetki Matrisi Menüsü
+    @FindBy(xpath = "//span[text()='Sistem']")
+    public WebElement sistemSekmesi;
+    @FindBy(xpath = "//a[text()=' Rol/Yetki Matrisi ']")
+    public WebElement rolYetkiMatrisiMenu;
+    @FindBy(xpath = "//mat-label[text()='Yetki Tipi']")
+    public WebElement yetkiTipi;
+    @FindBy(id = "searchForContent")
+    public WebElement kullaniciRolSearchBox;
 
 
 

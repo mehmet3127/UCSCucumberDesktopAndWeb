@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +76,7 @@ public class DesignerStepDefinition {
     }
     @Then("Kullanıcı tamam button'una tıklar")
     public void kullanıcıTamamButtonUnaTıklar() {
+        ReusableMethods.waitForClickablility(designerPage.tamam,10);
         designerPage.tamam.click();
     }
 
@@ -85,6 +88,7 @@ public class DesignerStepDefinition {
     @Then("Kullanıcı sayfayı kapatır")
     public void kullanıcıSayfayıKapatır() {
         designerPage.pencereKapat.click();
+        ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet,10);
         designerPage.pencereKapatEvet.click();
     }
 

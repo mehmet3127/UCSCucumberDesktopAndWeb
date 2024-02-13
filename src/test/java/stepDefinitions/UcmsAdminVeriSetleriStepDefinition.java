@@ -837,13 +837,14 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
         WebElement veriSetiEkleModal = Driver.getDriver().findElement(By.xpath("//h1[text()='Veri Seti Ekle ']"));
 
-        ReusableMethods.waitFor(2);
-        //JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
-        actions.clickAndHold(veriSetiEkleModal).build().perform();
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitForVisibility(veriSetiEkleModal, 10);
 
-        //jse.executeScript("window.scrollBy(" + xOffset + ", 0);");
-        //actions.moveByOffset(500, 0).build().perform();
+        //JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+
+        actions.clickAndHold(veriSetiEkleModal).dragAndDropBy(veriSetiEkleModal, 350, 0).
+                clickAndHold(veriSetiEkleModal).dragAndDropBy(veriSetiEkleModal, -350, 0).
+                build().perform();
+
 
     }
 

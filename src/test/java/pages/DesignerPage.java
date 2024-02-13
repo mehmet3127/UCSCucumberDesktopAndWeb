@@ -32,7 +32,7 @@ public class DesignerPage {
     public WebElement pencereKapatEvet;
     @FindBy(className = "WindowsForms10.RichEdit20W.app.0.3e2f22e_r9_ad1")
     public WebElement hataMesajı;
-    @FindBy(className = "WindowsForms10.BUTTON.app.0.3e2f22e_r9_ad1")
+    @FindBy(name = "Tamam")
     public WebElement tamam;
 
 

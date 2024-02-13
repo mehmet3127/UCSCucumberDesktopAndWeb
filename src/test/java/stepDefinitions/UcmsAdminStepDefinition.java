@@ -114,18 +114,16 @@ public class UcmsAdminStepDefinition {
     @And("Kaydet butonuna tıklar")
     public void KaydetButonunaTıklar() {
         ucmsAdminPage.kaydetButton.click();
-        ReusableMethods.waitFor(1);
     }
 
     @Then("Onay butonuna tıklar")
     public void OnayButonunaTıklar() {
         ucmsAdminPage.onayButton.click();
-        ReusableMethods.waitFor(1);
+
     }
 
     @Then("Sayfayı kapatır")
     public void SayfayıKapatır() {
-        ReusableMethods.waitFor(1);
         //Driver.closeDriver();
     }
 
