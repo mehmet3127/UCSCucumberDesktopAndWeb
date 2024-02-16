@@ -18,6 +18,7 @@ public class UcmsAdminPage {
     //UcmsAdmin Login Senaryosu Location
     @FindBy(id = "mat-input-0")
     public WebElement userName;
+
     @FindBy(id = "mat-input-1")
     public WebElement password;
     @FindBy(xpath = "//*[@type='submit']")
@@ -523,19 +524,93 @@ public class UcmsAdminPage {
 
     //Sİstem Sayfası-Rol/Yetki Matrisi Menüsü
     @FindBy(xpath = "//span[text()='Sistem']")
-    public WebElement sistemSekmesi;
+    public WebElement sistemSayfasi;
     @FindBy(xpath = "//a[text()=' Rol/Yetki Matrisi ']")
     public WebElement rolYetkiMatrisiMenu;
-    @FindBy(xpath = "//mat-label[text()='Yetki Tipi']")
+    @FindBy(xpath = "//mat-select[@role='combobox']")
     public WebElement yetkiTipi;
+    @FindBy(xpath = "//span[text()='Kullanıcı']")
+    public WebElement yetkiTipiKullanici;
+    @FindBy(xpath = "//mat-option[@value='rol']")
+    public WebElement yetkiTipiRol;
     @FindBy(id = "searchForContent")
-    public WebElement kullaniciRolSearchBox;
+    public WebElement kullaniciRolSearchBox; //
+    @FindBy(xpath = "//*[contains(text(),'Güncelleme başarı ile yapıldı!')]")
+    public WebElement yetkiVeridiPopUp;
 
 
+    //Task-Scheduler Sayfası-İş zamanlayıcı Menüsü
+    @FindBy(xpath = "//span[text()='Task Scheduler']")
+    public WebElement taskSchedulerSayfasi;
+    @FindBy(xpath = "//a[text()=' Script Tanımı ']")
+    public WebElement scriptTanimiMenu;
+    @FindBy(xpath = "//a[text()=' İş Zamanlayıcı ']")
+    public WebElement isZamanlayiciMenu;
+    @FindBy(xpath = "//a[text()=' Log ']")
+    public WebElement logMenu;
+
+    @FindBy(xpath = "//input[@data-placeholder='İş Adı']")
+    public WebElement isAdi;
+    @FindBy(xpath = "//mat-select[@name='data.ScriptId']")
+    public WebElement script;
+    @FindBy(xpath = "//a[text()=' Dakika ']")
+    public WebElement dakikaTab;
+    @FindBy(xpath = "//select[contains(@class,'minutes form-control cron-editor-select ng-untouched ng-pristine ng-valid')]")
+    public WebElement dakikaGir;
+    @FindBy(xpath = "//select[contains(@class,'seconds form-control cron-editor-select ng-untouched ng-pristine ng-star-inserted ng-valid')]")
+    public WebElement saniyeGir;
+
+    @FindBy(xpath = "//a[text()=' Saat ']")
+    public WebElement saatTab;
+    @FindBy(xpath = "//select[contains(@class,'hours form-control cron-editor-select ng-untouched')]")
+    public WebElement saatGir;
 
 
+    @FindBy(xpath = "//a[text()=' Gün ']")
+    public WebElement gunTab;
+    @FindBy(xpath = "//select[contains(@class,'days form-control cron-editor-select ng-untouched')]")
+    public WebElement gunGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[1]")
+    public WebElement gunIcinSaatGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[2]")
+    public WebElement gunIcinDakikaGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[2]")
+    public WebElement gunIcinSaniyeGir;
 
 
+    @FindBy(xpath = "//a[text()=' Hafta ']")
+    public WebElement haftaTab;
+    @FindBy(xpath = "//label[contains(text(),'Pazartesi')]")
+    public WebElement pazartesi;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[4]")
+    public WebElement haftaIcinSaatGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[5]")
+    public WebElement haftaIcinDakikaGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[5]")
+    public WebElement haftaIcinSaniyeGir;
+
+
+    @FindBy(xpath = "//a[text()=' Ay ']")
+    public WebElement ayTab;
+    @FindBy(xpath = "//select[contains(@class,'months-small form-control cron-editor-select ng-untouched')]")
+    public WebElement ayGir;
+    @FindBy(xpath = "(//select[contains(@class,'month-days form-control cron-editor-select ng-untouched')])[1]")
+    public WebElement ayIcinGunGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[7]")
+    public WebElement ayIcinSaatGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[8]")
+    public WebElement ayIcinDakikaGir;
+    @FindBy(xpath = "(//select[contains(@class,'timeFormControl form-control cron-editor-select ng-untouched')])[8]")
+    public WebElement ayIcinSaniyeGir;
+
+
+    @FindBy(xpath = "//*[contains(text(),'İş Adı Boş Geçilemez')]")
+    public WebElement isAdiBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Script Adı Boş Geçilemez')]")
+    public WebElement scriptAdiBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Lütfen gerekli alanları doldurun.')]")
+    public WebElement isZamanlayiciEklendiPopUp;
+    //Başarılı şekilde eklendi uyarısı çıkmadığı için şimdilik bu popup ile doğrulama yapılıyor
 
 
 }
