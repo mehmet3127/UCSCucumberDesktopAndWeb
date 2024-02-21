@@ -546,8 +546,6 @@ public class UcmsAdminPage {
     public WebElement scriptTanimiMenu;
     @FindBy(xpath = "//a[text()=' İş Zamanlayıcı ']")
     public WebElement isZamanlayiciMenu;
-    @FindBy(xpath = "//a[text()=' Log ']")
-    public WebElement logMenu;
 
     @FindBy(xpath = "//input[@data-placeholder='İş Adı']")
     public WebElement isAdi;
@@ -557,14 +555,15 @@ public class UcmsAdminPage {
     public WebElement dakikaTab;
     @FindBy(xpath = "//select[contains(@class,'minutes form-control cron-editor-select ng-untouched ng-pristine ng-valid')]")
     public WebElement dakikaGir;
-    @FindBy(xpath = "//select[contains(@class,'seconds form-control cron-editor-select ng-untouched ng-pristine ng-star-inserted ng-valid')]")
+    @FindBy(xpath = "//select[contains(@class,'seconds form-control cron-editor-select ng-untouched ng-pristine')]")
     public WebElement saniyeGir;
 
     @FindBy(xpath = "//a[text()=' Saat ']")
     public WebElement saatTab;
     @FindBy(xpath = "//select[contains(@class,'hours form-control cron-editor-select ng-untouched')]")
     public WebElement saatGir;
-
+    @FindBy(xpath = "(//select[contains(@class,'seconds form-control cron-editor-select ng-untouched ng-pristine')])[2]")
+    public WebElement saatIcinSaniyeGir;
 
     @FindBy(xpath = "//a[text()=' Gün ']")
     public WebElement gunTab;
@@ -611,6 +610,69 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'Lütfen gerekli alanları doldurun.')]")
     public WebElement isZamanlayiciEklendiPopUp;
     //Başarılı şekilde eklendi uyarısı çıkmadığı için şimdilik bu popup ile doğrulama yapılıyor
+    @FindBy(xpath = "//*[contains(text(),'Çalıştırıldı!')]")
+    public WebElement planlanmisIsiCasitirPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Zamanlanan İş Durduruldu')]")
+    public WebElement zamanlananIsDurdurulduPopUp;
+    @FindBy(xpath = "//td[contains(text(),'is zamanlayici_809-57-3708')]//following-sibling::td[contains(@class,'Resume')]//preceding-sibling::mat-icon[@mattooltip='Çalıştırmaya Devam Et']")
+    public WebElement calistirmayaDevamEtIcon;
+
+    @FindBy(xpath = "//*[contains(text(),'Durdurulmuş İş Tekrar Çalıştırıldı!')]")
+    public WebElement durdurulanIşTekrarÇalıştırıldıPopUp;
+    @FindBy(xpath = "//td[contains(text(),'is zamanlayici_809-57-3708')]//following-sibling::td[contains(@class,'Resume')]//preceding-sibling::mat-icon[@mattooltip='Durdur']")
+    public WebElement durdurIcon;
+
+    //Task-Scheduler Sayfası-İş zamanlayıcı Güncelleme
+    @FindBy(xpath = "//*[contains(text(),'Eklemeye çalıştığınız iş aynı bilgilerle önceden oluşturulmuştur')]")
+    public WebElement ayniIsimdeIsOlusturulduPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Planlanmış iş güncellendi.')]")
+    public WebElement planlanmisIsGuncellendiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Planlanmış iş silindi.')]")
+    public List<WebElement> planlanmisIsSilindiPopUp;
+    @FindBy(xpath = "//mat-slide-toggle[@mattooltip='Devre Dışı Bırakılanlar']")
+    public WebElement taskSchedulerDevreDisiBirakIkon;
+
+
+    //Task-Scheduler Sayfası-Log Menüsü
+    @FindBy(xpath = "//a[text()=' Log ']")
+    public WebElement logMenu;
+    @FindBy(xpath = "//input[@data-placeholder='İş Adı']")
+    public WebElement logIsAdiSearchBox;
+    @FindBy(xpath = "//input[@data-placeholder='Oluşturan']")
+    public WebElement logIsOlusturanSearchBox;
+    @FindBy(xpath = "//input[@data-placeholder='Başlangıç Tarihi']")
+    public WebElement logBaslangicTarihi;
+    @FindBy(xpath = "(//mat-icon[text()='settings_backup_restore'])[1]")
+    public WebElement logBaslangicTarihiSifirla;
+    @FindBy(xpath = "//input[@data-placeholder='Bitiş Tarihi']")
+    public WebElement logBitisTarihi;
+    @FindBy(xpath = "(//mat-icon[text()='settings_backup_restore'])[2]")
+    public WebElement logBitisTarihiSifirla;
+    @FindBy(xpath = "//span[text()='Filtrele']")
+    public WebElement logFiltrele;
+    @FindBy(xpath = "//span[text()='Sıfırla']")
+    public WebElement logSifirla;
+    @FindBy(xpath = "//div[text()='İş Adı']")
+    public WebElement logIsAdiSirala;
+    @FindBy(xpath = "//div[text()='İş Adı']//ancestor::th[@aria-sort='ascending']")
+    public WebElement logIsAdiSiralaDogrula;
+
+    @FindBy(xpath = "//div[text()='Oluşturan']")
+    public WebElement logOlusturanSirala;
+    @FindBy(xpath = "//div[text()='Oluşturan']//ancestor::th[@aria-sort='ascending']")
+    public WebElement logOlusturanSiralaDogrula;
+
+    @FindBy(xpath = "//div[text()='Log']")
+    public WebElement logSirala;
+    @FindBy(xpath = "//div[text()='Log']//ancestor::th[@aria-sort='ascending']")
+    public WebElement logSiralaDogrula;
+
+    @FindBy(xpath = "//div[text()='Tarih']")
+    public WebElement logTarihSirala;
+    @FindBy(xpath = "//div[text()='Tarih']//ancestor::th[@aria-sort='ascending']")
+    public WebElement logTarihSiralaDogrula;
+
+
 
 
 }

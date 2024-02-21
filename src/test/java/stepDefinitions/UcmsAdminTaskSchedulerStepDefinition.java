@@ -12,6 +12,9 @@ import pages.UcmsAdminPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
 public class UcmsAdminTaskSchedulerStepDefinition {
 
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
@@ -33,11 +36,13 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     }
 
+    //İş Zamanlayıcı Ekleme
     @And("İş adı alanına {string} giriş yapar")
     public void işAdıAlanınaGirişYapar(String isAdi) {
 
         if (!isAdi.isEmpty()) {
             isZamanlayiciAdi = isAdi + Faker.instance().idNumber().ssnValid();
+            ucmsAdminPage.isAdi.clear();
             ucmsAdminPage.isAdi.sendKeys(isZamanlayiciAdi);
         } else {
             isZamanlayiciAdi = isAdi;
@@ -59,6 +64,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         }
     }
 
+    //Aya göre İş Zamanlayıcı Ekleme
     @And("Ay Tab'ına geçer")
     public void ayTabInaGeçer() {
         ucmsAdminPage.ayTab.click();
@@ -80,23 +86,21 @@ public class UcmsAdminTaskSchedulerStepDefinition {
     public void saatCombosundaDeğerGirer(int ayIcinSaat) {
         Select select = new Select(ucmsAdminPage.ayIcinSaatGir);
         select.selectByIndex(ayIcinSaat);
-
     }
 
     @And("Dakika combosunda değer {int} girer")
     public void dakikaCombosundaDeğerGirer(int ayIcinDakika) {
         Select select = new Select(ucmsAdminPage.ayIcinDakikaGir);
         select.selectByIndex(ayIcinDakika);
-
     }
 
     @And("Saniye combosunda değer {int} girer")
     public void saniyeCombosundaDeğerGirer(int ayIcinSaniye) {
         Select select = new Select(ucmsAdminPage.ayIcinSaniyeGir);
         select.selectByIndex(ayIcinSaniye);
-
     }
 
+    //Haftaya göre İş Zamanlayıcı Ekleme
     @And("Hafta Tab'ına geçer")
     public void haftaTabInaGeçer() {
         ucmsAdminPage.haftaTab.click();
@@ -112,14 +116,12 @@ public class UcmsAdminTaskSchedulerStepDefinition {
             ucmsAdminPage.pazartesi.click();
             haftaIcinGunSec.click();
         }
-
     }
 
     @And("Saat combosundan değer {int} girer")
     public void saatCombosundanDeğerGirer(int haftaIcinSaat) {
         Select select = new Select(ucmsAdminPage.haftaIcinSaatGir);
         select.selectByIndex(haftaIcinSaat);
-
     }
 
     @And("Dakika combosundan değer {int} girer")
@@ -134,6 +136,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         select.selectByIndex(haftaIcinSaniye);
     }
 
+    //Güne göre İş Zamanlayıcı Ekleme
     @And("Gün Tab'ına geçer")
     public void günTabInaGeçer() {
         ucmsAdminPage.gunTab.click();
@@ -145,27 +148,25 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         select.selectByIndex(gun);
     }
 
-    //Gün için saat girer
     @And("Saat combosunda değer {int} seçer")
     public void saatCombosundaDeğerSeçer(int gunIcinSaat) {
         Select select = new Select(ucmsAdminPage.gunIcinSaatGir);
         select.selectByIndex(gunIcinSaat);
     }
 
-    //Gün için dakika girer
     @And("Dakika combosunda değer {int} seçer")
     public void dakikaCombosundaDeğerSeçer(int gunIcinDakika) {
         Select select = new Select(ucmsAdminPage.gunIcinDakikaGir);
         select.selectByIndex(gunIcinDakika);
     }
 
-    //Gün için saniye girer
     @And("Saniye combosunda değer {int} seçer")
     public void saniyeCombosundaDeğerSeçer(int gunIcinSaniye) {
         Select select = new Select(ucmsAdminPage.gunIcinSaniyeGir);
         select.selectByIndex(gunIcinSaniye);
     }
 
+    //Saate Göre İş Zamanlayıcı Ekleme
     @And("Saat Tab'ına geçer")
     public void saatTabInaGeçer() {
         ucmsAdminPage.saatTab.click();
@@ -173,11 +174,17 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     @And("Saat combosundan değer {int} seçer")
     public void saatCombosundanDeğerSeçer(int saat) {
-
         Select select = new Select(ucmsAdminPage.saatGir);
         select.selectByIndex(saat);
     }
 
+    @And("Saniye combosundan deger {int} seçer")
+    public void saniyeCombosundanDegerSeçer(int saatIcinSaniye) {
+        Select select = new Select(ucmsAdminPage.saatIcinSaniyeGir);
+        select.selectByIndex(saatIcinSaniye);
+    }
+
+    //Dakikaya Göre İş Zamanlayıcı Ekleme
     @And("Dakika tabını geçer")
     public void dakikaTabınıGeçer() {
         ucmsAdminPage.dakikaTab.click();
@@ -195,9 +202,8 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         select.selectByIndex(saniye);
     }
 
-    @Then("Kaydın eklendiğip eklenmedigini doğrular")
+    @Then("Kaydın eklenip eklenmedigini doğrular")
     public void kaydınEklendiğiniDoğrular() {
-
         if (isZamanlayiciAdi.isEmpty()) {
 
             Assert.assertTrue(ucmsAdminPage.isAdiBosGecilemezPopUp.isDisplayed());
@@ -217,4 +223,322 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         }
     }
 
+
+    @And("Listelenen planlanmış işlerden herhangi biri için {string} Bir Kere Çalıştır iconuna tıklar")
+    public void listelenenPlanlanmışIşlerdenHerhangiBiriIçinBirKereÇalıştırIconunaTıklar(String planlananIs) {
+
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'OneTimeTrigger')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'OneTimeTrigger')]"));
+                planlanmisIsZamanlayici.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+
+
+    }
+
+    @Then("Çalıştırıldı yazan bilgilendirme pop up ının gelmesi beklenir.")
+    public void çalıştırıldıYazanBilgilendirmePopUpInınGelmesiBeklenir() {
+        ReusableMethods.waitForVisibility(ucmsAdminPage.planlanmisIsiCasitirPopUp, 10);
+        Assert.assertTrue(ucmsAdminPage.planlanmisIsiCasitirPopUp.isDisplayed());
+    }
+
+    @And("Pop uptaki Kapat butonu kullanılarak pop up kapatılır.")
+    public void popUptakiKapatButonuKullanılarakPopUpKapatılır() {
+        ucmsAdminPage.popupKapat.click();
+    }
+
+    //İş Zamanlayıcı-listelenen Planlanmış işi Durdur iconu kullanarak durdurma
+    @And("Listelenen planlanmış işlerden herhangi biri için {string} planlanmış işi durdur iconuna tıklar")
+    public void listelenenPlanlanmışIşlerdenHerhangiBiriIçinPlanlanmışIşiDurdurIconunaTıklar(String planlananIs) {
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Resume')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Resume')]"));
+                planlanmisIsZamanlayici.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+
+    }
+
+    @Then("Zamanlanan İş Durduruldu yazan bilgilendirme pop up ının gelmesi beklenir.")
+    public void zamanlananİşDurdurulduYazanBilgilendirmePopUpInınGelmesiBeklenir() {
+        //ReusableMethods.waitForVisibility(ucmsAdminPage.zamanlananIsDurdurulduPopUp, 10);
+        Assert.assertTrue(ucmsAdminPage.zamanlananIsDurdurulduPopUp.isDisplayed());
+    }
+
+    @And("İşlem yapılan planlanmış iş için kırmızı olan Durdur iconunun yeşil Çalıştırmaya Devam Et iconuna dönüşmesi beklenir.")
+    public void işlemYapılanPlanlanmışIşIçinKırmızıOlanDurdurIconununYeşilÇalıştırmayaDevamEtIconunaDönüşmesiBeklenir() {
+        //ReusableMethods.waitForVisibility(ucmsAdminPage.calistirmayaDevamEtIcon, 10);
+        Assert.assertTrue(ucmsAdminPage.calistirmayaDevamEtIcon.isDisplayed());
+    }
+
+    //İş Zamanlayıcı-listelenen Planlanmış işi Çalıştırmaya devam et iconu kullanarak bir kez çalıştırma
+    @Then("Durdurulmuş İş Tekrar Çalıştırıldı yazan bilgilendirme pop up ının gelmesi beklenir.")
+    public void durdurulmuşİşTekrarÇalıştırıldıYazanBilgilendirmePopUpInınGelmesiBeklenir() {
+        Assert.assertTrue(ucmsAdminPage.durdurulanIşTekrarÇalıştırıldıPopUp.isDisplayed());
+    }
+
+    @And("İşlem yapılan planlanmış iş için yeşil olan Çalıştırmaya Devam Et iconunun kırmızı Durdur iconuna dönüşmesi beklenir.")
+    public void işlemYapılanPlanlanmışIşIçinYeşilOlanÇalıştırmayaDevamEtIconununKırmızıDurdurIconunaDönüşmesiBeklenir() {
+        Assert.assertTrue(ucmsAdminPage.durdurIcon.isDisplayed());
+    }
+
+    //İş Zamanlayıcı-listelenen Planlanmış işi Güncelleme
+    @And("Listelenen planlanmış işlerden herhangi biri için {string} Düzenle iconuna tıklanır")
+    public void listelenenPlanlanmışIşlerdenHerhangiBiriIçinDüzenleIconunaTıklanır(String planlananIs) {
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'OneTimeTrigger')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Edit')]"));
+                planlanmisIsZamanlayici.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+
+    }
+
+    @And("Açılan modalda İş adı alanına var olan bir işin ismi {string} girilir")
+    public void açılanModaldaİşAdıAlanınaVarOlanBirIşinIsmiGirilir(String varOlanIs) {
+
+        ucmsAdminPage.isAdi.clear();
+        ucmsAdminPage.isAdi.sendKeys(varOlanIs);
+    }
+
+    @Then("Eklemeye çalıştığınız iş aynı bilgilerle önceden oluşturulmuştur uyarısını görür")
+    public void eklemeyeÇalıştığınızIşAynıBilgilerleÖncedenOluşturulmuştur() {
+        Assert.assertTrue(ucmsAdminPage.ayniIsimdeIsOlusturulduPopUp.isDisplayed());
+    }
+
+    @Then("Planlanmış iş güncellendi yazısını görür.")
+    public void planlanmışIşGüncellendiYazısınıGörür() {
+
+        Assert.assertTrue(ucmsAdminPage.planlanmisIsGuncellendiPopUp.isDisplayed());
+
+    }
+
+    //İş Zamanlayıcı-listelenen Planlanmış işi Silme
+    @And("Listelenen planlanmış işlerden çalışan bir iş için {string} Çöp kutusu iconuna tıklanır")
+    public void listelenenPlanlanmışIşlerdenÇalışanBirIşIçinÇöpKutusuIconunaTıklanır(String planlananIs) {
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'OneTimeTrigger')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+                planlanmisIsZamanlayici.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+    }
+
+    @Then("planlanan iş silindi uyarısını görür.")
+    public void planlananIşSilindiUyarısınıGörür() {
+        Assert.assertEquals(ucmsAdminPage.planlanmisIsSilindiPopUp.size(), 1);
+    }
+
+    @Then("planlanan iş silindi uyarısını görmez.")
+    public void planlananIşSilindiUyarısınıGörmez() {
+        Assert.assertEquals(ucmsAdminPage.planlanmisIsSilindiPopUp.size(), 0);
+    }
+
+    @And("Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir tıklanır.")
+    public void açılanSayfadaDevreDışıBırakılanlarToggleIAktifEdilirTıklanır() {
+
+        ucmsAdminPage.taskSchedulerDevreDisiBirakIkon.click();
+    }
+
+    @And("Silinen planlanmış işlerden herhangi biri için {string} Aktif et iconuna tıklanır")
+    public void silinenPlanlanmışIşlerdenHerhangiBiriIçinAktifEtIconunaTıklanır(String silinenIs) {
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + silinenIs + "')]//following-sibling::td[contains(@class,'Edit')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 5);
+
+                // Element görünürse tıklama yapın
+                WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + silinenIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Aktif Et')]"));
+                planlanmisIsZamanlayici.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+    }
+
+    @Then("Silinen planlanmış işin {} aktif edildiği ve listelendiği görülür.")
+    public void silinenPlanlanmışIşinAktifEdildiğiVeListelendiğiGörülür(String silinenIs) {
+        List<WebElement> planlanmisIsZamanlayici = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + silinenIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+        Assert.assertEquals(planlanmisIsZamanlayici.size(), 1);
+    }
+
+    //İş Zamanlayıcı-listelenen Planlanmış işi Arama
+    @And("İçerik ara kısmına aramak istediği iş adını {string} girer")
+    public void içerikAraKısmınaAramakIstediğiIşAdınıGirer(String planlananIs) {
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(isZamanlayiciAdi);
+    }
+
+    @And("İçerik ara kısmına aramak istediği işin scriptini {string} girer")
+    public void içerikAraKısmınaAramakIstediğiIşinScriptiniGirer(String planlanaIsScriptAdi) {
+        ucmsAdminPage.içerikAramaSearchBox.sendKeys(scriptAdi);
+    }
+
+    @And("Aradığı işin listede olduğunu doğrular")
+    public void aradığıIşinListedeOlduğunuDoğrular() {
+        WebElement planlananIs = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + scriptAdi + "')]"));
+        Assert.assertTrue(planlananIs.isDisplayed());
+    }
+
+    //Task Scheduler-Log menüsü-Log Arama
+    @And("Log sekmesine tıklar")
+    public void logSekmesineTıklar() {
+        ucmsAdminPage.logMenu.click();
+    }
+
+    @And("İş adı searchBoxına aramak istediği logun iş adını {string} girer")
+    public void işAdıSearchBoxınaAramakIstediğiLogunIşAdınıGirer(String log) {
+
+        ucmsAdminPage.logIsAdiSearchBox.sendKeys(log);
+
+    }
+
+    @And("Filtre butonuna tıklar")
+    public void filtreButonunaTıklar() {
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.logFiltrele.click();
+    }
+
+    @Then("Aradığı {string} log'un olduğunu doğrular")
+    public void aradığıLogUnOlduğunuDoğrular(String log) {
+        WebElement logAdi = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + log + "')]"));
+        Assert.assertTrue(logAdi.isDisplayed());
+    }
+
+    @And("İş adı searchBoxına aramak istediği logun oluşturanı {string} girer")
+    public void işAdıSearchBoxınaAramakIstediğiLogunOluşturanıGirer(String olusturan) {
+        ucmsAdminPage.logIsOlusturanSearchBox.sendKeys(olusturan);
+        ReusableMethods.waitFor(1);
+    }
+
+    @And("Başlangıç {string} ve bitiş {string} tarihini seçer")
+    public void başlangıçVeBitişTarihiniSeçer(String baslangicTarihi, String bitisTarihi) {
+        ucmsAdminPage.logBaslangicTarihi.sendKeys(baslangicTarihi);
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.logBitisTarihi.sendKeys(bitisTarihi);
+
+    }
+
+    @Then("Belirtilen tarih aralığındaki Logların listelendiğini görür")
+    public void belirtilenTarihAralığındakiLoglarınListelendiğiniGörür() {
+
+    }
+
+    @And("Sıfırla butonuna tıklar")
+    public void sıfırlaButonunaTıklar() {
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.logSifirla.click();
+    }
+
+    @Then("Yapılan filtreleme işleminin kaldırlıdığını görür")
+    public void yapılanFiltrelemeIşlemininKaldırlıdığınıGörür() {
+    }
+
+    @And("Başlangıç tarihi sıfırlama ikonuna tıklar")
+    public void başlangıçTarihiSıfırlamaIkonunaTıklar() {
+        ucmsAdminPage.logBaslangicTarihiSifirla.click();
+    }
+
+    @And("Bitiş tarihi sıfırlama ikonuna tıklar")
+    public void bitişTarihiSıfırlamaIkonunaTıklar() {
+        ucmsAdminPage.logBitisTarihiSifirla.click();
+    }
+
+    @And("Logları {string} sıralama butonuna tıklar")
+    public void loglarıSıralamaButonunaTıklar(String log) {
+
+        switch (log) {
+            case "İş Adı":
+                ucmsAdminPage.logIsAdiSirala.click();
+                break;
+            case "Oluşturan":
+                ucmsAdminPage.logOlusturanSirala.click();
+                break;
+            case "Log":
+                ucmsAdminPage.logSirala.click();
+                break;
+
+            case "Tarih":
+                ucmsAdminPage.logTarihSirala.click();
+                break;
+            default:
+        }
+    }
+
+    @Then("Logların {string} göre sıralandığını görür")
+    public void loglarınGöreSıralandığınıGörür(String log) {
+        switch (log) {
+            case "İş Adı":
+                Assert.assertTrue(ucmsAdminPage.logIsAdiSiralaDogrula.isDisplayed());
+                break;
+
+            case "Oluşturan":
+                Assert.assertTrue(ucmsAdminPage.logOlusturanSiralaDogrula.isDisplayed());
+                break;
+
+            case "Log":
+                Assert.assertTrue(ucmsAdminPage.logSiralaDogrula.isDisplayed());
+                break;
+
+            case "Tarih":
+                Assert.assertTrue(ucmsAdminPage.logTarihSiralaDogrula.isDisplayed());
+                break;
+
+            default:
+        }
+    }
 }
