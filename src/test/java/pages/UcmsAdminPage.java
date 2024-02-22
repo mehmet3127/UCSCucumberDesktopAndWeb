@@ -542,8 +542,6 @@ public class UcmsAdminPage {
     //Task-Scheduler Sayfası-İş zamanlayıcı Menüsü
     @FindBy(xpath = "//span[text()='Task Scheduler']")
     public WebElement taskSchedulerSayfasi;
-    @FindBy(xpath = "//a[text()=' Script Tanımı ']")
-    public WebElement scriptTanimiMenu;
     @FindBy(xpath = "//a[text()=' İş Zamanlayıcı ']")
     public WebElement isZamanlayiciMenu;
 
@@ -671,6 +669,49 @@ public class UcmsAdminPage {
     public WebElement logTarihSirala;
     @FindBy(xpath = "//div[text()='Tarih']//ancestor::th[@aria-sort='ascending']")
     public WebElement logTarihSiralaDogrula;
+
+
+    //Task-Scheduler Sayfası-Script Tanımı-Script Ekleme
+    @FindBy(xpath = "//a[text()=' Script Tanımı ']")
+    public WebElement scriptTanimiMenu;
+    @FindBy(xpath = "(//input[@type='text'])[2]")
+    public WebElement yeniScriptscriptAdi;
+    @FindBy(xpath = "//mat-select[@role='combobox']")
+    public WebElement yeniScriptbaglanti;
+    @FindBy(xpath = "//input[contains(@type,'number')]")
+    public WebElement yeniScriptkomutZamanAsimi;
+    @FindBy(xpath = "//textarea[@data-placeholder='Script . . .']")
+    public WebElement yeniScriptScript;
+    @FindBy(xpath = "//*[contains(text(),'Script başarıyla kaydedildi.')]")
+    public WebElement scriptEklendiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Script Adı Boş Geçilemez')]")
+    public WebElement ScriptAdiBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Bağlantı Boş Geçilemez')]")
+    public WebElement baglantiBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Konut Zaman Aşımı Boş Geçilemez')]")
+    public WebElement komutZamanAsimiBosGecilemezPopUp;
+    @FindBy(xpath = "//input[contains(@type,'number')]//descendant-or-self::input[contains(@class,'invalid')]")
+    public WebElement komutZamanAsimiBos;
+    @FindBy(xpath = "//*[contains(text(),'Script Alanı Boş Geçilemez')]")
+    public WebElement ScriptAlaniBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Eklemeye çalıştığınız script aynı bilgilerle önceden oluşturulmuştur')]")
+    public WebElement scriptAdiAyniPopUp;
+
+
+    //Task-Scheduler Sayfası-Script Tanımı-Script Ekleme
+    @FindBy(xpath = "//*[contains(text(),'Script başarıyla güncellendi.')]")
+    public WebElement ScriptBasariylaGuncellendiPopUp;
+
+
+
+
+
+
+
+
+
+
+
 
 
 

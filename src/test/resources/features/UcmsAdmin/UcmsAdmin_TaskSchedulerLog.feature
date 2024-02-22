@@ -31,7 +31,7 @@ Feature: TaskScheduler_Log Sayfası
   @BelirliTarihAralığındakiLoglarıArama
   Scenario:TC_003 Belirli tarih aralığındaki logları arama
 
-    And Başlangıç "20.02.2024" ve bitiş "21.02.2024" tarihini seçer
+    And Başlangıç "21.02.2024   12:12" ve bitiş "22.02.202400012:12" tarihini seçer
     And Filtre butonuna tıklar
     Then Belirtilen tarih aralığındaki Logların listelendiğini görür
 
@@ -39,7 +39,7 @@ Feature: TaskScheduler_Log Sayfası
   @BaşlangıçVeBitişTarihAlanınısıfırlama
   Scenario:TC_001 Seçilen başlangıç tarihi alanının sıfırlanması
 
-    And Başlangıç "20.02.2024" ve bitiş "21.02.2024" tarihini seçer
+    And Başlangıç "22.02.202400012:12" ve bitiş "22.02.202400012:12" tarihini seçer
     And Başlangıç tarihi sıfırlama ikonuna tıklar
     And Bitiş tarihi sıfırlama ikonuna tıklar
 

@@ -22,6 +22,8 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     static String isZamanlayiciAdi;
     static String scriptAdi;
+    static String scriptName;
+    static String komutZamanAsimi;
 
 
     @And("Test Scheduler butonuna tıklar")
@@ -476,6 +478,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
     @Then("Belirtilen tarih aralığındaki Logların listelendiğini görür")
     public void belirtilenTarihAralığındakiLoglarınListelendiğiniGörür() {
 
+
     }
 
     @And("Sıfırla butonuna tıklar")
@@ -486,6 +489,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     @Then("Yapılan filtreleme işleminin kaldırlıdığını görür")
     public void yapılanFiltrelemeIşlemininKaldırlıdığınıGörür() {
+
     }
 
     @And("Başlangıç tarihi sıfırlama ikonuna tıklar")
@@ -540,5 +544,125 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
             default:
         }
+    }
+
+    //Task Scheduler-Script Tanımı menüsü-Script Ekleme
+    @And("Script Tanımı sekmesine tıklar")
+    public void scriptTanımıSekmesineTıklar() {
+        ucmsAdminPage.scriptTanimiMenu.click();
+    }
+
+    @And("Script adı alanına değer {string} girilir")
+    public void scriptAdıAlanınaDeğerGirilir(String scriptAd) {
+        if (scriptAd.isEmpty()) {
+            scriptName = scriptAd;
+            ucmsAdminPage.yeniScriptscriptAdi.click();
+            ucmsAdminPage.yeniScriptscriptAdi.sendKeys(scriptName);
+
+        } else {
+            ucmsAdminPage.yeniScriptscriptAdi.click();
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.yeniScriptscriptAdi.clear();
+            scriptName = scriptAd + Faker.instance().idNumber().ssnValid();
+            ucmsAdminPage.yeniScriptscriptAdi.sendKeys(scriptName);
+        }
+    }
+
+    @And("Script adı alanına var olan değer {string} girilir")
+    public void scriptAdıAlanınaVarOlanDeğerGirilir(String scriptAd) {
+        ucmsAdminPage.yeniScriptscriptAdi.click();
+        ucmsAdminPage.yeniScriptscriptAdi.sendKeys(scriptAd);
+    }
+
+    @And("Bağlantı combosundan bir bağlantı {string} seçilir")
+    public void bağlantıCombosundanBirBağlantıSeçilir(String baglantı) {
+
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.yeniScriptbaglanti.click();
+        WebElement baglanti = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + baglantı + "')]"));
+        baglanti.click();
+    }
+
+    @And("Komut zaman aşımı alanına değer {string} girilir")
+    public void komutZamanAşımıAlanınaDeğerGirilir(String wait) {
+        ucmsAdminPage.yeniScriptkomutZamanAsimi.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.yeniScriptkomutZamanAsimi.clear();
+        ucmsAdminPage.yeniScriptkomutZamanAsimi.sendKeys(wait);
+    }
+
+    @And("Script alanına değer {string} girilir")
+    public void scriptAlanınaDeğerGirilir(String script) {
+        ucmsAdminPage.yeniScriptScript.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.yeniScriptScript.clear();
+        ucmsAdminPage.yeniScriptScript.sendKeys(script);
+    }
+
+    @Then("Scriptin kaydedildigini dogrular")
+    public void scriptinKaydedildiginiDogrular() {
+        Assert.assertTrue(ucmsAdminPage.scriptEklendiPopUp.isDisplayed());
+    }
+
+    @Then("Script adı boş bırakılamaz uyarısı geldiği görülür")
+    public void scriptAdıBoşBırakılamazUyarısıGeldiğiGörülür() {
+        Assert.assertTrue(ucmsAdminPage.scriptAdiBosGecilemezPopUp.isDisplayed());
+    }
+
+    @Then("Bağlantı boş bırakılamaz uyarısı geldiği görülür")
+    public void bağlantıBoşBırakılamazUyarısıGeldiğiGörülür() {
+        Assert.assertTrue(ucmsAdminPage.baglantiBosGecilemezPopUp.isDisplayed());
+    }
+
+    @Then("Komut zaman aşımı boş bırakılamaz uyarısı geldiği görülür")
+    public void komutZamanAşımıBoşBırakılamazUyarısıGeldiğiGörülür() {
+
+        Assert.assertTrue(ucmsAdminPage.komutZamanAsimiBosGecilemezPopUp.isDisplayed());
+    }
+
+    @Then("Script boş bırakılamaz uyarısı geldiği görülür")
+    public void scriptBoşBırakılamazUyarısıGeldiğiGörülür() {
+        Assert.assertTrue(ucmsAdminPage.ScriptAlaniBosGecilemezPopUp.isDisplayed());
+    }
+
+    @Then("Script adı mevcut uyarısı geldiği görülür")
+    public void scriptAdıMevcutUyarısıGeldiğiGörülür() {
+
+        Assert.assertTrue(ucmsAdminPage.scriptAdiAyniPopUp.isDisplayed());
+    }
+
+    @Then("Girilen değerin yazılmadığı görülür")
+    public void girilenDeğerinYazılmadığıGörülür() {
+
+        Assert.assertTrue(ucmsAdminPage.komutZamanAsimiBos.isDisplayed());
+    }
+
+    //Task Scheduler-Script Tanımı menüsü-Script Düzenleme
+    @And("Listeden bir kaydın {string} düzenle ikonuna tıklar")
+    public void listedenBirKaydınDüzenleIkonunaTıklar(String script) {
+
+        By elementSelector = By.xpath("//td[contains(text(),'" + script + "')]//following-sibling::td[contains(@class,'Edit')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement scriptEdit = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + script + "')]//following-sibling::td[contains(@class,'Edit')]"));
+                scriptEdit.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+    }
+
+    @Then("Güncelleme işleminin yapıldığını doğrular")
+    public void güncellemeIşlemininYapıldığınıDoğrular() {
+
+        Assert.assertTrue(ucmsAdminPage.ScriptBasariylaGuncellendiPopUp.isDisplayed());
     }
 }
