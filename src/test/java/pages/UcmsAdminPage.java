@@ -702,14 +702,28 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'Script başarıyla güncellendi.')]")
     public WebElement ScriptBasariylaGuncellendiPopUp;
 
+    //Task-Scheduler Sayfası-Script Tanımı-Script Ekleme
+    @FindBy(xpath = "//*[contains(text(),'Script silindi')]")
+    public WebElement scriptSilindiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Script silindi')]")
+    public List <WebElement> scriptSilinmediPopUp;
 
 
-
-
-
-
-
-
+    //Ortam Tanımları Sayfası-Çıkış Numaraları
+    @FindBy(xpath = "//span[text()='Ortam Tanımları']")
+    public WebElement ortamTanimlariSayfasi;
+    @FindBy(xpath = "//a[text()=' Çıkış Numaraları ']")
+    public WebElement cikisNumaralariMenu;
+    @FindBy(name = "cpnNumberModel.TelNo")
+    public WebElement cikisNumaralariTelNo;
+    @FindBy(xpath = "//*[contains(text(),'telefon numarası eklendi.')]")
+    public List<WebElement> telefonNumarasiEklendiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Telefon numarası boş geçilemez.')]")
+    public WebElement telefonNumarasiBosGecilemezPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Aynı telefon numarasıyla zaten bir kayıt var.')]")
+    public WebElement ayniTelNoVarPopUp;
+    @FindBy(xpath = "//*[contains(text(),'telefon numarası güncellendi.')]")
+    public List<WebElement> telefonNumarasiGuncellendiPopUp;
 
 
 

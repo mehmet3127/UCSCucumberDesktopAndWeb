@@ -413,7 +413,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         }
     }
 
-    @Then("Silinen planlanmış işin {} aktif edildiği ve listelendiği görülür.")
+    @Then("Silinen planlanmış işin {string} aktif edildiği ve listelendiği görülür.")
     public void silinenPlanlanmışIşinAktifEdildiğiVeListelendiğiGörülür(String silinenIs) {
         List<WebElement> planlanmisIsZamanlayici = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + silinenIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
         Assert.assertEquals(planlanmisIsZamanlayici.size(), 1);
@@ -554,9 +554,13 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     @And("Script adı alanına değer {string} girilir")
     public void scriptAdıAlanınaDeğerGirilir(String scriptAd) {
+
         if (scriptAd.isEmpty()) {
-            scriptName = scriptAd;
             ucmsAdminPage.yeniScriptscriptAdi.click();
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.yeniScriptscriptAdi.clear();
+            ReusableMethods.waitFor(1);
+            scriptName = scriptAd;
             ucmsAdminPage.yeniScriptscriptAdi.sendKeys(scriptName);
 
         } else {
@@ -570,17 +574,24 @@ public class UcmsAdminTaskSchedulerStepDefinition {
 
     @And("Script adı alanına var olan değer {string} girilir")
     public void scriptAdıAlanınaVarOlanDeğerGirilir(String scriptAd) {
+
         ucmsAdminPage.yeniScriptscriptAdi.click();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.yeniScriptscriptAdi.clear();
         ucmsAdminPage.yeniScriptscriptAdi.sendKeys(scriptAd);
     }
 
     @And("Bağlantı combosundan bir bağlantı {string} seçilir")
     public void bağlantıCombosundanBirBağlantıSeçilir(String baglantı) {
 
-        ReusableMethods.waitFor(1);
-        ucmsAdminPage.yeniScriptbaglanti.click();
-        WebElement baglanti = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + baglantı + "')]"));
-        baglanti.click();
+        if (baglantı.isEmpty()) {
+
+        } else {
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.yeniScriptbaglanti.click();
+            WebElement baglanti = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + baglantı + "')]"));
+            baglanti.click();
+        }
     }
 
     @And("Komut zaman aşımı alanına değer {string} girilir")
@@ -641,14 +652,14 @@ public class UcmsAdminTaskSchedulerStepDefinition {
     @And("Listeden bir kaydın {string} düzenle ikonuna tıklar")
     public void listedenBirKaydınDüzenleIkonunaTıklar(String script) {
 
-        By elementSelector = By.xpath("//td[contains(text(),'" + script + "')]//following-sibling::td[contains(@class,'Edit')]");
+        By elementSelector = By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Edit')]");
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
                 ReusableMethods.waitForVisibility(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
-                WebElement scriptEdit = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + script + "')]//following-sibling::td[contains(@class,'Edit')]"));
+                WebElement scriptEdit = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Edit')]"));
                 scriptEdit.click();
 
                 // İşlem tamamlandı, döngüyü sonlandırın
@@ -664,5 +675,67 @@ public class UcmsAdminTaskSchedulerStepDefinition {
     public void güncellemeIşlemininYapıldığınıDoğrular() {
 
         Assert.assertTrue(ucmsAdminPage.ScriptBasariylaGuncellendiPopUp.isDisplayed());
+    }
+
+    //Task Scheduler-Script Tanımı menüsü-Script Silme
+    @And("Listeden bir kaydın {string} sil ikonuna tıklar")
+    public void listedenBirKaydınSilIkonunaTıklar(String script) {
+        By elementSelector = By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement scriptDelete = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+                scriptDelete.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+    }
+
+    @Then("Script tanımının {string} listeden sildiğini doğrular")
+    public void scriptTanımınınListedenSildiğiniDoğrular(String script) {
+        List<WebElement> silinenScript = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete')]//preceding-sibling::mat-icon[contains(@mattooltip,'Aktif Et')]"));
+        Assert.assertEquals(silinenScript.size(), 1);
+        //Assert.assertTrue(ucmsAdminPage.scriptSilindiPopUp.isDisplayed());
+    }
+
+    @Then("Script tanımının listeden silinmediğini doğrular")
+    public void scriptTanımınınListedenSilinmediğiniDoğrular() {
+        Assert.assertEquals(ucmsAdminPage.scriptSilinmediPopUp.size(), 0);
+    }
+
+    //Task Scheduler-Script Tanımı menüsü-Script Aktif Etme
+    @And("Listeden silinmiş bir kaydın {string} aktif et ikonuna tıklar")
+    public void listedenSilinmişBirKaydınAktifEtIkonunaTıklar(String script) {
+        By elementSelector = By.xpath("//td[contains(text(),'" + script + "')]//following-sibling::td[contains(@class,'Delete')]");
+        while (true) {
+            try {
+                // Elementin görünmesini 10 saniye boyunca bekleyin
+                ReusableMethods.waitForVisibility(elementSelector, 10);
+
+                // Element görünürse tıklama yapın
+                WebElement scriptActive = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Aktif Et')]"));
+                scriptActive.click();
+
+                // İşlem tamamlandı, döngüyü sonlandırın
+                break;
+            } catch (Exception e) {
+                // Element görünmediği durumda buraya düşer, bir sonraki sayfaya geçebilirsiniz
+                ucmsAdminPage.nextPageButton.click();
+            }
+        }
+    }
+
+    @Then("Silinen {string} Script tanımının aktif edildiğini doğrular")
+    public void scriptTanımınınAktifEdildiğiniDoğrular(String script) {
+        List<WebElement> activeScript = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+        Assert.assertEquals(activeScript.size(), 1);
     }
 }
