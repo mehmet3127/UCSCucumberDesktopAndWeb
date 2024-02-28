@@ -272,7 +272,6 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Seçilen veri setlerini {string} iptal eder")
     public void seçilenVeriSetleriniIptalEder(String versiSeti) {
         WebElement formAlanı = Driver.getDriver().findElement(By.xpath("//div[contains(text(),'" + versiSeti + "')]"));
-
         actions.clickAndHold(formAlanı).moveToElement(ucmsAdminPage.veriSetiAlanı).release(ucmsAdminPage.veriSetiAlanı).build().perform();
 
 

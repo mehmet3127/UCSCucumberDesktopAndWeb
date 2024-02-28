@@ -706,7 +706,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//*[contains(text(),'Script silindi')]")
     public WebElement scriptSilindiPopUp;
     @FindBy(xpath = "//*[contains(text(),'Script silindi')]")
-    public List <WebElement> scriptSilinmediPopUp;
+    public List<WebElement> scriptSilinmediPopUp;
 
 
     //Ortam Tanımları Sayfası-Çıkış Numaraları
@@ -726,8 +726,29 @@ public class UcmsAdminPage {
     public List<WebElement> telefonNumarasiGuncellendiPopUp;
 
 
+    //Ortam Tanımları Sayfası-Çıkış Numaraları
+    @FindBy(xpath = "//a[contains(@href,'/env-definition/cpn-template')]")
+    public WebElement ortamTanimlariSablonlarMenu;
+    @FindBy(xpath = "//*[contains(text(),'çıkış numara şablonu eklendi.')]")
+    public WebElement cikisNumaraSablonuEklendiPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Bu isimle bir şablon zaten var.')]")
+    public WebElement buIsimleBirSablonVarPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Bir veya birden fazla numara seçiniz.')]")
+    public WebElement birdenFazlaNumaraSecinizPopUp;
+    @FindBy(xpath = "//*[contains(text(),'çıkış numara şablonu güncellendi.')]")
+    public WebElement cikisNumaraSablonuGuncellendiPopUp;
 
-
+    //Ortam Tanımları Sayfası-Baglantı Menüsü
+    @FindBy(xpath = "//a[text()=' Bağlantı ']")
+    public WebElement ortamTanimlariBaglantiMenu;
+    @FindBy(xpath = "(//input[@type='text'])[2]")
+    public WebElement baglantiAdi;
+    @FindBy(xpath = "(//input[@type='text'])[3]")
+    public WebElement baglantiCumlesi;
+    @FindBy(xpath = "//span[text()=' Bağlantıyı Test Et ']")
+    public WebElement baglantiyiTestEt;
+    @FindBy(xpath = "//*[contains(text(),'Test Başarılı!')]")
+    public WebElement testBasariliPopUp;
 
 
 }
