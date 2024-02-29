@@ -63,7 +63,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
         ucmsAdminPage.veriEkleİkon.sendKeys(dosyaYolu);
         ReusableMethods.waitFor(3);
         */
-        ucmsAdminPage.veriEkleİkon.click();
+        ucmsAdminPage.ekleIkon.click();
     }
 
     @And("Bir dosya {string} seçer")

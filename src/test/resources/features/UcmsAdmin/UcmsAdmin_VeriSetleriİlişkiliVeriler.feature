@@ -8,7 +8,7 @@ Feature: Vrei setleri İlişkili Veriler
     And Kullanıcı giriş butonuna tıklar
     And Veri setleri butonuna tıklar
     And İlişkili veriler sekmesine tıklar
-    And Ekle ıkonuna  tıklar
+    And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\eklenenDosya.xlsx" seçer
     Then Dosyanın eklendiğini "eklenenDosya.xlsx" doğrular
 
@@ -20,7 +20,7 @@ Feature: Vrei setleri İlişkili Veriler
     And Kullanıcı giriş butonuna tıklar
     And Veri setleri butonuna tıklar
     And İlişkili veriler sekmesine tıklar
-    And Ekle ıkonuna  tıklar
+    And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\Uygulama Bazlı Test Senaryo Raporu.xlsx" seçer
     Then Dosya formatının uygun olmadığı uyarısını doğrular
 
@@ -33,7 +33,7 @@ Feature: Vrei setleri İlişkili Veriler
     And Kullanıcı giriş butonuna tıklar
     And Veri setleri butonuna tıklar
     And İlişkili veriler sekmesine tıklar
-    And Ekle ıkonuna  tıklar
+    And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\eklenenDosya.xlsx" seçer
     Then Bu dosya adında bir kayıt zaten var uyarısını doğrular
 

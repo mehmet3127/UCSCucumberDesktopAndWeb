@@ -4,10 +4,7 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
 import utilities.Driver;
@@ -23,6 +20,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     static String telefonNumarasi;
     static String cikisNumaralariSablonAdi;
+    static String eklenecekBaglantiAdi;
 
     //Ortam Tanımları-Çıkış Numaraları-Çıkış Numarası ekleme
     @And("Ortam Tanımları butonuna tıklar")
@@ -170,9 +168,10 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
     @And("Açılan pencerede şablon adını {string} girer")
     public void açılanPenceredeşablonAdınıGirer(String sablonAdi) {
         ucmsAdminPage.şablonAdı.clear();
-        cikisNumaralariSablonAdi=sablonAdi+Faker.instance().idNumber().valid().replace("-","");
+        cikisNumaralariSablonAdi = sablonAdi + Faker.instance().idNumber().valid().replace("-", "");
         ucmsAdminPage.şablonAdı.sendKeys(cikisNumaralariSablonAdi);
     }
+
     @And("Açılan pencerede var olan şablon adını {string} girer")
     public void açılanPenceredeVarOlanŞablonAdınıGirer(String sablonAdi) {
         ucmsAdminPage.şablonAdı.sendKeys(sablonAdi);
@@ -188,7 +187,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @And("Çıkış Numaraları şablonu eklendiğini doğrular")
     public void çıkışNumaralarıŞablonuEklendiğiniDoğrular() {
-       Assert.assertTrue(ucmsAdminPage.cikisNumaraSablonuEklendiPopUp.isDisplayed());
+        Assert.assertTrue(ucmsAdminPage.cikisNumaraSablonuEklendiPopUp.isDisplayed());
     }
 
 
@@ -205,7 +204,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
     //Ortam Tanımları-Şablonlar-Çıkış Numaraları Şablon düzenleme
     @And("Çıkış Numaraları şablonu {string} düzenleme ikonuna tıklar")
     public void çıkışNumaralarıŞablonuDüzenlemeIkonunaTıklar(String cikisNoSablon) {
-        WebElement cikisNumaralariSablonu=Driver.getDriver().findElement(By.xpath("//td[contains(text(),'"+cikisNumaralariSablonAdi+"')]//following-sibling::td[contains(@class,'Edit')]//preceding-sibling::mat-icon[contains(@mattooltip,'Düzenle')]"));
+        WebElement cikisNumaralariSablonu = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + cikisNumaralariSablonAdi + "')]//following-sibling::td[contains(@class,'Edit')]//preceding-sibling::mat-icon[contains(@mattooltip,'Düzenle')]"));
         cikisNumaralariSablonu.click();
     }
 
@@ -251,7 +250,26 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @And("Bağlantı adı {string} girilir")
     public void bağlantıAdıGirilir(String baglantiName) {
+
+        if (baglantiName.isEmpty()) {
+            jse.executeScript("arguments[0].click();", ucmsAdminPage.baglantiAdi);
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.baglantiAdi.clear();
+        } else {
+            jse.executeScript("arguments[0].click();", ucmsAdminPage.baglantiAdi);
+            ReusableMethods.waitFor(1);
+            ucmsAdminPage.baglantiAdi.clear();
+            eklenecekBaglantiAdi = baglantiName + Faker.instance().idNumber().valid().replace("-", "");
+            ucmsAdminPage.baglantiAdi.sendKeys(eklenecekBaglantiAdi);
+        }
+
+    }
+    @And("Aynı isimde bağlantı adı {string} girilir")
+    public void aynıIsimdeBağlantıAdıGirilir(String baglantiName) {
+
         jse.executeScript("arguments[0].click();", ucmsAdminPage.baglantiAdi);
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.baglantiAdi.clear();
         ucmsAdminPage.baglantiAdi.sendKeys(baglantiName);
     }
 
@@ -284,6 +302,66 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @Then("İşlemin tamamlandığını doğrular")
     public void işleminTamamlandığınıDoğrular() {
+        WebElement eklenenBaglanti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
+        Assert.assertTrue(eklenenBaglanti.isDisplayed());
+    }
 
+    @Then("Bu isimde bir kayıt var uyarsı alır")
+    public void buIsimdeBirKayıtVarUyarsıAlır() {
+
+    }
+
+    @And("Hatalı Bağlantı Cümlesi girilir")
+    public void hatalıBağlantıCümlesiGirilir() {
+        ucmsAdminPage.baglantiCumlesi.clear();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.baglantiCumlesi.sendKeys("errorconn1");
+    }
+
+    @Then("Format uygun değil uyarısı aldığı görülür.")
+    public void formatUygunDeğilUyarısıAldığıGörülür() {
+        Assert.assertTrue(ucmsAdminPage.formatiHataliPopUp.isDisplayed());
+    }
+
+    @And("İçerik hatalı Bağlantı Cümlesi girilir")
+    public void içerikHatalıBağlantıCümlesiGirilir() {
+        ucmsAdminPage.baglantiCumlesi.clear();
+        ReusableMethods.waitFor(1);
+        ucmsAdminPage.baglantiCumlesi.sendKeys("conn stringin şifresi veya tablo adı değiştirilebilir.");
+    }
+
+    @Then("Bağlantı adı boş bırakılamaz uyarısı görülür")
+    public void bağlantıAdıBoşBırakılamazUyarısıGörülür() {
+
+    }
+
+    @And("Güncellemek istediği baglantının {string} düzenle ikonuna tıklar")
+    public void güncellemekBaglantınınDüzenleIkonunaTıklar(String balantiAdi) {
+
+        WebElement duzenlenecekBaglanti = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]//following-sibling::td[contains(@class,'Edit')]"));
+        duzenlenecekBaglanti.click();
+
+    }
+
+    @And("Silmek istediği baglantının {string} sil ikonuna tıklar")
+    public void silmekIstediğiBaglantınınSilIkonunaTıklar(String balantiAdi) {
+        WebElement baglantiDelete = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
+        baglantiDelete.click();
+
+
+    }
+
+    @Then("Baglantının silindiğini doğrular")
+    public void baglantınınSilindiğiniDoğrular() {
+        ReusableMethods.waitFor(1);
+        List<WebElement> eklenenBaglanti = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
+        Assert.assertEquals(eklenenBaglanti.size(),0);
+    }
+
+    @Then("Baglantının silinmediğini doğrular")
+    public void baglantınınSilinmediğiniDoğrular() {
+        ReusableMethods.waitFor(1);
+        List<WebElement> eklenenBaglanti = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
+        Assert.assertEquals(eklenenBaglanti.size(),1);
     }
 }

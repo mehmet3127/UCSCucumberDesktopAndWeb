@@ -40,7 +40,6 @@ public class UcmsAdminSmsStepDefinition {
 
     @And("Ekle ikonuna tıklar")
     public void ekleIkonunaTıklar() {
-
         ucmsAdminPage.ekleIkon.click();
     }
 

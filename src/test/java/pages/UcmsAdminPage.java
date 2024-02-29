@@ -749,6 +749,45 @@ public class UcmsAdminPage {
     public WebElement baglantiyiTestEt;
     @FindBy(xpath = "//*[contains(text(),'Test Başarılı!')]")
     public WebElement testBasariliPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Bağlantı Hatası')]")
+    public WebElement formatiHataliPopUp;
+
+
+    //Kampanyalar Sayfası-Arama Limitleri Menüsü
+    @FindBy(xpath = "//span[text()='Kampanyalar']")
+    public WebElement kampanyalarSayfasi;
+    @FindBy(xpath = "//a[text()=' Arama Limitleri ']")
+    public WebElement aramaLimitleriMenu;
+    @FindBy(xpath = "(//mat-checkbox[@name='isChoisedNextSessionCampaign'])[1]")
+    public WebElement BirSonrakiLoginIslemindeBuKampanyaIleAcilsin;
+    @FindBy(id = "showChosenCampaign")
+    public WebElement kampanyaSecButton;
+    @FindBy(xpath = "//span[text()='Seç']")
+    public WebElement aramaLimitleriSecButton;
+    @FindBy(xpath = "//span[text()='Ana Sayfaya Dön']")
+    public WebElement anaSayfayaDon;
+    @FindBy(xpath = "//span[text()='Ekle']")
+    public WebElement limitEkleButton;
+    @FindBy(xpath = "//h4[contains(text(),'Kampanyası İçin İşlem Yapmaktasınız')]")
+    public WebElement kampanyaIleIslemYapilmakta;
+    @FindBy(xpath = "//input[@data-placeholder='Kayıt Günü']")
+    public WebElement limitEkleKayitGunu;
+    @FindBy(xpath = "//input[@data-placeholder='Arama Sayısı']")
+    public WebElement limitEkleAramaSayisi;
+    @FindBy(xpath = "//mat-select[@role='combobox']")
+    public WebElement limitEkleKampanyalar;
+    @FindBy(xpath = "//span[text()='Tüm günlere uygula']")
+    public WebElement tumGunlereUygula;
+    @FindBy(xpath = "//span[text()='Tüm günlere uygula']")
+    public WebElement limitEkleSilIkon;
+
+
+
+
+
+
+
+
 
 
 }
