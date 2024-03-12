@@ -22,9 +22,9 @@ public class UcmsAdminPage {
     @FindBy(id = "mat-input-1")
     public WebElement password;
     @FindBy(xpath = "//*[@type='submit']")
-    public WebElement girişButton;
+    public WebElement girisButton;
     @FindBy(xpath = "//span[contains(text(),'Kullanıcı bilgileri hatalı')]")
-    public WebElement hatalıKullanıcıBilgileriPopup;
+    public WebElement hataliKullaniciBilgileriPopup;
     @FindBy(id = "mat-select-value-1")
     public WebElement uygulamalar;
     @FindBy(id = "mat-option-0")
@@ -42,8 +42,8 @@ public class UcmsAdminPage {
     public WebElement kodGrubuEkleIkon;
     @FindBy(name = "data.group.CrmId")
     public WebElement crmId;
-    @FindBy(id = "mat-input-2")
-    public WebElement grupAdıEkle;
+    @FindBy(name = "data.group.Title")
+    public WebElement grupAdiEkle;
     @FindBy(xpath = "//span[text()='Kaydet']")
     public WebElement kaydetButton;
     @FindBy(xpath = "//button[text()='Evet']")
@@ -52,6 +52,8 @@ public class UcmsAdminPage {
     public WebElement zorunluAlanlarıDoldurunuzPopup;
     @FindBy(id = "swal2-html-container")
     public WebElement kodGrubuSilinemezPopup;
+    @FindBy(xpath = "//*[contains(text(), 'başlıklı sonuç kodu grubu silindi.')]")
+    public WebElement kodGrubuSilindiPopup;
 
 
     //Sonuç Kodu Ekleme Senaryosu Location
@@ -60,7 +62,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//mat-icon[text()='add']")
     public WebElement sonuçKoduEkleIkon;
     @FindBy(id = "mat-input-1")
-    public WebElement sonuçKoduBaşlık;
+    public WebElement sonucKoduBaslik;
 
 
     //Aksiyon Tipi Combo Secenekleri
@@ -112,74 +114,75 @@ public class UcmsAdminPage {
 
     //Genel Özellikler TabI
     @FindBy(id = "mat-tab-label-0-1")
-    public WebElement genelÖzelliklerTab;
+    public WebElement genelOzelliklerTab;
 
 
     //Başarı Durumu Combo Box
     @FindBy(id = "mat-select-value-3")
-    public WebElement başarıDurumuComboBox;
+    public WebElement basariDurumuComboBox;
     @FindBy(xpath = "//span[text()='Kriter Dışı']")
-    public WebElement kriterDışı;
+    public WebElement kriterDisi;
     @FindBy(xpath = "//span[text()='Başarısız']")
-    public WebElement başarısız;
+    public WebElement basarisiz;
     @FindBy(xpath = "//span[text()='Başarılı']")
-    public WebElement başarılı;
+    public WebElement basarili;
 
 
     //Müşteriye Ulaşılma Durumu Combo Box
     @FindBy(id = "mat-select-value-5")
-    public WebElement müşteriyeUlaşılmaDurumuComboBox;
+    public WebElement musteriyeUlasilmaDurumuComboBox;
     @FindBy(xpath = "//span[text()='Müşteriye Ulaşılamadı']")
-    public WebElement müşteriyeUlaşılamadı;
+    public WebElement musteriyeUlasilamadi;
     @FindBy(xpath = "//span[text()='Müşteriye Ulaşıldı']")
-    public WebElement müşteriyeUlaşıldı;
+    public WebElement musteriyeUlasildi;
 
 
     //Müşteriye Temas Durumu Combo Box
     @FindBy(id = "mat-select-value-7")
-    public WebElement müşteriyeTemasDurumuComboBox;
+    public WebElement musteriyeTemasDurumuComboBox;
     @FindBy(xpath = "//span[text()='Müşteriye Temas Edilemedi']")
-    public WebElement müşteriyeTemasEdilemedi;
+    public WebElement musteriyeTemasEdilemedi;
     @FindBy(xpath = "//span[text()='Müşteriye Temas Edildi']")
-    public WebElement müşteriyeTemasEdildi;
+    public WebElement musteriyeTemasEdildi;
 
 
     //Alt Grup Ekle
-    @FindBy(id = "mat-input-1")
-    public WebElement altGrupBaşlık;
+    @FindBy(name = "data.group.Title")
+    public WebElement altGrupBaslik;
     @FindBy(xpath = "//span[text()='Kapat']")
     public WebElement altGrupKapat;
 
 
     //Sonuç Kodu İçerik Arama
     @FindBy(id = "mat-input-0")
-    public WebElement içerikAramaSearchBox;
-
+    public WebElement icerikAramaSearchBox;
+    @FindBy(xpath = "//*[contains(text(), 'adlı sonuç kodu eklendi.')]")
+    public WebElement sonucKoduEklendiPopup;
 
     //Devre Dışı Bırakma
     @FindBy(xpath = "//button[@mattooltip='Devre Dışı Bırakılanlar']")
-    public WebElement devreDışıBırakılanlarIkon;
+    public WebElement devreDisiBirakilanlarIkon;
     @FindBy(xpath = "//del")
-    public List<WebElement> devreDışıBırakılanSonuçKodları;
+    public List<WebElement> devreDisiBirakilanSonucKodlari;
 
 
     //Sonuç Kodu Taşıma
     @FindBy(xpath = "//button[text()='Vazgeç']")
-    public WebElement vazgeçButton;
+    public WebElement vazgecButton;
 
     @FindBy(xpath = "//*[contains(text(),'başlıklı dizin altına taşındı')]")
-    public List<WebElement> sonuçKoduTaşındıUyarısı;
+    public List<WebElement> sonucKoduTasindiUyarisi;
     @FindBy(xpath = "//button[@mattooltip='İptal']//span[@class='mat-button-wrapper']")
-    public WebElement taşımaİptalButton;
+    public WebElement tasimaIptalButton;
 
 
     //Sonuç Kodu Güncelleme Versiyon Değişikliği
     @FindBy(xpath = "//span[text()='Güncelle']")
-    public WebElement güncelleButton;
+    public WebElement guncelleButton;
     @FindBy(xpath = "//*[contains(text(),'sonuç kodu güncellendi')]")
-    public List<WebElement> sonuçKoduGüncellendiPopup;
+    public List<WebElement> sonucKoduGuncellendiPopup;
     @FindBy(xpath = "//td[text()='Oluşturma']//following::button[@mattooltip='Bu versiyonla devam et']")
-    public WebElement oluşturmaTipiBuVersiyonİleDevamEt;
+    public WebElement olusturmaTipiBuVersiyonIleDevamEt;
     @FindBy(xpath = "//span[text()='Versiyon Değiştir']")
     public WebElement versiyonDeğiştirButton;
 
@@ -772,6 +775,8 @@ public class UcmsAdminPage {
     public WebElement kampanyaIleIslemYapilmakta;
     @FindBy(xpath = "//input[@data-placeholder='Kayıt Günü']")
     public WebElement limitEkleKayitGunu;
+    @FindBy(xpath = "(//input[@data-placeholder='Kayıt Günü'])[2]")
+    public WebElement limitEkleKayitGunuIki;
     @FindBy(xpath = "//input[@data-placeholder='Arama Sayısı']")
     public WebElement limitEkleAramaSayisi;
     @FindBy(xpath = "//mat-select[@role='combobox']")
@@ -779,15 +784,64 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//span[text()='Tüm günlere uygula']")
     public WebElement tumGunlereUygula;
     @FindBy(xpath = "//span[text()='Tüm günlere uygula']")
-    public WebElement limitEkleSilIkon;
+    public WebElement limitSilIkon;
+    @FindBy(xpath = "//*[contains(text(),'1. sıradaki Kayıt günü alanını doldurunuz.')]")
+    public WebElement kayitGunuAlaniniDoldurunuzPopUp;
+    @FindBy(xpath = "//*[contains(text(),'1. sıradaki Arama sayısı alanını doldurunuz.')]")
+    public WebElement aramaSayisiAlaniniDoldurunuzPopUp;
+    @FindBy(xpath = "//*[contains(text(),'İlk gün limiti sıfır olamaz.')]")
+    public WebElement IlkGUnLimitiSifirOlamazPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Aynı gün için tek bir kayıt girilebilir.')]")
+    public WebElement ayniGunIcinTekBirKayitGirilebilirPopUp;
+    @FindBy(xpath = "//*[contains(text(),'Seçtiğiniz kampanyaların ilgili günlerinde farklı tanımlar bulunmaktadır')]")
+    public WebElement ayniKayitGünüVarPopUp;
+    @FindBy(xpath = "//mat-slide-toggle[@mattooltip='Silinenleri Göster']")
+    public WebElement silinenAramaLimitleriniGosterToggle;
+    @FindBy(xpath = "//td[contains(@class,'CallingDayAndLimitInfo passiveRecord')]")
+    public List<WebElement> silinenAramaLimitleriList;
 
 
+    //Kampanyalar Sayfası-Arama Limitleri Menüsü
+    @FindBy(xpath = "//a[text()=' Çağrı Aksiyonları ']")
+    public WebElement cagriAksiyonlariMenu;
+    @FindBy(name = "selectedResultTemplates")
+    public WebElement cagriAksiyonuSonucKoduSablonuEkle;
+    @FindBy(xpath = "//mat-slide-toggle[@mattooltip='Tümü']")
+    public WebElement tumSonucKodlariSecToggle;
+    @FindBy(xpath = "//mat-slide-toggle[@mattooltip='Tüm kampanyalara uygula']")
+    public WebElement tumKampanyalaraUygulaToggle;
+    @FindBy(xpath = "(//div[contains(@class,'mat-select-arrow-wrapper')])[2]")
+    public WebElement kosulTipiComboBox;
+    @FindBy(xpath = "//span[text()=' Ardışık ']")
+    public WebElement kosulTipiArdisik;
+    @FindBy(xpath = "//span[text()=' Toplam ']")
+    public WebElement kosulTipiToplam;
+    @FindBy(xpath = "//span[text()=' Attempt ']")
+    public WebElement kosulTipiAttempt;
 
+    @FindBy(xpath = "//input[@data-placeholder='Değer']")
+    public WebElement cagriAksiyonuEkleDeger;
+    @FindBy(xpath = "(//input[contains(@onkeypress,'return event.charCode')])[2]")
+    public WebElement cagriAksiyonuEkleDakika;
 
-
-
-
-
+    @FindBy(xpath = "(//div[contains(@class,'mat-select-arrow-wrapper')])[3]")
+    public WebElement aksiyonTipiComboBox;
+    @FindBy(xpath = "//span[text()=' Sms gönder ']")
+    public WebElement aksiyonTipiSmsGonder;
+    @FindBy(xpath = "(//div[contains(@class,'mat-select-arrow-wrapper')])[4]")
+    public WebElement smsTamplateComboBox;
+    @FindBy(xpath = "//span[text()=' Kayıt durumu güncelle ']")
+    public WebElement aksiyonTipiKayitDurumuGuncelle;
+    @FindBy(xpath = "//mat-select[@placeholder='Kayıt Durumu']")
+    public WebElement kayitDurumuComboBox;
+    @FindBy(xpath = "//span[text()=' Web Servis Çağır ']")
+    public WebElement aksiyonTipiKayitWebServisCagir;
+    @FindBy(xpath = "(//input[@type='text'])[2]")
+    public WebElement webServisLink;
+    @FindBy(xpath = "//mat-icon[text()='delete']")
+    public WebElement aksiyonSil;
+    @FindBy(xpath = "//*[contains(text(),'alanını doldurunuz')]")
+    public WebElement kosulTipiBosGecilemezPopUp;
 
 
 }

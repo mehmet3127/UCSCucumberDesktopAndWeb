@@ -88,7 +88,7 @@ public class UcmsAdminListelerStepefiniton {
     @And("İçerik ara kısmına aramak istediği DNC in {string} sunu girer")
     public void içerikAraKısmınaAramakIstediğiDNCInSunuGirer(String data) {
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(data);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(data);
 
     }
 

@@ -13,7 +13,6 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class UcmsAdminTaskSchedulerStepDefinition {
 
@@ -422,12 +421,12 @@ public class UcmsAdminTaskSchedulerStepDefinition {
     //İş Zamanlayıcı-listelenen Planlanmış işi Arama
     @And("İçerik ara kısmına aramak istediği iş adını {string} girer")
     public void içerikAraKısmınaAramakIstediğiIşAdınıGirer(String planlananIs) {
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(isZamanlayiciAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(isZamanlayiciAdi);
     }
 
     @And("İçerik ara kısmına aramak istediği işin scriptini {string} girer")
     public void içerikAraKısmınaAramakIstediğiIşinScriptiniGirer(String planlanaIsScriptAdi) {
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(scriptAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(scriptAdi);
     }
 
     @And("Aradığı işin listede olduğunu doğrular")

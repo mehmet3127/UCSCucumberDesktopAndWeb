@@ -11,8 +11,8 @@ Feature: Sonuç Kodu Ekleme Tüm Senaryolar
     And Sonuç kodları sekmesine tıklar
     And Kod grubunun sonuç kodu ekle ikonuna tıklar
     And Başlık kısmına isim "<isim>" girer ve Aksiyon tipi-başarı durumu-müsteriye ulaşılma durumu-müşteriye temas durumunu seçer
-    Then Kaydete tıklar
-    And Sonuç kodunun eklendiğini görür
+    And Kaydete tıklar
+    Then Sonuç kodunun eklendiğini görür
 
     Examples:
       | isim |

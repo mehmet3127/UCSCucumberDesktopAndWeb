@@ -11,7 +11,7 @@ Feature: Rol Yetki Matrisi
     And Rol-Yetki matrisi  sekmesine tıklar
 
 
-  @ignore
+
   @RolOlarakYetkiVerme
   Scenario:TC_001 Yetki Tipi Rol olarak yetki verme
 
@@ -21,7 +21,7 @@ Feature: Rol Yetki Matrisi
     And Kaydet butona tıklar
     And Yetki güncellendi mesajını doğrular
 
-  @ignore
+
   @RolOlarakYetkiKaldırma
   Scenario:TC_001	Yetki Tipi Rol olarak yetki kaldırma
 

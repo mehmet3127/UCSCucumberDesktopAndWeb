@@ -126,7 +126,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @Then("Çıkış numarasının {string} silindiği dogrular")
     public void çıkışNumarasınınSilindiğiDogrular(String telNo) {
-        ReusableMethods.waitFor(1);
+        ReusableMethods.waitFor(2);
         List<WebElement> telNoDelete = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]"));
         Assert.assertEquals(telNoDelete.size(), 0);
 
@@ -134,6 +134,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @Then("Çıkış numarasının {string} silinmediği dogrular")
     public void çıkışNumarasınınSilinmediğiDogrular(String telNo) {
+        ReusableMethods.waitFor(2);
         List<WebElement> telNoDelete = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]"));
         Assert.assertEquals(telNoDelete.size(), 1);
     }
@@ -141,7 +142,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
     @And("En az üç basamaklı telefon no {string} değeri girer")
     public void enAzBasamaklıTelefonNoDeğeriGirer(String telNo) {
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(telefonNumarasi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(telefonNumarasi);
 
     }
 
@@ -153,9 +154,9 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @And("En az üç basamaklı id değeri girer")
     public void enAzÜçBasamaklıIdDeğeriGirer() {
-        ucmsAdminPage.içerikAramaSearchBox.clear();
+        ucmsAdminPage.icerikAramaSearchBox.clear();
         WebElement cikisNumarasiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + telefonNumarasi + "')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(cikisNumarasiId.getText());
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(cikisNumarasiId.getText());
     }
 
     //Ortam Tanımları-Şablonlar-Çıkış Numaraları Şablon ekleme
@@ -224,7 +225,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
     @And("Var olan Çıkış Numaraları şablonunun ismini {string} girer")
     public void varOlanÇıkışNumaralarıŞablonununIsminiGirer(String cikisNumaralariSablonu) {
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(cikisNumaralariSablonAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(cikisNumaralariSablonAdi);
     }
 
     @Then("Var olan Çıkış Numaraları şablonunun {string} olduğunu doğrular")
@@ -235,10 +236,10 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
 
     @And("Var olan Çıkış Numaraları şablonunun ıd sini girer")
     public void varOlanÇıkışNumaralarıŞablonununIdSiniGirer() {
-        ucmsAdminPage.içerikAramaSearchBox.clear();
+        ucmsAdminPage.icerikAramaSearchBox.clear();
         WebElement cikisNumarasiSablonuId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + cikisNumaralariSablonAdi + "')]//preceding-sibling::td[contains(@class,'TemplateId')]"));
         System.out.println(cikisNumarasiSablonuId.getText());
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(cikisNumarasiSablonuId.getText());
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(cikisNumarasiSablonuId.getText());
     }
 
     //Ortam Tanımları-Baglantı Ekleme
@@ -354,8 +355,8 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
     @Then("Baglantının silindiğini doğrular")
     public void baglantınınSilindiğiniDoğrular() {
         ReusableMethods.waitFor(1);
-        List<WebElement> eklenenBaglanti = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
-        Assert.assertEquals(eklenenBaglanti.size(),0);
+        List<WebElement> silinenBaglanti = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
+        Assert.assertEquals(silinenBaglanti.size(),0);
     }
 
     @Then("Baglantının silinmediğini doğrular")
@@ -364,4 +365,5 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
         List<WebElement> eklenenBaglanti = Driver.getDriver().findElements(By.xpath("//td[contains(text(),'" + eklenecekBaglantiAdi + "')]"));
         Assert.assertEquals(eklenenBaglanti.size(),1);
     }
+
 }

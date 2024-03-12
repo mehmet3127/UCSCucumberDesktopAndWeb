@@ -5,8 +5,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.UcmsAdminPage;
@@ -192,7 +190,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Var olan veri ismini {string} girer")
     public void varOlanVeriIsminiGirer(String veriAdi) {
         arananVeriAdi = veriAdi;
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(arananVeriAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(arananVeriAdi);
 
     }
 
@@ -281,7 +279,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
     @And("Aramak istediği veri seti şablonunun {string} ismini girer")
     public void aramakIstediğiVeriSetiŞablonununIsminiGirer(String aranacakŞablonAdı) {
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiŞablonAdı);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(veriSetiŞablonAdı);
     }
 
     @Then("Veri seti şablonunun olduğunu doğrular")
@@ -736,7 +734,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
         //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'+ etiketAdi + ')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
         //ucmsAdminPage.içerikAramaSearchBox.sendKeys(veriSetiId.getText());
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(etiketAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(etiketAdi);
     }
 
     @Then("Veri setinin olduğunu doğrular")
@@ -949,4 +947,5 @@ public class UcmsAdminVeriSetleriStepDefinition {
     public void versiyonGeriAlButonunaTıklar() {
         ucmsAdminPage.versiyonGeriAl.click();
     }
+
 }

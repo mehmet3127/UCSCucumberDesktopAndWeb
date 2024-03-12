@@ -1,7 +1,7 @@
 @ListelerDnc
 Feature: Listeler_dNC
 
-  @ignore
+
   @ManuelDncEkleme
   Scenario Outline:Manuel DNC Ekleme
 
@@ -21,17 +21,17 @@ Feature: Listeler_dNC
     Examples:
       | campId | telNo | clientId |
       | campId | telNo | clientId |
-      #|        | telNo | clientId |
-      #| campId |       | clientId |
-      #| campId | telNo |          |
-      #| campId |       |          |
-      #|        | telNo |          |
-      #|        |       | clientId |
+      |        | telNo | clientId |
+      | campId |       | clientId |
+      | campId | telNo |          |
+      | campId |       |          |
+      |        | telNo |          |
+      |        |       | clientId |
 
 
-  @ignore
+
   @DncArama
-  Scenario Outline:DNC'i ClientNo ile içerikten arama
+  Scenario Outline:DNC'i içerikten arama
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer

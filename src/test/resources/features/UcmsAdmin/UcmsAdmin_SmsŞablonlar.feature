@@ -89,8 +89,8 @@ Feature: SMS_Şablonlar Menüsü
     #NOT:Daha önceki Test lerde aktif etme ve pasif etme ayrı senaryolar ile test edilirken burda ikisi aynı senaryoda test edilmiştir.
 
 
-  @ignore
-  #@CheckBoxİleBirdenFazlaSmsSablonuAktifPasifEtme
+
+  @CheckBoxİleBirdenFazlaSmsSablonuAktifPasifEtme
   Scenario:Birden fazla Sms Sablonu Aktif-Pasif etme
 
     Given Kullanıcı ucmsadmin sayfasına gider
@@ -100,7 +100,7 @@ Feature: SMS_Şablonlar Menüsü
     And Sms butonuna tıklar
     And Şablonlar sekmesine tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
-    And Aktif yada pasif etmek istediği sms sablonlarının "GüncelSmsŞablonu_506045914" "GüncelSmsŞablonu_514022216" checkboxına tıklar
+    And Aktif yada pasif etmek istediği sms sablonlarının "SmsŞablonAdı_104862448" "SmsŞablonAdı_337195997" checkboxına tıklar
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
     Then Sms sablonunun aktif-pasif edildiği doğrulanır
 
@@ -194,7 +194,7 @@ Feature: SMS_Şablonlar Menüsü
     And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar
     Then Sms sablonunun silindiğini doğrular
 
-  @ignore
+
   @CheckBoxİleBirdenFazlaSmsSablonuSilme
   Scenario:TC_002 Checkbox ile birden fazla sms şablonları seçip silme
 
@@ -205,7 +205,7 @@ Feature: SMS_Şablonlar Menüsü
     And Sms butonuna tıklar
     And Şablonlar sekmesine tıklar
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
-    And Silmek istediği sms sablonunun "SmsŞablonAdı_517039402" "SmsŞablonAdı_493965585" checkboxına tıklar
+    And Silmek istediği sms sablonunun "SmsŞablonAdı_104862448" "SmsŞablonAdı_337195997" checkboxına tıklar
     And Sağ üst köşede beliren sil ikonuna tıklanır
     And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar
     Then Sms sablonunun silindiğini doğrular

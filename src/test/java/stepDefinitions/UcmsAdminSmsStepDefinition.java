@@ -98,16 +98,16 @@ public class UcmsAdminSmsStepDefinition {
     @And("Aramak istediği sms şablonunun {string} ismini girer")
     public void aramakIstediğiSmsŞablonununIsminiGirer(String arananSmsSablonu) {
 
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(smsSablonAdi);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(smsSablonAdi);
 
     }
 
     @And("Aramak istediği sms şablonunun id'sini girer")
     public void aramakIstediğiSmsŞablonununIdSiniGirer() {
 
-        ucmsAdminPage.içerikAramaSearchBox.clear();
+        ucmsAdminPage.icerikAramaSearchBox.clear();
         WebElement smsSablonuId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + smsSablonAdi + "')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(smsSablonuId.getText());
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(smsSablonuId.getText());
     }
 
     @And("Aranan sms şablonunun listede olduğunu doğrular")
@@ -368,9 +368,8 @@ public class UcmsAdminSmsStepDefinition {
 
     @Then("Sms yaratıcı nın silindiğini doğrular")
     public void smsYaratıcıNınSilindiğiniDoğrular() {
-
+        ReusableMethods.waitFor(1);
         List<WebElement> smsSablonu = Driver.getDriver().findElements(By.xpath("//*[contains(text(),'" + smsYaraticiId + "')]"));
-
         Assert.assertEquals(smsSablonu.size(), 0);
 
     }

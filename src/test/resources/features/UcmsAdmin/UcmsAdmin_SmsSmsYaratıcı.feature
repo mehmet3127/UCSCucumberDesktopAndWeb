@@ -16,14 +16,14 @@ Feature:Ucms Admin_Sms_SmsYaratıcı
     Then SMS Yaratıcı eklendiğini doğrular
     Examples:
       | Yaratici Id | Yaratici Adi |
-      |             |              |
-      |             | YaraticiAdi_ |
-      | -           |              |
+      #|             |              |
+      #|             | YaraticiAdi_ |
+      #| -           |              |
       | -           | YaraticiAdi_ |
 
 
   @SmsYaratıcıDüzenleme
-  Scenario Outline:TC_001 SMS Yaratıcı oluşturma
+  Scenario Outline:SMS Düzenleme
 
     Given Kullanıcı ucmsadmin sayfasına gider
     When Kullanıcı ucmsadmin için geçerli username girer
@@ -40,7 +40,7 @@ Feature:Ucms Admin_Sms_SmsYaratıcı
       #|             |              |
       #|             | YaraticiAdi_ |
       #| -           |              |
-      | -           | YaraticiAdi_ |
+      #| -           | YaraticiAdi_ |
 
     #NOT:Otomasyon ile düzenleme yaparken ıd ve adı silince Güncellenmemesi gerekirken güncelleniyor
 

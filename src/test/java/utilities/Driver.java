@@ -1,6 +1,7 @@
 package utilities;
 
 import io.appium.java_client.windows.WindowsDriver;
+import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,10 +25,8 @@ public class Driver {
 
     public static WebDriver driver;
 
-
     /*
     static WebDriver driver2;
-
     public static WebDriver getDriver() {
         if (driver == null) {
 

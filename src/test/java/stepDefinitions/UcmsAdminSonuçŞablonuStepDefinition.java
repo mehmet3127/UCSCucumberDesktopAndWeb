@@ -70,13 +70,13 @@ public class UcmsAdminSonuçŞablonuStepDefinition {
     @And("Var olan sonuç şablonunun ismini girer")
     public void varOlanSonuçŞablonununIsminiGirer() {
         ReusableMethods.waitFor(1);
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys(sonuçŞablonuName);
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys(sonuçŞablonuName);
         ReusableMethods.waitFor(1);
     }
 
     @And("Var olan sonuç şablonunun ıd sini girer")
     public void varOlanSonuçŞablonununIdSiniGirer() {
-        ucmsAdminPage.içerikAramaSearchBox.sendKeys("20026");
+        ucmsAdminPage.icerikAramaSearchBox.sendKeys("20026");
         ReusableMethods.waitFor(1);
     }
 
