@@ -1,9 +1,6 @@
 package pages;
 
-import io.appium.java_client.pagefactory.WindowsFindAll;
 import io.appium.java_client.pagefactory.WindowsFindBy;
-import io.appium.java_client.pagefactory.WindowsFindBys;
-import io.appium.java_client.windows.WindowsElement;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -45,29 +42,29 @@ public class DesignerPage {
     @FindBy(xpath = "//MenuItem[@Name='Kampanya Ekle']")
     public WebElement kampanyaEkle;
 
-    @FindBy(className = "WindowsForms10.EDIT.app.0.3e2f22e_r9_ad1")
+    @FindBy(name = "Kampanya Adı")
     public WebElement kampanyaAdi;
 
-    @FindBy(xpath = "//Button[@AutomationId='cmdSave']")
+    @FindBy(name = "Kaydet")
     public WebElement kampanyaKaydet;
 
     @FindBy(xpath = "//Button[@AutomationId='cmdEdit']")
-    public WebElement kampanyaDüzenleme;
+    public WebElement kampanyaDuzenleme;
 
-    @FindBy(xpath = "//Pane[@AutomationId='chkCampOutbound']")
+    @FindBy(name = "Outbound")
     public WebElement outbound;
 
     @FindBy(xpath = "//Pane[@AutomationId='cmdSelectResultId']")
-    public WebElement varsayılanSonuçKoduSeç;
+    public WebElement varsayilanSonucKoduSec;
 
     @FindBy(xpath = "//TreeItem[@Name='Cagri Cevaplanmadi (3)']")
-    public WebElement çagrıCevaplanmadı;
+    public WebElement cagriCevaplanmadi;
 
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")
     public WebElement mesgul1071;
 
     @FindBy(xpath = "//Button[@AutomationId='cmdOk']")
-    public WebElement tamamSonuçKodu;
+    public WebElement tamamSonucKodu;
 
     @FindBy(xpath = "//Button[@AutomationId='cmdCampSave']")
     public WebElement kaydet;
@@ -76,7 +73,7 @@ public class DesignerPage {
     public WebElement cucumberTest01;
 
     @FindBy(name = "Akış Tasarımı")
-    public WebElement akışTasarım;
+    public WebElement akisTasarim;
 
     @FindBy(name = "toolStripButton30")
     public WebElement formEkle;

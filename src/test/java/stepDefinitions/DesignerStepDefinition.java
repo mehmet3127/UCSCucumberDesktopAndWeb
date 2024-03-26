@@ -1,59 +1,36 @@
 package stepDefinitions;
 
 
+import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class DesignerStepDefinition {
 
-    public static WebDriver driver;
+    public static WindowsDriver<WebElement> driver;
     DesignerPage designerPage = new DesignerPage();
     Actions actions = new Actions(Driver.getDriver());
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 100);
-    JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+
+    static String eklenenKampanyaAdi;
+
 
 
     //Login Steps
     @Given("Kullanici designer sayfasina gider")
     public void kullaniciDesignerSayfasinaGider(){
         Driver.getDriver();
-
-        /*
-        Desktop desktop2 = Desktop.getDesktop();
-        try {
-            desktop2.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-            ReusableMethods.waitFor(1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
-        try {
-            driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
-            };
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        */
+        //ReusableMethods.designer();
 
 
     }
@@ -69,16 +46,12 @@ public class DesignerStepDefinition {
         designerPage.sifre.sendKeys(ConfigReader.getProperty("password"));
     }
     @And("Kullanici login buttonuna tıklar")
-    public void kullaniciLoginButtonunaTıklar() throws InterruptedException{
+    public void kullaniciLoginButtonunaTıklar(){
         designerPage.sistemeGiris.click();
-        Thread.sleep(5000);
+        ReusableMethods.waitFor(7);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(windowList.get(0));
 
-        System.out.println("windowHandlesHashCode1 = " + windowList.get(0));
-        int windowCount = Driver.getDriver().getWindowHandles().size();
-        System.out.println(windowCount);
-        System.out.println(Driver.getDriver().getTitle());
         //String windows = Driver.getDriver().getWindowHandles().iterator().next();
         //Driver.getDriver().switchTo().window(windows).getTitle();
     }
@@ -115,24 +88,24 @@ public class DesignerStepDefinition {
 
     @Then("Kullanıcı sayfayı kapatır")
     public void kullanıcıSayfayıKapatır() {
-        designerPage.pencereKapat.click();
-        ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet,10);
-        designerPage.pencereKapatEvet.click();
+        //ReusableMethods.designerClose();
     }
 
 
     @And("Kullanıcı Campaigns klasörüne tıklar")
     public void kullanıcıCampaignsKlasörüneTıklar() {
 
-        wait.until(ExpectedConditions.elementToBeClickable(designerPage.campaigns));
+        ReusableMethods.waitForVisibility(designerPage.campaigns,20);
+        //wait.until(ExpectedConditions.elementToBeClickable(designerPage.campaigns));
         actions.doubleClick(designerPage.campaigns).perform();
 
     }
 
-    @And("Kullanıcı mehmetDemir klasörüne sag tıklar")
-    public void kullaniciMehmetDemirKlasorunesagTiklar() {
+    @And("Kullanıcı {string} klasörüne sag tıklar")
+    public void kullaniciMehmetDemirKlasorunesagTiklar(String klasorAdi) {
 
-        actions.contextClick(designerPage.mehmetDemir).perform();
+        WebElement klasorContextClick=Driver.getDriver().findElement(By.xpath("//TreeItem[@Name='"+klasorAdi+"']"));
+        actions.contextClick(klasorContextClick).perform();
     }
 
     @And("Kullanıcı KampanyaEkle ye tıklar")
@@ -141,37 +114,38 @@ public class DesignerStepDefinition {
         designerPage.kampanyaEkle.click();
     }
 
-    @And("Kullanıcı Kampanya adı girer")
-    public void kullanıcıKampanyaAdıGirer() {
+    @And("Kullanıcı Kampanya adı {string} girer")
+    public void kullanıcıKampanyaAdıGirer(String kampanyaAdi) {
 
-        designerPage.kampanyaAdi.sendKeys("CucumberTest05");
+        eklenenKampanyaAdi=kampanyaAdi+ Faker.instance().number().numberBetween(1,100);
+        designerPage.kampanyaAdi.sendKeys(eklenenKampanyaAdi);
     }
 
     @And("Kullanıcı kaydet butonuna tıklar")
     public void kullanıcıKaydetButonunaTıklar() {
-
-        //designerPage.kampanyaKaydet.click();
+        designerPage.kampanyaKaydet.click();
 
     }
 
     @And("Kullanıcı kampanya modunu secer")
     public void kullanıcıKampanyaModunuSecer() {
-        wait.until(ExpectedConditions.visibilityOf(designerPage.kampanyaDüzenleme));
-        designerPage.kampanyaDüzenleme.click();
+        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenleme,100);
+        designerPage.kampanyaDuzenleme.click();
     }
 
-    @And("Kullanıcı outbound secenegine tıklar")
-    public void kullanıcıOutboundSecenegineTıklar() {
-        wait.until(ExpectedConditions.visibilityOf(designerPage.outbound));
-        designerPage.outbound.click();
+    @And("Kullanıcı arama tipini {string} secer")
+    public void kullaniciAramaTipiniSecer(String aramaTipi) {
+        WebElement aramaTipiSec=Driver.getDriver().findElement(By.xpath("//CheckBox[@Name='"+aramaTipi+"']"));
+        ReusableMethods.waitForClickablility(aramaTipiSec,10);
+        aramaTipiSec.click();
     }
 
     @And("Kullanıcı varsayılan sonuç kodunu secer")
     public void kullanıcıVarsayılanSonuçKodunuSecer() {
-        designerPage.varsayılanSonuçKoduSeç.click();
-        actions.doubleClick(designerPage.çagrıCevaplanmadı).perform();
+        designerPage.varsayilanSonucKoduSec.click();
+        actions.doubleClick(designerPage.cagriCevaplanmadi).perform();
         designerPage.mesgul1071.click();
-        designerPage.tamamSonuçKodu.click();
+        designerPage.tamamSonucKodu.click();
     }
 
     @Then("Kullanıcı Kaydet e tıklar")
@@ -180,10 +154,11 @@ public class DesignerStepDefinition {
         designerPage.kaydet.click();
     }
 
-    @And("Kullanıcı mehmetDemir klasörüne tıklar")
-    public void kullanıcıMehmetDemirKlasörüneTıklar() {
+    @And("Kullanıcı {string} klasörüne tıklar")
+    public void kullanıcıMehmetDemirKlasörüneTıklar(String klasorAdi) {
 
-        actions.doubleClick(designerPage.mehmetDemir).perform();
+        WebElement klasorSec=Driver.getDriver().findElement(By.xpath("//TreeItem[@Name='"+klasorAdi+"']"));
+        actions.doubleClick(klasorSec).perform();
     }
 
     @And("Kullanıcı istediği kampanyayı seçer")
@@ -194,29 +169,23 @@ public class DesignerStepDefinition {
 
     @And("Kullanıcı AkışTasarım penceresine tıklar")
     public void kullanıcıAkışTasarımPenceresineTıklar() {
-        wait.until(ExpectedConditions.elementToBeClickable(designerPage.akışTasarım));
-        designerPage.akışTasarım.click();
+        ReusableMethods.waitForVisibility(designerPage.akisTasarim,20);
+        designerPage.akisTasarim.click();
     }
 
     @And("Kullanıcı {int} adet form ekler")
-    public void kullanıcıAdetFormEkler(int formAdet) throws InterruptedException {
+    public void kullanıcıAdetFormEkler(int formAdet){
 
         int formSayısı = formAdet;
 
         for (int i = 1; i <= formSayısı; i++) {
             designerPage.formEkle.click();
-            Thread.sleep(1000);
+            ReusableMethods.waitFor(1);
         }
     }
 
     @And("Kullanıcı eklenen formları düzenler")
     public void kullanıcıEklenenFormlarıDüzenler() {
-        /*
-        int x =-100;
-        int y = 50;
-        actions.moveByOffset(x, y).doubleClick().perform();
-        */
-        //jse.executeScript("arguments[0].click();",designerPage.form4);
         designerPage.formAra.click();
         designerPage.eklenenFormlar.click();
         designerPage.form4.click();

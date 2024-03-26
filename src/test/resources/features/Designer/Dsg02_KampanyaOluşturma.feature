@@ -9,12 +9,12 @@ Feature: Kampanya_Oluşturma
     And Kullanici gecerli password girer
     And Kullanici login buttonuna tıklar
     And Kullanıcı Campaigns klasörüne tıklar
-    And Kullanıcı mehmetDemir klasörüne sag tıklar
+    And Kullanıcı "Test" klasörüne sag tıklar
     And Kullanıcı KampanyaEkle ye tıklar
-    And Kullanıcı Kampanya adı girer
+    And Kullanıcı Kampanya adı "Otomasyon_" girer
     And Kullanıcı kaydet butonuna tıklar
     And Kullanıcı kampanya modunu secer
-    And Kullanıcı outbound secenegine tıklar
+    And Kullanıcı arama tipini "outbound" secer
     And Kullanıcı varsayılan sonuç kodunu secer
     Then Kullanıcı Kaydet e tıklar
 

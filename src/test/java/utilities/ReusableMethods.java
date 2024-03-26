@@ -1,7 +1,6 @@
 package utilities;
 
 import io.appium.java_client.windows.WindowsDriver;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -9,6 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.DesignerPage;
 
 import java.awt.*;
 import java.io.File;
@@ -16,16 +16,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class ReusableMethods {
 
-    public static WindowsDriver<WebElement> driver;
+    public static WindowsDriver<WebElement> winAppDriver;
 
 
     //========ScreenShot(Syafanın resmini alma)=====//
@@ -201,13 +199,21 @@ public class ReusableMethods {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
         try {
-            driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
+            winAppDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
             };
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+        return winAppDriver;
+    }
 
-        return driver;
+
+    public static void designerClose(){
+        DesignerPage designerPage=new DesignerPage();
+
+        designerPage.pencereKapat.click();
+        ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet,10);
+        designerPage.pencereKapatEvet.click();
     }
 
 

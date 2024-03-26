@@ -8,7 +8,7 @@ Feature: KampanyaDüzenleme
     And Kullanici gecerli password girer
     And Kullanici login buttonuna tıklar
     And Kullanıcı Campaigns klasörüne tıklar
-    And Kullanıcı mehmetDemir klasörüne tıklar
+    And Kullanıcı "Test" klasörüne tıklar
     And Kullanıcı istediği kampanyayı seçer
     And Kullanıcı kampanya modunu secer
     And Kullanıcı AkışTasarım penceresine tıklar

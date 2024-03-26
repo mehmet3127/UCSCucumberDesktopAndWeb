@@ -4,6 +4,7 @@ import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -80,6 +81,8 @@ public class Driver {
 
 
             switch (ConfigReader.getProperty("uygulama")) {
+
+
                 case "wde":
                     Desktop desktop = Desktop.getDesktop();
                     try {
@@ -88,10 +91,8 @@ public class Driver {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-
                     DesiredCapabilities cap = new DesiredCapabilities();
                     cap.setCapability("app", ConfigReader.getProperty("wdePath"));
-
                     try {
                         driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
                         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -100,8 +101,8 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
-
                     break;
+
                 case "designer":
                     Desktop desktop2 = Desktop.getDesktop();
                     try {
@@ -113,7 +114,7 @@ public class Driver {
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
                     try {
-                        driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities) {
+                        driver = new WindowsDriver<WebElement>(new URL("http://127.0.0.1:4723/"), capabilities) {
                         };
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
@@ -126,17 +127,19 @@ public class Driver {
                     driver.manage().window().maximize();
                     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
                     break;
+
                 case "edge":
                     WebDriverManager.edgedriver().setup();
                     driver = new EdgeDriver();
                     driver.manage().window().maximize();
                     driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
                     break;
+                default:
             }
 
-        }
-        return driver;
     }
+        return driver;
+}
 
     public static void closeDriver() {
         if (driver != null) {
