@@ -31,8 +31,7 @@ public class DesignerStepDefinition {
     public void kullaniciDesignerSayfasinaGider(){
         Driver.getDriver();
         //ReusableMethods.designer();
-
-
+        
     }
     @Then("Kullanici gecerli username girer")
     public void kullanicigecerliUsernameGirer() {
@@ -135,16 +134,19 @@ public class DesignerStepDefinition {
 
     @And("Kullanıcı arama tipini {string} secer")
     public void kullaniciAramaTipiniSecer(String aramaTipi) {
-        WebElement aramaTipiSec=Driver.getDriver().findElement(By.xpath("//CheckBox[@Name='"+aramaTipi+"']"));
-        ReusableMethods.waitForClickablility(aramaTipiSec,10);
+
+        ReusableMethods.waitForVisibility(designerPage.outbound,15);
+        WebElement aramaTipiSec=Driver.getDriver().findElement(By.name(aramaTipi));
         aramaTipiSec.click();
+
     }
 
-    @And("Kullanıcı varsayılan sonuç kodunu secer")
-    public void kullanıcıVarsayılanSonuçKodunuSecer() {
+    @And("Kullanıcı varsayılan sonuç kodunu {string} secer")
+    public void kullanıcıVarsayılanSonuçKodunuSecer(String sonucKodu) {
         designerPage.varsayilanSonucKoduSec.click();
         actions.doubleClick(designerPage.cagriCevaplanmadi).perform();
-        designerPage.mesgul1071.click();
+        WebElement sonucKoduSec = Driver.getDriver().findElement(By.name(sonucKodu));
+        sonucKoduSec.click();
         designerPage.tamamSonucKodu.click();
     }
 

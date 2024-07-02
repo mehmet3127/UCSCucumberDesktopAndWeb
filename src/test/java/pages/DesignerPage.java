@@ -54,10 +54,10 @@ public class DesignerPage {
     @FindBy(name = "Outbound")
     public WebElement outbound;
 
-    @FindBy(xpath = "//Pane[@AutomationId='cmdSelectResultId']")
+    @FindBy(name = "Seç")
     public WebElement varsayilanSonucKoduSec;
 
-    @FindBy(xpath = "//TreeItem[@Name='Cagri Cevaplanmadi (3)']")
+    @FindBy(xpath = "//TreeItem[@Name='Çağrı Cevaplanmadı (2)']")
     public WebElement cagriCevaplanmadi;
 
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")

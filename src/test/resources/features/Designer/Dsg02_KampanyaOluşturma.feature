@@ -14,7 +14,7 @@ Feature: Kampanya_Oluşturma
     And Kullanıcı Kampanya adı "Otomasyon_" girer
     And Kullanıcı kaydet butonuna tıklar
     And Kullanıcı kampanya modunu secer
-    And Kullanıcı arama tipini "outbound" secer
-    And Kullanıcı varsayılan sonuç kodunu secer
+    And Kullanıcı arama tipini "Outbound" secer
+    And Kullanıcı varsayılan sonuç kodunu "Agent Geri Arama Hatasi (1001)" secer
     Then Kullanıcı Kaydet e tıklar
 
