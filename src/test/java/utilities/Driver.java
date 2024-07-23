@@ -19,13 +19,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-
     private Driver() {
         //SingletonPattern tekli kullanım demektir bu CLass dan başka obje oluşturulmasını engellemek için kullanılır
     }
 
     public static WebDriver driver;
-
     /*
     static WebDriver driver2;
     public static WebDriver getDriver() {
