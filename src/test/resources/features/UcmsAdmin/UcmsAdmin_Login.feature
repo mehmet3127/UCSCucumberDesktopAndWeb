@@ -11,7 +11,6 @@ Feature: Ucms Admin Login Test
     Then Anasayfaya gidildiğini doğrular
 
 
-
   @UcmsNegatifLoginTest
   Scenario Outline:TC_002_TC_003_TC_004 Ucms Admin Neğatif Login Test
     Given Kullanıcı ucmsadmin sayfasına gider
@@ -24,4 +23,4 @@ Feature: Ucms Admin Login Test
       | username     | password |
       | mehmet.demir | y        |
       | mehmetdemir  | x        |
-      | mehmetdemir  | y        |
+      | mehmetdemir  | z        |
