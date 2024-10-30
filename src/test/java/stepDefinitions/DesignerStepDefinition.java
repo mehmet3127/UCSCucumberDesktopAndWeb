@@ -4,9 +4,12 @@ package stepDefinitions;
 import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -14,6 +17,7 @@ import utilities.ReusableMethods;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class DesignerStepDefinition {
@@ -25,14 +29,14 @@ public class DesignerStepDefinition {
     static String eklenenKampanyaAdi;
 
 
-
     //Login Steps
     @Given("Kullanici designer sayfasina gider")
-    public void kullaniciDesignerSayfasinaGider(){
+    public void kullaniciDesignerSayfasinaGider() {
         Driver.getDriver();
-        //ReusableMethods.designer();
-        
+        //Driver.getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
     }
+
     @Then("Kullanici gecerli username girer")
     public void kullanicigecerliUsernameGirer() {
         designerPage.kullaniciAdi.clear();
@@ -44,122 +48,186 @@ public class DesignerStepDefinition {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty("password"));
     }
+
     @And("Kullanici login buttonuna tıklar")
-    public void kullaniciLoginButtonunaTıklar(){
+    public void kullaniciLoginButtonunaTıklar() {
         designerPage.sistemeGiris.click();
-        ReusableMethods.waitFor(7);
+        ReusableMethods.waitFor(8);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(windowList.get(0));
 
         //String windows = Driver.getDriver().getWindowHandles().iterator().next();
         //Driver.getDriver().switchTo().window(windows).getTitle();
     }
-    @Then("Kullanici gecerli userName {string} girer")
+
+    //Negatif senaryolar da ana sayfaya gidilmedigi icin bekleme suresine gerek olmadigi icin farkli login step yazildi
+    @And("Kullanıcı login butonuna tıklar")
+    public void kullanıcıTamamButonunaTıklar() {
+        designerPage.sistemeGiris.click();
+    }
+
+    @Then("Kullanici userName {string} girer")
     public void kullaniciGecerliUserNameGirer(String girilecekUserName) {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
     }
+
     @And("Kullanici gecerli olmayan password {string} girer")
     public void kullaniciGecerliOlmayanPasswordGirer(String girilecekPassword) {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
     }
+
     @Then("Kullanici gecerli olmayan userName {string} girer")
     public void kullaniciGecerliOlmayanUserNameGirer(String girilecekUserName) {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
     }
-    @And("kullanıcı gecerli password {string} girer")
+
+    @And("kullanıcı password {string} girer")
     public void kullanıcıGecerliPasswordGirer(String girilecekPassword) {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
     }
+
+    @And("Kullanıcı uygulama adını {string} gırer")
+    public void kullanıcıUygulamaAdınıGırer(String uygulamaAdi) {
+        designerPage.loginDetayButton.click();
+        designerPage.uygulamaAdi.clear();
+        designerPage.uygulamaAdi.sendKeys(ConfigReader.getProperty(uygulamaAdi));
+
+    }
+
+    @And("Kullanıcı server name {string} girer")
+    public void kullanıcıServerNameGirer(String serverName) {
+        designerPage.sunucu.clear();
+        designerPage.sunucu.sendKeys(ConfigReader.getProperty(serverName));
+    }
+
+    @And("Kullanıcı Port bilgisini {string} girer")
+    public void kullanıcıPortBilgisiniGirer(String port) {
+        designerPage.port.clear();
+        designerPage.port.sendKeys(ConfigReader.getProperty(port));
+    }
+
     @Then("Kullanıcı tamam button'una tıklar")
     public void kullanıcıTamamButtonUnaTıklar() {
-        ReusableMethods.waitForClickablility(designerPage.tamam,10);
+        ReusableMethods.waitForClickablility(designerPage.tamam, 10);
         designerPage.tamam.click();
     }
 
+    @Then("Vazgec butonuna tiklar")
+    public void vazgecButonunaTiklar() {
+        designerPage.loginVazgecButton.click();
+    }
+
+    //Ana sayfa
     @Then("Kullanıcı designer ana sayfasina gidildiğini doğrular")
     public void kullanıcıDesignerAnaSayfasinaGidildiğiniDoğrular() {
-
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 60);
+        Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
     }
 
     @Then("Kullanıcı sayfayı kapatır")
     public void kullanıcıSayfayıKapatır() {
-        //ReusableMethods.designerClose();
+        ReusableMethods.designerClose();
     }
 
-
+    //Kampanya Ekleme
     @And("Kullanıcı Campaigns klasörüne tıklar")
-    public void kullanıcıCampaignsKlasörüneTıklar() {
-
-        ReusableMethods.waitForVisibility(designerPage.campaigns,20);
-        //wait.until(ExpectedConditions.elementToBeClickable(designerPage.campaigns));
-        actions.doubleClick(designerPage.campaigns).perform();
-
+    public void kullaniciCampaignsKlasoruneTiklar() {
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+        actions.doubleClick(designerPage.anaSayfaCampaignKlasor).build().perform();
     }
 
-    @And("Kullanıcı {string} klasörüne sag tıklar")
-    public void kullaniciMehmetDemirKlasorunesagTiklar(String klasorAdi) {
-
-        WebElement klasorContextClick=Driver.getDriver().findElement(By.xpath("//TreeItem[@Name='"+klasorAdi+"']"));
-        actions.contextClick(klasorContextClick).perform();
+    @And("Kampanyanin eklenecegi klasöre {string} sag tiklar")
+    public void kampanyaninEklenecegiKlasoruSecer(String klasorAdi) {
+        WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + klasorAdi + "')]"));
+        //WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Campaigns\\"+klasorAdi+"')]"));
+        actions.contextClick(kampanyaninEklenecegiKlasor).perform();
     }
 
-    @And("Kullanıcı KampanyaEkle ye tıklar")
+    @And("Kullanıcı Kampanya ekle ye tıklar")
     public void kullaniciKampanyaEkleYeTiklar() {
-
         designerPage.kampanyaEkle.click();
     }
 
-    @And("Kullanıcı Kampanya adı {string} girer")
-    public void kullanıcıKampanyaAdıGirer(String kampanyaAdi) {
-
-        eklenenKampanyaAdi=kampanyaAdi+ Faker.instance().number().numberBetween(1,100);
+    @And("Kullanıcı Kampanya adıni {string} girer")
+    public void kullaniciKampanyaAdniGirer(String kampanyaAdi) {
+        eklenenKampanyaAdi = kampanyaAdi + Faker.instance().number().numberBetween(1, 1000);
         designerPage.kampanyaAdi.sendKeys(eklenenKampanyaAdi);
     }
 
     @And("Kullanıcı kaydet butonuna tıklar")
-    public void kullanıcıKaydetButonunaTıklar() {
+    public void kullaniciKaydetButonunaTiklar() {
         designerPage.kampanyaKaydet.click();
-
     }
 
+    @Then("Kampanyanin eklendigini dogrular")
+    public void kampanyaninEklendiginiDogrular() {
+        ReusableMethods.waitForVisibility(designerPage.versiyonAcmaModePenceresi, 100);
+        Assert.assertTrue(designerPage.versiyonAcmaModePenceresi.isDisplayed());
+    }
+
+    //Kampanya Goruntuleme
     @And("Kullanıcı kampanya modunu secer")
     public void kullanıcıKampanyaModunuSecer() {
-        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenleme,100);
+        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenleme, 100);
         designerPage.kampanyaDuzenleme.click();
     }
 
     @And("Kullanıcı arama tipini {string} secer")
     public void kullaniciAramaTipiniSecer(String aramaTipi) {
 
-        ReusableMethods.waitForVisibility(designerPage.outbound,15);
-        WebElement aramaTipiSec=Driver.getDriver().findElement(By.name(aramaTipi));
-        aramaTipiSec.click();
+        designerPage.kanalTipiComboBox.click();
 
+        if (aramaTipi.equals("Inbound")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        } else if (aramaTipi.equals("Outbound")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        } else {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    sendKeys(Keys.ARROW_DOWN).
+                    sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        }
+    }
+
+    @Given("Islem yapilacak olan {string} kampanya secilir")
+    public void goruntulemekIstenilenKampanyaSecilir(String campName) {
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+        designerPage.campSearchBox.sendKeys(campName, Keys.ENTER);
+        WebElement goruntulenecekKampanya = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + campName + "')]"));
+        actions.doubleClick(goruntulenecekKampanya).perform();
+    }
+
+    @And("Varsayılan sonuç kodu için seç butonuna tıklar")
+    public void varsayılanSonuçKoduIçinSeçButonunaTıklar() {
+        designerPage.varsayilanSonucKoduSec.click();
     }
 
     @And("Kullanıcı varsayılan sonuç kodunu {string} secer")
     public void kullanıcıVarsayılanSonuçKodunuSecer(String sonucKodu) {
-        designerPage.varsayilanSonucKoduSec.click();
+
         actions.doubleClick(designerPage.cagriCevaplanmadi).perform();
-        WebElement sonucKoduSec = Driver.getDriver().findElement(By.name(sonucKodu));
+        WebElement sonucKoduSec = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + sonucKodu + "')]"));
         sonucKoduSec.click();
+
+    }
+
+    @And("Tamam butonuna tıklar")
+    public void tamamButonunaTıklar() {
         designerPage.tamamSonucKodu.click();
     }
 
-    @Then("Kullanıcı Kaydet e tıklar")
-    public void kullanıcıKaydetETıklar() {
-
-        designerPage.kaydet.click();
-    }
 
     @And("Kullanıcı {string} klasörüne tıklar")
     public void kullanıcıMehmetDemirKlasörüneTıklar(String klasorAdi) {
 
-        WebElement klasorSec=Driver.getDriver().findElement(By.xpath("//TreeItem[@Name='"+klasorAdi+"']"));
+        WebElement klasorSec = Driver.getDriver().findElement(By.xpath("//TreeItem[@Name='" + klasorAdi + "']"));
         actions.doubleClick(klasorSec).perform();
     }
 
@@ -169,14 +237,15 @@ public class DesignerStepDefinition {
         actions.doubleClick(designerPage.cucumberTest01).perform();
     }
 
+    //Akis Tasarimi Sayfasi
     @And("Kullanıcı AkışTasarım penceresine tıklar")
     public void kullanıcıAkışTasarımPenceresineTıklar() {
-        ReusableMethods.waitForVisibility(designerPage.akisTasarim,20);
+        ReusableMethods.waitForVisibility(designerPage.akisTasarim, 20);
         designerPage.akisTasarim.click();
     }
 
     @And("Kullanıcı {int} adet form ekler")
-    public void kullanıcıAdetFormEkler(int formAdet){
+    public void kullanıcıAdetFormEkler(int formAdet) {
 
         int formSayısı = formAdet;
 
@@ -193,4 +262,49 @@ public class DesignerStepDefinition {
         designerPage.form4.click();
 
     }
+
+    //Kampanya Kopyalama
+    @Given("Kopyalanacak olan {string} kampanyaya sag tiklanir")
+    public void kopyalanacakOlanKampanyayaSagTiklanir(String copyCamp) {
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+        designerPage.campSearchBox.sendKeys(copyCamp, Keys.ENTER);
+        WebElement kopyalanacakKampanya = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + copyCamp + "')]"));
+        actions.contextClick(kopyalanacakKampanya).perform();
+    }
+
+    @And("Kampanya kopyala secenegine tiklanir")
+    public void kampanyaKopyalaSecenegineTiklanir() {
+        designerPage.kampanyaKopyala.click();
+    }
+
+    @And("Kampanyanin eklenecegi klasor secilir")
+    public void kampanyaninEklenecegiKlasorSecilir() {
+        designerPage.eklencekKlasorComboBox.click();
+        actions.sendKeys(Keys.ARROW_DOWN).
+                sendKeys(Keys.ARROW_DOWN).
+                perform();
+        //WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//ListItem"));
+        //kampanyaninEklenecegiKlasor.click();
+    }
+
+    @And("Onay penceresinde Evet'e tiklar")
+    public void onayPenceresindeEveteTiklar() {
+        ReusableMethods.waitForVisibility(designerPage.onayPenceresi, 10);
+        System.out.println(designerPage.onayPenceresi.getText());
+        if (designerPage.onayPenceresi.getText().contains("Genesys kampanyası mevcut")) {
+            designerPage.onayPenceresiHayir.click();
+        } else if (designerPage.onayPenceresi.getText().contains("adında bir kopyası")) {
+            System.out.println(designerPage.onayPenceresi.getText());
+            designerPage.onayPenceresiEvet.click();
+        }
+    }
+
+    @Then("Kampanyanin kopyalandigini dogrular")
+    public void kampanyaninKopyalandiginiDogrular() {
+        ReusableMethods.waitForVisibility(designerPage.onayPenceresi, 60);
+        System.out.println(designerPage.onayPenceresi.getText());
+        Assert.assertTrue(designerPage.onayPenceresi.getText().contains("Kampanya kopyası oluşturuldu"));
+        designerPage.tamam.click();
+    }
 }
+

@@ -24,6 +24,7 @@ public class Driver {
     }
 
     public static WebDriver driver;
+
     /*
     static WebDriver driver2;
     public static WebDriver getDriver() {
@@ -112,8 +113,8 @@ public class Driver {
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
                     try {
-                        driver = new WindowsDriver<WebElement>(new URL("http://127.0.0.1:4723/"), capabilities) {
-                        };
+                        driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities);
+                        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
@@ -135,14 +136,15 @@ public class Driver {
                 default:
             }
 
-    }
+        }
         return driver;
-}
+    }
 
     public static void closeDriver() {
         if (driver != null) {
             driver.close();
             driver = null;
+
         }
     }
 

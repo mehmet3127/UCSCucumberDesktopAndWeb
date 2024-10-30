@@ -20,9 +20,21 @@ public class DesignerPage {
     public WebElement sifre;
     @FindBy(xpath = "//Button[@AutomationId='cmdLogin']")
     public WebElement sistemeGiris;
+    @FindBy(name = "Vazgeç")
+    public WebElement loginVazgecButton;
+    @FindBy(xpath = "//Pane[@AutomationId='picDetay']")
+    public WebElement loginDetayButton;
+    @FindBy(name = "Uygulama")
+    public WebElement uygulamaAdi;
+    @FindBy(xpath = "//Edit[@AutomationId='txtHost']")
+    public WebElement sunucu;
+    @FindBy(xpath = "//Edit[@AutomationId='txtPort']")
+    public WebElement port;
 
 
-
+    //Ana Sayfa
+    @FindBy(name = "Campaigns")
+    public WebElement anaSayfaCampaignKlasor;
     @FindBy(name = "Kapat")
     public WebElement pencereKapat;
     @FindBy(name = "Evet")
@@ -33,41 +45,47 @@ public class DesignerPage {
     public WebElement tamam;
 
 
-    @FindBy(xpath = "//Tree[@AutomationId='tvwCampaigns']//TreeItem[@Name='Campaigns']")
+    //Kampanya Ekleme ve Kampanuya Duzenleme Sayfasi
+    @FindBy(xpath = "//TreeItem[@Name='Campaigns']")
     public WebElement campaigns;
-
+    @FindBy(xpath = "//Edit[@AutomationId='txtSearchCamp']")
+    public WebElement campSearchBox;
     @FindBy(xpath = "//TreeItem[@Name='MehmetDemir']")
     public WebElement mehmetDemir;
-
-    @FindBy(xpath = "//MenuItem[@Name='Kampanya Ekle']")
+    @FindBy(name = "Kampanya Ekle")
     public WebElement kampanyaEkle;
-
     @FindBy(name = "Kampanya Adı")
     public WebElement kampanyaAdi;
 
-    @FindBy(name = "Kaydet")
-    public WebElement kampanyaKaydet;
-
-    @FindBy(xpath = "//Button[@AutomationId='cmdEdit']")
-    public WebElement kampanyaDuzenleme;
-
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboFolder']")
+    public WebElement eklencekKlasorComboBox;
+    @FindBy(name = "Kanal Tipi")
+    public WebElement kanalTipiComboBox;
+    @FindBy(name = "Versiyonu hangi modda açmak istersiniz?")
+    public WebElement versiyonAcmaModePenceresi;
     @FindBy(name = "Outbound")
     public WebElement outbound;
-
+    @FindBy(name = "Inbound")
+    public WebElement Inbound;
+    @FindBy(name = "IVR")
+    public WebElement ivr;
+    @FindBy(name = "Klasör bilgisi boş, işlem yapılamaz")
+    public WebElement klasorSec;
+    @FindBy(name = "Kaydet")
+    public WebElement kampanyaKaydet;
+    @FindBy(name = "Ucms'te OTOMASYON_51 adında bir kampanya zaten mevcut.")
+    public WebElement buIsimdeKampanyaMevcut;
+    @FindBy(name = "DÜZENLEME")
+    public WebElement kampanyaDuzenleme;
     @FindBy(name = "Seç")
     public WebElement varsayilanSonucKoduSec;
-
-    @FindBy(xpath = "//TreeItem[@Name='Çağrı Cevaplanmadı (2)']")
+    @FindBy(name = "Çağrı Cevaplanmadı (2)")
     public WebElement cagriCevaplanmadi;
-
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")
     public WebElement mesgul1071;
 
     @FindBy(xpath = "//Button[@AutomationId='cmdOk']")
     public WebElement tamamSonucKodu;
-
-    @FindBy(xpath = "//Button[@AutomationId='cmdCampSave']")
-    public WebElement kaydet;
 
     @FindBy(name = "CUCUMBERTEST02 (266)")
     public WebElement cucumberTest01;
@@ -99,5 +117,19 @@ public class DesignerPage {
     public WebElement form2;
     @FindBy(name = "Form.1-Form1")
     public WebElement form1;
+
+    //Kampanya Kopyalama
+    @FindBy(name = "Kampanya Kopyala")
+    public WebElement kampanyaKopyala;
+    @FindBy(xpath = "//Document[@AutomationId='txtMsg']")
+    public WebElement onayPenceresi;
+    @FindBy(name = "Evet")
+    public WebElement onayPenceresiEvet;
+    @FindBy(name = "Hayır")
+    public WebElement onayPenceresiHayir;
+
+    //public static WebElement tbLeftPanel() {
+    //    return Driver.getDriver().findElementByAccessibilityId("tbLeftPanel");
+    //}
 
 }

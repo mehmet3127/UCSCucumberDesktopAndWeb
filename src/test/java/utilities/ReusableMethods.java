@@ -96,12 +96,11 @@ public class ReusableMethods {
         jse.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    public static int randomİnt(int randomRnd){
+    public static int randomİnt(int randomRnd) {
         Random random = new Random();
         int anahtarDeğer = random.nextInt(randomRnd);
         return anahtarDeğer;
     }
-
 
 
     //==========Return a list of string given a list of Web Element====////
@@ -187,7 +186,7 @@ public class ReusableMethods {
         }
     }
 
-    public static WindowsDriver<WebElement> designer(){
+    public static WindowsDriver<WebElement> designer() {
 
         Desktop desktop = Desktop.getDesktop();
         try {
@@ -208,14 +207,18 @@ public class ReusableMethods {
     }
 
 
-    public static void designerClose(){
-        DesignerPage designerPage=new DesignerPage();
+    public static void designerClose() {
+        DesignerPage designerPage = new DesignerPage();
 
-        designerPage.pencereKapat.click();
-        ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet,10);
-        designerPage.pencereKapatEvet.click();
+        if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
+            designerPage.pencereKapat.click();
+            ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet, 10);
+            designerPage.pencereKapatEvet.click();
+        } else {
+            designerPage.loginVazgecButton.click();
+        }
+
     }
-
 
 
 }
