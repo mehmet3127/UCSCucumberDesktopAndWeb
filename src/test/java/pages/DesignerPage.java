@@ -76,7 +76,7 @@ public class DesignerPage {
     @FindBy(name = "Ucms'te OTOMASYON_51 adında bir kampanya zaten mevcut.")
     public WebElement buIsimdeKampanyaMevcut;
     @FindBy(name = "DÜZENLEME")
-    public WebElement kampanyaDuzenleme;
+    public WebElement kampanyaDuzenlemeModu;
     @FindBy(name = "Seç")
     public WebElement varsayilanSonucKoduSec;
     @FindBy(name = "Çağrı Cevaplanmadı (2)")
@@ -84,8 +84,8 @@ public class DesignerPage {
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")
     public WebElement mesgul1071;
 
-    @FindBy(xpath = "//Button[@AutomationId='cmdOk']")
-    public WebElement tamamSonucKodu;
+    @FindBy(name = "Tamam")
+    public WebElement tamamButonu;
 
     @FindBy(name = "CUCUMBERTEST02 (266)")
     public WebElement cucumberTest01;
@@ -127,9 +127,38 @@ public class DesignerPage {
     public WebElement onayPenceresiEvet;
     @FindBy(name = "Hayır")
     public WebElement onayPenceresiHayir;
-
     //public static WebElement tbLeftPanel() {
     //    return Driver.getDriver().findElementByAccessibilityId("tbLeftPanel");
     //}
+
+    //Kampanya Duzenleme
+    @FindBy(name = "Kampanya Düzenle")
+    public WebElement kampanyaDuznleButton;
+
+
+    //Versiyon Yayinlama, Olusturma ve Versyon Silme
+    @FindBy(name = "Kontrol ettim")
+    public WebElement kontrolEttimCheckBox;
+    @FindBy(name = "Versiyon Yayınla")
+    public WebElement versiyonYayinlaButon;
+    @FindBy(name = "Versiyon Oluştur")
+    public WebElement versiyonOlusturButon;
+    @FindBy(name = "Versiyon Sil")
+    public WebElement versiyonSilButon;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

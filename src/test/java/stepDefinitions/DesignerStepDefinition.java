@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -17,7 +16,6 @@ import utilities.ReusableMethods;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class DesignerStepDefinition {
@@ -170,10 +168,10 @@ public class DesignerStepDefinition {
     }
 
     //Kampanya Goruntuleme
-    @And("Kullanıcı kampanya modunu secer")
-    public void kullanıcıKampanyaModunuSecer() {
-        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenleme, 100);
-        designerPage.kampanyaDuzenleme.click();
+    @And("Kampanya modu secilir")
+    public void kampanyaModuSecilir() {
+        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 100);
+        designerPage.kampanyaDuzenlemeModu.click();
     }
 
     @And("Kullanıcı arama tipini {string} secer")
@@ -220,7 +218,7 @@ public class DesignerStepDefinition {
 
     @And("Tamam butonuna tıklar")
     public void tamamButonunaTıklar() {
-        designerPage.tamamSonucKodu.click();
+        designerPage.tamamButonu.click();
     }
 
 
@@ -264,7 +262,7 @@ public class DesignerStepDefinition {
     }
 
     //Kampanya Kopyalama
-    @Given("Kopyalanacak olan {string} kampanyaya sag tiklanir")
+    @Given("Islem yapilacak olan {string} kampanyaya sag tiklanir")
     public void kopyalanacakOlanKampanyayaSagTiklanir(String copyCamp) {
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
         designerPage.campSearchBox.sendKeys(copyCamp, Keys.ENTER);
@@ -275,6 +273,13 @@ public class DesignerStepDefinition {
     @And("Kampanya kopyala secenegine tiklanir")
     public void kampanyaKopyalaSecenegineTiklanir() {
         designerPage.kampanyaKopyala.click();
+    }
+
+    @And("Versiyon {string} satırına tıklanir")
+    public void VersiyonSatırınaTıklanir(String versiyon) {
+        //En son yayinlanmis olan versiyon satiri secili geldigi icin ekstra satir secimine gerek varmi?
+        WebElement versiyonSec = Driver.getDriver().findElement(By.name("Row " + versiyon + " Column 2"));
+        versiyonSec.click();
     }
 
     @And("Kampanyanin eklenecegi klasor secilir")
@@ -305,6 +310,38 @@ public class DesignerStepDefinition {
         System.out.println(designerPage.onayPenceresi.getText());
         Assert.assertTrue(designerPage.onayPenceresi.getText().contains("Kampanya kopyası oluşturuldu"));
         designerPage.tamam.click();
+    }
+
+    //Versiyon Yayinlama Sayfasi
+    @And("Kontrol ettim checkbox'ı işaretlenir")
+    public void kontrolEttimCheckboxIIşaretlenir() {
+        designerPage.kontrolEttimCheckBox.click();
+    }
+
+    @And("Versiyon Yayınla butonuna tıklanır")
+    public void versiyonYayınlaButonunaTıklanır() {
+        designerPage.versiyonYayinlaButon.click();
+    }
+
+    @Then("Onay penceresinde Evet butonuna tiklar")
+    public void onayPenceresindeEvetButonunaTiklar() {
+        designerPage.onayPenceresiEvet.click();
+    }
+
+    @And("Versiyon olustur butonuna tiklanir")
+    public void versiyonOlusturButonunaTiklanir() {
+        designerPage.versiyonOlusturButon.click();
+    }
+
+    //Kampanya Duzenleme
+    @And("Kampanya duzenle butonuna tiklanir")
+    public void kampanyaDuzenleButonunaTiklanir() {
+        designerPage.kampanyaDuznleButton.click();
+    }
+
+    @And("Versiyon sil butonuna tiklanir")
+    public void versiyonSilButonunaTiklanir() {
+        designerPage.versiyonSilButon.click();
     }
 }
 
