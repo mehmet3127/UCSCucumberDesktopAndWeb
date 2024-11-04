@@ -28,27 +28,27 @@ public class DesignerStepDefinition {
 
 
     //Login Steps
-    @Given("Kullanici designer sayfasina gider")
-    public void kullaniciDesignerSayfasinaGider() {
+    @Given("Designer uygulamasina gidilir")
+    public void designerUygulamasinaGidilir() {
         Driver.getDriver();
         //Driver.getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
     }
 
-    @Then("Kullanici gecerli username girer")
-    public void kullanicigecerliUsernameGirer() {
+    @Then("Gecerli username girilir")
+    public void gecerliUsernameGirilir() {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty("userName"));
     }
 
-    @And("Kullanici gecerli password girer")
-    public void kullanicigecerliPasswordGirer() {
+    @And("Gecerli password girilir")
+    public void gecerliPasswordGirilir() {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty("password"));
     }
 
-    @And("Kullanici login buttonuna tıklar")
-    public void kullaniciLoginButtonunaTıklar() {
+    @And("Login butonuna tıklanir")
+    public void loginButonunaTiklanir() {
         designerPage.sistemeGiris.click();
         ReusableMethods.waitFor(8);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
@@ -59,13 +59,13 @@ public class DesignerStepDefinition {
     }
 
     //Negatif senaryolar da ana sayfaya gidilmedigi icin bekleme suresine gerek olmadigi icin farkli login step yazildi
-    @And("Kullanıcı login butonuna tıklar")
-    public void kullanıcıTamamButonunaTıklar() {
+    @And("Login butonuna tıklanir.")
+    public void loginButtonunaTiklanir() {
         designerPage.sistemeGiris.click();
     }
 
-    @Then("Kullanici userName {string} girer")
-    public void kullaniciGecerliUserNameGirer(String girilecekUserName) {
+    @Then("UserName {string} girilir")
+    public void userNameGirilir(String girilecekUserName) {
         designerPage.kullaniciAdi.clear();
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
     }
@@ -82,8 +82,8 @@ public class DesignerStepDefinition {
         designerPage.kullaniciAdi.sendKeys(ConfigReader.getProperty(girilecekUserName));
     }
 
-    @And("kullanıcı password {string} girer")
-    public void kullanıcıGecerliPasswordGirer(String girilecekPassword) {
+    @And("Password {string} girilir")
+    public void passwordGirilir(String girilecekPassword) {
         designerPage.sifre.clear();
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
     }
@@ -96,20 +96,20 @@ public class DesignerStepDefinition {
 
     }
 
-    @And("Kullanıcı server name {string} girer")
-    public void kullanıcıServerNameGirer(String serverName) {
+    @And("Server name {string} girilir")
+    public void serverNameGirilir(String serverName) {
         designerPage.sunucu.clear();
         designerPage.sunucu.sendKeys(ConfigReader.getProperty(serverName));
     }
 
-    @And("Kullanıcı Port bilgisini {string} girer")
-    public void kullanıcıPortBilgisiniGirer(String port) {
+    @And("Port bilgisi {string} girilir")
+    public void portBilgisiGirilir(String port) {
         designerPage.port.clear();
         designerPage.port.sendKeys(ConfigReader.getProperty(port));
     }
 
-    @Then("Kullanıcı tamam button'una tıklar")
-    public void kullanıcıTamamButtonUnaTıklar() {
+    @Then("Tamam button'una tıklanir")
+    public void tamamButtonUnaTiklanir() {
         ReusableMethods.waitForClickablility(designerPage.tamam, 10);
         designerPage.tamam.click();
     }
@@ -120,8 +120,8 @@ public class DesignerStepDefinition {
     }
 
     //Ana sayfa
-    @Then("Kullanıcı designer ana sayfasina gidildiğini doğrular")
-    public void kullanıcıDesignerAnaSayfasinaGidildiğiniDoğrular() {
+    @Then("Designer ana sayfasina gidildiği gorulur")
+    public void designerAnaSayfasinaGidildigiGorulur() {
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 60);
         Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
     }
@@ -132,32 +132,32 @@ public class DesignerStepDefinition {
     }
 
     //Kampanya Ekleme
-    @And("Kullanıcı Campaigns klasörüne tıklar")
-    public void kullaniciCampaignsKlasoruneTiklar() {
+    @And("Campaigns klasörüne tıklanir")
+    public void campaignsKlasoruneTiklanir() {
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
         actions.doubleClick(designerPage.anaSayfaCampaignKlasor).build().perform();
     }
 
-    @And("Kampanyanin eklenecegi klasöre {string} sag tiklar")
-    public void kampanyaninEklenecegiKlasoruSecer(String klasorAdi) {
+    @And("Kampanyanin eklenecegi klasöre {string} sag tiklanir")
+    public void kampanyaninEklenecegiKlasoreSagTiklanir(String klasorAdi) {
         WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + klasorAdi + "')]"));
         //WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Campaigns\\"+klasorAdi+"')]"));
         actions.contextClick(kampanyaninEklenecegiKlasor).perform();
     }
 
-    @And("Kullanıcı Kampanya ekle ye tıklar")
-    public void kullaniciKampanyaEkleYeTiklar() {
+    @And("Kampanya ekle ye tıklanir")
+    public void kampanyaEkleYeTiklanir() {
         designerPage.kampanyaEkle.click();
     }
 
-    @And("Kullanıcı Kampanya adıni {string} girer")
-    public void kullaniciKampanyaAdniGirer(String kampanyaAdi) {
+    @And("Kampanya adi {string} girilir")
+    public void kampanyaAdiGirilir(String kampanyaAdi) {
         eklenenKampanyaAdi = kampanyaAdi + Faker.instance().number().numberBetween(1, 1000);
         designerPage.kampanyaAdi.sendKeys(eklenenKampanyaAdi);
     }
 
-    @And("Kullanıcı kaydet butonuna tıklar")
-    public void kullaniciKaydetButonunaTiklar() {
+    @And("Kaydet butonuna tıklanir")
+    public void kaydetButonunaTiklanir() {
         designerPage.kampanyaKaydet.click();
     }
 
@@ -174,8 +174,8 @@ public class DesignerStepDefinition {
         designerPage.kampanyaDuzenlemeModu.click();
     }
 
-    @And("Kullanıcı arama tipini {string} secer")
-    public void kullaniciAramaTipiniSecer(String aramaTipi) {
+    @And("Arama tipi {string} secilir")
+    public void aramaTipiSecilir(String aramaTipi) {
 
         designerPage.kanalTipiComboBox.click();
 
@@ -195,20 +195,20 @@ public class DesignerStepDefinition {
     }
 
     @Given("Islem yapilacak olan {string} kampanya secilir")
-    public void goruntulemekIstenilenKampanyaSecilir(String campName) {
+    public void islemYapilacakOlanKampanyaSecilir(String campName) {
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
         designerPage.campSearchBox.sendKeys(campName, Keys.ENTER);
         WebElement goruntulenecekKampanya = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + campName + "')]"));
         actions.doubleClick(goruntulenecekKampanya).perform();
     }
 
-    @And("Varsayılan sonuç kodu için seç butonuna tıklar")
+    @And("Varsayilan sonuç kodu için seç butonuna tıklanir")
     public void varsayılanSonuçKoduIçinSeçButonunaTıklar() {
         designerPage.varsayilanSonucKoduSec.click();
     }
 
-    @And("Kullanıcı varsayılan sonuç kodunu {string} secer")
-    public void kullanıcıVarsayılanSonuçKodunuSecer(String sonucKodu) {
+    @And("Varsayilan sonuc kodu {string} secilir")
+    public void varsayilanSonucKoduSecilir(String sonucKodu) {
 
         actions.doubleClick(designerPage.cagriCevaplanmadi).perform();
         WebElement sonucKoduSec = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + sonucKodu + "')]"));
@@ -236,11 +236,6 @@ public class DesignerStepDefinition {
     }
 
     //Akis Tasarimi Sayfasi
-    @And("Kullanıcı AkışTasarım penceresine tıklar")
-    public void kullanıcıAkışTasarımPenceresineTıklar() {
-        ReusableMethods.waitForVisibility(designerPage.akisTasarim, 20);
-        designerPage.akisTasarim.click();
-    }
 
     @And("Kullanıcı {int} adet form ekler")
     public void kullanıcıAdetFormEkler(int formAdet) {
@@ -256,7 +251,7 @@ public class DesignerStepDefinition {
     @And("Kullanıcı eklenen formları düzenler")
     public void kullanıcıEklenenFormlarıDüzenler() {
         designerPage.formAra.click();
-        designerPage.eklenenFormlar.click();
+        designerPage.eklenenTumNodelar.click();
         designerPage.form4.click();
 
     }
@@ -343,5 +338,169 @@ public class DesignerStepDefinition {
     public void versiyonSilButonunaTiklanir() {
         designerPage.versiyonSilButon.click();
     }
+
+
+    //IVR Akis Tasarim Ekrani
+    @And("Akis Tasarim penceresine tiklanir")
+    public void akisTasarimPenceresineTiklanir() {
+        ReusableMethods.waitForVisibility(designerPage.akisTasarim, 20);
+        designerPage.akisTasarim.click();
+    }
+
+    @Then("Anons ekle noduna tiklanir")
+    public void anonsEkleNodunaTiklanir() {
+        designerPage.anonsEkleNode.click();
+    }
+
+    @And("Veri girisi ekle noduna tiklanir")
+    public void veriGirisiEkleNodunaTiklanir() {
+        designerPage.verGirisiEkleNode.click();
+    }
+
+    @And("Menu ekle noduna tiklanir")
+    public void menuEkleNodunaTiklanir() {
+        designerPage.menuEkleNode.click();
+    }
+
+    @And("Transfer ekle noduna tiklanir")
+    public void transferEkleNodunaTiklanir() {
+        designerPage.transferEkleNode.click();
+    }
+
+    @And("Cagridan veri oku noduna tiklanir")
+    public void cagridanVeriOkuNodunaTiklanir() {
+        designerPage.cagridanVeriOkuNode.click();
+    }
+
+    @And("Cagriya veri yaz noduna tiklanir")
+    public void cagriyaVeriYazNodunaTiklanir() {
+        designerPage.cagriyaVeriYazNode.click();
+    }
+
+    @And("Gorusmeyi bitir noduna tiklanir")
+    public void gorusmeyiBitirNodunaTiklanir() {
+        designerPage.gorusmeyiBitirNode.click();
+    }
+
+    @And("Web service ekle noduna tiklanir")
+    public void webServiceEkleNodunaTiklanir() {
+        designerPage.webServiceEkleNode.click();
+    }
+
+    @And("Script ekle noduna tiklanir")
+    public void scriptEkleNodunaTiklanir() {
+        designerPage.scriptEkleNode.click();
+    }
+
+    @And("Akis tasariminin kaydedildigi gorulur")
+    public void akisTasarimininKaydedildigiGorulur() {
+        if (designerPage.onayPenceresi.getText().contains("Akış tasarımı kaydedildi.")) {
+            designerPage.tamam.click();
+        }
+    }
+
+    @And("Kontrol Et butonuna tiklanir")
+    public void kontrolEtButonunaTiklanir() {
+        designerPage.kontrolEtButon.click();
+    }
+
+    @Then("Tasarim hatasiz bilgi pop-up gorunur")
+    public void tasarimHatasizBilgiPopUpGorunur() {
+        if (designerPage.onayPenceresi.getText().contains("Tasarım hatasız.")) {
+            designerPage.tamam.click();
+        }
+    }
+
+    @Then("Tasarimda hata tespit edildi uyarisinin geldigi gorulur")
+    public void tasarimdaHataTespitEdildiUyarisininGeldigiGorulur() {
+        if (designerPage.onayPenceresi.getText().contains("Tasarımda hata tespit edildi.")) {
+            designerPage.tamam.click();
+        }
+
+    }
+
+    @Then("Hata mesajlarini goruntuler")
+    public void hataMesajlariniGoruntuler() {
+        int hataMeaji = 1;
+
+        List<WebElement> hataMesaji = Driver.getDriver().findElements(By.xpath("//DataItem[contains(@Name,'Explanation Row')]"));
+        for (WebElement w : hataMesaji) {
+            System.out.println(hataMeaji + ".Hata Mesaji = " + w.getText());
+            hataMeaji++;
+        }
+    }
+
+    @And("Tasarim ekranini uzaklastir butonuna tiklanir")
+    public void tasarimEkraniniUzaklastirButonunaTiklanir() {
+
+        for (int i = 1; i < 4; i++) {
+            designerPage.tasarimEkraniniUzaklastir.click();
+        }
+    }
+
+    @And("Tasarim ekranini yakinlastir butonuna tiklanir")
+    public void tasarimEkraniniYakinlastirButonunaTiklanir() {
+        for (int i = 1; i < 4; i++) {
+            designerPage.tasarimEkraniniYakinlastir.click();
+        }
+    }
+
+    @And("Tasarim ekranini normal boyutta goster butonuna tiklanir")
+    public void tasarimEkraniniNormalBoyuttaGosterButonunaTiklanir() {
+        designerPage.tasarimEkraniniNormalBoyuttaGoster.click();
+    }
+
+    @And("Akistaki bir forma tiklanir")
+    public void akistakiBirFormaTiklanir() {
+        designerPage.formAra.click();
+        designerPage.eklenenTumNodelar.click();
+        WebElement form = Driver.getDriver().findElement(By.name("Form.1-Anons1"));
+        form.click();
+    }
+
+    @And("Ozellikler butonuna tıklanır")
+    public void OzelliklerButonunaTiklanir() {
+        designerPage.ozelliklerButon.click();
+
+    }
+
+    @Then("Ozellikler penceresinin acildigi gorulur")
+    public void ozelliklerPenceresininAcildigiGorulur() {
+        Assert.assertTrue(designerPage.ozelliklerpenceresiTitle.getText().contains("Form Özellikleri"));
+    }
+
+    @And("Baglanti kurulacak formlar secilir")
+    public void baglantiKurulacakFormlarSecilir() {
+        designerPage.formAra.click();
+        designerPage.eklenenTumNodelar.click();
+
+        WebElement form1 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Anons1')]"));
+        form1.click();
+        designerPage.formEkleButon.click();
+
+        WebElement form2 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Transfer1')]"));
+        form2.click();
+        designerPage.formEkleButon.click();
+
+    }
+
+    @Then("Baglanti kur butonuna tiklanir")
+    public void baglantiKurButonunaTiklanir() {
+        designerPage.baglantiKurButon.click();
+    }
+
+    @And("Silinecek olan baglanti secilir")
+    public void silinecekOlanBaglantiSecilir() {
+        designerPage.formAra.click();
+        designerPage.eklenenTumNodelar.click();
+        WebElement baglanti = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Varsayılan Akış')]"));
+        baglanti.click();
+    }
+
+    @Then("Baglanti sil butonuna tiklanir")
+    public void baglantiSilButonunaTiklanir() {
+        designerPage.baglantiSilButon.click();
+    }
+
 }
 

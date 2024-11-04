@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "stepDefinitions",
-        tags = "@YayinlanmamisVersiyonSilme and not @ignore", // iki tag'ı aynı anda çalıştırmak isterseniz "@gp1 or @gp2"
+        tags = "@IVRAkisiKontrolEtPozıtıf and not @ignore", // iki tag'ı aynı anda çalıştırmak isterseniz "@gp1 or @gp2"
         dryRun = false  // true olursa sayfayi acip calistirmadan eksiklik varsa onlari bize gosterir.
 )
 public class Runner {

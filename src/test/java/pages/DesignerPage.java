@@ -83,40 +83,11 @@ public class DesignerPage {
     public WebElement cagriCevaplanmadi;
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")
     public WebElement mesgul1071;
-
     @FindBy(name = "Tamam")
     public WebElement tamamButonu;
-
     @FindBy(name = "CUCUMBERTEST02 (266)")
     public WebElement cucumberTest01;
 
-    @FindBy(name = "Akış Tasarımı")
-    public WebElement akisTasarim;
-
-    @FindBy(name = "toolStripButton30")
-    public WebElement formEkle;
-
-    @FindBy(name = "Ara")
-    public WebElement formAra;
-
-    @WindowsFindBy(windowsAutomation = "Find")
-    public WebElement formBul;
-
-    @FindBy(name = "Hepsini göster")
-    public WebElement eklenenFormlar;
-
-
-    @FindBy(name = "Form.4-Form4")
-    public WebElement form4;
-    // "//Pane[@AutomationId='searchPanelOutbound']/List[@AutomationId='FoundItems']/ListItem[@Name='Form.4-Form4']"
-    // "//Pane[@AutomationId='addFlowOutbound']"
-
-    @FindBy(name = "Form.3-Form3")
-    public WebElement form3;
-    @FindBy(name = "Form.2-Form2")
-    public WebElement form2;
-    @FindBy(name = "Form.1-Form1")
-    public WebElement form1;
 
     //Kampanya Kopyalama
     @FindBy(name = "Kampanya Kopyala")
@@ -147,18 +118,73 @@ public class DesignerPage {
     public WebElement versiyonSilButon;
 
 
+    //Outboud Akis Tasarim Ekrani
+    @FindBy(name = "Akış Tasarımı")
+    public WebElement akisTasarim;
+    @FindBy(name = "toolStripButton30")
+    public WebElement formEkle;
+
+
+    //IVR Akis Tasarim Ekrani
+    @FindBy(name = "Kontrol Et")
+    public WebElement kontrolEtButon;
+    @FindBy(name = "Özellikler")
+    public WebElement ozelliklerButon;
+    @FindBy(xpath = "//TitleBar[@AutomationId='TitleBar']")
+    public WebElement ozelliklerpenceresiTitle;
+    @FindBy(name = "toolboxZoomOutIVR")
+    public WebElement tasarimEkraniniUzaklastir;
+    @FindBy(name = "toolboxZoomInIVR")
+    public WebElement tasarimEkraniniYakinlastir;
+    @FindBy(name = "toolboxZoomOffIVR")
+    public WebElement tasarimEkraniniNormalBoyuttaGoster;
+    @FindBy(name = "toolboxAddPrompt")
+    public WebElement anonsEkleNode;
+    @FindBy(name = "toolboxAddInput")
+    public WebElement verGirisiEkleNode;
+    @FindBy(name = "toolboxAddMenu")
+    public WebElement menuEkleNode;
+    @FindBy(name = "toolboxAddTransfer")
+    public WebElement transferEkleNode;
+    @FindBy(name = "toolboxAddAttachedDataIn")
+    public WebElement cagridanVeriOkuNode;
+    @FindBy(name = "toolboxAddAttachedDataOut")
+    public WebElement cagriyaVeriYazNode;
+    @FindBy(name = "toolboxAddHangUp")
+    public WebElement gorusmeyiBitirNode;
+    @FindBy(name = "toolboxAddIVRWebService")
+    public WebElement webServiceEkleNode;
+    @FindBy(name = "toolboxAddIVRScript")
+    public WebElement scriptEkleNode;
+
+
+    @FindBy(name = "Ara")
+    public WebElement formAra;
+    @WindowsFindBy(windowsAutomation = "Find")
+    public WebElement formBul;
+    @FindBy(name = "Hepsini göster")
+    public WebElement eklenenTumNodelar;
+    @FindBy(name = "Ekle")
+    public WebElement formEkleButon;
+    @FindBy(name = "Bağlantı Kur")
+    public WebElement baglantiKurButon;
+    @FindBy(name = "Bağlantı Sil")
+    public WebElement baglantiSilButon;
 
 
 
 
 
-
-
-
-
-
-
-
+    @FindBy(name = "Form.4-Form4")
+    public WebElement form4;
+    // "//Pane[@AutomationId='searchPanelOutbound']/List[@AutomationId='FoundItems']/ListItem[@Name='Form.4-Form4']"
+    // "//Pane[@AutomationId='addFlowOutbound']"
+    @FindBy(name = "Form.3-Form3")
+    public WebElement form3;
+    @FindBy(name = "Form.2-Form2")
+    public WebElement form2;
+    @FindBy(name = "Form.1-Form1")
+    public WebElement form1;
 
 
 }
