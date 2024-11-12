@@ -116,5 +116,53 @@ Feature: Akis Tasarim Ekrani
     Then Baglanti sil butonuna tiklanir
     Then Onay penceresinde Evet butonuna tiklar
     And Kaydet butonuna tıklanir
-    And Akis tasariminin kaydedildigi gorulur
+    Then Akis tasariminin kaydedildigi gorulur
+
+
+  @OBAkışaFormEkleme
+  Scenario: UCMS-TC-90:Akışa Form Ekleme
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And Form ekle noduna tiklanir
+    And Eklenen node'a "Form1" cift tiklanir
+    Then Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir
+
+  @OBAkışaJavaScriptEkleme
+  Scenario: UCMS-TC-95: JavaScript Ekleme
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And JavaScript ekle noduna tiklanir
+    And Eklenen node "Javascript2" acilir
+    And Javascript menusu acilir ve js kodu girilir
+    And Sonuc kodu tabina tiklanir
+    And Varsayilan sonuc kodu "Mesgul" secilir
+    And Tamam butonuna tıklar
+    And Kaydet butonuna tıklanir
+    Then Akis tasariminin kaydedildigi gorulur
+
+
+    @OBAkışaScriptEkleme
+    Scenario: UCMS-TC-96: Script Ekleme
+
+      Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+      And Kampanya modu secilir
+      And Akis Tasarim penceresine tiklanir
+      And Script ekle'ye tiklanir
+      And Eklenen node "Script1" acilir
+      And Script menusu acilir
+      And Veri seti degiskeni "'|E08-CustKey|'" secilip ekle'ye tiklanir
+      And Donus degerlerinin yazilacagi veri seti degiskenleri alanina tiklanir
+      And Karar nesnesini secer
+      And Tamam butonuna tıklar
+
+
+
+
+
+
+
 

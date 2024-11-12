@@ -121,8 +121,65 @@ public class DesignerPage {
     //Outboud Akis Tasarim Ekrani
     @FindBy(name = "Akış Tasarımı")
     public WebElement akisTasarim;
-    @FindBy(name = "toolStripButton30")
+    @FindBy(name = "toolboxFormAddOutbound")
     public WebElement formEkle;
+    @FindBy(name = "toolboxWSAddOutbound")
+    public WebElement webServiceEkleOB;
+    @FindBy(name = "toolboxReadSessionOutbound")
+    public WebElement sessiondanDegerOku;
+
+    //Javascript Node
+    @FindBy(name = "toolboxJsAddOutbound")
+    public WebElement javaScriptEkle;
+    @FindBy(name = "Javascript")
+    public WebElement javaScriptTab;
+    @FindBy(name = "Veri Seti Değişkeni")
+    public WebElement javaScriptVeriSetiDegiskeni;
+    @FindBy(name = "Ekranı Kapla")
+    public WebElement ekranMaximize;
+    @FindBy(name = "Sonuç Kodları")
+    public WebElement sonucKodlariTab;
+
+    //Script Node
+    @FindBy(name = "toolboxScriptAddOutbound")
+    public WebElement scriptEkleOB;
+    @FindBy(name = "Script")
+    public WebElement scriptTab;
+    @FindBy(xpath = "//Document[@AutomationId='txtScript']")
+    public WebElement scriptVeriSetiDegiskeniTxt;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboScriptInsertVar']")
+    public WebElement scriptVeriSetiDegiskeni;
+    //scriptVeriSetiDegiskeni'nin Name'i yoktur
+    @FindBy(xpath = "//Button[@AutomationId='cmdAddVariable']")
+    public WebElement veriSetiDegiskeniEkleButon;
+    @FindBy(name = "Karar Nesnesi")
+    public WebElement kararNesnesiComboBox;
+
+
+
+
+    @FindBy(name = "toolboxObjAddOutbound")
+    public WebElement kampanyaNesnesiEkle;
+    @FindBy(name = "Standart Alanlar")
+    public WebElement formTasarimiStandartAlanlar;
+    @FindBy(name = "Etiket")
+    public WebElement etiket;
+    @FindBy(name = "Resim")
+    public WebElement resim;
+    @FindBy(name = "Web Link")
+    public WebElement webLink;
+    @FindBy(name = "TextBox")
+    public WebElement textBox;
+    @FindBy(name = "MultilineTextBox")
+    public WebElement multiLineTextBox;
+    @FindBy(name = "ComboBox")
+    public WebElement comboBox;
+    @FindBy(name = "ListBox")
+    public WebElement listBox;
+    @FindBy(name = "CheckBox")
+    public WebElement checkBox;
+    @FindBy(name = "Veri Seti Değişkeni")
+    public WebElement veriSetiDegiskeni;
 
 
     //IVR Akis Tasarim Ekrani
@@ -139,23 +196,23 @@ public class DesignerPage {
     @FindBy(name = "toolboxZoomOffIVR")
     public WebElement tasarimEkraniniNormalBoyuttaGoster;
     @FindBy(name = "toolboxAddPrompt")
-    public WebElement anonsEkleNode;
+    public WebElement anonsEkle;
     @FindBy(name = "toolboxAddInput")
-    public WebElement verGirisiEkleNode;
+    public WebElement veriGirisiEkle;
     @FindBy(name = "toolboxAddMenu")
-    public WebElement menuEkleNode;
+    public WebElement menuEkle;
     @FindBy(name = "toolboxAddTransfer")
-    public WebElement transferEkleNode;
+    public WebElement transferEkle;
     @FindBy(name = "toolboxAddAttachedDataIn")
-    public WebElement cagridanVeriOkuNode;
+    public WebElement cagridanVeriOku;
     @FindBy(name = "toolboxAddAttachedDataOut")
-    public WebElement cagriyaVeriYazNode;
+    public WebElement cagriyaVeriYaz;
     @FindBy(name = "toolboxAddHangUp")
-    public WebElement gorusmeyiBitirNode;
+    public WebElement gorusmeyiBitir;
     @FindBy(name = "toolboxAddIVRWebService")
-    public WebElement webServiceEkleNode;
+    public WebElement webServiceEkleIVR;
     @FindBy(name = "toolboxAddIVRScript")
-    public WebElement scriptEkleNode;
+    public WebElement scriptEkleIVR;
 
 
     @FindBy(name = "Ara")
@@ -170,21 +227,6 @@ public class DesignerPage {
     public WebElement baglantiKurButon;
     @FindBy(name = "Bağlantı Sil")
     public WebElement baglantiSilButon;
-
-
-
-
-
-    @FindBy(name = "Form.4-Form4")
-    public WebElement form4;
-    // "//Pane[@AutomationId='searchPanelOutbound']/List[@AutomationId='FoundItems']/ListItem[@Name='Form.4-Form4']"
-    // "//Pane[@AutomationId='addFlowOutbound']"
-    @FindBy(name = "Form.3-Form3")
-    public WebElement form3;
-    @FindBy(name = "Form.2-Form2")
-    public WebElement form2;
-    @FindBy(name = "Form.1-Form1")
-    public WebElement form1;
 
 
 }

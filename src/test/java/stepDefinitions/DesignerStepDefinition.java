@@ -213,6 +213,7 @@ public class DesignerStepDefinition {
         actions.doubleClick(designerPage.cagriCevaplanmadi).perform();
         WebElement sonucKoduSec = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + sonucKodu + "')]"));
         sonucKoduSec.click();
+        actions.sendKeys(Keys.SPACE).perform();
 
     }
 
@@ -252,7 +253,7 @@ public class DesignerStepDefinition {
     public void kullanıcıEklenenFormlarıDüzenler() {
         designerPage.formAra.click();
         designerPage.eklenenTumNodelar.click();
-        designerPage.form4.click();
+
 
     }
 
@@ -349,47 +350,47 @@ public class DesignerStepDefinition {
 
     @Then("Anons ekle noduna tiklanir")
     public void anonsEkleNodunaTiklanir() {
-        designerPage.anonsEkleNode.click();
+        designerPage.anonsEkle.click();
     }
 
     @And("Veri girisi ekle noduna tiklanir")
     public void veriGirisiEkleNodunaTiklanir() {
-        designerPage.verGirisiEkleNode.click();
+        designerPage.veriGirisiEkle.click();
     }
 
     @And("Menu ekle noduna tiklanir")
     public void menuEkleNodunaTiklanir() {
-        designerPage.menuEkleNode.click();
+        designerPage.menuEkle.click();
     }
 
     @And("Transfer ekle noduna tiklanir")
     public void transferEkleNodunaTiklanir() {
-        designerPage.transferEkleNode.click();
+        designerPage.transferEkle.click();
     }
 
     @And("Cagridan veri oku noduna tiklanir")
     public void cagridanVeriOkuNodunaTiklanir() {
-        designerPage.cagridanVeriOkuNode.click();
+        designerPage.cagridanVeriOku.click();
     }
 
     @And("Cagriya veri yaz noduna tiklanir")
     public void cagriyaVeriYazNodunaTiklanir() {
-        designerPage.cagriyaVeriYazNode.click();
+        designerPage.cagriyaVeriYaz.click();
     }
 
     @And("Gorusmeyi bitir noduna tiklanir")
     public void gorusmeyiBitirNodunaTiklanir() {
-        designerPage.gorusmeyiBitirNode.click();
+        designerPage.gorusmeyiBitir.click();
     }
 
     @And("Web service ekle noduna tiklanir")
     public void webServiceEkleNodunaTiklanir() {
-        designerPage.webServiceEkleNode.click();
+        designerPage.webServiceEkleIVR.click();
     }
 
     @And("Script ekle noduna tiklanir")
     public void scriptEkleNodunaTiklanir() {
-        designerPage.scriptEkleNode.click();
+        designerPage.scriptEkleIVR.click();
     }
 
     @And("Akis tasariminin kaydedildigi gorulur")
@@ -421,12 +422,12 @@ public class DesignerStepDefinition {
 
     @Then("Hata mesajlarini goruntuler")
     public void hataMesajlariniGoruntuler() {
-        int hataMeaji = 1;
+        int hataMesajiCount = 1;
 
         List<WebElement> hataMesaji = Driver.getDriver().findElements(By.xpath("//DataItem[contains(@Name,'Explanation Row')]"));
         for (WebElement w : hataMesaji) {
-            System.out.println(hataMeaji + ".Hata Mesaji = " + w.getText());
-            hataMeaji++;
+            System.out.println(hataMesajiCount + ".Hata Mesaji = " + w.getText());
+            hataMesajiCount++;
         }
     }
 
@@ -502,5 +503,128 @@ public class DesignerStepDefinition {
         designerPage.baglantiSilButon.click();
     }
 
+
+    //Outbound Akis Tasarim Ekrani
+    @And("Form ekle noduna tiklanir")
+    public void formEkleNodunaTiklanir() {
+        designerPage.formEkle.click();
+    }
+
+    @And("JavaScript ekle noduna tiklanir")
+    public void javascriptEkleNodunaTiklanir() {
+        designerPage.javaScriptEkle.click();
+    }
+
+    @And("Eklenen node'a {string} cift tiklanir")
+    public void eklenenNodaCiftTiklanir(String eklenenNode) {
+        designerPage.formAra.click();
+        designerPage.eklenenTumNodelar.click();
+
+        WebElement node = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + eklenenNode + "')]"));
+        actions.doubleClick(node).perform();
+    }
+
+    @Then("Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir")
+    public void standartAlanlarBasligiAltindaVeriSetiDegiskenlerineTiklanarakSagEkranaSuruklenir() {
+        actions.doubleClick(designerPage.formTasarimiStandartAlanlar).perform();
+        actions.doubleClick(designerPage.etiket).perform();
+    }
+
+    @And("Eklenen node {string} acilir")
+    public void eklenenNodeAcilir(String eklenenNode) {
+        designerPage.formAra.click();
+        designerPage.eklenenTumNodelar.click();
+
+        WebElement node = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + eklenenNode + "')]"));
+        node.click();
+        designerPage.ozelliklerButon.click();
+        designerPage.ekranMaximize.click();
+    }
+
+    @And("Javascript menusu acilir ve js kodu girilir")
+    public void javascriptMenusuAcilirVeJsKoduGirilir() {
+        designerPage.javaScriptTab.click();
+        actions.sendKeys(designerPage.javaScriptVeriSetiDegiskeni,
+                        "'|53-ST_MULTITEXTBOX_KARAKTER100|'=|50-ST_TEXTBOX_NUMERIK20| + '|49-ST_TEXTBOX_KARAKTER30|'")
+                .perform();
+    }
+
+    @And("Sonuc kodu tabina tiklanir")
+    public void sonucKoduTabinaTiklanir() {
+        designerPage.sonucKodlariTab.click();
+    }
+
+    @And("Script ekle'ye tiklanir")
+    public void scriptEkleYeTiklanir() {
+        designerPage.scriptEkleOB.click();
+    }
+
+    @And("Script menusu acilir")
+    public void scriptMenusuAcilir() {
+        designerPage.scriptTab.click();
+    }
+
+    @And("Veri seti degiskeni {string} secilip ekle'ye tiklanir")
+    public void veriSetiDegiskeniSecilipEkleyeTiklanir(String veriSetiDegiskeni) {
+        actions.sendKeys(designerPage.scriptVeriSetiDegiskeniTxt, veriSetiDegiskeni).perform();
+        //designerPage.scriptVeriSetiDegiskeni.click();
+        //List<WebElement> veriSetiDegiskeniSec = Driver.getDriver().findElements(By.xpath("//ListItem[@Name='E03-Müşteri Soyadı']"));
+        //switch (veriSetiDegiskeni) {
+        //    case "E01-Müşteri No":
+        //        actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //    case "E02-Müşteri Adı":
+        //        for (int i = 0; i < 2; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E03-Müşteri Soyadı":
+        //        for (int i = 0; i < 3; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E04-Agent Adı":
+        //        for (int i = 0; i < 4; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E05-Günün Tarih/Saati":
+        //        for (int i = 0; i < 5; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E06-Agent Id":
+        //        for (int i = 0; i < 6; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E06-Conn Id":
+        //        for (int i = 0; i < 7; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+        //    case "E06-CustKey":
+        //        for (int i = 0; i < 8; i++) {
+        //            actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //        }
+//
+//
+        //}
+        //for (WebElement w : veriSetiDegiskeniSec) {
+        //    System.out.println("w.getText() = " + w.getText());
+        //    if (w.getText().contains(veriSetiDegiskeni)) {
+        //        w.click();
+        //    }
+        //}
+        //designerPage.veriSetiDegiskeniEkleButon.click();
+    }
+
+    @And("Donus degerlerinin yazilacagi veri seti degiskenleri alanina tiklanir")
+    public void donusDegerlerininYazilacagiVeriSetiDegiskenleriAlaninaTiklanir() {
+        WebElement ddyvsd = Driver.getDriver().findElement(By.name("Row 1"));
+        ddyvsd.click();
+        actions.sendKeys(Keys.ENTER).perform();
+        actions.sendKeys(Keys.ARROW_DOWN).perform();
+        //WebElement ddyvsdSec = Driver.getDriver().findElement(By.name("57-ST_COMBOBOX_KARAKTER20"));
+    }
+
+    @And("Karar nesnesini secer")
+    public void kararNesnesiniSecer() {
+        designerPage.kararNesnesiComboBox.click();
+        actions.sendKeys(Keys.ARROW_DOWN).perform();
+    }
 }
 
