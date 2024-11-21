@@ -4,23 +4,29 @@ package stepDefinitions;
 import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.DesignerPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class DesignerStepDefinition {
 
     public static WindowsDriver<WebElement> driver;
+    public static WebDriver driver2;
     DesignerPage designerPage = new DesignerPage();
     Actions actions = new Actions(Driver.getDriver());
 
@@ -470,16 +476,16 @@ public class DesignerStepDefinition {
         Assert.assertTrue(designerPage.ozelliklerpenceresiTitle.getText().contains("Form Özellikleri"));
     }
 
-    @And("Baglanti kurulacak formlar secilir")
-    public void baglantiKurulacakFormlarSecilir() {
+    @And("Baglanti kurulacak formlar {string} {string} secilir")
+    public void baglantiKurulacakFormlarSecilir(String node1, String node2) {
         designerPage.formAra.click();
         designerPage.eklenenTumNodelar.click();
 
-        WebElement form1 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Anons1')]"));
+        WebElement form1 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + node1 + "')]"));
         form1.click();
         designerPage.formEkleButon.click();
 
-        WebElement form2 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Transfer1')]"));
+        WebElement form2 = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + node2 + "')]"));
         form2.click();
         designerPage.formEkleButon.click();
 
@@ -490,11 +496,11 @@ public class DesignerStepDefinition {
         designerPage.baglantiKurButon.click();
     }
 
-    @And("Silinecek olan baglanti secilir")
-    public void silinecekOlanBaglantiSecilir() {
+    @And("Silinecek olan baglanti {string} secilir")
+    public void silinecekOlanBaglantiSecilir(String silinecekBaglanti) {
         designerPage.formAra.click();
         designerPage.eklenenTumNodelar.click();
-        WebElement baglanti = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Varsayılan Akış')]"));
+        WebElement baglanti = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + silinecekBaglanti + "')]"));
         baglanti.click();
     }
 
@@ -559,8 +565,8 @@ public class DesignerStepDefinition {
         designerPage.scriptEkleOB.click();
     }
 
-    @And("Script menusu acilir")
-    public void scriptMenusuAcilir() {
+    @And("Script tabi acilir")
+    public void scriptTabiAcilir() {
         designerPage.scriptTab.click();
     }
 
@@ -626,5 +632,105 @@ public class DesignerStepDefinition {
         designerPage.kararNesnesiComboBox.click();
         actions.sendKeys(Keys.ARROW_DOWN).perform();
     }
+
+    @And("Web service ekle noda tiklanir")
+    public void webServiceEkleNodaTiklanir() {
+        designerPage.webServiceEkleOB.click();
+    }
+
+    @And("Web service tabi acilir")
+    public void webServiceTabiAcilir() {
+        designerPage.webServiceTab.click();
+    }
+
+    @And("Test endpointi eklenir")
+    public void testEndpointiEklenir() {
+        designerPage.testEndpoint.sendKeys("http://172.30.1.60:39029/api/v1/batch/start");
+
+    }
+
+    @And("Preprod endpointi eklenir")
+    public void preprodEndpointiEklenir() {
+        actions.sendKeys(Keys.TAB, "http://172.30.1.60:39029/api/v1/batch/start").perform();
+    }
+
+    @And("Prod endpointi eklenir")
+    public void prodEndpointiEklenir() {
+        actions.sendKeys(Keys.TAB, "http://172.30.1.60:39029/api/v1/batch/start").perform();
+    }
+
+    @And("Ornek JSON kodu girilir")
+    public void ornekJSONKoduGirilir() {
+        designerPage.ornekJson.sendKeys("{" +
+                "\n" +
+                "\"ImportRequestedBy\": \"CRM_SERVICE\",\n" +
+                "\n" +
+                "\"TotalRecordCount\": 3120,\n" +
+                "\n" +
+                "\"ListName\": \"Churn_2020-12-20\",\n" +
+                "\n" +
+                "\"CampId\":62,\n" +
+                "\n" +
+                "\"AutoEndBatch\": false,\n" +
+                "\n" +
+                "\"ChunkCount\": 7\n" +
+                "\n" +
+                "}");
+    }
+
+    @And("Yukle butonuna tiklanir")
+    public void yukleButonunaTiklanir() {
+        designerPage.yukleButon.click();
+    }
+
+    @And("Request tabina gecilir")
+    public void requestTabinaGecilir() {
+    }
+
+    @And("Alan eslestirme tabina tiklanir")
+    public void alanEslestirmeTabinaTiklanir() {
+    }
+
+    @And("Sol alt combobox'tan SOAP secilir")
+    public void solAltComboboxTanSOAPSecilir() {
+        designerPage.restSoapComboBox.click();
+        actions.sendKeys(Keys.ARROW_DOWN).perform();
+    }
+
+    @And("Url alanina tiklanir ve Url {string} girilir")
+    public void urlAlaninaTiklanirVeUrlGirilir(String url) {
+        designerPage.soapUrl.sendKeys(url);
+    }
+
+    @And("Sag taraftaki yesil butona tiklanir")
+    public void sagTaraftakiYesilButonaTiklanir() {
+        designerPage.parametreDegerleriButon.click();
+    }
+
+    @And("Session dan deger oku noduna tiklanir")
+    public void sessionDanDegerOkuNodunaTiklanir() {
+        designerPage.sessiondanDegerOku.click();
+    }
+
+    @And("Session dan deger oku tabi acilir")
+    public void sessionDanDegerOkuTabiAcilir() {
+        designerPage.sessiondanDegerOkuTab.click();
+    }
+
+    @And("Veri seti degiskeni listBox'ina tiklanir")
+    public void veriSetiDegiskeniListBoxInaTiklanir() {
+        actions.contextClick(designerPage.getSessiondanDegerOkuVeriSetiDegiskeni).perform();
+        actions.contextClick(designerPage.degiskenEkleButon).perform();
+        WebElement degerAdi = Driver.getDriver().findElement(By.name("Row 1"));
+        degerAdi.sendKeys("CUSTOMER_NAME");
+        WebElement veriSetiDegiskeni = Driver.getDriver().findElement(By.name("Row 1 Column 2"));
+        actions.doubleClick(veriSetiDegiskeni).perform();
+    }
+
+    @And("Akis baslangic formu secilir")
+    public void akisBaslangicFormuSecilir() {
+        designerPage.akisBaslangicFormu.click();
+    }
+
 }
 

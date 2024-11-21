@@ -23,10 +23,10 @@ public class Hooks {
         }
 
         if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
-            //ReusableMethods.designerClose();
+            ReusableMethods.designerClose();
         } else if (designerPage.loginVazgecButton.isDisplayed()) {
-            //designerPage.loginVazgecButton.click();
+            designerPage.loginVazgecButton.click();
         }
-        //Driver.quitDriver();
+         Driver.quitDriver();
     }
 }

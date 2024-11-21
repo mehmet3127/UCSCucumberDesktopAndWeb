@@ -1,8 +1,10 @@
 package utilities;
 
 import io.appium.java_client.windows.WindowsDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -20,10 +22,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ReusableMethods {
 
     public static WindowsDriver<WebElement> winAppDriver;
+    public static WebDriver driver;
 
 
     //========ScreenShot(Syafanın resmini alma)=====//
@@ -220,5 +224,20 @@ public class ReusableMethods {
 
     }
 
+    public static void webDriver() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    }
 
+    public static void winAppDriverStart() {
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            desktop.open(new File(ConfigReader.getProperty("winAppDriverPath")));
+            ReusableMethods.waitFor(1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -81,15 +81,16 @@ public class Driver {
 
             switch (ConfigReader.getProperty("uygulama")) {
 
-
                 case "wde":
-                    Desktop desktop = Desktop.getDesktop();
-                    try {
-                        desktop.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-                        ReusableMethods.waitFor(1);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    //Desktop desktop = Desktop.getDesktop();
+                    //try {
+                    //    desktop.open(new File(ConfigReader.getProperty("winAppDriverPath")));
+                    //    ReusableMethods.waitFor(1);
+                    //} catch (IOException e) {
+                    //    throw new RuntimeException(e);
+                    //}
+                    ReusableMethods.winAppDriverStart();
+
                     DesiredCapabilities cap = new DesiredCapabilities();
                     cap.setCapability("app", ConfigReader.getProperty("wdePath"));
                     try {
@@ -103,13 +104,8 @@ public class Driver {
                     break;
 
                 case "designer":
-                    Desktop desktop2 = Desktop.getDesktop();
-                    try {
-                        desktop2.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-                        ReusableMethods.waitFor(1);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    ReusableMethods.winAppDriverStart();
+
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
                     try {

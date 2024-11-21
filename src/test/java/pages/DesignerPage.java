@@ -123,10 +123,37 @@ public class DesignerPage {
     public WebElement akisTasarim;
     @FindBy(name = "toolboxFormAddOutbound")
     public WebElement formEkle;
+    @FindBy(name = "Akış Başlangıç Formu")
+    public WebElement akisBaslangicFormu;
+
+    //WebService ekle Node
     @FindBy(name = "toolboxWSAddOutbound")
     public WebElement webServiceEkleOB;
+    @FindBy(name = "Web Service")
+    public WebElement webServiceTab;
+    @FindBy(name = "Test Endpoint")
+    public WebElement testEndpoint;
+    @FindBy(xpath = "//Document[@AutomationId='txtJsonExample']")
+    public WebElement ornekJson;
+    @FindBy(name = "Yükle")
+    public WebElement yukleButon;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboWsType']")
+    public WebElement restSoapComboBox;
+    @FindBy(xpath = "//Edit[@AutomationId='1001']")
+    public WebElement soapUrl;
+    @FindBy(name = "Parametre Değerleri")
+    public WebElement parametreDegerleriButon;
+
+
+    //Sessiondan deger oku
     @FindBy(name = "toolboxReadSessionOutbound")
     public WebElement sessiondanDegerOku;
+    @FindBy(name = "Session'dan Değer Oku")
+    public WebElement sessiondanDegerOkuTab;
+    @FindBy(name = "FlexGrid")
+    public WebElement getSessiondanDegerOkuVeriSetiDegiskeni;
+    @FindBy(name = "Değişken Ekle")
+    public WebElement degiskenEkleButon;
 
     //Javascript Node
     @FindBy(name = "toolboxJsAddOutbound")
@@ -154,8 +181,6 @@ public class DesignerPage {
     public WebElement veriSetiDegiskeniEkleButon;
     @FindBy(name = "Karar Nesnesi")
     public WebElement kararNesnesiComboBox;
-
-
 
 
     @FindBy(name = "toolboxObjAddOutbound")
