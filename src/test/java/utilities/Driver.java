@@ -1,17 +1,15 @@
 package utilities;
 
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.windows.WindowsDriver;
-import io.cucumber.java.After;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import pages.DesignerPage;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +21,9 @@ public class Driver {
         //SingletonPattern tekli kullanım demektir bu CLass dan başka obje oluşturulmasını engellemek için kullanılır
     }
 
-    public static WebDriver driver;
+    public static WindowsDriver<WebElement> desktopDriver;
+    public static WebDriver webDriver;
+
 
     /*
     static WebDriver driver2;
@@ -74,33 +74,27 @@ public class Driver {
     }
 
      */
-    public static WebDriver getDriver() {
+    public static WindowsDriver<WebElement> getDriver() {
 
-        if (driver == null) {
-
+        if (desktopDriver == null) {
 
             switch (ConfigReader.getProperty("uygulama")) {
 
                 case "wde":
-                    //Desktop desktop = Desktop.getDesktop();
-                    //try {
-                    //    desktop.open(new File(ConfigReader.getProperty("winAppDriverPath")));
-                    //    ReusableMethods.waitFor(1);
-                    //} catch (IOException e) {
-                    //    throw new RuntimeException(e);
-                    //}
                     ReusableMethods.winAppDriverStart();
 
                     DesiredCapabilities cap = new DesiredCapabilities();
-                    cap.setCapability("app", ConfigReader.getProperty("wdePath"));
+                    cap.setCapability(MobileCapabilityType.APP, ConfigReader.getProperty("wdePath"));
+
                     try {
-                        driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
-                        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                        String widowHandle = driver.getWindowHandle();
-                        driver.switchTo().window(widowHandle);
+                        desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
+                        desktopDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                        String widowHandle = desktopDriver.getWindowHandle();
+                        desktopDriver.switchTo().window(widowHandle);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
+
                     break;
 
                 case "designer":
@@ -109,46 +103,100 @@ public class Driver {
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
                     try {
-                        driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities);
-                        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+                        desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities);
+                        desktopDriver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
                     break;
 
+                //case "chrome":
+                //    WebDriverManager.chromedriver().setup();
+                //    driver = new ChromeDriver();
+                //    driver.manage().window().maximize();
+                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                //    break;
+//
+                //case "edge":
+                //    WebDriverManager.edgedriver().setup();
+                //    driver = new EdgeDriver();
+                //    driver.manage().window().maximize();
+                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                //    break;
+                //default:
+            }
+
+        }
+        return desktopDriver;
+    }
+
+    public static WebDriver webDriver() {
+
+        if (webDriver == null) {
+
+            switch (ConfigReader.getProperty("browser")) {
+
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    driver.manage().window().maximize();
-                    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    webDriver = new ChromeDriver();
                     break;
 
                 case "edge":
                     WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
-                    driver.manage().window().maximize();
-                    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    webDriver = new EdgeDriver();
                     break;
-                default:
-            }
 
+                //case "chrome":
+                //    WebDriverManager.chromedriver().setup();
+                //    driver = new ChromeDriver();
+                //    driver.manage().window().maximize();
+                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                //    break;
+//
+                //case "edge":
+                //    WebDriverManager.edgedriver().setup();
+                //    driver = new EdgeDriver();
+                //    driver.manage().window().maximize();
+                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                //    break;
+                //default:
+            }
+            webDriver.manage().window().maximize();
+            webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         }
-        return driver;
+        return webDriver;
     }
 
+
     public static void closeDriver() {
-        if (driver != null) {
-            driver.close();
-            driver = null;
+        if (webDriver != null) {
+            webDriver.close();
+            webDriver = null;
 
         }
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (webDriver != null) {
+            webDriver.quit();
+            webDriver = null;
         }
+    }
+
+    public static void designerClose() {
+
+        DesignerPage designerPage = new DesignerPage();
+
+        if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
+            designerPage.pencereKapat.click();
+            ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet, 10);
+            designerPage.pencereKapatEvet.click();
+            ReusableMethods.winAppDriverStop();
+            desktopDriver=null;
+        } else {
+            designerPage.loginVazgecButton.click();
+        }
+
     }
 }
 

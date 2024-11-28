@@ -240,4 +240,19 @@ public class ReusableMethods {
             throw new RuntimeException(e);
         }
     }
+
+    public static void winAppDriverStop() {
+        try {
+            // WinAppDriver işlemini sistemde sonlandır
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                Runtime.getRuntime().exec("taskkill /F /IM WinAppDriver.exe");
+            } else {
+                System.out.println("WinAppDriver sadece Windows sistemlerde kullanılabilir.");
+            }
+            ReusableMethods.waitFor(1);
+        } catch (IOException e) {
+            throw new RuntimeException("WinAppDriver kapatılırken bir hata oluştu.", e);
+        }
+    }
 }

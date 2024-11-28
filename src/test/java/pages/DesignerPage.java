@@ -1,6 +1,7 @@
 package pages;
 
 import io.appium.java_client.pagefactory.WindowsFindBy;
+import io.appium.java_client.pagefactory.WindowsFindBys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +13,10 @@ public class DesignerPage {
 
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
+    //public static WebElement tbLeftPanel() {
+    //    return Driver.getDriver().findElementByAccessibilityId("tbLeftPanel");
+    //}
 
     //Login page locator
     @FindBy(xpath = "//Edit[@AutomationId='txtUserName']")
@@ -39,8 +44,6 @@ public class DesignerPage {
     public WebElement pencereKapat;
     @FindBy(name = "Evet")
     public WebElement pencereKapatEvet;
-    @FindBy(className = "WindowsForms10.RichEdit20W.app.0.3e2f22e_r9_ad1")
-    public WebElement hataMesajı;
     @FindBy(name = "Tamam")
     public WebElement tamam;
 
@@ -78,7 +81,7 @@ public class DesignerPage {
     @FindBy(name = "DÜZENLEME")
     public WebElement kampanyaDuzenlemeModu;
     @FindBy(name = "Seç")
-    public WebElement varsayilanSonucKoduSec;
+    public WebElement secButon;
     @FindBy(name = "Çağrı Cevaplanmadı (2)")
     public WebElement cagriCevaplanmadi;
     @FindBy(xpath = "//TreeItem[@Name='Mesgul (1071)']")
@@ -98,9 +101,9 @@ public class DesignerPage {
     public WebElement onayPenceresiEvet;
     @FindBy(name = "Hayır")
     public WebElement onayPenceresiHayir;
-    //public static WebElement tbLeftPanel() {
-    //    return Driver.getDriver().findElementByAccessibilityId("tbLeftPanel");
-    //}
+    @FindBy(xpath = "//Text[@AutomationId='65535']")
+    public WebElement hataMesaji;
+
 
     //Kampanya Duzenleme
     @FindBy(name = "Kampanya Düzenle")
@@ -119,8 +122,48 @@ public class DesignerPage {
 
 
     //Outboud Akis Tasarim Ekrani
+    @FindBy(name = "Kampanya Tanım")
+    public WebElement kampanyaTanimPenceresi;
+    @FindBy(name = "CRM")
+    public WebElement kampanyaTanimPenceresiCrmTab;
+    @FindBy(xpath = "//Edit[@AutomationId='txtCampExtId1']")
+    public WebElement hariciKampanyaId;
+    @FindBy(name = "Dosya Kaynakları")
+    public WebElement kampanyaTanimPenceresiDosyaKaynaklariTab;
+    @FindBy(name = "Resim")
+    public WebElement dosyaKaynaklariResim;
+    @FindBy(name = "Ses Dosyası")
+    public WebElement dosyaKaynaklariSesDosyasi;
+    @FindBy(name = "XML Liste Kaynağı")
+    public WebElement dosyaKaynaklariXmlListeKaynagi;
+    @FindBy(name = "Sil")
+    public WebElement silButon;
+    @FindBy(name = "Öngörüm")
+    public WebElement dosyaKaynaklariOngorum;
+    @FindBy(name = "Dışa Ver")
+    public WebElement dosyaKaynaklariDisaVer;
+    @FindBy(name = "İçe Al")
+    public WebElement dosyaKaynaklariIceAl;
+
+
+
     @FindBy(name = "Akış Tasarımı")
-    public WebElement akisTasarim;
+    public WebElement akisTasarimPenceresi;
+    @FindBy(name = "Sonuç Kodu")
+    public WebElement sonucKoduPenceresi;
+    @FindBy(name = "Veri Seti")
+    public WebElement veriSetiPenceresi;
+    @FindBy(name = "Nesneler")
+    public WebElement nesnelerPenceresi;
+    @FindBy(name = "Hata")
+    public WebElement hataPenceresi;
+    @FindBy(name = "toolboxZoomOutOutbound")
+    public WebElement akisEkraniUzaklastirOB;
+    @FindBy(name = "toolboxZoomInOutbound")
+    public WebElement akisEkraniYakinlastirOB;
+    @FindBy(name = "toolboxZoomOffOutbound")
+    public WebElement akisEkraniNormalBoyuttaGosterOB;
+
     @FindBy(name = "toolboxFormAddOutbound")
     public WebElement formEkle;
     @FindBy(name = "Akış Başlangıç Formu")
@@ -151,9 +194,13 @@ public class DesignerPage {
     @FindBy(name = "Session'dan Değer Oku")
     public WebElement sessiondanDegerOkuTab;
     @FindBy(name = "FlexGrid")
-    public WebElement getSessiondanDegerOkuVeriSetiDegiskeni;
+    public WebElement veriSetiDegiskeniEklemeEkrani;
     @FindBy(name = "Değişken Ekle")
     public WebElement degiskenEkleButon;
+    @FindBy(name = "Arama Metni")
+    public WebElement degiskenEkleAramaMetniSearchBox;
+
+
 
     //Javascript Node
     @FindBy(name = "toolboxJsAddOutbound")
@@ -179,9 +226,10 @@ public class DesignerPage {
     //scriptVeriSetiDegiskeni'nin Name'i yoktur
     @FindBy(xpath = "//Button[@AutomationId='cmdAddVariable']")
     public WebElement veriSetiDegiskeniEkleButon;
+    @FindBy(name = "Ekle")
+    public WebElement ekleButon;
     @FindBy(name = "Karar Nesnesi")
     public WebElement kararNesnesiComboBox;
-
 
     @FindBy(name = "toolboxObjAddOutbound")
     public WebElement kampanyaNesnesiEkle;
@@ -212,14 +260,16 @@ public class DesignerPage {
     public WebElement kontrolEtButon;
     @FindBy(name = "Özellikler")
     public WebElement ozelliklerButon;
+    @FindBy(name = "Inbound'a Kopyala")
+    public WebElement inboundaKopyala;
     @FindBy(xpath = "//TitleBar[@AutomationId='TitleBar']")
     public WebElement ozelliklerpenceresiTitle;
     @FindBy(name = "toolboxZoomOutIVR")
-    public WebElement tasarimEkraniniUzaklastir;
+    public WebElement akisEkraniUzaklastirIVR;
     @FindBy(name = "toolboxZoomInIVR")
-    public WebElement tasarimEkraniniYakinlastir;
+    public WebElement akisEkraniYakinlastirIVR;
     @FindBy(name = "toolboxZoomOffIVR")
-    public WebElement tasarimEkraniniNormalBoyuttaGoster;
+    public WebElement akisEkraniNormalBoyuttaGosterIVR;
     @FindBy(name = "toolboxAddPrompt")
     public WebElement anonsEkle;
     @FindBy(name = "toolboxAddInput")
@@ -252,6 +302,7 @@ public class DesignerPage {
     public WebElement baglantiKurButon;
     @FindBy(name = "Bağlantı Sil")
     public WebElement baglantiSilButon;
+
 
 
 }

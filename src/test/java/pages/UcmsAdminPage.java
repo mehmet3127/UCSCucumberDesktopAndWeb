@@ -11,7 +11,7 @@ public class UcmsAdminPage {
 
     public UcmsAdminPage() {//Constructor oluşturup public yapmamız gerekiyor
 
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.webDriver(), this);
     }
 
 

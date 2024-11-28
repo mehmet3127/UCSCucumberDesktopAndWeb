@@ -38,9 +38,9 @@ Feature: Akis Tasarim Ekrani
 
 
   @AkisTasarimiKaydet
-  Scenario: UCMS-TC-314: IVR Akışı Kaydet
+  Scenario Outline: UCMS-TC-314: IVR Akışı Kaydet,UCMS-TC-321: OB Akışı Kaydet
 
-    Given Islem yapilacak olan "IVRDEMOTEST" kampanya secilir
+    Given Islem yapilacak olan "<KAMPANYA KANAL TIPI>" kampanya secilir
     And Kampanya modu secilir
     And Akis Tasarim penceresine tiklanir
     And Anons ekle noduna tiklanir
@@ -48,6 +48,11 @@ Feature: Akis Tasarim Ekrani
     And Veri girisi ekle noduna tiklanir
     And Kaydet butonuna tıklanir
     And Akis tasariminin kaydedildigi gorulur
+
+    Examples:
+      | KAMPANYA KANAL TIPI |
+      | IVRDEMOTEST         |
+      | OBOTOMASYONTEST     |
 
 
   @IVRAkisiKontrolEtPozıtıf
@@ -79,18 +84,18 @@ Feature: Akis Tasarim Ekrani
     Given Islem yapilacak olan "IVRDEMOTEST" kampanya secilir
     And Kampanya modu secilir
     And Akis Tasarim penceresine tiklanir
-    And Tasarim ekranini uzaklastir butonuna tiklanir
-    And Tasarim ekranini yakinlastir butonuna tiklanir
-    And Tasarim ekranini normal boyutta goster butonuna tiklanir
+    And "IVR" Tasarim ekranini uzaklastir butonuna tiklanir
+    And "IVR" Tasarim ekranini yakinlastir butonuna tiklanir
+    And "IVR" Tasarim ekranini normal boyutta goster butonuna tiklanir
 
 
-  @IVRAkisiOzelliklerButonu
+  @IVRAkisiAraVeOzelliklerButonu
   Scenario: UCMS-TC-318: IVR Akışı Ara Butonu, UCMS-TC-317: IVR Akışı Özellikler Butonu
 
     Given Islem yapilacak olan "IVRDEMOTEST" kampanya secilir
     And Kampanya modu secilir
     And Akis Tasarim penceresine tiklanir
-    And Akistaki bir forma tiklanir
+    And Akistaki bir node "Form1" tiklanir
     And Ozellikler butonuna tıklanır
     Then Ozellikler penceresinin acildigi gorulur
 
@@ -129,6 +134,7 @@ Feature: Akis Tasarim Ekrani
     And Form ekle noduna tiklanir
     And Eklenen node'a "Form1" cift tiklanir
     Then Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir
+
 
   @OBAkışaJavaScriptEkleme
   Scenario: UCMS-TC-95: JavaScript Ekleme
@@ -179,6 +185,7 @@ Feature: Akis Tasarim Ekrani
     And Alan eslestirme tabina tiklanir
     #hata alindigi icin burdan sonra devam edilecek
 
+
   @OBAkışaSOAPWebServiceEkleme
   Scenario: UCMS-TC-158: SOAP Web Service Ekleme (http)
 
@@ -205,6 +212,7 @@ Feature: Akis Tasarim Ekrani
     And Session dan deger oku tabi acilir
     And Veri seti degiskeni listBox'ina tiklanir
     And Tamam butonuna tıklar
+
 
   @OBCagridanVeriOkumaSonucKoduEkleme
   Scenario: UCMS-TC-93: Sonuç Kodu Seçme
@@ -235,7 +243,7 @@ Feature: Akis Tasarim Ekrani
 
 
   @OBNodelarArasiBaglantiEkleme
-  Scenario: UCMS-TC-599: Akış Tasarımı Node'lar Arasına Bağlantı Ekleme
+  Scenario: UCMS-TC-599: Akış Tasarımı Node'lar Arasına Bağlantı Ekleme, UCMS-TC-326
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
@@ -247,7 +255,7 @@ Feature: Akis Tasarim Ekrani
 
 
   @OBNodelarArasiBaglantiSılme
-  Scenario:UCMS-TC-600: Akış Tasarımı Node'lar Arasındaki Bağlantıyı Silme
+  Scenario:UCMS-TC-600: Akış Tasarımı Node'lar Arasındaki Bağlantıyı Silme, UCMS-TC-327
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
@@ -259,8 +267,139 @@ Feature: Akis Tasarim Ekrani
     Then Akis tasariminin kaydedildigi gorulur
 
 
+  @FormNodunaVeriSetiEkleme
+  Scenario:UCMS-TC-174: Designer Akış Tasarımı'nda Form Node'una Veri Seti Ekleme
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Veri seti ekrani acilir
+    And Veri seti alanina sag tiklanir
+    And Ekle butonuna tıklanir
+    And Arama metnine veri seti degiskeni ismi "ST_TEXTBOX_TARIH" yazilir
+    And Sec butonuna tıklanır
+    And Akis Tasarim penceresine tiklanir
+    #And Form ekle noduna tiklanir
+    And Eklenen node'a "Form1" cift tiklanir
+    And Eklenen veri seti sag tarafa suruklenir
+    #Then Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir
 
 
+  @OBAkisiKontrolEtPozıtıf
+  Scenario:UCMS-TC-487: Outbound Akışı Kontrol Et - Pozitif
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And Kontrol Et butonuna tiklanir
+    Then Tasarim hatasiz bilgi pop-up gorunur
 
 
+  @OBAkisiKontrolEtNegatif
+  Scenario:UCMS-TC-322: OB Akışı Kontrol Et, UCMS-TC-488: Outbound Akışı Kontrol Et - Negatif
 
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And Kontrol Et butonuna tiklanir
+    Then Tasarimda hata tespit edildi uyarisinin geldigi gorulur
+    Then Hata mesajlarini goruntuler
+    #IVRAkisiKontrolEtNegatif ve IVRAkisiKontrolEt pozıtıf senaryoları aynı
+    #sadece hata olmayan bır kampan secıp devam edılırse pozıtıf senaryo elde edılmıs olur
+
+
+  @AkışıInboundaKopyala
+  Scenario:UCMS-TC-328: OB Akışı Inbounda Kopyala Butonu
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And Inbound'a kopyala butonuna tiklanir
+    And Onay penceresinde Evet butonuna tiklar
+    And Tamam butonuna tıklar
+
+
+  @OBAkisiAraVeOzelliklerButonu
+  Scenario:UCMS-TC-325: OB Akışı Ara Butonu, UCMS-TC-324: OB Akışı Özellikler Butonu
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And Akistaki bir node "Form1" tiklanir
+    And Ozellikler butonuna tıklanır
+    Then Ozellikler penceresinin acildigi gorulur
+
+
+  @OBAkisiUzaklastirYakinlastir
+  Scenario:UCMS-TC-323: OB Akışı Uzaklaştır/Yakınlaştır Butonları
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Akis Tasarim penceresine tiklanir
+    And "OB" Tasarim ekranini uzaklastir butonuna tiklanir
+    And "OB" Tasarim ekranini yakinlastir butonuna tiklanir
+    And "OB" Tasarim ekranini normal boyutta goster butonuna tiklanir
+
+
+  @HariciKampanyaAdiGirme
+  Scenario:UCMS-TC-671: Harici Kampanya Adı
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And CRM tabi acilir
+    And Harici kampanya adi girilir
+
+  @DosyaKaynaklarıUygunOlmayanFormatıİçeAl
+  Scenario:UCMS-TC-337: Dosya Kaynakları Uygun Olmayan Formatı İçe Al
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya turu "XML Liste Kaynagi" secilir
+    And Ice al butonuna tiklanir
+    And Eklenecek dosya secilir "C:\Users\demir\OneDrive\Masaüstü\xxx.zip"
+    Then Ice alim dosyasinin gecersiz oldugu uyari gorulur
+
+  @DosyaKaynaklarıEklePozitive
+  Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya turu "<Yuklenecek Dosya>" secilir
+    And Ekle butonuna tıklanir
+    And Eklenecek dosya secilir "<Dosya Path>"
+    And Kaydet butonuna tıklanir
+
+    Examples:
+      | Yuklenecek Dosya  | Dosya Path                                                |
+      | Resim             | C:\Users\demir\OneDrive\Masaüstü\TestData\TİK.png         |
+      | Ses Dosyasi       | C:\Users\demir\OneDrive\Masaüstü\TestData\ses-dosyası.wav |
+      | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.xml         |
+
+
+  @DosyaKaynaklarıEkleNegative
+  Scenario Outline:UCMS-TC-144, UCMS-TC-146, UCMS-TC-148: Dosya Kaynakları-Ekle (Resim)-Negative
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya turu "<Dosya Turu>" secilir
+    And Ekle butonuna tıklanir
+    And Eklenecek dosya secilir "<Dosya Path>"
+    Then Desteklenmeyen dosya formati uyarisi gorulur
+
+    Examples:
+      | Dosya Turu        | Dosya Path                                          |
+      | Resim             | C:\Users\demir\OneDrive\Masaüstü\TestData\resim.dmr |
+      | Ses Dosyasi       | C:\Users\demir\OneDrive\Masaüstü\TestData\ses.dmr   |
+      | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.dmr   |
+
+
+  @DosyaKaynaklariSil
+  Scenario Outline:UCMS-TC-149: Dosya Kaynakları - Sil (Resim)
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Silinecek dosya secilir
+    And Sil butonuna tiklanir

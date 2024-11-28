@@ -4,23 +4,23 @@ package stepDefinitions;
 import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.DesignerPage;
+import pages.UcmsAdminPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-import java.util.AbstractCollection;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class DesignerStepDefinition {
@@ -28,9 +28,11 @@ public class DesignerStepDefinition {
     public static WindowsDriver<WebElement> driver;
     public static WebDriver driver2;
     DesignerPage designerPage = new DesignerPage();
+    UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
     Actions actions = new Actions(Driver.getDriver());
 
     static String eklenenKampanyaAdi;
+    static String eklenenVeriSetiDegiskeniName;
 
 
     //Login Steps
@@ -130,6 +132,8 @@ public class DesignerStepDefinition {
     public void designerAnaSayfasinaGidildigiGorulur() {
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 60);
         Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
+        Driver.designerClose();
+        ReusableMethods.winAppDriverStop();
     }
 
     @Then("Kullanıcı sayfayı kapatır")
@@ -149,6 +153,7 @@ public class DesignerStepDefinition {
         WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + klasorAdi + "')]"));
         //WebElement kampanyaninEklenecegiKlasor = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'Campaigns\\"+klasorAdi+"')]"));
         actions.contextClick(kampanyaninEklenecegiKlasor).perform();
+
     }
 
     @And("Kampanya ekle ye tıklanir")
@@ -210,7 +215,7 @@ public class DesignerStepDefinition {
 
     @And("Varsayilan sonuç kodu için seç butonuna tıklanir")
     public void varsayılanSonuçKoduIçinSeçButonunaTıklar() {
-        designerPage.varsayilanSonucKoduSec.click();
+        designerPage.secButon.click();
     }
 
     @And("Varsayilan sonuc kodu {string} secilir")
@@ -350,8 +355,8 @@ public class DesignerStepDefinition {
     //IVR Akis Tasarim Ekrani
     @And("Akis Tasarim penceresine tiklanir")
     public void akisTasarimPenceresineTiklanir() {
-        ReusableMethods.waitForVisibility(designerPage.akisTasarim, 20);
-        designerPage.akisTasarim.click();
+        ReusableMethods.waitForVisibility(designerPage.akisTasarimPenceresi, 20);
+        designerPage.akisTasarimPenceresi.click();
     }
 
     @Then("Anons ekle noduna tiklanir")
@@ -437,32 +442,47 @@ public class DesignerStepDefinition {
         }
     }
 
-    @And("Tasarim ekranini uzaklastir butonuna tiklanir")
-    public void tasarimEkraniniUzaklastirButonunaTiklanir() {
+    @And("{string} Tasarim ekranini uzaklastir butonuna tiklanir")
+    public void tasarimEkraniniUzaklastirButonunaTiklanir(String kanalTipi) {
 
         for (int i = 1; i < 4; i++) {
-            designerPage.tasarimEkraniniUzaklastir.click();
+            if (kanalTipi.equals("IVR")) {
+                designerPage.akisEkraniUzaklastirIVR.click();
+            } else {
+                designerPage.akisEkraniUzaklastirOB.click();
+            }
+
         }
     }
 
-    @And("Tasarim ekranini yakinlastir butonuna tiklanir")
-    public void tasarimEkraniniYakinlastirButonunaTiklanir() {
+    @And("{string} Tasarim ekranini yakinlastir butonuna tiklanir")
+    public void tasarimEkraniniYakinlastirButonunaTiklanir(String kanalTipi) {
         for (int i = 1; i < 4; i++) {
-            designerPage.tasarimEkraniniYakinlastir.click();
+            if (kanalTipi.equals("IVR")) {
+                designerPage.akisEkraniYakinlastirIVR.click();
+            } else {
+                designerPage.akisEkraniYakinlastirOB.click();
+            }
+
         }
     }
 
-    @And("Tasarim ekranini normal boyutta goster butonuna tiklanir")
-    public void tasarimEkraniniNormalBoyuttaGosterButonunaTiklanir() {
-        designerPage.tasarimEkraniniNormalBoyuttaGoster.click();
+    @And("{string} Tasarim ekranini normal boyutta goster butonuna tiklanir")
+    public void tasarimEkraniniNormalBoyuttaGosterButonunaTiklanir(String kanalTipi) {
+        if (kanalTipi.equals("IVR")) {
+            designerPage.akisEkraniNormalBoyuttaGosterIVR.click();
+        } else {
+            designerPage.akisEkraniNormalBoyuttaGosterOB.click();
+        }
+
     }
 
-    @And("Akistaki bir forma tiklanir")
-    public void akistakiBirFormaTiklanir() {
+    @And("Akistaki bir node {string} tiklanir")
+    public void akistakiBirFormaTiklanir(String nodeName) {
         designerPage.formAra.click();
         designerPage.eklenenTumNodelar.click();
-        WebElement form = Driver.getDriver().findElement(By.name("Form.1-Anons1"));
-        form.click();
+        WebElement node = Driver.getDriver().findElement(By.xpath("//ListItem[contains(@Name,'" + nodeName + "')]"));
+        node.click();
     }
 
     @And("Ozellikler butonuna tıklanır")
@@ -719,7 +739,7 @@ public class DesignerStepDefinition {
 
     @And("Veri seti degiskeni listBox'ina tiklanir")
     public void veriSetiDegiskeniListBoxInaTiklanir() {
-        actions.contextClick(designerPage.getSessiondanDegerOkuVeriSetiDegiskeni).perform();
+        actions.contextClick(designerPage.veriSetiDegiskeniEklemeEkrani).perform();
         actions.contextClick(designerPage.degiskenEkleButon).perform();
         WebElement degerAdi = Driver.getDriver().findElement(By.name("Row 1"));
         degerAdi.sendKeys("CUSTOMER_NAME");
@@ -732,5 +752,132 @@ public class DesignerStepDefinition {
         designerPage.akisBaslangicFormu.click();
     }
 
+    @And("Ucms admine gider")
+    public void ucmsAdmineGider() {
+        Driver.webDriver().get("http://test-linux.ucs.pvt:58027/");
+        ucmsAdminPage.userName.sendKeys("mehmet.demir");
+
+    }
+
+    @And("Veri seti ekrani acilir")
+    public void veriSetiEkraniAcilir() {
+
+        designerPage.veriSetiPenceresi.click();
+    }
+
+    @And("Veri seti alanina sag tiklanir")
+    public void veriSetiAlaninaSagTiklanir() {
+        actions.contextClick(designerPage.veriSetiDegiskeniEklemeEkrani).perform();
+    }
+
+    @And("Ekle butonuna tıklanir")
+    public void ekleButonunaTıklanir() {
+        designerPage.ekleButon.click();
+    }
+
+    @And("Arama metnine veri seti degiskeni ismi {string} yazilir")
+    public void aramaMetnineVeriSetiDegiskeniIsmiYazilir(String veriSetiDegiskeni) {
+        eklenenVeriSetiDegiskeniName = veriSetiDegiskeni;
+        designerPage.degiskenEkleAramaMetniSearchBox.sendKeys(veriSetiDegiskeni, Keys.ENTER);
+
+    }
+
+    @And("Sec butonuna tıklanır")
+    public void secButonunaTıklanır() {
+        designerPage.secButon.click();
+    }
+
+    @And("Eklenen veri seti sag tarafa suruklenir")
+    public void ekleneVeriSetiSagTarafaSuruklenir() {
+
+        WebElement eklenenVeriSetiDegiskeni = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + eklenenVeriSetiDegiskeniName + "')]"));
+        Assert.assertTrue(eklenenVeriSetiDegiskeni.isDisplayed());
+        actions.doubleClick(eklenenVeriSetiDegiskeni).perform();
+
+    }
+
+    @And("Inbound'a kopyala butonuna tiklanir")
+    public void ınboundAKopyalaButonunaTiklanir() {
+        designerPage.inboundaKopyala.click();
+    }
+
+    //Kampanya Tanim Penceresi CRM Tabi
+    @And("CRM tabi acilir")
+    public void crmTabiAcilir() {
+        designerPage.kampanyaTanimPenceresiCrmTab.click();
+    }
+
+    @And("Harici kampanya adi girilir")
+    public void hariciKampanyaAdiGirilir() {
+        designerPage.hariciKampanyaId.sendKeys("DEMIR");
+    }
+
+    @And("Dosya kaynaklari sekmesine tiklanir")
+    public void dosyaKaynaklariSekmesineTiklanir() {
+        designerPage.kampanyaTanimPenceresiDosyaKaynaklariTab.click();
+    }
+
+    @And("Dosya turu {string} secilir")
+    public void dosyaTuruSecilir(String dosyaKaynagi) {
+        switch (dosyaKaynagi) {
+            case "Resim":
+
+                designerPage.resim.click();
+                break;
+            case "Ses Dosyasi":
+
+                designerPage.dosyaKaynaklariSesDosyasi.click();
+                break;
+            case "XML Liste Kaynagi":
+
+                designerPage.dosyaKaynaklariXmlListeKaynagi.click();
+                break;
+        }
+
+    }
+
+    @And("Ice al butonuna tiklanir")
+    public void ıceAlButonunaTiklanir() {
+        designerPage.dosyaKaynaklariIceAl.click();
+    }
+
+    @And("Eklenecek dosya secilir {string}")
+    public void eklenecekDosyaSecilir(String dosyaYolu) {
+        try {
+            Robot robot = new Robot();
+            StringSelection dosyaSelection = new StringSelection(dosyaYolu);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(dosyaSelection, null);
+
+            // Ctrl + V (Yapıştırma) kombinasyonu ile dosya yolu eklemek için Robot'u kullanma
+            ReusableMethods.waitFor(2);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            // Enter ile dosyayı seçme penceresini kapatma
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Then("Ice alim dosyasinin gecersiz oldugu uyari gorulur")
+    public void iceAlimDosyasininGecersizOlduguUyariGorulur() {
+
+        if (designerPage.hataMesaji.getText().contains("İçe alım dosyası geçersiz")) {
+            System.out.println("hataMesaji.getText() = " + designerPage.hataMesaji.getText());
+            designerPage.tamam.click();
+        }
+    }
+
+
+    @Then("Desteklenmeyen dosya formati uyarisi gorulur")
+    public void desteklenmeyenDosyaFormatiUyarisiGorulur() {
+        if (designerPage.hataMesaji.getText().contains("Desteklenmeyen dosya formatı")) {
+            System.out.println("hataMesaji.getText() = " + designerPage.hataMesaji.getText());
+            designerPage.tamam.click();
+        }
+    }
 }
 

@@ -50,7 +50,9 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
 
     @When("Kullanıcı ucmsadmin için geçerli username girer")
     public void KullanıcıUcmsadminIçinGeçerliUsernameGirer() {
+        ucmsAdminPage.userName.click();
         ucmsAdminPage.userName.sendKeys("mehmet.demir");
+
     }
 
     @And("Kullanıcı ucmsadmin için geçerli password girer")

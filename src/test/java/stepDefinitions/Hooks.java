@@ -12,7 +12,7 @@ import utilities.ReusableMethods;
 
 
 public class Hooks {
-    //Hook class ile test lerimiz de hata aldigimizda hata aldigimiz yerin resmini bize verir
+
     @After
     public void tearDown(Scenario scenario) {
         DesignerPage designerPage = new DesignerPage();
@@ -21,12 +21,9 @@ public class Hooks {
         if (scenario.isFailed()) {
             scenario.attach(screenshot, "image/png", "screenshots");
         }
-
-        if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
-            ReusableMethods.designerClose();
-        } else if (designerPage.loginVazgecButton.isDisplayed()) {
-            designerPage.loginVazgecButton.click();
-        }
-         Driver.quitDriver();
+        //if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
+        //    Driver.designerClose();
+        //}
+        //Driver.quitDriver();
     }
 }
