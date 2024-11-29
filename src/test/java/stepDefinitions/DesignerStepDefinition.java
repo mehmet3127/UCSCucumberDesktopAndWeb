@@ -58,7 +58,7 @@ public class DesignerStepDefinition {
     @And("Login butonuna tıklanir")
     public void loginButonunaTiklanir() {
         designerPage.sistemeGiris.click();
-        ReusableMethods.waitFor(8);
+        ReusableMethods.waitFor(7);
         List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(windowList.get(0));
 
@@ -841,6 +841,14 @@ public class DesignerStepDefinition {
         designerPage.dosyaKaynaklariIceAl.click();
     }
 
+    @And("Disa ver butonuna tiklanir")
+    public void disaVerButonunaTiklanir() {
+        designerPage.dosyaKaynaklariDisaVer.click();
+        WebElement disaVerilecekPath = Driver.getDriver().findElement(By.name("Dışa verilecek dosyanın kopyalanacağı dizini seçiniz"));
+        disaVerilecekPath.sendKeys("C:/_UcsDemo/TestData");
+
+    }
+
     @And("Eklenecek dosya secilir {string}")
     public void eklenecekDosyaSecilir(String dosyaYolu) {
         try {
@@ -862,22 +870,76 @@ public class DesignerStepDefinition {
         }
     }
 
-    @Then("Ice alim dosyasinin gecersiz oldugu uyari gorulur")
+    @Then("Ice alim dosyasinin gecersiz oldugu uyarisi gorulur")
     public void iceAlimDosyasininGecersizOlduguUyariGorulur() {
 
-        if (designerPage.hataMesaji.getText().contains("İçe alım dosyası geçersiz")) {
-            System.out.println("hataMesaji.getText() = " + designerPage.hataMesaji.getText());
+        if (designerPage.bilgiHataMesaji.getText().contains("İçe alım dosyası geçersiz")) {
+            System.out.println("hataMesaji.getText() = " + designerPage.bilgiHataMesaji.getText());
             designerPage.tamam.click();
         }
+    }
+
+    @Then("Kampanya dosyalari ice alindi uyari gorulur")
+    public void kampanyaDosyalariIceAlindiUyariGorulur() {
+        ReusableMethods.waitForVisibility(designerPage.bilgiHataMesaji, 60);
+        if (designerPage.bilgiHataMesaji.getText().contains("Kampanya dosyaları içe alındı")) {
+            System.out.println("hataMesaji.getText() = " + designerPage.bilgiHataMesaji.getText());
+            designerPage.tamam.click();
+        }
+    }
+
+    @Then("Dışa verme dosyası oluşturuldu uyarisi gorulur")
+    public void dışaVermeDosyasıOluşturulduUyarisiGorulur() {
     }
 
 
     @Then("Desteklenmeyen dosya formati uyarisi gorulur")
     public void desteklenmeyenDosyaFormatiUyarisiGorulur() {
-        if (designerPage.hataMesaji.getText().contains("Desteklenmeyen dosya formatı")) {
-            System.out.println("hataMesaji.getText() = " + designerPage.hataMesaji.getText());
+        if (designerPage.bilgiHataMesaji.getText().contains("Desteklenmeyen dosya formatı")) {
+            System.out.println("hataMesaji.getText() = " + designerPage.bilgiHataMesaji.getText());
             designerPage.tamam.click();
         }
     }
+
+    @And("Dosya {string} secilir")
+    public void dosyaSecilir(String dosya) {
+        switch (dosya) {
+            case "Resim":
+                actions.doubleClick(designerPage.resim).
+                        sendKeys(Keys.ARROW_DOWN, Keys.ENTER).build().perform();
+                break;
+            case "Ses Dosyasi":
+                actions.doubleClick(designerPage.dosyaKaynaklariSesDosyasi).
+                        sendKeys(Keys.ARROW_DOWN, Keys.ENTER).build().perform();
+                break;
+            case "XML Liste Kaynagi":
+                actions.doubleClick(designerPage.dosyaKaynaklariXmlListeKaynagi).
+                        sendKeys(Keys.ARROW_DOWN, Keys.ENTER).build().perform();
+                break;
+        }
+    }
+
+    @And("Sil butonuna tiklanir")
+    public void silButonunaTiklanir() {
+        designerPage.silButon.click();
+    }
+
+    @And("Ongorum butonuna tiklanir")
+    public void ongorumButonunaTiklanir() {
+        designerPage.dosyaKaynaklariOngorum.click();
+
+    }
+
+    @And("Acilan ongorum dosyasi kapatilir")
+    public void acilanOngorumDosyasiKapatilir() {
+        ReusableMethods.waitFor(2);
+        actions.keyDown(Keys.ALT)
+                .sendKeys(Keys.F4)
+                .keyUp(Keys.ALT)
+                .build()
+                .perform();
+    }
+
+
 }
 

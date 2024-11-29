@@ -1,7 +1,6 @@
 package pages;
 
 import io.appium.java_client.pagefactory.WindowsFindBy;
-import io.appium.java_client.pagefactory.WindowsFindBys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -102,7 +101,7 @@ public class DesignerPage {
     @FindBy(name = "Hayır")
     public WebElement onayPenceresiHayir;
     @FindBy(xpath = "//Text[@AutomationId='65535']")
-    public WebElement hataMesaji;
+    public WebElement bilgiHataMesaji;
 
 
     //Kampanya Duzenleme
@@ -239,6 +238,9 @@ public class DesignerPage {
     public WebElement etiket;
     @FindBy(name = "Resim")
     public WebElement resim;
+    @FindBy(name = "Non Client Input Sink Window")
+    public WebElement screenShotClose;
+
     @FindBy(name = "Web Link")
     public WebElement webLink;
     @FindBy(name = "TextBox")

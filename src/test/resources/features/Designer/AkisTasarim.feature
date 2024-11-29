@@ -348,7 +348,7 @@ Feature: Akis Tasarim Ekrani
     And CRM tabi acilir
     And Harici kampanya adi girilir
 
-  @DosyaKaynaklarıUygunOlmayanFormatıİçeAl
+  @DosyaKaynaklarıUygunOlmayanFormatıIçeAl
   Scenario:UCMS-TC-337: Dosya Kaynakları Uygun Olmayan Formatı İçe Al
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
@@ -356,25 +356,32 @@ Feature: Akis Tasarim Ekrani
     And Dosya kaynaklari sekmesine tiklanir
     And Dosya turu "XML Liste Kaynagi" secilir
     And Ice al butonuna tiklanir
-    And Eklenecek dosya secilir "C:\Users\demir\OneDrive\Masaüstü\xxx.zip"
-    Then Ice alim dosyasinin gecersiz oldugu uyari gorulur
+    And Eklenecek dosya secilir "C:\Users\demir\OneDrive\Masaüstü\TestData\XMListeKaynagiZip.zip"
+    Then Ice alim dosyasinin gecersiz oldugu uyarisi gorulur
+    #Dışa verme dosyası oluşturuldu.
 
-  @DosyaKaynaklarıEklePozitive
-  Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
+  @DosyaKaynaklarıIçeAl
+  Scenario:UCMS-TC-304: Dosya Kaynakları İçe Al
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
     And Dosya kaynaklari sekmesine tiklanir
-    And Dosya turu "<Yuklenecek Dosya>" secilir
-    And Ekle butonuna tıklanir
-    And Eklenecek dosya secilir "<Dosya Path>"
-    And Kaydet butonuna tıklanir
+    And Dosya turu "XML Liste Kaynagi" secilir
+    And Ice al butonuna tiklanir
+    And Eklenecek dosya secilir "C:\_UcsDemo\TestData\UCMSCampaignResource-673-0.zip"
+    Then Kampanya dosyalari ice alindi uyari gorulur
 
-    Examples:
-      | Yuklenecek Dosya  | Dosya Path                                                |
-      | Resim             | C:\Users\demir\OneDrive\Masaüstü\TestData\TİK.png         |
-      | Ses Dosyasi       | C:\Users\demir\OneDrive\Masaüstü\TestData\ses-dosyası.wav |
-      | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.xml         |
+
+  @DosyaKaynaklarıDisaVer
+  Scenario:UCMS-TC-303: Dosya Kaynakları Dışa Ver
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya turu "XML Liste Kaynagi" secilir
+    And Disa ver butonuna tiklanir
+
+    #Then Dışa verme dosyası oluşturuldu uyarisi gorulur
 
 
   @DosyaKaynaklarıEkleNegative
@@ -395,11 +402,56 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.dmr   |
 
 
-  @DosyaKaynaklariSil
-  Scenario Outline:UCMS-TC-149: Dosya Kaynakları - Sil (Resim)
+  @SmokeTest
+    @DosyaKaynaklarıEklePozitive
+  Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
     And Dosya kaynaklari sekmesine tiklanir
-    And Silinecek dosya secilir
+    And Dosya turu "<Yuklenecek Dosya>" secilir
+    And Ekle butonuna tıklanir
+    And Eklenecek dosya secilir "<Dosya Path>"
+    And Kaydet butonuna tıklanir
+
+    Examples:
+      | Yuklenecek Dosya  | Dosya Path                              |
+      | Resim             | C:\_UcsDemo\TestData\resim.png          |
+      | Ses Dosyasi       | C:\_UcsDemo\TestData\sesdosyası.wav     |
+      | XML Liste Kaynagi | C:\_UcsDemo\TestData\XMListeKaynagi.xml |
+
+
+  @SmokeTest
+    @DosyaKaynaklariOngorunum
+  Scenario Outline:UCMS-TC-301, UCMS-TC-302, UCMS-TC-335: Dosya Kaynakları Öngörüm (Resim,Ses Dosyasi,XML Liste Kaynağı)
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya "<Dosya Turu>" secilir
+    And Ongorum butonuna tiklanir
+    And Acilan ongorum dosyasi kapatilir
+
+    Examples:
+      | Dosya Turu        |
+      | Resim             |
+      | Ses Dosyasi       |
+      | XML Liste Kaynagi |
+
+
+  @SmokeTest
+    @DosyaKaynaklariSil
+  Scenario Outline:UCMS-TC-149, UCMS-TC-150, UCMS-TC-151: Dosya Kaynakları-Sil (Resim,Ses Dosyası,XML Liste Kaynağı)
+
+    Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
+    And Kampanya modu secilir
+    And Dosya kaynaklari sekmesine tiklanir
+    And Dosya "<Dosya Turu>" secilir
     And Sil butonuna tiklanir
+    And Onay penceresinde Evet butonuna tiklar
+
+    Examples:
+      | Dosya Turu        |
+      | Resim             |
+      | Ses Dosyasi       |
+      | XML Liste Kaynagi |
