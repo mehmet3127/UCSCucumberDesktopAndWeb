@@ -38,6 +38,10 @@ public class DesignerStepDefinition {
     //Login Steps
     @Given("Designer uygulamasina gidilir")
     public void designerUygulamasinaGidilir() {
+
+        if (Driver.webDriver() != null) {
+            Driver.quitWebDriver();
+        }
         Driver.getDriver();
         //Driver.getDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
@@ -844,9 +848,14 @@ public class DesignerStepDefinition {
     @And("Disa ver butonuna tiklanir")
     public void disaVerButonunaTiklanir() {
         designerPage.dosyaKaynaklariDisaVer.click();
-        WebElement disaVerilecekPath = Driver.getDriver().findElement(By.name("Dışa verilecek dosyanın kopyalanacağı dizini seçiniz"));
-        disaVerilecekPath.sendKeys("C:/_UcsDemo/TestData");
+        WebElement disaVerilecekPath1 = Driver.getDriver().findElement(By.name("Yerel Disk (C:)"));
+        actions.click(disaVerilecekPath1).perform();
 
+        WebElement disaVerilecekPath2 = Driver.getDriver().findElement(By.name("_UcsDemo"));
+        actions.click(disaVerilecekPath2).perform();
+
+        WebElement disaVerilecekPath3 = Driver.getDriver().findElement(By.name("TestData"));
+        actions.click(disaVerilecekPath3).perform();
     }
 
     @And("Eklenecek dosya secilir {string}")
@@ -939,7 +948,6 @@ public class DesignerStepDefinition {
                 .build()
                 .perform();
     }
-
 
 }
 

@@ -78,6 +78,7 @@ public class Driver {
 
         if (desktopDriver == null) {
 
+
             switch (ConfigReader.getProperty("uygulama")) {
 
                 case "wde":
@@ -145,21 +146,25 @@ public class Driver {
                     WebDriverManager.edgedriver().setup();
                     webDriver = new EdgeDriver();
                     break;
+                default:
+                    throw new RuntimeException("Geçersiz uygulama seçimi!");
+                    //System.out.println("Geçersiz tarayıcı seçimi!");
+                    //throw new IllegalArgumentException("Geçersiz tarayıcı seçimi!");
 
-                //case "chrome":
-                //    WebDriverManager.chromedriver().setup();
-                //    driver = new ChromeDriver();
-                //    driver.manage().window().maximize();
-                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                //    break;
+                    //case "chrome":
+                    //    WebDriverManager.chromedriver().setup();
+                    //    driver = new ChromeDriver();
+                    //    driver.manage().window().maximize();
+                    //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    //    break;
 //
-                //case "edge":
-                //    WebDriverManager.edgedriver().setup();
-                //    driver = new EdgeDriver();
-                //    driver.manage().window().maximize();
-                //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                //    break;
-                //default:
+                    //case "edge":
+                    //    WebDriverManager.edgedriver().setup();
+                    //    driver = new EdgeDriver();
+                    //    driver.manage().window().maximize();
+                    //    driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                    //    break;
+                    //default:
             }
             webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
@@ -168,7 +173,7 @@ public class Driver {
     }
 
 
-    public static void closeDriver() {
+    public static void closeWebDriver() {
         if (webDriver != null) {
             webDriver.close();
             webDriver = null;
@@ -176,7 +181,7 @@ public class Driver {
         }
     }
 
-    public static void quitDriver() {
+    public static void quitWebDriver() {
         if (webDriver != null) {
             webDriver.quit();
             webDriver = null;
@@ -192,9 +197,11 @@ public class Driver {
             ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet, 10);
             designerPage.pencereKapatEvet.click();
             ReusableMethods.winAppDriverStop();
-            desktopDriver=null;
+            desktopDriver = null;
         } else {
             designerPage.loginVazgecButton.click();
+            ReusableMethods.winAppDriverStop();
+            desktopDriver = null;
         }
 
     }

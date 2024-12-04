@@ -8,9 +8,9 @@ import utilities.Driver;
 
 public class GensysAdminPage {
 
-    public GensysAdminPage(){
+    public GensysAdminPage() {
 
-        PageFactory.initElements(Driver.getDriver(), this);
+        PageFactory.initElements(Driver.webDriver(), this);
     }
 
     //GensysAdmin Login Test Location
@@ -43,6 +43,33 @@ public class GensysAdminPage {
 
 
     //GenesysAdmin WindowHandles Test Location
+    @FindBy(id = "ext-comp-1002__Tab-MENU_MON")
+    public WebElement monitoring;
+    @FindBy(xpath = "//a[text()='Navigate to Provisioning Campaigns']")
+    public WebElement provisioning;
+    @FindBy(id = "ext-comp-1002__Tab-MENU_OPER")
+    public WebElement operations;
+
+    //Environment Sekmesi Menuleri
+    @FindBy(xpath = "//span[text()='Environment']")
+    public WebElement environment;
+    @FindBy(xpath = "//a[text()='Applications']")
+    public WebElement applications;
+    @FindBy(xpath = "//span[text()='Options']")
+    public WebElement optionsTab;
+    @FindBy(id = "cfgGrid-column-optex-grid-2")
+    public WebElement optionsFilter;
+    @FindBy(xpath = "(//td[contains(@class, 'val')])[2]")
+    public WebElement optionsFilterValueDegeri;
+    @FindBy(xpath = "//button[text()='Save']")
+    public WebElement save;
+
+
+
+
+
+
+
     @FindBy(id = "ext-gen542")
     public WebElement account;
 
@@ -57,15 +84,6 @@ public class GensysAdminPage {
 
     @FindBy(xpath = "//a[text()='OCS_Group_1']")
     public WebElement OCS_Group_1;
-
-
-
-
-
-
-
-
-
 
 
 }

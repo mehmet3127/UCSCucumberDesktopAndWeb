@@ -380,8 +380,9 @@ Feature: Akis Tasarim Ekrani
     And Dosya kaynaklari sekmesine tiklanir
     And Dosya turu "XML Liste Kaynagi" secilir
     And Disa ver butonuna tiklanir
-
-    #Then Dışa verme dosyası oluşturuldu uyarisi gorulur
+    And Tamam butonuna tıklar
+    Then Dışa verme dosyası oluşturuldu uyarisi gorulur
+    And Tamam butonuna tıklar
 
 
   @DosyaKaynaklarıEkleNegative

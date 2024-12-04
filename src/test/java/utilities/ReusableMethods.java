@@ -94,6 +94,11 @@ public class ReusableMethods {
         jse.executeScript("arguments[0].click();", element);
     }
 
+    public static void clickWithJsWeb(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.webDriver();
+        jse.executeScript("arguments[0].click();", element);
+    }
+
     //========Scroll Into View Java Script(JavaScript İle Elemente Tıklama)=====//
     public static void scroolWithJs(WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
@@ -147,6 +152,10 @@ public class ReusableMethods {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
+    public static WebElement waitForVisibilityWeb(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(Driver.webDriver(), (timeout));
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
     public static WebElement waitForVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
@@ -155,6 +164,11 @@ public class ReusableMethods {
 
     public static WebElement waitForClickablility(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static WebElement waitForClickablilityWeb(WebElement element, int timeout) {
+        WebDriverWait wait = new WebDriverWait(Driver.webDriver(), (timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
