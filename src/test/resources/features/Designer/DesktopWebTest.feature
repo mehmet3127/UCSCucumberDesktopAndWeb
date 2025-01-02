@@ -15,8 +15,7 @@ Feature: Desktop and Web
 
     Given Ucms admine gider
 
-
-  @Test1
+  @SmokeTest2
   @DesignerCPNveSMSServislerininOptionlarınınAtanmışOlması
   Scenario: UCMS-TC-514: Designer CPN ve SMS Servislerinin Optionlarının Atanmış Olması
 
@@ -38,7 +37,8 @@ Feature: Desktop and Web
     And Save butonuna tiklanir
     And Genesys uygulmasi kapatilir
 
-  @Test1
+
+  @SmokeTest2
   Scenario:UCMS-TC-514: Designer CPN ve SMS Servislerinin Optionlarının Atanmış Olması
     Given Designer uygulamasina gidilir
     When Gecerli username girilir
@@ -46,6 +46,7 @@ Feature: Desktop and Web
     And Login butonuna tıklanir
     And Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
+
 
 
 

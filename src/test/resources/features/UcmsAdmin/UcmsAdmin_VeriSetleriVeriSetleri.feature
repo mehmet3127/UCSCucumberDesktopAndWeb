@@ -1,7 +1,8 @@
 @VeriSetileri
 Feature: Veri Setleri
 
-  @VeriSetiEkle
+  @SmokeTest2
+  @VeriSetiEkleme
   Scenario Outline: Veri Seti Ekleme
 
     Given Kullanıcı ucmsadmin sayfasına gider
@@ -23,6 +24,7 @@ Feature: Veri Setleri
     And 2 adet anahtar değer ve görünen değer ekler
     And Kaydet butonuna tıklar.
     Then Veri setinin eklendiğini doğrular
+
     Examples:
       | Form Alan Tipi | Veri Tipi | dB Adi |
       #| ComboBox       | Karakter  | Db     |
@@ -36,7 +38,7 @@ Feature: Veri Setleri
       ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
       #| ListBox          | Tarih       |        |
       | TextBox        | Karakter  | Db     |
-      #| TextBox        | Nümerik   | Db     |
+      | TextBox        | Nümerik   | Db     |
       #| TextBox        | Nümerik Kod | Db     |
       #| TextBox        | Tarih     | Db     |
       #| MultilineTextBox | Karakter  | Db*    |

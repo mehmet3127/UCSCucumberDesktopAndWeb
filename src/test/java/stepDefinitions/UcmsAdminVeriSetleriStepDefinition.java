@@ -22,7 +22,7 @@ import java.util.NoSuchElementException;
 public class UcmsAdminVeriSetleriStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
 
-    Actions actions = new Actions(Driver.getDriver());
+    Actions actions = new Actions(Driver.webDriver());
     static String dosyaYolu;
     static String silenecekVeriAdi;
     static String indirilecekDosyaAdı;
@@ -390,11 +390,11 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
         if (!formAlanTipi.isEmpty()) {
             ucmsAdminPage.formAlanTipi.click();
-            WebElement formAlanTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + formAlanTipi + "']"));
+            WebElement formAlanTipiSeç = Driver.webDriver().findElement(By.xpath("//span[text()='" + formAlanTipi + "']"));
 
-            ReusableMethods.waitForVisibility(formAlanTipiSeç, 10);
+            ReusableMethods.waitForVisibilityWeb(formAlanTipiSeç, 10);
 
-            ReusableMethods.clickWithJs(formAlanTipiSeç);
+            ReusableMethods.clickWithJsWeb(formAlanTipiSeç);
         }
 
     }
@@ -408,9 +408,9 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
             } else {
                 ucmsAdminPage.veriTipi.click();
-                WebElement veriTipiSeç = Driver.getDriver().findElement(By.xpath("//span[text()='" + veriTipi + "']"));
-                ReusableMethods.waitForVisibility(veriTipiSeç, 10);
-                ReusableMethods.clickWithJs(veriTipiSeç);
+                WebElement veriTipiSeç = Driver.webDriver().findElement(By.xpath("//span[text()='" + veriTipi + "']"));
+                ReusableMethods.waitForVisibilityWeb(veriTipiSeç, 10);
+                ReusableMethods.clickWithJsWeb(veriTipiSeç);
             }
         }
     }
@@ -739,7 +739,7 @@ public class UcmsAdminVeriSetleriStepDefinition {
 
     @Then("Veri setinin olduğunu doğrular")
     public void veriSetininOlduğunuDoğrular() {
-        WebElement veriSeti = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + etiketAdi + "')]"));
+        WebElement veriSeti = Driver.webDriver().findElement(By.xpath("//*[contains(text(),'" + etiketAdi + "')]"));
         Assert.assertTrue(veriSeti.isDisplayed());
         //Veri setinin Id ile aranıp doğrulanması
         //WebElement veriSetiId = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'+ etiketAdi + ')]//preceding-sibling::td[contains(@class,'Id mat-column-Id')]"));

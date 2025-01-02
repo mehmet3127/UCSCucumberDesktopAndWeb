@@ -3,8 +3,8 @@ Feature: PreviewModdaBirdenFazlaİnteraction geldiğinde custcall tablosuna hata
   @PreviewModdaÇağrıAlma
   Scenario: TC001_PreviewModdaÇağrıAlınması
 
-    Given Kullanıcıc wde uygulamasına gider
-    When Kullanıc wde için geçerli username girer
+    Given Kullanıcı wde uygulamasına gider
+    When Kullanıci wde için geçerli username girer
     And Kullanıcı wde için geçerli password girer
     And Kullanıc wde için Login button tıklar
     And Kullanıcı hamburger menu ye tiklar

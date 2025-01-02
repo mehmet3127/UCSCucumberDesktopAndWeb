@@ -2,6 +2,7 @@
 Feature: GenesysAdminLogin
 
   Scenario: GenesysAdminPozitiveLoginTest
+
     Given Kullanıcı Genesys admin Url'ye gider
     When Kullanıcı Genesys admin için geçerli username girer
     And Kullanıcı Genesys admin için geçerli password girer

@@ -29,8 +29,8 @@ import java.util.List;
 public class UcmsAdminSonuçKodlarıStepDefinition {
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
     Faker faker = new Faker();
-    Actions actions = new Actions(Driver.getDriver());
-    JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+    Actions actions = new Actions(Driver.webDriver());
+    JavascriptExecutor jse = (JavascriptExecutor) Driver.webDriver();
     static String eklenenKodGrubuName;
     static String altGrupName;
     static WebElement eklenenkodGrubu;
@@ -45,7 +45,11 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
     public void kullanıcıUcmsadminSayfasınaGider() {
-        Driver.getDriver().get(ConfigReader.getProperty("ucmsAdminURL"));
+        if (Driver.getDriver() != null) {
+            Driver.designerClose();
+            ReusableMethods.winAppDriverStop();
+        }
+        Driver.webDriver().get(ConfigReader.getProperty("ucmsAdminURL"));
     }
 
     @When("Kullanıcı ucmsadmin için geçerli username girer")

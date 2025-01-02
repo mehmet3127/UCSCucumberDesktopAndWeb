@@ -156,6 +156,85 @@ public class DesignerPage {
     public WebElement nesnelerPenceresi;
     @FindBy(name = "Hata")
     public WebElement hataPenceresi;
+
+
+    //Iceri Veri Transferi Veri Kaynagi Secimi
+    @FindBy(name = "Listeler")
+    public WebElement listelerButon;
+    @FindBy(name = "Kayıt Durum Değiştirme")
+    public WebElement listelerEkraniKayitDurumDegistirmeTab;
+    @FindBy(name = "Kayıt Güncelleme")
+    public WebElement listelerEkraniKayitGuncellemeTab;
+    @FindBy(name = "Arama Listesi Çevirme")
+    public WebElement listelerEkraniAramaListesiCevirmeTab;
+    @FindBy(name = "İçeri Veri Transferi")
+    public WebElement listelerEkraniIceriVeriTransferiTab;
+    @FindBy(name = "Veri Kaynağı Seçimi")
+    public WebElement listelerEkraniIceriVeriTransferiVeriKaynagiSecimi;
+    @FindBy(name = "Liste Yönetimi")
+    public WebElement listelerEkraniListeYonetimiTab;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboTransferSrcType']")
+    public WebElement iceriVeriTransferiVeriKaynagiTipi;
+    @FindBy(name = "Dosya Formatı")
+    public WebElement iceriVeriTransferiVeriKaynagiDosyaYolu;
+    @FindBy(xpath = "//Edit[@AutomationId='txtTransferDelimiter']")
+    public WebElement iceriVeriTransferiVeriKaynagiAyrac;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboTransferEncoding']")
+    public WebElement iceriVeriTransferiVeriKaynagiFormati;
+    @FindBy(name = "Sonraki")
+    public WebElement iceriVeriTransferiSonrakiButon;
+    @FindBy(name = "Önceki")
+    public WebElement iceriVeriTransferiOncekiButon;
+
+    //Iceri Veri Transferi Arama Listesi Secimi
+    @FindBy(name = "Arama Listesi Seçimi")
+    public WebElement iceriVeriTransferiAramaListesiSecimi;
+
+
+    //Iceri Veri Transferi Kaynak-Hedef Alan Eşleştirme
+    @FindBy(name = "Kaynak-Hedef Alan Eşleştirme")
+    public WebElement iceriVeriTransferiKaynakHedefAlan;
+    @FindBy(name = "Telefon Bilgileri")
+    public WebElement iceriVeriTransferiKaynakHedefAlanTelefonBilgileri;
+    @FindBy(name = "Type Row 1")
+    public WebElement iceriVeriTransferiKaynakHedefAlanTelefonBilgileriTelTipi;
+
+
+    @FindBy(name = "Müşteri Bilgileri")
+    public WebElement iceriVeriTransferiKaynakHedefAlanMusteriBilgileri;
+    @FindBy(name = "Kampanya Veri Seti")
+    public WebElement iceriVeriTransferiKaynakHedefAlanKampanyaVeriSeti;
+    @FindBy(name = "Kampanya Nesneleri")
+    public WebElement iceriVeriTransferiKaynakHedefAlanKampanyaNesneleri;
+    @FindBy(name = "Ulaşım Skoru")
+    public WebElement iceriVeriTransferiKaynakHedefAlanUlasimSkoru;
+
+
+
+    //Iceri Veri Transferi Transfer Şablonu Oluşturma
+    @FindBy(name = "Transfer Şablonu Oluşturma")
+    public WebElement iceriVeriTransferiTransferSablonu;
+
+
+
+    //Iceri Veri Transferi Veri Transferi Sayfasi
+    @FindBy(name = "Veri Transferi")
+    public WebElement iceriVeriTransferiVeriTransferi;
+    @FindBy(name = "Kaynaktaki Mükerrer Kayıtları İçeri Aktar")
+    public WebElement veriTransferiKaynaktakiMukerrerKayitlarIceriAktar;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboTransferRecordStatus']")
+    public WebElement veriTransferiBatchIdDurumu;
+    @FindBy(xpath = "//ComboBox[@AutomationId='cboShiftType']")
+    public WebElement veriTransferiGecerlilikTarihi;
+    //@FindBy(name = "Kontrol ettim")
+    //public WebElement veriTransferiKontrolEttimCheckBox; //Baska yerde kullanilmis ordan alindi
+    @FindBy(name = "Transferi Başlat")
+    public WebElement veriTransferiTarnasferiBaslat;
+
+
+
+
+
     @FindBy(name = "toolboxZoomOutOutbound")
     public WebElement akisEkraniUzaklastirOB;
     @FindBy(name = "toolboxZoomInOutbound")

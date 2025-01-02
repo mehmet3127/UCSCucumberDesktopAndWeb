@@ -3,15 +3,24 @@ package utilities;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.windows.WindowsDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.DesignerPage;
 
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -82,20 +91,20 @@ public class Driver {
             switch (ConfigReader.getProperty("uygulama")) {
 
                 case "wde":
+
                     ReusableMethods.winAppDriverStart();
 
                     DesiredCapabilities cap = new DesiredCapabilities();
-                    cap.setCapability(MobileCapabilityType.APP, ConfigReader.getProperty("wdePath"));
+                    cap.setCapability("app", ConfigReader.getProperty("runtimeDemoPath"));
 
                     try {
                         desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
+                        desktopDriver.manage().window().maximize();
                         desktopDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                        String widowHandle = desktopDriver.getWindowHandle();
-                        desktopDriver.switchTo().window(widowHandle);
+
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
-
                     break;
 
                 case "designer":
@@ -103,9 +112,10 @@ public class Driver {
 
                     DesiredCapabilities capabilities = new DesiredCapabilities();
                     capabilities.setCapability("app", ConfigReader.getProperty("designerPath"));
+
                     try {
                         desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities);
-                        desktopDriver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+                        desktopDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
@@ -167,7 +177,7 @@ public class Driver {
                     //default:
             }
             webDriver.manage().window().maximize();
-            webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }
         return webDriver;
     }
@@ -194,7 +204,7 @@ public class Driver {
 
         if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
             designerPage.pencereKapat.click();
-            ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet, 10);
+            ReusableMethods.waitForClickablility(designerPage.pencereKapatEvet, 120);
             designerPage.pencereKapatEvet.click();
             ReusableMethods.winAppDriverStop();
             desktopDriver = null;
@@ -204,6 +214,9 @@ public class Driver {
             desktopDriver = null;
         }
 
+    }
+
+    private static class ReadOnlyCollection<T> {
     }
 }
 

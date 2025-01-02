@@ -38,6 +38,8 @@ public class ReusableMethods {
 
         // TakesScreenshot is an interface of selenium that takes the screenshot
         TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
+        TakesScreenshot tsWeb = (TakesScreenshot) Driver.webDriver();
+
         File source = ts.getScreenshotAs(OutputType.FILE);
 
         // full path to the screenshot location
@@ -148,9 +150,9 @@ public class ReusableMethods {
 
     //===============Explicit Wait==============//
 
-    public static WebElement waitForVisibility(WebElement element, int timeout) {
+    public static void waitForVisibility(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
-        return wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
     public static WebElement waitForVisibilityWeb(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.webDriver(), (timeout));

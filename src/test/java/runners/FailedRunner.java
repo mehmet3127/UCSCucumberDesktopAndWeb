@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
         },
         features = "@target/failed_scenarios.txt",//.txt dosya path
         glue = "stepDefinitions",
-        dryRun = false  // true olursa sayfayi acip calistirmadan eksiklik varsa onlari bize gosterir.
+        dryRun = false  //true olursa sayfayi acip calistirmadan eksiklik varsa onlari bize gosterir.
 )
 public class FailedRunner {
 

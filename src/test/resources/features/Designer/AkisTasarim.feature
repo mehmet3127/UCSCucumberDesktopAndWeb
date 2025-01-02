@@ -136,6 +136,7 @@ Feature: Akis Tasarim Ekrani
     Then Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir
 
 
+
   @OBAkışaJavaScriptEkleme
   Scenario: UCMS-TC-95: JavaScript Ekleme
 
@@ -403,7 +404,7 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.dmr   |
 
 
-  @SmokeTest
+  @SmokeTest2
     @DosyaKaynaklarıEklePozitive
   Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
 
@@ -417,12 +418,12 @@ Feature: Akis Tasarim Ekrani
 
     Examples:
       | Yuklenecek Dosya  | Dosya Path                              |
-      | Resim             | C:\_UcsDemo\TestData\resim.png          |
-      | Ses Dosyasi       | C:\_UcsDemo\TestData\sesdosyası.wav     |
-      | XML Liste Kaynagi | C:\_UcsDemo\TestData\XMListeKaynagi.xml |
+      | Resim             | C:\UcsDemo\TestData\resim.png          |
+      | Ses Dosyasi       | C:\UcsDemo\TestData\sesdosyası.wav     |
+      | XML Liste Kaynagi | C:\UcsDemo\TestData\XMListeKaynagi.xml |
 
 
-  @SmokeTest
+
     @DosyaKaynaklariOngorunum
   Scenario Outline:UCMS-TC-301, UCMS-TC-302, UCMS-TC-335: Dosya Kaynakları Öngörüm (Resim,Ses Dosyasi,XML Liste Kaynağı)
 
@@ -440,7 +441,7 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi |
 
 
-  @SmokeTest
+  @SmokeTest2
     @DosyaKaynaklariSil
   Scenario Outline:UCMS-TC-149, UCMS-TC-150, UCMS-TC-151: Dosya Kaynakları-Sil (Resim,Ses Dosyası,XML Liste Kaynağı)
 

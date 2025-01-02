@@ -3,6 +3,8 @@ package stepDefinitions;
 
 import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
+import io.appium.java_client.windows.WindowsElement;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -10,6 +12,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import pages.UcmsAdminPage;
 import utilities.ConfigReader;
@@ -30,6 +34,9 @@ public class DesignerStepDefinition {
     DesignerPage designerPage = new DesignerPage();
     UcmsAdminPage ucmsAdminPage = new UcmsAdminPage();
     Actions actions = new Actions(Driver.getDriver());
+
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 120);
+
 
     static String eklenenKampanyaAdi;
     static String eklenenVeriSetiDegiskeniName;
@@ -61,13 +68,25 @@ public class DesignerStepDefinition {
 
     @And("Login butonuna tıklanir")
     public void loginButonunaTiklanir() {
+
         designerPage.sistemeGiris.click();
-        ReusableMethods.waitFor(7);
-        List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
-        Driver.getDriver().switchTo().window(windowList.get(0));
+        ReusableMethods.waitFor(6);
+
+        for (String window : Driver.getDriver().getWindowHandles()) {
+            Driver.getDriver().switchTo().window(window);
+            if (Driver.getDriver().getTitle().contains("UcmsDesigner")) {
+                break;
+            }
+        }
+
+
+        //List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
+        //Driver.getDriver().switchTo().window(windowList.get(0));
 
         //String windows = Driver.getDriver().getWindowHandles().iterator().next();
         //Driver.getDriver().switchTo().window(windows).getTitle();
+
+
     }
 
     //Negatif senaryolar da ana sayfaya gidilmedigi icin bekleme suresine gerek olmadigi icin farkli login step yazildi
@@ -134,10 +153,14 @@ public class DesignerStepDefinition {
     //Ana sayfa
     @Then("Designer ana sayfasina gidildiği gorulur")
     public void designerAnaSayfasinaGidildigiGorulur() {
-        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 60);
+
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 120);
+
         Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
-        Driver.designerClose();
-        ReusableMethods.winAppDriverStop();
+
+        //Assert.assertTrue(Driver.getDriver().getTitle().contains("UcmsDesigner"));
+        //Driver.designerClose();
+        //ReusableMethods.winAppDriverStop();
     }
 
     @Then("Kullanıcı sayfayı kapatır")
@@ -185,7 +208,7 @@ public class DesignerStepDefinition {
     //Kampanya Goruntuleme
     @And("Kampanya modu secilir")
     public void kampanyaModuSecilir() {
-        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 100);
+        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 45);
         designerPage.kampanyaDuzenlemeModu.click();
     }
 
@@ -274,9 +297,12 @@ public class DesignerStepDefinition {
 
     //Kampanya Kopyalama
     @Given("Islem yapilacak olan {string} kampanyaya sag tiklanir")
-    public void kopyalanacakOlanKampanyayaSagTiklanir(String copyCamp) {
+    public void islemyapilacakOlanKampanyayaSagTiklanir(String copyCamp) {
+
         ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+
         designerPage.campSearchBox.sendKeys(copyCamp, Keys.ENTER);
+
         WebElement kopyalanacakKampanya = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + copyCamp + "')]"));
         actions.contextClick(kopyalanacakKampanya).perform();
     }
@@ -558,6 +584,7 @@ public class DesignerStepDefinition {
     public void standartAlanlarBasligiAltindaVeriSetiDegiskenlerineTiklanarakSagEkranaSuruklenir() {
         actions.doubleClick(designerPage.formTasarimiStandartAlanlar).perform();
         actions.doubleClick(designerPage.etiket).perform();
+
     }
 
     @And("Eklenen node {string} acilir")
@@ -949,5 +976,174 @@ public class DesignerStepDefinition {
                 .perform();
     }
 
+    //Iceri Veri Transferi
+    @And("Listeler'e tiklanir")
+    public void listelerETiklanir() {
+        designerPage.listelerButon.click();
+        designerPage.ekranMaximize.click();
+    }
+
+    @And("Iceri veri transferi tab'ina tiklanir")
+    public void ıceriVeriTransferiTabInaTiklanir() {
+        designerPage.listelerEkraniIceriVeriTransferiTab.click();
+    }
+
+    @And("Veri kaynagi tipine tiklanir ve veri kaynagi tipi {string} secilir")
+    public void veriKaynagiTipineTiklanirVeVeriKaynagiTipiSecilir(String veriKaynagiTipi) {
+
+        designerPage.iceriVeriTransferiVeriKaynagiTipi.click();
+
+        if (veriKaynagiTipi.equals("Ağ Yolundaki Dosya")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        } else if (veriKaynagiTipi.equals("ODBC Veri Kaynağı")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        }
+    }
+
+    @And("Dosya yolu secilir {string}")
+    public void dosyaYoluSecilir(String dosyaYolu) {
+
+        designerPage.iceriVeriTransferiVeriKaynagiDosyaYolu.sendKeys(dosyaYolu);
+    }
+
+    @And("Ayrac {string} secilir")
+    public void ayracSecilir(String ayrac) {
+        designerPage.iceriVeriTransferiVeriKaynagiAyrac.clear();
+        designerPage.iceriVeriTransferiVeriKaynagiAyrac.sendKeys(ayrac);
+    }
+
+    @And("Dosya formati {string} secilir")
+    public void dosyaFormatiSecilir(String dosyaFormati) {
+
+        designerPage.iceriVeriTransferiVeriKaynagiFormati.click();
+
+        if (dosyaFormati.equals("UTF-8")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        } else if (dosyaFormati.equals("ANSI")) {
+            actions.sendKeys(Keys.ARROW_DOWN).
+                    sendKeys(Keys.ARROW_DOWN).
+                    perform();
+        }
+
+    }
+
+    @And("Sonraki butonuna tiklanir")
+    public void sonrakiButonunaTiklanir() {
+        designerPage.iceriVeriTransferiSonrakiButon.click();
+    }
+
+    @And("Musteri bilgileri modulune tiklanir")
+    public void musteriBilgileriModuluneTiklanir() {
+        designerPage.iceriVeriTransferiKaynakHedefAlanMusteriBilgileri.click();
+
+    }
+
+    @And("{string} ile deger adi {string} alani eslestirilir")
+    public void ileDegerAdiAlaniEslestirilir(String kaynak, String hedefAdi) {
+
+        //WebElement kaynakAlan = Driver.getDriver().findElement(By.name(kaynak));
+        WebElement kaynakAlan = Driver.getDriver().findElement(By.xpath("//TreeItem[contains(@Name,'" + kaynak + "')]"));
+
+
+        int hedefSatir = 0;
+
+        switch (hedefAdi) {
+
+            case "Cep":
+                kaynakAlan.click();
+                hedefSatir = 1;
+
+                break;
+            case "No":
+                hedefSatir = 1;
+
+                break;
+            case "Ad":
+                hedefSatir = 2;
+
+                break;
+            case "Soyadı":
+                hedefSatir = 3;
+
+                break;
+        }
+
+        WebElement hedefAlani = Driver.getDriver().findElement(By.name("MatchCols Row " + hedefSatir));
+        actions.dragAndDrop(kaynakAlan, hedefAlani).build().perform();
+
+    }
+
+    @And("Kaynak hedef alan eslestirme sayfasinda Tlf tipi secilir")
+    public void kaynakHedefAlanEslestirmeSayfasindaTlfTipiSecilir() {
+        WebElement tlfTipiCombobox = Driver.getDriver().findElement(By.name("Type Row 1"));
+        actions.click(tlfTipiCombobox).sendKeys(Keys.ENTER).perform();
+
+    }
+
+    @And("Veri transferi sayfasina gecilir")
+    public void veriTransferiSayfasinaGecilir() {
+
+        designerPage.iceriVeriTransferiSonrakiButon.click();
+        designerPage.iceriVeriTransferiSonrakiButon.click();
+    }
+
+    @And("Kaynaktaki mukerrer kayitlari iceri aktar checkBox'ina tiklanir")
+    public void kaynaktakiMukerrerKayitlariIceriAktarCheckBoxInaTiklanir() {
+
+        designerPage.veriTransferiKaynaktakiMukerrerKayitlarIceriAktar.click();
+
+    }
+
+    @And("Batch Id durumu {string} secilir")
+    public void batchIdDurumuSecilir(String batchIdDurumu) {
+        designerPage.veriTransferiBatchIdDurumu.click();
+
+        switch (batchIdDurumu) {
+
+            case "Aktif":
+                actions.sendKeys(Keys.ARROW_DOWN).
+                        perform();
+                break;
+            case "Pasif":
+                actions.sendKeys(Keys.ARROW_DOWN).
+                        sendKeys(Keys.ARROW_DOWN).
+                        perform();
+                break;
+        }
+    }
+
+    @And("Gecerlilik tarihi {string} secilir")
+    public void gecerlilikTarihiSecilir(String gecerlilikTarihi) {
+        designerPage.veriTransferiGecerlilikTarihi.click();
+
+        switch (gecerlilikTarihi) {
+
+            case "Takvim tarihine":
+                actions.sendKeys(Keys.ARROW_DOWN).
+                        perform();
+                break;
+            case "Ayin son gunune":
+                actions.sendKeys(Keys.ARROW_DOWN).
+                        sendKeys(Keys.ARROW_DOWN).
+                        perform();
+                break;
+        }
+    }
+
+    @And("Transferi baslat butonuna tiklanir")
+    public void transferiBaslatButonunaTiklanir() {
+        designerPage.veriTransferiTarnasferiBaslat.click();
+    }
+
+    @Then("Yukleme talebi alindi mesajinin geldigi gorulur")
+    public void yuklemeTalebiAlindiMesajininGeldigiGorulur() {
+        if (designerPage.onayPenceresi.getText().contains("Yükleme talebiniz alındı")) {
+            designerPage.tamam.click();
+        }
+    }
 }
 
