@@ -83,7 +83,7 @@ Feature: Cagri Cikma
     And Genesys admin icin port girilir
     And Genesys admin login buttonuna tıklanir
     And Operation tab'i acilir
-    And Calistirilmak istenilen kampanya "CagriTest_1" secilir
+    And Calistirilmak istenilen kampanya "OTOMASYONDEMOTEST" secilir
     And Load butonuna basilir
     And Dialing mode kismindan kampanya arama modu "Preview" secilir
     And Start butonuna tiklanir
