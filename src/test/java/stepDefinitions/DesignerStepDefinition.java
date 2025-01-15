@@ -1150,9 +1150,16 @@ public class DesignerStepDefinition {
 
     @Then("Yukleme talebi alindi mesajinin geldigi gorulur")
     public void yuklemeTalebiAlindiMesajininGeldigiGorulur() {
+
         if (designerPage.onayPenceresi.getText().contains("Yükleme talebiniz alındı")) {
             designerPage.tamam.click();
         }
+
+        actions.keyDown(Keys.ALT)
+                .sendKeys(Keys.F4)
+                .keyUp(Keys.ALT)
+                .build()
+                .perform();
     }
 }
 

@@ -34,8 +34,11 @@ public class GenesysAdminStepDefinition {
 
         Driver.webDriver().get(ConfigReader.getProperty("gaURL"));
 
-        //genesys.advanced.click();
-        //genesys.link.click();
+        if (genesys.advanced.isDisplayed()) {
+            genesys.advanced.click();
+            genesys.link.click();
+        }
+
     }
 
     @When("Genesys admin icin gecerli username girilir")
@@ -195,7 +198,7 @@ public class GenesysAdminStepDefinition {
 
 
         WebElement kampanyaKlasoru = Driver.webDriver().findElement(By.xpath("//div[text()='Test']"));
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(3);
         actions.doubleClick(kampanyaKlasoru).perform();
 
         //ReusableMethods.waitFor(2);
@@ -207,7 +210,7 @@ public class GenesysAdminStepDefinition {
 
     @And("Load butonuna basilir")
     public void loadButonunaBasilir() {
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(3);
         ReusableMethods.clickWithJsWeb(genesys.loadButton);
         //genesys.loadButton.click();
     }
@@ -221,7 +224,7 @@ public class GenesysAdminStepDefinition {
         } else {
 
             //ReusableMethods.waitForVisibilityWeb(genesys.dialingMode, 10);
-            ReusableMethods.waitFor(1);
+            ReusableMethods.waitFor(3);
             genesys.dialingMode.click();
 
             WebElement dialingModeSec = Driver.webDriver().findElement(By.xpath("//div[text()='" + dialingMode + "']"));
@@ -234,7 +237,7 @@ public class GenesysAdminStepDefinition {
     @And("Start butonuna tiklanir")
     public void startButonunaTiklanir() {
 
-        ReusableMethods.waitFor(2);
+        ReusableMethods.waitFor(3);
         if (genesys.kampanyaStartButton.isEnabled()) {
             genesys.kampanyaStartButton.click();
         } else {
