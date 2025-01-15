@@ -385,6 +385,7 @@ Feature: Akis Tasarim Ekrani
     And Tamam butonuna tıklar
 
 
+
   @DosyaKaynaklarıEkleNegative
   Scenario Outline:UCMS-TC-144, UCMS-TC-146, UCMS-TC-148: Dosya Kaynakları-Ekle (Resim)-Negative
 
@@ -404,7 +405,7 @@ Feature: Akis Tasarim Ekrani
 
 
 
-    @DosyaKaynaklarıEklePozitive
+  @DosyaKaynaklarıEklePozitive
   Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
@@ -439,8 +440,7 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi |
 
 
-
-    @DosyaKaynaklariSil
+  @DosyaKaynaklariSil
   Scenario Outline:UCMS-TC-149, UCMS-TC-150, UCMS-TC-151: Dosya Kaynakları-Sil (Resim,Ses Dosyası,XML Liste Kaynağı)
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
