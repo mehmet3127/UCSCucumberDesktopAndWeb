@@ -403,7 +403,7 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi | C:\Users\demir\OneDrive\Masaüstü\TestData\xxx.dmr   |
 
 
-  @SmokeTest2
+
     @DosyaKaynaklarıEklePozitive
   Scenario Outline:UCMS-TC-140, UCMS-TC-145, UCMS-TC-147: Dosya Kaynakları-Ekle(Resim,Ses Dosyasi,XML Liste Kaynagi)-Positive
 
@@ -439,7 +439,7 @@ Feature: Akis Tasarim Ekrani
       | XML Liste Kaynagi |
 
 
-  @SmokeTest2
+
     @DosyaKaynaklariSil
   Scenario Outline:UCMS-TC-149, UCMS-TC-150, UCMS-TC-151: Dosya Kaynakları-Sil (Resim,Ses Dosyası,XML Liste Kaynağı)
 

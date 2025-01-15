@@ -15,7 +15,7 @@ Feature: Desktop and Web
 
     Given Ucms admine gider
 
-  @SmokeTest2
+
   @DesignerCPNveSMSServislerininOptionlarınınAtanmışOlması
   Scenario: UCMS-TC-514: Designer CPN ve SMS Servislerinin Optionlarının Atanmış Olması
 
@@ -38,7 +38,7 @@ Feature: Desktop and Web
     And Genesys uygulmasi kapatilir
 
 
-  @SmokeTest2
+
   Scenario:UCMS-TC-514: Designer CPN ve SMS Servislerinin Optionlarının Atanmış Olması
     Given Designer uygulamasina gidilir
     When Gecerli username girilir

@@ -33,6 +33,7 @@ Feature: Cagri Cikma
     Then Kampanyanin kopyalandigini dogrular
 
 
+  @SmokeTest
   @DesignerIcerVeriTransferi
   Scenario:UCMS-TC-101, UCMS-TC-102, UCMS-TC-160, UCMS-TC-173, UCMS-TC-205
 
@@ -70,6 +71,7 @@ Feature: Cagri Cikma
     Then Yukleme talebi alindi mesajinin geldigi gorulur
 
 
+  @SmokeTest
   @KampanyaStart
   Scenario: Kampanyayı Start Etme
 

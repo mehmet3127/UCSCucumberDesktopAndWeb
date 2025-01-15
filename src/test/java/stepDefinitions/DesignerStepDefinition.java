@@ -209,7 +209,7 @@ public class DesignerStepDefinition {
     @And("Kampanya modu secilir")
     public void kampanyaModuSecilir() {
 
-        if (designerPage.onayPenceresi.getText().contains("kampanya versiyonu yayınlanmış")) {
+        if (designerPage.onayPenceresi.isDisplayed()) {
             designerPage.tamam.click();
         }else {
             ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 45);
@@ -264,6 +264,7 @@ public class DesignerStepDefinition {
     @And("Tamam butonuna tıklar")
     public void tamamButonunaTıklar() {
         designerPage.tamamButonu.click();
+
     }
 
 
