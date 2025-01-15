@@ -105,6 +105,7 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
+
                     break;
 
                 case "designer":
@@ -115,7 +116,7 @@ public class Driver {
 
                     try {
                         desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), capabilities);
-                        desktopDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+                        desktopDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }

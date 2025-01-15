@@ -49,6 +49,24 @@ public class GensysAdminPage {
     public WebElement provisioning;
     @FindBy(id = "ext-comp-1002__Tab-MENU_OPER")
     public WebElement operations;
+    @FindBy(id = "ext-comp-1018")
+    public WebElement campIdSearchBox;
+    @FindBy(id = "ext-gen168")
+    public WebElement campIdSearchBoxAraButon;
+    @FindBy(id = "ext-comp-1110")
+    public WebElement campFiltreleSearchBox;
+
+    @FindBy(id = "ext-gen196")
+    public WebElement loadButton;
+    @FindBy(id = "ext-gen249")
+    public WebElement dialingMode;
+    @FindBy(id = "ext-gen205")
+    public WebElement kampanyaStartButton;
+
+
+
+
+
 
     //Environment Sekmesi Menuleri
     @FindBy(xpath = "//span[text()='Environment']")

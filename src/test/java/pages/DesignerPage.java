@@ -37,8 +37,13 @@ public class DesignerPage {
 
 
     //Ana Sayfa
+
     @FindBy(name = "Campaigns")
     public WebElement anaSayfaCampaignKlasor;
+    @FindBy(name = "Environment")
+    public WebElement anaSayfaEnvironment;
+    @FindBy(name = "Test")
+    public WebElement anaSayfaTest;
     @FindBy(name = "Kapat")
     public WebElement pencereKapat;
     @FindBy(name = "Evet")

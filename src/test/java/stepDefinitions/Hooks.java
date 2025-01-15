@@ -23,7 +23,7 @@ public class Hooks {
             if (scenario.isFailed()) {
                 scenario.attach(screenshot, "image/png", "desktopscreenshots");
             }
-           //Driver.designerClose();
+           Driver.designerClose();
         }
 
 
@@ -33,7 +33,7 @@ public class Hooks {
             if (scenario.isFailed()) {
                 scenario.attach(screenshot, "image/png", "webscreenshots");
             }
-            //Driver.closeWebDriver();
+            Driver.closeWebDriver();
         }
 
 

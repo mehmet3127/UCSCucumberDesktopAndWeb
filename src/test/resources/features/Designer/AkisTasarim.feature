@@ -136,7 +136,6 @@ Feature: Akis Tasarim Ekrani
     Then Standart alanlar basligi altinda veri seti degiskenlerine tiklanarak sag ekrana suruklenir
 
 
-
   @OBAkışaJavaScriptEkleme
   Scenario: UCMS-TC-95: JavaScript Ekleme
 
@@ -417,14 +416,13 @@ Feature: Akis Tasarim Ekrani
     And Kaydet butonuna tıklanir
 
     Examples:
-      | Yuklenecek Dosya  | Dosya Path                              |
+      | Yuklenecek Dosya  | Dosya Path                             |
       | Resim             | C:\UcsDemo\TestData\resim.png          |
       | Ses Dosyasi       | C:\UcsDemo\TestData\sesdosyası.wav     |
       | XML Liste Kaynagi | C:\UcsDemo\TestData\XMListeKaynagi.xml |
 
 
-
-    @DosyaKaynaklariOngorunum
+  @DosyaKaynaklariOngorunum
   Scenario Outline:UCMS-TC-301, UCMS-TC-302, UCMS-TC-335: Dosya Kaynakları Öngörüm (Resim,Ses Dosyasi,XML Liste Kaynağı)
 
     Given Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir

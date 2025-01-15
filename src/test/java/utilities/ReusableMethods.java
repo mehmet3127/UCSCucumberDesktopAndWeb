@@ -150,16 +150,17 @@ public class ReusableMethods {
 
     //===============Explicit Wait==============//
 
-    public static void waitForVisibility(WebElement element, int timeout) {
+    public static WebElement waitForVisibility( WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
-        wait.until(ExpectedConditions.visibilityOf(element));
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
+
     public static WebElement waitForVisibilityWeb(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.webDriver(), (timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static WebElement waitForVisibility(By locator, int timeout) {
+    public static WebElement waitForVisibilityLocate(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), (timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
@@ -204,6 +205,16 @@ public class ReusableMethods {
             System.out.println(
                     "Timeout waiting for Page Load Request to complete after " + timeout + " seconds");
         }
+    }
+
+
+    public static void altF4() {
+        Actions actions = new Actions(Driver.getDriver());
+        actions.keyDown(Keys.ALT)
+                .sendKeys(Keys.F4)
+                .keyUp(Keys.ALT)
+                .build()
+                .perform();
     }
 
     public static WindowsDriver<WebElement> designer() {

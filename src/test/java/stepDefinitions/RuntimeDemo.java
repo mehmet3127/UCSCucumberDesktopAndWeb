@@ -15,9 +15,10 @@ import java.io.IOException;
 import java.util.IllegalFormatCodePointException;
 
 public class RuntimeDemo {
-    @Given("Eke acilir")
+    @Given("Exe acilir")
     public void ekeAcilir() {
 
+        /*
         ProcessBuilder processBuilder = new ProcessBuilder(
                 "C:/UcsDemo/TestEdge/TestEdge.exe", "--remote-debugging-port=9222");
         try {
@@ -25,6 +26,8 @@ public class RuntimeDemo {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+         */
+
     }
 
     @And("Initialize butonuna tiklanir")
@@ -44,22 +47,28 @@ public class RuntimeDemo {
     @Then("Runtime'a gecis yapilir")
     public void runtimeAGecisYapilir() {
 
-        ReusableMethods.waitFor(3);//Name	Start Flow
 
+        WebElement iframeElement = Driver.getDriver().findElement(By.name("AgentId"));
 
-        WebElement iframeElement = Driver.getDriver().findElement(By.name("Start Flow"));
-       //now using the switch command to switch to main frame.
-        //iframeElement.click();
-        //Driver.getDriver().switchTo().frame(0);
+        WebElement agentId = Driver.getDriver().findElement(By.xpath("//Edit[@AutomationId='txtAgentID']"));
+        agentId.clear();
+        agentId.sendKeys("hyalcin");
 
-
+        ReusableMethods.waitFor(1);
         WebElement agentName = Driver.getDriver().findElement(By.xpath("//Edit[@AutomationId='txtAgentName']"));
-        agentName.click();
         agentName.clear();
-        agentName.sendKeys("mehmet.demir");
+        agentName.sendKeys("Hasan Yalçın");
 
+        WebElement startFlow = Driver.getDriver().findElement(By.name("Start Flow"));
+        startFlow.click();
 
+        WebElement uyariKapat = Driver.getDriver().findElement(By.name("×"));
+        uyariKapat.click();
+        ReusableMethods.waitFor(1);
+        WebElement sonrakiButton = Driver.getDriver().findElement(By.xpath("//Button[contains(@Name,'Bitir')]"));
+        sonrakiButton.click();
 
+        /*
         Driver.getDriver().switchTo().frame("//Document[@AutomationId='RootWebArea']");
         Driver.getDriver().switchTo().frame(0);
         ReusableMethods.waitFor(2);
@@ -68,11 +77,10 @@ public class RuntimeDemo {
         System.out.println(agentId.getText());
 
 
-
-        /*
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("debuggerAddress", "http://127.0.0.1:9222");
         WebDriver driver = new ChromeDriver(options);
+
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-debugging-port=9222");

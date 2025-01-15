@@ -233,7 +233,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'OneTimeTrigger')]"));
@@ -269,7 +269,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Resume')]"));
@@ -316,7 +316,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Edit')]"));
@@ -359,7 +359,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + planlananIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
@@ -397,7 +397,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 5);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 5);
 
                 // Element görünürse tıklama yapın
                 WebElement planlanmisIsZamanlayici = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + silinenIs + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Aktif Et')]"));
@@ -655,7 +655,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement scriptEdit = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Edit')]"));
@@ -683,7 +683,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement scriptDelete = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
@@ -717,7 +717,7 @@ public class UcmsAdminTaskSchedulerStepDefinition {
         while (true) {
             try {
                 // Elementin görünmesini 10 saniye boyunca bekleyin
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
 
                 // Element görünürse tıklama yapın
                 WebElement scriptActive = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + scriptName + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Aktif Et')]"));

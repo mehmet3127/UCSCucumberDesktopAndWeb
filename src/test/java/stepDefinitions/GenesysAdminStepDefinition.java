@@ -24,8 +24,8 @@ public class GenesysAdminStepDefinition {
     Actions actions = new Actions(Driver.webDriver());
     JavascriptExecutor jse = (JavascriptExecutor) Driver.webDriver();
 
-    @Given("Kullanıcı Genesys admin Url'ye gider")
-    public void kullanıcıGenesysAdminUrlYeGider() {
+    @Given("Genesys admin Url'ye gidilir")
+    public void genesysAdminUrlYeGidilir() {
 
         if (Driver.getDriver() != null) {
             Driver.designerClose();
@@ -38,36 +38,36 @@ public class GenesysAdminStepDefinition {
         //genesys.link.click();
     }
 
-    @When("Kullanıcı Genesys admin için geçerli username girer")
-    public void kullanıcıGenesysAdminIçinGeçerliUsernameGirer() {
+    @When("Genesys admin icin gecerli username girilir")
+    public void genesysAdminIcinGecerliUsernameGirilir() {
         genesys.userName.sendKeys(ConfigReader.getProperty("gaUserName"));
 
     }
 
-    @And("Kullanıcı Genesys admin için geçerli password girer")
-    public void kullanıcıGenesysAdminIçinGeçerliPasswordGirer() {
+    @And("Genesys admin icin gecerli password girilir")
+    public void genesysAdminIcinGecerliPasswordGirilir() {
         genesys.password.sendKeys(ConfigReader.getProperty("gaPassword"));
 
     }
 
-    @And("Kullanıcı Genesys admin için application girer")
-    public void kullanıcıGenesysAdminIçinApplicationGirer() {
+    @And("Genesys admin icin application girilir")
+    public void genesysAdminIcinApplicationGirilir() {
         genesys.applicationName.sendKeys(ConfigReader.getProperty("gaAplication"));
 
     }
 
-    @And("Kullanıcı Genesys admin için host name girer")
-    public void kullanıcıGenesysAdminIçinHostNameGirer() {
+    @And("Genesys admin icin host name girilir")
+    public void genesysAdminIcinHostNameGirilir() {
         genesys.hostName.sendKeys(ConfigReader.getProperty("gaHostName"));
     }
 
-    @And("Kullanıcı Genesys admin için port girer")
-    public void kullanıcıGenesysAdminIçinPortGirer() {
+    @And("Genesys admin icin port girilir")
+    public void genesysAdminIcinPortGirilir() {
         genesys.Port.sendKeys(ConfigReader.getProperty("gaPort"));
     }
 
-    @And("Kullanıcı login buttonuna tıklar")
-    public void kullanıcıLoginButtonunaTıklar() {
+    @And("Genesys admin login buttonuna tıklanir")
+    public void genesysAdminLoginButtonunaTiklanir() {
         genesys.loginButton.click();
 
     }
@@ -78,15 +78,15 @@ public class GenesysAdminStepDefinition {
         Assert.assertTrue(genesys.homePageTitle.isDisplayed());
     }
 
-    @And("Kullanıcı Account sekmesine tıklar")
-    public void kullanıcıAccountSekmesineTıklar() {
+    @And("Account sekmesine tiklanir")
+    public void accountSekmesineTiklanir() {
 
         jse.executeScript("arguments[0].click();", genesys.account);
 
     }
 
-    @And("Kullanıcı users sekmesine tıklar")
-    public void kullanıcıUsersSekmesineTıklar() {
+    @And("Users sekmesine tiklanir")
+    public void usersSekmesineTiklanir() {
         ReusableMethods.waitFor(1);
         jse.executeScript("arguments[0].click();", genesys.users);
 
@@ -179,5 +179,67 @@ public class GenesysAdminStepDefinition {
     @And("Genesys uygulmasi kapatilir")
     public void genesysUygulmasiKapatilir() {
         Driver.quitWebDriver();
+    }
+
+    //Kampanya Start
+    @And("Operation tab'i acilir")
+    public void operationTabIAcilir() {
+        genesys.operations.click();
+
+    }
+
+    @And("Calistirilmak istenilen kampanya {string} secilir")
+    public void calistirilmakIstenilenKampanyaSecilir(String kampanyaName) {
+        //genesys.campIdSearchBox.sendKeys(kampanyaName);
+        genesys.campIdSearchBoxAraButon.click();
+
+
+        WebElement kampanyaKlasoru = Driver.webDriver().findElement(By.xpath("//div[text()='Test']"));
+        ReusableMethods.waitFor(2);
+        actions.doubleClick(kampanyaKlasoru).perform();
+
+        //ReusableMethods.waitFor(2);
+        ReusableMethods.waitForClickablilityWeb(genesys.campFiltreleSearchBox, 10);
+        genesys.campFiltreleSearchBox.sendKeys(kampanyaName, Keys.ENTER);
+        WebElement kampanyaSec = Driver.webDriver().findElement(By.xpath("//div[text()='" + kampanyaName + "']"));
+        actions.doubleClick(kampanyaSec).perform();
+    }
+
+    @And("Load butonuna basilir")
+    public void loadButonunaBasilir() {
+        ReusableMethods.waitFor(2);
+        ReusableMethods.clickWithJsWeb(genesys.loadButton);
+        //genesys.loadButton.click();
+    }
+
+    @And("Dialing mode kismindan kampanya arama modu {string} secilir")
+    public void dialingModeKismindanKampanyaAramaModuSecilir(String dialingMode) {
+
+        if (dialingMode.equals("Preview")) {
+
+            System.out.println("Dialing Mode Defoult Olarak Preview Secili");
+        } else {
+
+            //ReusableMethods.waitForVisibilityWeb(genesys.dialingMode, 10);
+            ReusableMethods.waitFor(1);
+            genesys.dialingMode.click();
+
+            WebElement dialingModeSec = Driver.webDriver().findElement(By.xpath("//div[text()='" + dialingMode + "']"));
+            ReusableMethods.waitForVisibilityWeb(dialingModeSec, 10);
+            dialingModeSec.click();
+        }
+
+    }
+
+    @And("Start butonuna tiklanir")
+    public void startButonunaTiklanir() {
+
+        ReusableMethods.waitFor(2);
+        if (genesys.kampanyaStartButton.isEnabled()) {
+            genesys.kampanyaStartButton.click();
+        } else {
+            System.out.println("Start Butonu Aktif Degil");
+        }
+
     }
 }

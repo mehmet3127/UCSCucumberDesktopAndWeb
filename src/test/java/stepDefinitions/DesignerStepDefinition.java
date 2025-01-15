@@ -3,8 +3,6 @@ package stepDefinitions;
 
 import com.github.javafaker.Faker;
 import io.appium.java_client.windows.WindowsDriver;
-import io.appium.java_client.windows.WindowsElement;
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -12,7 +10,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DesignerPage;
 import pages.UcmsAdminPage;
@@ -23,7 +20,6 @@ import utilities.ReusableMethods;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +34,7 @@ public class DesignerStepDefinition {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 120);
 
 
-    static String eklenenKampanyaAdi;
+    protected static String eklenenKampanyaAdi;
     static String eklenenVeriSetiDegiskeniName;
 
 
@@ -70,7 +66,7 @@ public class DesignerStepDefinition {
     public void loginButonunaTiklanir() {
 
         designerPage.sistemeGiris.click();
-        ReusableMethods.waitFor(6);
+        ReusableMethods.waitFor(8);
 
         for (String window : Driver.getDriver().getWindowHandles()) {
             Driver.getDriver().switchTo().window(window);
@@ -79,14 +75,11 @@ public class DesignerStepDefinition {
             }
         }
 
-
         //List<String> windowList = new ArrayList<>(Driver.getDriver().getWindowHandles());
         //Driver.getDriver().switchTo().window(windowList.get(0));
 
         //String windows = Driver.getDriver().getWindowHandles().iterator().next();
         //Driver.getDriver().switchTo().window(windows).getTitle();
-
-
     }
 
     //Negatif senaryolar da ana sayfaya gidilmedigi icin bekleme suresine gerek olmadigi icin farkli login step yazildi
@@ -154,7 +147,7 @@ public class DesignerStepDefinition {
     @Then("Designer ana sayfasina gidildiği gorulur")
     public void designerAnaSayfasinaGidildigiGorulur() {
 
-        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 120);
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
 
         Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
 
@@ -190,7 +183,7 @@ public class DesignerStepDefinition {
 
     @And("Kampanya adi {string} girilir")
     public void kampanyaAdiGirilir(String kampanyaAdi) {
-        eklenenKampanyaAdi = kampanyaAdi + Faker.instance().number().numberBetween(1, 1000);
+        eklenenKampanyaAdi = kampanyaAdi;
         designerPage.kampanyaAdi.sendKeys(eklenenKampanyaAdi);
     }
 
@@ -203,13 +196,26 @@ public class DesignerStepDefinition {
     public void kampanyaninEklendiginiDogrular() {
         ReusableMethods.waitForVisibility(designerPage.versiyonAcmaModePenceresi, 100);
         Assert.assertTrue(designerPage.versiyonAcmaModePenceresi.isDisplayed());
+
+        actions.keyDown(Keys.ALT)
+                .sendKeys(Keys.F4)
+                .keyUp(Keys.ALT)
+                .build()
+                .perform();
+
     }
 
     //Kampanya Goruntuleme
     @And("Kampanya modu secilir")
     public void kampanyaModuSecilir() {
-        ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 45);
-        designerPage.kampanyaDuzenlemeModu.click();
+
+        if (designerPage.onayPenceresi.getText().contains("kampanya versiyonu yayınlanmış")) {
+            designerPage.tamam.click();
+        }else {
+            ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 45);
+            designerPage.kampanyaDuzenlemeModu.click();
+        }
+
     }
 
     @And("Arama tipi {string} secilir")
@@ -299,7 +305,7 @@ public class DesignerStepDefinition {
     @Given("Islem yapilacak olan {string} kampanyaya sag tiklanir")
     public void islemyapilacakOlanKampanyayaSagTiklanir(String copyCamp) {
 
-        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaTest, 90);
 
         designerPage.campSearchBox.sendKeys(copyCamp, Keys.ENTER);
 
@@ -317,6 +323,8 @@ public class DesignerStepDefinition {
         //En son yayinlanmis olan versiyon satiri secili geldigi icin ekstra satir secimine gerek varmi?
         WebElement versiyonSec = Driver.getDriver().findElement(By.name("Row " + versiyon + " Column 2"));
         versiyonSec.click();
+
+
     }
 
     @And("Kampanyanin eklenecegi klasor secilir")

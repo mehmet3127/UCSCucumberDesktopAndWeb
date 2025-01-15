@@ -19,13 +19,13 @@ Feature: Desktop and Web
   @DesignerCPNveSMSServislerininOptionlarınınAtanmışOlması
   Scenario: UCMS-TC-514: Designer CPN ve SMS Servislerinin Optionlarının Atanmış Olması
 
-    Given Kullanıcı Genesys admin Url'ye gider
-    When Kullanıcı Genesys admin için geçerli username girer
-    And Kullanıcı Genesys admin için geçerli password girer
-    And Kullanıcı Genesys admin için application girer
-    And Kullanıcı Genesys admin için host name girer
-    And Kullanıcı Genesys admin için port girer
-    And Kullanıcı login buttonuna tıklar
+    Given Genesys admin Url'ye gidilir
+    When Genesys admin icin gecerli username girilir
+    And Genesys admin icin gecerli password girilir
+    And Genesys admin icin application girilir
+    And Genesys admin icin host name girilir
+    And Genesys admin icin port girilir
+    And Genesys admin login buttonuna tıklanir
     And Provisioning tab'i acilir
     And Environment sekmesine tiklanir
     And Applications'a tiklanir
@@ -46,6 +46,7 @@ Feature: Desktop and Web
     And Login butonuna tıklanir
     And Islem yapilacak olan "OBOTOMASYONTEST" kampanya secilir
     And Kampanya modu secilir
+
 
 
 

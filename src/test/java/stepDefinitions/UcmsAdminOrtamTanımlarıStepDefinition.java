@@ -92,7 +92,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
         By elementSelector = By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]//following-sibling::td[contains(@class,'Edit')]");
         while (true) {
             try {
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
                 WebElement telNoEdit = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]//following-sibling::td[contains(@class,'Edit')]"));
                 telNoEdit.click();
                 break;
@@ -113,7 +113,7 @@ public class UcmsAdminOrtamTanımlarıStepDefinition {
         By elementSelector = By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]//following-sibling::td[contains(@class,'Delete')]");
         while (true) {
             try {
-                ReusableMethods.waitForVisibility(elementSelector, 10);
+                ReusableMethods.waitForVisibilityLocate(elementSelector, 10);
                 WebElement scriptDelete = Driver.getDriver().findElement(By.xpath("//td[contains(text(),'" + telefonNumarasi + "')]//following-sibling::td[contains(@class,'Delete ')]//preceding-sibling::mat-icon[contains(@mattooltip,'Sil')]"));
                 scriptDelete.click();
                 break;
