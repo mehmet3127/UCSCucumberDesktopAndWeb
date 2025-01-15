@@ -352,6 +352,7 @@ public class DesignerStepDefinition {
 
     @Then("Kampanyanin kopyalandigini dogrular")
     public void kampanyaninKopyalandiginiDogrular() {
+
         ReusableMethods.waitForVisibility(designerPage.onayPenceresi, 60);
         System.out.println(designerPage.onayPenceresi.getText());
         Assert.assertTrue(designerPage.onayPenceresi.getText().contains("Kampanya kopyası oluşturuldu"));
