@@ -6,7 +6,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\eklenenDosya.xlsx" seçer
@@ -18,7 +18,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\Uygulama Bazlı Test Senaryo Raporu.xlsx" seçer
@@ -31,7 +31,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Ekle ikonuna tıklar
     And Bir dosya "C:\Users\demir\OneDrive\Masaüstü\eklenenDosya.xlsx" seçer
@@ -44,7 +44,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Değiştirmek istediği verinin "eklenenVeri" düzenle ıkonuna  tıklar
     And Değişiklik yapmak istediğinizden eminmisiniz uyarısını onaylar
@@ -58,7 +58,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Değiştirmek istediği verinin "dataDosyası" düzenle ıkonuna  tıklar
     And Değişiklik yapmak istediğinizden eminmisiniz uyarısını onaylar
@@ -73,7 +73,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Değiştirmek istediği verinin "dataDosyası" düzenle ıkonuna  tıklar
     And Değişiklik yapmak istediğinizden eminmisiniz uyarısını onaylar
@@ -88,7 +88,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And İçerik ara searchbox ına tıklar
     And Var olan veri ismini "dataDosyası" girer
@@ -101,7 +101,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And İndirmek istediği dosyanın "dataDosyası.xlsx" dosya indir ıkonuna tıklar
     Then Dosyanın indirildiğini doğrular
@@ -114,7 +114,7 @@ Feature: Vrei setleri İlişkili Veriler
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
+    And Veri setleri menusune tiklanir
     And İlişkili veriler sekmesine tıklar
     And Silmek istediği verinin "dataDosyası" sil ikonuna tıklar
     And Dosyayı silmek istediğinizden eminmisiniz uyarısını onaylar

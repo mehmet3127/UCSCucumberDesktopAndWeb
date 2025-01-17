@@ -109,18 +109,15 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
         ucmsAdminPage.kodGrubuEkleIkon.click();
     }
 
-    @And("Crm ıd alanını null geçer")
-    public void crmIdAlanınıNullGeçer() {
+    @And("CRM ıd {string} girilir")
+    public void crmIdgirilir(String crmId) {
+        ucmsAdminPage.crmId.sendKeys(crmId);
     }
 
     @And("Grup adı {string} ekler")
     public void GrupAdıEkler(String grupAdi) {
         eklenenKodGrubuName = grupAdi + Faker.instance().idNumber().valid().replace("-", "");
         ucmsAdminPage.grupAdiEkle.sendKeys(eklenenKodGrubuName);
-    }
-
-    @And("Grup adı  ekler")
-    public void GrupAdıEkler() {
     }
 
     @And("Kaydet butonuna tıklar")
@@ -131,7 +128,7 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
 
     @Then("Onay butonuna tıklar")
     public void OnayButonunaTıklar() {
-        ReusableMethods.waitForVisibility(ucmsAdminPage.onayButton, 10);
+        ReusableMethods.waitForVisibilityWeb(ucmsAdminPage.onayButton, 10);
         ucmsAdminPage.onayButton.click();
 
     }
@@ -139,7 +136,9 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     @Then("Kod grubunun eklendigini dogrular")
     public void kodGrubununEklendiginiDogrular() {
 
-        WebElement eklenenKodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+
+        WebElement eklenenKodGrubu = Driver.webDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        ReusableMethods.waitForVisibilityWeb(eklenenKodGrubu, 15);
         Assert.assertTrue(eklenenKodGrubu.isDisplayed());
     }
 
@@ -230,6 +229,7 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
         versiyonDegisecekKodGrubuGuncelleIkon.click();
 
     }
+
     @And("Güncellenen sonuç kodu grubunun versiyon ikonuna tıklar")
     public void güncellenenSonuçKoduGrubununVersiyonIkonunaTıklar() {
 
@@ -307,55 +307,93 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     //Sonuç Kodları Ekleme Steps
     @And("Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void eklenenKodGrubununSonuçKoduEkleIkonunaTıklar() {
-        eklenenkodGrubu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
-        actions.moveToElement(eklenenkodGrubu).perform();
-        WebElement eklenenkodGrubuSonucKoduEkleIkon = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
-        eklenenkodGrubuSonucKoduEkleIkon.click();
+
+        //eklenenkodGrubu = Driver.webDriver().findElement(By.xpath("//*[contains(text(),'Mehmetdemir')]"));
+        eklenenkodGrubu = Driver.webDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenKodGrubuName + "')]"));
+        eklenenkodGrubu.click();
+
+        ucmsAdminPage.sonucKoduEkleIkon.click();
+
+        //WebElement eklenenkodGrubuSonucKoduEkleIkon = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Sonuç Kodu Ekle']"));
+        //eklenenkodGrubuSonucKoduEkleIkon.click();
     }
 
-    @And("Aksiyon tipi combo suna tıklanır")
-    public void aksiyonTipiComboSunaTıklanır() {
-        ucmsAdminPage.actionTipiCombo.click();
-    }
-
-    @And("Açılan pencereden kaydı kapat sekmesine tıklar")
-    public void AçılanPenceredenKaydıKapatSekmesineTıklar() {
-        ucmsAdminPage.yalnızcaÇağrıyıKapat.click();
-    }
-
-    @And("Başlık kısmına isim girer")
-    public void başlıkKısmınaIsimGirer() {
-        eklenenSonucKoduName = "SK_" + eklenenKodGrubuName;
+    @And("Başlık bilgisi {string} girilir")
+    public void başlıkKısmınaIsimGirer(String sonucKoduBaslikName) {
+        eklenenSonucKoduName = sonucKoduBaslikName + Faker.instance().idNumber().valid().replace("-", "");
         ucmsAdminPage.sonucKoduBaslik.sendKeys(eklenenSonucKoduName);
 
     }
+
+    @And("Varsa Bilgilendirme notu bilgisi girilir")
+    public void varsaBilgilendirmeNotuBilgisiGirilir() {
+
+        ucmsAdminPage.sonucKoduBilgilendirmeNotu.sendKeys("automation_closed_resultcode");
+    }
+
+    @And("Varsa Aciklama bilgisi girilir")
+    public void varsaAciklamaBilgisiGirilir() {
+        ucmsAdminPage.sonucKoduAciklama.sendKeys("automation_closed_resultcode");
+    }
+
+    @And("CRM sonuc kodu {string} girilir")
+    public void crmSonucKoduGirilir(String crmId) {
+        ucmsAdminPage.crmSonucKodu.sendKeys(crmId);
+    }
+
+    @And("Aksiyon tipi {string} secilir")
+    public void aksiyonTipiSecilir(String aksiyonTipi) {
+        ucmsAdminPage.actionTipiCombo.click();
+
+        WebElement aksiyonTipiSec = Driver.webDriver().findElement(By.xpath("//span[text()='" + aksiyonTipi + "']"));
+        aksiyonTipiSec.click();
+    }
+
 
     @And("Genel özellikler tabına geçer")
     public void genelÖzelliklerTabınaGeçer() {
         ucmsAdminPage.genelOzelliklerTab.click();
     }
 
-    @And("Başarı durumu combosunda kriter dışını seçer")
-    public void başarıDurumuCombosundaKriterDışınıSeçer() {
+    @And("Başarı durumu {string} secilir")
+    public void basariDurumuSecilir(String basariDurumu) {
+
         ucmsAdminPage.basariDurumuComboBox.click();
-        ucmsAdminPage.kriterDisi.click();
+
+        WebElement basariDurumuSec = Driver.webDriver().findElement(By.xpath("//span[text()='" + basariDurumu + "']"));
+        basariDurumuSec.click();
+
     }
 
-    @And("Müşteriye ulaşılma durumundan müşteriye ulaşılamadı seçer")
-    public void müşteriyeUlaşılmaDurumundanMüşteriyeUlaşılamadıSeçer() {
+    @And("Musteriye ulasilma durumu {string} secilir")
+    public void musteriyeUlasilmaDurumuSecilir(String musteriyeUlasilmaDurumu) {
         ucmsAdminPage.musteriyeUlasilmaDurumuComboBox.click();
-        ucmsAdminPage.musteriyeUlasilamadi.click();
+
+        WebElement musteriyeUlasilmaDurumuSec = Driver.webDriver().findElement(By.xpath("//span[text()='" + musteriyeUlasilmaDurumu + "']"));
+        musteriyeUlasilmaDurumuSec.click();
+
     }
 
-    @And("Müşteri temas durumundan temas edilemedi seçer")
-    public void müşteriTemasDurumundanTemasEdilemediSeçer() {
+    @And("Musteriye temas durumu {string} secilir")
+    public void musteriyeTemasDurumuSecilir(String musteriyeTemasDurumu) {
         ucmsAdminPage.musteriyeTemasDurumuComboBox.click();
-        ucmsAdminPage.musteriyeTemasEdilemedi.click();
+        WebElement musteriyeTemasDurumuSec = Driver.webDriver().findElement(By.xpath("//span[text()='" + musteriyeTemasDurumu + "']"));
+        musteriyeTemasDurumuSec.click();
+
+    }
+    @And("Varsa CTI sonuc kodu {string} secilir")
+    public void varsaCTISonucKoduSecilir(String CTISonucKodu) {
+
+        ucmsAdminPage.ctiSonucKodu.click();
+
+        WebElement ctiSonucKoduSec = Driver.webDriver().findElement(By.xpath("//span[text()= '" + CTISonucKodu + "']"));
+        ctiSonucKoduSec.click();
+
     }
 
     @And("Kaydete tıklar")
     public void kaydeteTıklar() {
-        ReusableMethods.waitForClickablility(ucmsAdminPage.kaydetButton,10);
+        ReusableMethods.waitForClickablilityWeb(ucmsAdminPage.kaydetButton, 10);
         ucmsAdminPage.kaydetButton.click();
 
     }
@@ -450,12 +488,12 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     @And("Taşımak istediği kod grubunun {string} buraya taşı iconuna tıklar")
     public void taşımakIstediğiKodGrubununBurayaTaşıIconunaTıklar(String kodGrubuName) {
 
-        eklenenKodGrubuName=kodGrubuName;
+        eklenenKodGrubuName = kodGrubuName;
 
-        WebElement tasimakIstedigiSonucKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'"+eklenenKodGrubuName+"')]"));
+        WebElement tasimakIstedigiSonucKoduKodGrubu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]"));
         actions.moveToElement(tasimakIstedigiSonucKoduKodGrubu).perform();
 
-        WebElement sonucKoduBurayaTasiIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'"+eklenenKodGrubuName+"')]/following::button[@mattooltip='Buraya Taşı']"));
+        WebElement sonucKoduBurayaTasiIkonu = Driver.getDriver().findElement(By.xpath("//span[contains(text(),'" + eklenenKodGrubuName + "')]/following::button[@mattooltip='Buraya Taşı']"));
         sonucKoduBurayaTasiIkonu.click();
 
     }
@@ -497,7 +535,7 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     @And("Devre dışı bırakmak istediği sonuç kodunun {string} devre dışı bırak iconuna tıklar")
     public void devreDışıBırakmakIstediğiSonuçKodununDevreDışıBırakIconunaTıklar(String sonucKoduName) {
 
-        eklenenSonucKoduName=sonucKoduName;
+        eklenenSonucKoduName = sonucKoduName;
         WebElement sonucKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + sonucKoduName + "')]"));
         actions.moveToElement(sonucKodu).perform();
 
@@ -527,7 +565,7 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     @And("Devreye almak istediği sonuç kodunun {string} devreye al iconuna tıklar")
     public void devreyeAlmakIstediğiSonuçKodununDevreyeAlIconunaTıklar(String sonucKoduName) {
 
-        eklenenSonucKoduName=sonucKoduName;
+        eklenenSonucKoduName = sonucKoduName;
         WebElement sonucKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + sonucKoduName + "')]"));
         actions.moveToElement(sonucKodu).perform();
 

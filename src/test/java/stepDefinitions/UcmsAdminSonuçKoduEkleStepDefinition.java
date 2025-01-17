@@ -14,7 +14,7 @@ public class UcmsAdminSonuçKoduEkleStepDefinition {
     static String eklenenSonucKoduName;
     static WebElement eklenenkodGrubu;
     static String eklenenKodGrubuName;
-    Actions actions = new Actions(Driver.getDriver());
+    Actions actions = new Actions(Driver.webDriver());
 
     @And("Kod grubunun sonuç kodu ekle ikonuna tıklar")
     public void kodGrubununSonuçKoduEkleIkonunaTıklar() {
@@ -1842,9 +1842,6 @@ public class UcmsAdminSonuçKoduEkleStepDefinition {
             ucmsAdminPage.musteriyeTemasEdildi.click();
         }
 
-
-
-
     }
 
     @And("Sonuç kodunun eklendiğini görür")
@@ -1855,7 +1852,7 @@ public class UcmsAdminSonuçKoduEkleStepDefinition {
         /*
         //Sonuç kodu eklendiğini doğrulamak için PopUp cıkmadığı durumlarda 2.Yol
 
-        Driver.getDriver().navigate().refresh();
+        Driver.webDriver().navigate().refresh();
         ucmsAdminPage.icerikAramaSearchBox.click();
         ucmsAdminPage.icerikAramaSearchBox.sendKeys(eklenenSonucKoduName);
         WebElement eklenenSonucKodu = Driver.getDriver().findElement(By.xpath("//*[contains(text(),'" + eklenenSonucKoduName + "')]"));

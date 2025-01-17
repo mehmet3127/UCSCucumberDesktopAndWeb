@@ -116,4 +116,9 @@ public class UcmsAdminSistemStepDefinition {
 
 
     }
+
+    @And("CRM ıd girilir")
+    public void crmIdGirilir() {
+    }
+
 }

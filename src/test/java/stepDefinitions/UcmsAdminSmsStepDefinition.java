@@ -279,8 +279,8 @@ public class UcmsAdminSmsStepDefinition {
         Assert.assertEquals(ucmsAdminPage.versiyonGuncellendi.size(), 1);
     }
 
-    @And("{int} saniye bekler")
-    public void saniyeBekler(int beklemeSuresi) {
+    @And("{int} saniye beklenir")
+    public void saniyeBeklenir(int beklemeSuresi) {
 
         ReusableMethods.waitFor(beklemeSuresi);
     }

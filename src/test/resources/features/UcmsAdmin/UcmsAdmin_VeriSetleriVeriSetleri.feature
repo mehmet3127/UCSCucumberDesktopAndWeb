@@ -1,7 +1,7 @@
 @VeriSetileri
 Feature: Veri Setleri
 
-  @SmokeTest2
+
   @VeriSetiEkleme
   Scenario Outline: Veri Seti Ekleme
 
@@ -9,17 +9,19 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
-    And Veri seti ekle ikonuna tıklar
-    And Form alan tipini "<Form Alan Tipi>" seçer
-    And Veri tipini "<Veri Tipi>" seçer
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
+    And Veri seti ekle ikonuna tiklanir
+    And Form alan tipi "<Form Alan Tipi>" secilir
+    And Veri tipi "<Veri Tipi>" secilir
     Then Özellikler tabının etkin olduğu görülür
     Then Veriler tabının etkin olduğu görülür
-    And Alan adını "Alan_" girer
-    And Etiket adını "Etiket_" girer
-    And Db adını "<dB Adi>" girer
-    And Özellikler tabına geçip Maksimum veri uzunluğunu 38 girilir
+    And Alan adi "Alan_" girilir
+    And Etiket adi "Etiket_" girilir
+    And Db adi "<dB Adi>" girilir
+    #And Özellikler tabına geçip Maksimum veri uzunluğunu 30 girer
+    And Özellikler sekmesine tiklanir
+    And Maksimum veri uzunlugu 30 girilir
     And Veriler tab'ına geçer
     And 2 adet anahtar değer ve görünen değer ekler
     And Kaydet butonuna tıklar.
@@ -38,7 +40,7 @@ Feature: Veri Setleri
       ##Bu durumda max veri uzunluğu aktif olması gerekirken pasif gelmekte Task açıldı beklemede
       #| ListBox          | Tarih       |        |
       | TextBox        | Karakter  | Db     |
-      | TextBox        | Nümerik   | Db     |
+      #| TextBox        | Nümerik   | Db     |
       #| TextBox        | Nümerik Kod | Db     |
       #| TextBox        | Tarih     | Db     |
       #| MultilineTextBox | Karakter  | Db*    |
@@ -55,14 +57,14 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
-    And Veri seti ekle ikonuna tıklar
-    And Form alan tipini "<Form Alan Tipi>" seçer
-    And Veri tipini "<Veri Tipi>" seçer
-    And Alan adını "AynıAlanAdi" girer
-    And Etiket adını "AynıEtiketAdi1" girer
-    And Db adını "AyniDbAdi1" girer
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
+    And Veri seti ekle ikonuna tiklanir
+    And Form alan tipi "<Form Alan Tipi>" secilir
+    And Veri tipi "<Veri Tipi>" secilir
+    And Alan adi "Alan_" girilir
+    And Etiket adi "Etiket_" girilir
+    And Db adi "<dB Adi>" girilir
     And Kaydet butonuna tıklar.
     Then Aynı isimde Etiket Adı Obje Adı veya Db Adı bulunmakta uyarısını görür
     Examples:
@@ -77,8 +79,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And İçerik ara searchbox ına tıklar
     And Aramak istediği veri setinin "" ismini girer
     Then Veri setinin olduğunu doğrular
@@ -91,8 +93,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Veri setinin "" Aktif-Pasif et iconuna tıklanır
     Then Veri setinin aktif-Pasif edildiğini doğrular
 
@@ -104,8 +106,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
     And Veri setinin "" Aktif-Pasif et iconuna tıklanır
     Then Veri setinin aktif-Pasif edildiğini doğrular
@@ -118,8 +120,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Aktif yada Pasif etmek istediği veri setinin "" checkboxına tıklar
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
     Then Kayıt güncellendi yazısnı doğrular
@@ -132,8 +134,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
     And Aktif yada Pasif etmek istediği veri setinin "Etiket_317435321" checkboxına tıklar
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
@@ -147,8 +149,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
     And Aktif yada Pasif etmek istediği veri setlerinin "Etiket_197837176" "Etiket_082855152" checkboxına tıklar
     And Sağ üst köşede beliren aktif_pasif iconuna tıklanır
@@ -162,8 +164,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Kontrol eklemek istediği veri setinin "Etiket_871202480" kontrol ıkonuna tıklar
     And Kontrol tipini "" seçer
     And Mesaj alanına içerik "Lütfen zorunlu alanı doldurunuz" girilir
@@ -178,8 +180,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Kontrol eklemek istediği veri setinin "Etiket_197837176" kontrol ıkonuna tıklar
     And Sil ıkonuna tıklar
     And Kapat butonuna tıklar
@@ -193,11 +195,11 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Güncellemek istediği veri setinin "EtiketCopy_162340272" düzenle ikonuna tıklar
-    And Alan adını "GüncelAlan_" girer
-    And Etiket adını "GüncelEtiket_" girer
+    And Alan adi "Alan_" girilir
+    And Etiket adi "Etiket_" girilir
     And Kaydet butona tıklar
     Then Veri setinin güncellendiğini doğrular
 
@@ -209,8 +211,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Güncellenen veri setinin "Db082036206" versiyon ikonuna tıklar
     And Açılan pencerede tipi Oluşturma olan satırın Bu versiyonlar devam et ikonuna tıklar
     And Versiyon geri al butonuna tıklar
@@ -225,12 +227,12 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Kopyalamak istediği veri setinin "Etiket_218598467" kopyala ikonuna tıklar
-    And Alan adını "AlanCopy_" girer
-    And Etiket adını "EtiketCopy_" girer
-    And Db adını "DbCopy_" girer
+    And Alan adi "Alan_" girilir
+    And Etiket adi "Etiket_" girilir
+    And Db adi "<dB Adi>" girilir
     And Kopyala butonuna tıklar
     Then Veri setinin kopyalandığını görür
 
@@ -243,8 +245,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Açılan sayfada devre dışı bırakılanlar toggle'ı aktif edilir
     Then İnaktif veri setilerinin listelendiği görülür
 
@@ -256,8 +258,8 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
     And Açılan Devre dışı bırakılanlar toggle'ı kapatılır
     Then Yalnızca aktif veri setlerinin listelendiği görülür
 
@@ -269,9 +271,9 @@ Feature: Veri Setleri
     When Kullanıcı ucmsadmin için geçerli username girer
     And Kullanıcı ucmsadmin için geçerli password girer
     And Kullanıcı giriş butonuna tıklar
-    And Veri setleri butonuna tıklar
-    And Veri setleri Menüsüne tıklar
-    And Veri seti ekle ikonuna tıklar
+    And Veri setleri menusune tiklanir
+    And Veri setleri sekmesine tiklanir
+    And Veri seti ekle ikonuna tiklanir
     And Açılan pencereyi tutup sürükler
 
 

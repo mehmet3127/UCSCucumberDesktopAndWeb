@@ -16,6 +16,9 @@ public class UcmsAdminPage {
 
 
     //UcmsAdmin Login Senaryosu Location
+
+    @FindBy(xpath = "//h4[text()='UCMS Admin Paneli']")
+    public WebElement ucmsAdminLoginPage;
     @FindBy(id = "mat-input-0")
     public WebElement userName;
 
@@ -31,7 +34,10 @@ public class UcmsAdminPage {
     public WebElement ucmsConfig;
     @FindBy(xpath = "//a[text()=' mehmet.demir']")
     public WebElement homePageUser;
-
+    @FindBy(xpath = "//img[@alt='user']")
+    public WebElement profilIcon;
+    @FindBy(xpath = "//button[text()=' Çıkış ']")
+    public WebElement cikisButton;
 
     //Kod Grubu Ekeleme Senaryosu Location
     @FindBy(xpath = "//span[text()='Sonuç Kodları']")
@@ -57,12 +63,18 @@ public class UcmsAdminPage {
 
 
     //Sonuç Kodu Ekleme Senaryosu Location
-    @FindBy(xpath = "//span[text()='237 - otomasyon_03']")
-    public WebElement eklenenKodGrubu;
-    @FindBy(xpath = "//mat-icon[text()='add']")
-    public WebElement sonuçKoduEkleIkon;
-    @FindBy(id = "mat-input-1")
+    @FindBy(xpath = "//button[@mattooltip='Sonuç Kodu Ekle']")
+    public WebElement sonucKoduEkleIkon;
+    @FindBy(name = "dataItem.Title")
     public WebElement sonucKoduBaslik;
+    @FindBy(name = "dataItem.InformationNote")
+    public WebElement sonucKoduBilgilendirmeNotu;
+    @FindBy(name = "dataItem.Description")
+    public WebElement sonucKoduAciklama;
+    @FindBy(name = "dataItem.CrmId")
+    public WebElement crmSonucKodu;
+    @FindBy(name = "dataItem.CtiId")
+    public WebElement ctiSonucKodu;
 
 
     //Aksiyon Tipi Combo Secenekleri
@@ -232,7 +244,7 @@ public class UcmsAdminPage {
 
     //Veri Setleri-İlişkili Veriler Menüsü
     @FindBy(xpath = "//span[text()='Veri Setleri']")
-    public WebElement verilerSetleriSekmesi;
+    public WebElement veriSetleriSekmesi;
     @FindBy(xpath = "//a[text()=' İlişkili Veriler ']")
     public WebElement ilişkiliVerilerMenü;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
@@ -280,7 +292,7 @@ public class UcmsAdminPage {
     @FindBy(xpath = "//a[text()=' Veri Setleri ']")
     public WebElement veriSetleriMenü;
     @FindBy(xpath = "//button[@mattooltip='Ekle']")
-    public WebElement veriSetiEkleİkon;
+    public WebElement veriSetiEkleIkon;
 
     //Form Alan Tipi
     @FindBy(xpath = "(//mat-select[@role='combobox'])[2]")
@@ -309,18 +321,18 @@ public class UcmsAdminPage {
     public WebElement verTipiTarih;
 
 
-    @FindBy(xpath = "//input[@aria-label='Alan Adı']")
-    public WebElement alanAdı;
+    @FindBy(name = "data.Name")
+    public WebElement alanAdi;
     @FindBy(xpath = "//input[@aria-label='Alan Adı']//descendant-or-self::input[contains(@class,'invalid')]")
     public WebElement bosAlanAdi;
-    @FindBy(xpath = "//input[@aria-label='Etiket Adı']")
-    public WebElement etiketAdı;
-    @FindBy(xpath = "//input[@aria-label='Db Adı']")
-    public WebElement dbAdı;
-    @FindBy(xpath = "//span[text()='Veri Kaynağı Alan Adı']")
-    public WebElement veriKaynağıAlanAdı;
-    @FindBy(xpath = "//span[text()='Açıklama']")
-    public WebElement açıklama;
+    @FindBy(name = "data.Label")
+    public WebElement etiketAdi;
+    @FindBy(name = "data.ObjectName")
+    public WebElement dbAdi;
+    @FindBy(name = "data.ExternalId")
+    public WebElement veriKaynagiAlanAdi;
+    @FindBy(name = "data.Description")
+    public WebElement veriSetiAciklama;
     @FindBy(xpath = "//span[text()=' Veriyi Şifrele ']")
     public WebElement veriyiŞifrele;
     @FindBy(xpath = "//span[text()=' Kaydet ']")
@@ -330,11 +342,11 @@ public class UcmsAdminPage {
 
 
     //Veri Seti Özellikler Tab'ı
-    @FindBy(xpath = "//div[text()='Özellikler']//ancestor::div[@aria-disabled='false']")
-    public WebElement veriSetiÖzelliklerTab;
+    @FindBy(xpath = "//div[text()='Özellikler']")//ancestor::div[@aria-disabled='false']
+    public WebElement veriSetiOzelliklerTab;
 
     @FindBy(name = "attribute.LenMax")
-    public WebElement maxVeriUzunluğu;
+    public WebElement maxVeriUzunlugu;
     @FindBy(xpath = "//span[text()=' Varsayılan Değer ']")
     public WebElement varsayılanDeğer;
 

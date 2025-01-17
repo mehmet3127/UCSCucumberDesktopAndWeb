@@ -15,7 +15,7 @@ Feature:Sonuc Kodları Sayfası
   Scenario Outline:TC_001-TC_002 Kod Grubu Ekleme
 
     And Kod grubu ekle ıkon a tıklar
-    And Crm ıd alanını null geçer
+    And CRM ıd girilir
     And Grup adı "<grupAdi>" ekler
     And Kaydet butonuna tıklar
     And Onay butonuna tıklar
@@ -95,13 +95,16 @@ Feature:Sonuc Kodları Sayfası
   Scenario:Sonuç Kodu Ekleme
 
     And Eklenen kod grubunun sonuç kodu ekle ikonuna tıklar
-    And Başlık kısmına isim girer
-    And Aksiyon tipi combo suna tıklanır
-    And Açılan pencereden kaydı kapat sekmesine tıklar
+    And Başlık bilgisi "automation_closed_resultcode" girilir
+    And Varsa Bilgilendirme notu bilgisi girilir
+    And Varsa Aciklama bilgisi girilir
+    And CRM sonuc kodu "automation_closed_resultcode" girilir
+    And Aksiyon tipi "Kaydı Kapat" secilir
     And Genel özellikler tabına geçer
-    And Başarı durumu combosunda kriter dışını seçer
-    And Müşteriye ulaşılma durumundan müşteriye ulaşılamadı seçer
-    And Müşteri temas durumundan temas edilemedi seçer
+    And Başarı durumu "Kriter Dışı" secilir
+    And Musteriye ulasilma durumu "Müşteriye Ulaşılamadı" secilir
+    And Musteriye temas durumu "Müşteriye Temas Edildi" secilir
+    And Varsa CTI sonuc kodu "Cevaplandı (33) " secilir
     And Kaydete tıklar
     Then Sonuç kodunun eklendiğini görür
 
