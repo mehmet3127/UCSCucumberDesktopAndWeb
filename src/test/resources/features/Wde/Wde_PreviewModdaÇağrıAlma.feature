@@ -10,11 +10,8 @@ Feature: PreviewModdaBirdenFazlaİnteraction geldiğinde custcall tablosuna hata
     And Kullanıcı hamburger menu ye tiklar
     And My Campains e tıklar
     And My campains sayfasında get rocords butonu na tıklar
-    And Runtıme penceresi içerisin de arama butonuna tıklar
-    And Açılan arama penceresinde kaydın ilk numarasını tıklar
-    And Arama penceresi kapatılır
     And Runtime içerisinde bitir butonuna tıklar
-    And Kapatıcı sonuç kodu girer
+    And Sonuc kodu "Cevap Yok" girilir
     And Bitir butonuna tıklar
     Then onay butonun da evet tıklar
 

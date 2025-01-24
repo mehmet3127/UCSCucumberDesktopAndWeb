@@ -50,3 +50,25 @@ Feature: HappyPathSenario_UcmsAdmin_Designer
     And Sag ustte profil iconuna tiklanir
     And Cikis butonuna tıklanir
     Then Logout isleminin yapildigi ve login sayfasinin geldigi gorulur
+
+
+
+  @HappyPathDesigner
+  Scenario: UCMS-TC-49 Kampanya Oluşturma
+
+    Given Designer uygulamasina gidilir
+    When UserName "userName" girilir
+    And Password "password" girilir
+    And Uygulama sunucu ve port bilgileri icin detay butonuna tıklanır
+    And Kullanıcı uygulama adını "uygulamaAdi" gırer
+    And Server name "serverName" girilir
+    And Port bilgisi "port" girilir
+    And Login butonuna tıklanir.
+    Then Designer ana sayfasina gidildiği gorulur
+    And Campaigns klasörüne tıklanir
+    And Kampanyanin eklenecegi klasöre "Test" sag tiklanir
+    And Kampanya ekle ye tıklanir
+    And Kampanya adi "OTOMASYON_" girilir
+    And Arama tipi "Outbound" secilir
+    #And Kaydet butonuna tıklanir
+    #Then Kampanyanin eklendigini dogrular

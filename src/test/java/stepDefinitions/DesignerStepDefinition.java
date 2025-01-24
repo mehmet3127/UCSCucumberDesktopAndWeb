@@ -112,12 +112,17 @@ public class DesignerStepDefinition {
         designerPage.sifre.sendKeys(ConfigReader.getProperty(girilecekPassword));
     }
 
+    @And("Uygulama sunucu ve port bilgileri icin detay butonuna tıklanır")
+    public void uygulamaSunucuVePortBilgileriIcinDetayButonunaTıklanır() {
+
+        designerPage.loginDetayButton.click();
+    }
+
     @And("Kullanıcı uygulama adını {string} gırer")
     public void kullanıcıUygulamaAdınıGırer(String uygulamaAdi) {
-        designerPage.loginDetayButton.click();
+
         designerPage.uygulamaAdi.clear();
         designerPage.uygulamaAdi.sendKeys(ConfigReader.getProperty(uygulamaAdi));
-
     }
 
     @And("Server name {string} girilir")
@@ -147,9 +152,9 @@ public class DesignerStepDefinition {
     @Then("Designer ana sayfasina gidildiği gorulur")
     public void designerAnaSayfasinaGidildigiGorulur() {
 
-        ReusableMethods.waitForVisibility(designerPage.anaSayfaCampaignKlasor, 90);
+        ReusableMethods.waitForVisibility(designerPage.anaSayfaTest, 90);
 
-        Assert.assertTrue(designerPage.anaSayfaCampaignKlasor.isDisplayed());
+        Assert.assertTrue(designerPage.anaSayfaTest.isDisplayed());
 
         //Assert.assertTrue(Driver.getDriver().getTitle().contains("UcmsDesigner"));
         //Driver.designerClose();
@@ -211,7 +216,7 @@ public class DesignerStepDefinition {
 
         if (designerPage.onayPenceresi.isDisplayed()) {
             designerPage.tamam.click();
-        }else {
+        } else {
             ReusableMethods.waitForVisibility(designerPage.kampanyaDuzenlemeModu, 45);
             designerPage.kampanyaDuzenlemeModu.click();
         }

@@ -93,19 +93,18 @@ public class Driver {
                 case "wde":
 
                     ReusableMethods.winAppDriverStart();
-
                     DesiredCapabilities cap = new DesiredCapabilities();
-                    cap.setCapability("app", ConfigReader.getProperty("runtimeDemoPath"));
+                    cap.setCapability("app", ConfigReader.getProperty("wdePath"));
+
+
 
                     try {
                         desktopDriver = new WindowsDriver<>(new URL("http://127.0.0.1:4723/"), cap);
-                        desktopDriver.manage().window().maximize();
                         desktopDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
-
                     break;
 
                 case "designer":

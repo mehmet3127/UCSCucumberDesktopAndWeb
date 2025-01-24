@@ -10,19 +10,18 @@ public class WdePage {
     public WdePage()  {//Constructor oluşturup public yapmamız gerekiyor
 
         PageFactory.initElements(Driver.getDriver(), this);
-
     }
     @FindBy(name = "InteractionWorkspace.exe")
     public WebElement wde;
 
-    @FindBy(xpath = "/Window/Custom/Edit[1]")
+    @FindBy(xpath = "//Edit[@AutomationId='UserName']")
     public WebElement userName;
 
-    @FindBy(xpath = "/Window/Custom/Edit[2]")
+    @FindBy(xpath = "//Edit[@AutomationId='passwordBoxPassword']")
     public WebElement password;
 
 
-    @FindBy(xpath = "/Window/Custom/Button[1]")
+    @FindBy(name = "_Log In")
     public WebElement login;
 
     @FindBy(name = "Hamburger Button")
@@ -35,12 +34,28 @@ public class WdePage {
     public WebElement getRecord;
 
     //Runtime
-    @FindBy(xpath = "//Custom[@ClassName='Browser']")
-    public WebElement ucsWebbrowser;
-
-
+    @FindBy(name = "UCMS Runtime Module")
+    public WebElement runtimeModule;
+    @FindBy(xpath = "//Button[@AutomationId='cmdFinishFlow']")
+    public WebElement runtimeModuleBitir;
     @FindBy(id = "cmdCallDialog")
     public WebElement aramaButton;
+
+    //@FindBy(xpath = "(//Hyperlink[@Name='Çağrı Cevaplanmadı'])[1]")
+    //public WebElement cagriCevaplanmadi;
+
+    @FindBy(xpath = "//Hyperlink[@ClassName='jstree-anchor']")
+    public WebElement cagriCevaplanmadi;
+    @FindBy(xpath = "//Edit[@AutomationId='txtSearch']")
+    public WebElement sonucKoduAraSearchBox;
+    @FindBy(name = "Görüşme Sonucu")
+    public WebElement gorusmeSonucu;
+    @FindBy(xpath = "//Button[@AutomationId='cmdFinish']")
+    public WebElement sonucKoduBitirButon;
+    @FindBy(name = "Tamam")
+    public WebElement runtimeOnayButon;
+
+
 
 
 

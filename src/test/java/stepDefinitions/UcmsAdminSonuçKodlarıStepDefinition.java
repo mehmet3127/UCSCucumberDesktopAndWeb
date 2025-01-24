@@ -38,6 +38,7 @@ public class UcmsAdminSonuçKodlarıStepDefinition {
     //Login Steps
     @Given("Kullanıcı ucmsadmin sayfasına gider")
     public void kullanıcıUcmsadminSayfasınaGider() {
+
         if (Driver.getDriver() != null) {
             Driver.designerClose();
             ReusableMethods.winAppDriverStop();
