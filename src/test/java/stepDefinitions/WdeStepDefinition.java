@@ -64,7 +64,7 @@ public class WdeStepDefinition {
     public void kullanıcWdeIçinLoginButtonTıklar() {
         wdePage.login.click();
 
-        ReusableMethods.waitFor(12);
+        ReusableMethods.waitFor(15);
         /*
         int windowCount = Driver.getDriver().getWindowHandles().size();
         System.out.println(windowCount);
